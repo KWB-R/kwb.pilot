@@ -4,7 +4,7 @@
 sites_info.csv
 .karte.R
 ^docs\.*
-_pkgdown.yaml
+_pkgdown.yml
 ^index\.md$
 README.md
 ^packrat/
@@ -14,3 +14,4 @@ README.md
 ^codecov\.yml$
 ^.gitlab-ci\.yml$
 ^\.travis\.yml$
+LICENSE.md
