@@ -1,0 +1,167 @@
+"ParameterCode","ParameterName_Cor","ParameterUnit_Org","Method_Org","ParameterName","ParameterUnit","ParameterName_German","ParameterUnit_German","LOD","LOQ","CalibrationLow","CalibrationHigh","MeasUncert_Perc"
+1,,,,"Flow","L/h","Durchfluss","L/h",,,,,
+2,,,,"EC","µS/cm","Leitfähigkeit","µS/cm",,,,,
+3,,,,"pH","pH","pH","pH",,,,,
+4,,,,"Turbidity","FNU","Trübung","FNU",,,,,
+5,,,,"UV-Fluence","W/m2","UV-Intensität","W/m2",,,,,
+6,,,,"H2O2","mg/l","H2O2","mg/l",,,,,
+11107,"Intakte Zellen","Zellen/mL","ZZI ACCURI","Intact cell count","Cells/mL","Intakte Zellen","Zellen/mL",,,,,
+11108,"Anteil Intakte Zellen","%","ZZI ACCURI","Intact cells share","%","Anteil Intakte Zellen","%",,,,,
+11109,"Intakte Zellen absolut","Zellen","ZZI ACCURI","Intact cells","Cells","Intakte Zellen absolut","Zellen",,,,,
+11110,"Totalzellzahl","Zellen/mL","TZZ ACCURI","Total cell count","Cells/mL","Totalzellzahl","Zellen/mL",,,,,
+11111,"LNA-Zellen","Zellen/mL","TZZ ACCURI","LNA cell count","Cells/mL","LNA-Zellen","Zellen/mL",,,,,
+11112,"HNA-Zellen","Zellen/mL","TZZ ACCURI","HNA cell count","Cells/mL","HNA-Zellen","Zellen/mL",,,,,
+11113,"LNA-Anteil","%","TZZ ACCURI","LNA share","%","LNA-Anteil","%",,,,,
+11114,"HNA-Anteil","%","TZZ ACCURI","HNA share","%","HNA-Anteil","%",,,,,
+11115,"Totalzellzahl absolut","Zellen","TZZ ACCURI","Total cells","Cells","Totalzellzahl absolut","Zellen",,,,,
+11116,"LNA-Zellen absolut","Zellen","TZZ ACCURI","LNA-cells absolute","Cells","LNA-Zellen absolut","Zellen",,,,,
+11117,"HNA-Zellen absolut","Zellen","TZZ ACCURI","HNA-cells absolute","Cells","HNA-Zellen absolut","Zellen",,,,,
+11120,"ATP [RLU]",,"ATP","ATP","RLU","ATP [RLU]","RLU",,,,,
+11121,"ATP frei [RLU]",,"ATP","ATP, free","RLU","ATP frei [RLU]","RLU",,,,,
+11122,"ATP bakt. [RLU]",,"ATP","ATP, bact.","RLU","ATP bakt. [RLU]","RLU",,,,,
+11125,"ATP","nmol/L","ATP","ATP","nmol/L","ATP","nmol/L",,,0.001,0.1,30
+11126,"ATP frei","nmol/L","ATP","ATP, free","nmol/L","ATP frei","nmol/L",,,0.001,0.1,30
+11127,"ATP bakt.","nmol/L","ATP","ATP, bact.","nmol/L","ATP bakt.","nmol/L",,,,,
+11128,"Steigung [RLU / (nM/L)]",,"ATP","Gradient ATP","RLU / (nmol/L)","Steigung [RLU / (nM/L)]","RLU / (nmol/L)",,,,,
+11129,"Achsenabschnitt [RLU]",,"ATP","Intercept ATP","RLU","Achsenabschnitt [RLU]","RLU",,,,,
+11502,"Vermehrungsf. Keime 20°C","KBE/mL","GKZR2AAWBR","Aerobic Plate Count (20 °C)","CFU/mL","Vermehrungsf. Keime 20°C","KBE/mL",,,,,
+12101,"Wassertemperatur","°C","O2 SÄUL FH","T","°C","Wassertemperatur","°C",,,,,
+12101,"Wassertemperatur","°C","O2 SOND FH","T","°C","Wassertemperatur","°C",,,,,
+12601,"Redox","mV","REDOX FH","Redox","mV","Redox","mV",,,,,
+13301,"Sauerstoff","mg/L","O2 SOND FH","O2","mg/L","Sauerstoff","mg/L",,,,,
+13302,"rel. Sauerstoffsättigung","%","O2 SÄUL FH","rel. Oxygen saturation","%","rel. Sauerstoffsättigung","%",,,,,
+13302,"rel. Sauerstoffsättigung","%","O2 SOND FH","rel. Oxygen saturation","%","rel. Sauerstoffsättigung","%",,,,,
+15201,"DOC (Gelöster org. C)","mg C/L","LC-OCD FH","DOC","mg/L","DOC (Gelöster org. C)","mg C/L",,,,,
+15203,"AOC (Assimil. org. C)","µg AOC/L","AOC","AOC","µg/L","AOC (Assimil. org. C)","µg AOC/L",,,,,
+15204,"TIC (Totaler anorg. C)","mg/L","TIC FH","TIC","mg/L","TIC (Totaler anorg. C)","mg/L",,,,,
+15205,"Biopolymere","mg/L","LC-OCD FH","Biopolymers","mg/L","Biopolymere","mg/L",,,,,
+15206,"Huminstoffe","mg/L","LC-OCD FH","Humic substances","mg/L","Huminstoffe","mg/L",,,,,
+15207,"Building blocks","mg/L","LC-OCD FH","Building blocks","mg/L","Building blocks","mg/L",,,,,
+15208,"Niedermolekular neutrale","mg/L","LC-OCD FH","Low molecular weight neutrals","mg/L","Niedermolekular neutrale","mg/L",,,,,
+15209,"Niedermolekulare Säuren","mg/L","LC-OCD FH","Low molecular weight acids","mg/L","Niedermolekulare Säuren","mg/L",,,,,
+15401,"SAK 254","1/m","SAK FH","Abs254","1/m","SAK 254","1/m",,,,,
+20001,"Bromid","mg/L","BR_BRO3 FH","Bromide","mg/L","Bromid","mg/L",,,,,
+20011,"Bromat","mg/L","BR_BRO3 FH","Bromate","mg/L","Bromat","mg/L",,,,,
+25001,"Calcium","mg Ca/L","ICPOES-SCR","Calcium","mg/L","Calcium","mg Ca/L",,,,,
+25002,"Kalium","mg K/L","ICPOES-SCR","Potassium","mg/L","Kalium","mg K/L",,,,,
+25003,"Magnesium","mg Mg/L","ICPOES-SCR","Magnesium","mg/L","Magnesium","mg Mg/L",,,,,
+25004,"Natrium","mg Na/L","ICPOES-SCR","Sodium","mg/L","Natrium","mg Na/L",,,,,
+25301,"Eisen","mg Fe/L","ICPOES-SCR","Iron","mg/L","Eisen","mg Fe/L",,,,,
+25501,"Mangan","mg Mn/L","ICPOES-SCR","Manganese","mg/L","Mangan","mg Mn/L",,,,,
+40001,"Alachlor","ng/l","GC-MS-SCR.","Alachlor","ng/l","Alachlor","ng/l",,,,,
+40003,"Atrazin","µg/L","LCMS ORBI","Atrazine","µg/l","Atrazin","µg/L",,,0.01,0.5,30
+40003,"Atrazin","ng/l","GC-MS-SCR.","Atrazine","ng/l","Atrazin","ng/l",,,,,
+40005,"Desethylatrazin","µg/L","LCMS ORBI","Desethylatrazine","µg/L","Desethylatrazin","µg/L",,,0.01,0.5,30
+40008,"Metazachlor","µg/L","LCMS ORBI","Metazachlor","µg/L","Metazachlor","µg/L",,,0.02,0.5,30
+40009,"Metolachlor","µg/L","LCMS MULTI","Metolachlor","µg/L","Metolachlor","µg/L",,0.0042,0.01,0.32,25
+40009,"Metolachlor","µg/L","LCMS ORBI","Metolachlor","µg/L","Metolachlor","µg/L",,,0.01,0.5,30
+40033,"Simazin","ng/l","GC-MS-SCR.","Simazine","ng/l","Simazin","ng/l",,,,,
+40035,"Terbuthylazin","µg/L","LCMS ORBI","Terbuthylazine","µg/L","Terbuthylazin","µg/L",,,0.01,0.5,30
+40044,"Chloridazon","µg/L","LCMS ORBI","Chloridazone","µg/L","Chloridazon","µg/L",,,0.01,0.5,30
+40045,"Diethyltoluamide DEET","ng/l","GC-MS-SCR.","Diethyltoluamide DEET","ng/l","Diethyltoluamide DEET","ng/l",,,,,
+40098,"Benzotriazol","µg/L","LCMS MULTI","Benzotriazole","µg/L","Benzotriazol","µg/L",,0.0077,0.01,0.32,25
+40098,"Benzotriazol","µg/L","LCMS ORBI","Benzotriazole","µg/L","Benzotriazol","µg/L",,,0.01,0.5,30
+40102,"Desphenylchloridazon","µg/L","LCMS ORBI","Desphenylchlordazone","µg/L","Desphenylchloridazon","µg/L",,,0.04,0.5,30
+40104,"Metolachlor-ESA","µg/L","LCMS MULTI","Metolachlor-ESA","µg/L","Metolachlor-ESA","µg/L",,0.002,0.01,0.32,25
+40105,"Metolachlor-OXA","µg/L","LCMS MULTI","Metolachlor-OXA","µg/L","Metolachlor-OXA","µg/L",,0.0067,0.01,0.32,25
+40108,"Cyprosulfamide","µg/L","LCMS MULTI","Cyprosulfamide","µg/L","Cyprosulfamide","µg/L",,3e-04,0.01,0.32,25
+41004,"Bentazon","µg/L","LCMS ORBI","Bentazone","µg/L","Bentazon","µg/L",,,0.01,0.5,30
+41008,"MCPA","µg/L","LCMS ORBI","MCPA","µg/L","MCPA","µg/L",,,0.01,0.5,30
+41010,"Mecoprop (MCPP)","µg/L","LCMS ORBI","Mecoprop (MCPP)","µg/L","Mecoprop (MCPP)","µg/L",,,0.01,0.5,30
+42001,"Chlortoluron","µg/L","LCMS MULTI","Chlortolurone","µg/L","Chlortoluron","µg/L",,3e-04,0.01,0.32,25
+42002,"Diuron","µg/L","LCMS ORBI","Diurone","µg/L","Diuron","µg/L",,,0.01,0.5,30
+42003,"Isoproturon","µg/L","LCMS ORBI","Isoproturone","µg/L","Isoproturon","µg/L",,,0.01,0.5,30
+44001,"Tris(2chloroethyl)phosph","ng/l","GC-MS-SCR.","Tris(2-chloroethyl)phosphate","ng/l","Tris(2chloroethyl)phosph","ng/l",,,,,
+50001,"NTA","µg/L","KOMPLEX-LC","NTA","µg/L","NTA","µg/L",0.02,0.05,0.5,5,30
+50002,"EDTA","µg/L","KOMPLEX-LC","EDTA","µg/L","EDTA","µg/L",0.01,0.04,0.5,5,20
+50003,"DTPA","µg/L","KOMPLEX-LC","DTPA","µg/L","DTPA","µg/L",0.04,0.1,0.5,5,30
+55040,"Silizium","mg Si/L","ICPOES-SCR","Silicium","mg/L","Silizium","mg Si/L",,,,,
+55045,"Phosphor","mg P/L","ICPOES-SCR","Phosphor","mg/L","Phosphor","mg P/L",,,,,
+60001,"Acenaphthene","ng/l","GC-MS-SCR.","Acenaphthene","ng/l","Acenaphthene","ng/l",,,,,
+60002,"Acenaphthylene","ng/l","GC-MS-SCR.","Acenaphthylene","ng/l","Acenaphthylene","ng/l",,,,,
+60004,"Benz(a)anthracene","ng/l","GC-MS-SCR.","Benz(a)anthracene","ng/l","Benz(a)anthracene","ng/l",,,,,
+60005,"Benzo(b)fluoranthene","ng/l","GC-MS-SCR.","Benzo(b)fluoranthene","ng/l","Benzo(b)fluoranthene","ng/l",,,,,
+60006,"Benzo(k)fluoranthene","ng/l","GC-MS-SCR.","Benzo(k)fluoranthene","ng/l","Benzo(k)fluoranthene","ng/l",,,,,
+60007,"Benzo(ghi)perylene","ng/l","GC-MS-SCR.","Benzo(ghi)perylene","ng/l","Benzo(ghi)perylene","ng/l",,,,,
+60008,"Benzo(a)pyrene","ng/l","GC-MS-SCR.","Benzo(a)pyrene","ng/l","Benzo(a)pyrene","ng/l",,,,,
+60009,"Chrysene","ng/l","GC-MS-SCR.","Chrysene","ng/l","Chrysene","ng/l",,,,,
+60010,"Dibenzo(ah)anthracene","ng/l","GC-MS-SCR.","Dibenzo(ah)anthracene","ng/l","Dibenzo(ah)anthracene","ng/l",,,,,
+60012,"Fluorene","ng/l","GC-MS-SCR.","Fluorene","ng/l","Fluorene","ng/l",,,,,
+60013,"Indeno(1,2,3,cd)pyrene","ng/l","GC-MS-SCR.","Indeno(1,2,3,cd)pyrene","ng/l","Indeno(1,2,3,cd)pyrene","ng/l",,,,,
+60014,"Naphthalene","ng/l","GC-MS-SCR.","Naphthalene","ng/l","Naphthalene","ng/l",,,,,
+60015,"Phenanthrene","ng/l","GC-MS-SCR.","Phenanthrene","ng/l","Phenanthrene","ng/l",,,,,
+60016,"Pyrene","ng/l","GC-MS-SCR.","Pyrene","ng/l","Pyrene","ng/l",,,,,
+60019,"Galaxolide","ng/l","GC-MS-SCR.","Galaxolide","ng/l","Galaxolide","ng/l",,,,,
+60026,"3-Trifluoromethylanilin","ng/l","GC-MS-SCR.","3-Trifluoromethylanilin","ng/l","3-Trifluoromethylanilin","ng/l",,,,,
+60035,"Venlafaxin","µg/L","LCMS ORBI","Venlafaxin","µg/L","Venlafaxin","µg/L",,,0.01,0.5,30
+82005,"2-Chlorbiphenyl_BZ1","ng/l","GC-MS-SCR.","2-Chlorbiphenyl","ng/l","2-Chlorbiphenyl_BZ1","ng/l",,,,,
+82008,"2,3-Dichlorbiphenyl_BZ5","ng/l","GC-MS-SCR.","2,3-Dichlorbiphenyl","ng/l","2,3-Dichlorbiphenyl_BZ5","ng/l",,,,,
+82009,"Hexachlorbenzene","ng/l","GC-MS-SCR.","Hexachlorbenzene","ng/l","Hexachlorbenzene","ng/l",,,,,
+82016,"Trichlorbiphenyl_BZ29","ng/l","GC-MS-SCR.","Trichlorbiphenyl","ng/l","Trichlorbiphenyl_BZ29","ng/l",,,,,
+82018,"Heptachlor","ng/l","GC-MS-SCR.","Heptachlor","ng/l","Heptachlor","ng/l",,,,,
+82020,"Tetrachlorbiphenyl_BZ47","ng/l","GC-MS-SCR.","Tetrachlorbiphenyl","ng/l","Tetrachlorbiphenyl_BZ47","ng/l",,,,,
+82021,"Aldrin","ng/l","GC-MS-SCR.","Aldrin","ng/l","Aldrin","ng/l",,,,,
+82022,"Heptachlorepoxid","ng/l","GC-MS-SCR.","Heptachlorepoxid","ng/l","Heptachlorepoxid","ng/l",,,,,
+82023,"Pentachlorbiphenyl_BZ98","ng/l","GC-MS-SCR.","Pentachlorbiphenyl","ng/l","Pentachlorbiphenyl_BZ98","ng/l",,,,,
+82025,"gamma-Chlordan","ng/l","GC-MS-SCR.","gamma-Chlordan","ng/l","gamma-Chlordan","ng/l",,,,,
+82026,"alpha-Chlordan","ng/l","GC-MS-SCR.","alpha-Chlordan","ng/l","alpha-Chlordan","ng/l",,,,,
+82027,"trans-Nonachlor","ng/l","GC-MS-SCR.","trans-Nonachlor","ng/l","trans-Nonachlor","ng/l",,,,,
+82028,"Hexachlorbiphenyl_BZ154","ng/l","GC-MS-SCR.","Hexachlorbiphenyl","ng/l","Hexachlorbiphenyl_BZ154","ng/l",,,,,
+82029,"Endrin","ng/l","GC-MS-SCR.","Endrin","ng/l","Endrin","ng/l",,,,,
+82030,"Dieldrin","ng/l","GC-MS-SCR.","Dieldrin","ng/l","Dieldrin","ng/l",,,,,
+82033,"Heptachlorbiphenyl_BZ171","ng/l","GC-MS-SCR.","Heptachlorbiphenyl","ng/l","Heptachlorbiphenyl_BZ171","ng/l",,,,,
+82035,"Octachlorbiphenyl_BZ200","ng/l","GC-MS-SCR.","Octachlorbiphenyl","ng/l","Octachlorbiphenyl_BZ200","ng/l",,,,,
+82037,"Methoxychlor","ng/l","GC-MS-SCR.","Methoxychlor","ng/l","Methoxychlor","ng/l",,,,,
+82062,"Triallylisocyanurat","ng/l","GC-MS-SCR.","Triallylisocyanurat","ng/l","Triallylisocyanurat","ng/l",,,,,
+82063,"Caffeine","ng/l","GC-MS-SCR.","Caffeine","ng/l","Caffeine","ng/l",,,,,
+82064,"cis-Nonachlor","ng/l","GC-MS-SCR.","cis-Nonachlor","ng/l","cis-Nonachlor","ng/l",,,,,
+82065,"Diazepam","µg/L","LCMS MULTI","Diazepam","µg/l","Diazepam","µg/L",,0.002,0.01,0.32,25
+82065,"Diazepam","ng/l","GC-MS-SCR.","Diazepam","ng/l","Diazepam","ng/l",,,,,
+83010,"Surfynol_104","ng/l","GC-MS-SCR.","Surfynol","ng/l","Surfynol_104","ng/l",,,,,
+84000,"Benzafibrat","µg/L","LCMS MULTI","Benzafibrate","µg/L","Benzafibrat","µg/L",,0.0125,0.01,0.32,25
+84002,"Diclofenac","µg/L","LCMS MULTI","Diclofenac","µg/L","Diclofenac","µg/L",,0.0056,0.01,0.32,25
+84002,"Diclofenac","µg/L","LCMS ORBI","Diclofenac","µg/L","Diclofenac","µg/L",,,0.02,0.5,30
+86002,"Carbamazepin","µg/L","LCMS MULTI","Carbamazepine","µg/L","Carbamazepin","µg/L",,2e-04,0.01,0.32,25
+86002,"Carbamazepin","µg/L","LCMS ORBI","Carbamazepine","µg/L","Carbamazepin","µg/L",,,0.01,0.5,30
+86022,"Metoprolol","µg/L","LCMS MULTI","Metoprolol","µg/L","Metoprolol","µg/L",,7e-04,0.01,0.32,25
+86022,"Metoprolol","µg/L","LCMS ORBI","Metoprolol","µg/L","Metoprolol","µg/L",,,0.01,0.5,30
+86030,"Sotalol","µg/L","LCMS MULTI","Sotalol","µg/L","Sotalol","µg/L",,0.0016,0.01,0.32,25
+86035,"Clarithromycin","µg/L","LCMS ORBI","Clarithromycine","µg/L","Clarithromycin","µg/L",,,0.02,0.5,30
+86044,"Sulfamethoxazol","µg/L","LCMS MULTI","Sulfamethoxazole","µg/L","Sulfamethoxazol","µg/L",,5e-04,0.01,0.32,25
+86044,"Sulfamethoxazol","µg/L","LCMS ORBI","Sulfamethoxazole","µg/L","Sulfamethoxazol","µg/L",,,0.01,0.5,30
+86069,"Amidotrizoesäure","µg/L","RKM / SS","Amidotrizoic Acid","µg/L","Amidotrizoesäure","µg/L",2e-04,8e-04,0.01,0.5,18
+86071,"Iohexol","µg/L","RKM / SS","Iohexole","µg/L","Iohexol","µg/L",0.0025,0.0083,0.01,0.5,19
+86072,"Iomeprol","µg/L","RKM / SS","Iomeprol","µg/L","Iomeprol","µg/L",0.0016,0.0053,0.01,0.5,24
+86073,"Iopamidol","µg/L","RKM / SS","Iopamidol","µg/L","Iopamidol","µg/L",0.0015,0.005,0.01,0.5,27
+86075,"Iopromid","µg/L","RKM / SS","Iopromide","µg/L","Iopromid","µg/L",0.0015,0.005,0.01,0.5,12
+86076,"Iotalaminsäure","µg/L","RKM / SS","Iothalamic Acid","µg/L","Iotalaminsäure","µg/L",7e-04,0.0023,0.01,0.5,37
+86078,"Ioxithalaminsäure","µg/L","RKM / SS","Ioxithalamic Acid","µg/L","Ioxithalaminsäure","µg/L",0.0013,0.0042,0.01,0.5,19
+86080,"Gabapentin","µg/L","LCMS MULTI","Gabapentine","µg/L","Gabapentin","µg/L",,0.0031,0.01,0.32,25
+86081,"Hydrochlorothiazid","µg/L","LCMS ORBI","Hydrochlorothiazide","µg/L","Hydrochlorothiazid","µg/L",,,0.02,0.5,30
+87101,"Guanylharnstoff","µg/L","LCMS MULTI","Guanly Urea","µg/L","Guanylharnstoff","µg/L",,0.0056,0.01,0.8,50
+87105,"Acetyl-Sulfamethoxazol","µg/L","LCMS MULTI","Acetyl-Sulfamethoxazole","µg/L","Acetyl-Sulfamethoxazol","µg/L",,0.0014,0.01,0.32,25
+87105,"Acetyl-Sulfamethoxazol","µg/L","LCMS ORBI","Acetyl-Sulfamethoxazole","µg/L","Acetyl-Sulfamethoxazol","µg/L",,,0.02,0.5,30
+87106,"Citalopram","µg/L","LCMS ORBI","Citalopram","µg/L","Citalopram","µg/L",,,0.01,0.5,30
+87107,"Ibersartan","µg/L","LCMS ORBI","Ibersartan","µg/L","Ibersartan","µg/L",,,0.02,0.5,30
+87108,"Candesartan","µg/L","LCMS ORBI","Candesartan","µg/L","Candesartan","µg/L",,,0.04,0.5,30
+87110,"Amisulprid","µg/L","LCMS ORBI","Amisulpride","µg/L","Amisulprid","µg/L",,,0.01,0.5,30
+88001,"Acesulfame-K","µg/L","RKM / SS","Acesulfame-K","µg/L","Acesulfame-K","µg/L",,,,,
+88002,"Saccharin","µg/L","RKM / SS","Saccharin","µg/L","Saccharin","µg/L",0.0021,0.0071,0.01,2,23
+88003,"Cyclamat-Na","µg/L","RKM / SS","Cyclamat-Na","µg/L","Cyclamat-Na","µg/L",,,,,
+88004,"Acesulfam","µg/L","LCMS ORBI","Acesulfame","µg/L","Acesulfam","µg/L",,,0.01,0.5,30
+88004,"Acesulfam","µg/L","RKM / SS","Acesulfame","µg/L","Acesulfam","µg/L",7e-04,0.0022,0.01,1.6,11
+88005,"Cyclamat","µg/L","RKM / SS","Cyclamat","µg/L","Cyclamat","µg/L",2e-04,7e-04,0.01,1.7,17
+88054,"Carbamazepin-10,11Dihydr","µg/L","LCMS MULTI","Carbamazepin-10,11Dihydr","µg/L","Carbamazepin-10,11Dihydr","µg/L",,9e-04,0.01,0.32,25
+88058,"Metformin","µg/L","LCMS MULTI","Metformin","µg/L","Metformin","µg/L",,0.0034,0.01,0.8,50
+88058,"Metformin","µg/L","LCMS ORBI","Metformin","µg/L","Metformin","µg/L",,,0.02,0.5,30
+88059,"Metolachlor-Morpholinon","µg/L","LCMS MULTI","Metolachlor-Morpholinon","µg/L","Metolachlor-Morpholinon","µg/L",,0.0067,0.01,0.32,25
+88070,"Lamotrigin","µg/L","LCMS MULTI","Lamotrigin","µg/L","Lamotrigin","µg/L",,0.0026,0.01,0.32,25
+88075,"N-Acetyl-4-Aminoantipyri","µg/L","LCMS MULTI","N-Acetyl-4-Aminoantipyri","µg/L","N-Acetyl-4-Aminoantipyri","µg/L",,0.0013,0.01,0.32,25
+90701,"Silikat","mg SiO2/L","ICPOES-SCR","Silicon dioxide","mg/L","Silikat","mg SiO2/L",,,,,
+91701,"Gesamtphosphor","mg PO4/L","ICPOES-SCR","Phosphate totale","mg/L","Gesamtphosphor","mg PO4/L",,,,,
+92100,"4-Methylbenzotriazol","µg/L","LCMS MULTI","4-Methyl-1H-benzotriazole","µg/L","4-Methylbenzotriazol","µg/L",,0.0032,0.01,0.32,25
+92200,"5-Methylbenzotriazol","µg/L","LCMS MULTI","5-Methyl-1H-benzotriazole","µg/L","5-Methylbenzotriazol","µg/L",,0.0032,0.01,0.32,25
+92200,"5-Methylbenzotriazol","µg/L","LCMS ORBI","5-Methyl-1H-benzotriazole","µg/L","5-Methylbenzotriazol","µg/L",,,0.01,0.5,30
+93100,"1,1,3-Trimethyl-3-phenyl","ng/l","GC-MS-SCR.","1,1,3-Trimethyl-3-phenyl","ng/l","1,1,3-Trimethyl-3-phenyl","ng/l",,,,,
+94004,"N-Formy-4-aminoantipyrin","µg/L","LCMS MULTI","N-Formy-4-aminoantipyrine","µg/L","N-Formy-4-aminoantipyrin","µg/L",,,,,
+94006,"Bezafibrat","µg/L","LCMS MULTI","Bezafibrate","µg/L","Bezafibrat","µg/L",,,,,

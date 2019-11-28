@@ -1,0 +1,40 @@
+---
+title: "2 App Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{2 App Start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Once the [installation](A1_installation.html) is completed the (shiny) app can be started locally which is described below.
+
+## Case 1) First app launch or force data update
+
+If you start the app for the first time you need to set the parameter "use_live_data = TRUE", so that the:
+
+
+1. Latest operational data is downloaded from the mySQL Database and
+
+
+2. Analytics data is imported from the file 'analytics.xlsx' (see [Installation, Step 4.2](A1_installation.html#analytics-spreadsheet-file-analytics-xlsx))
+
+
+```r
+kwb.pilot::run_app(use_live_data = TRUE)
+```
+
+
+***This step also always needs to be performed in case you want to import the latest operational and analytical data!***
+
+
+
+## Case 2) Subsequent app launch (without data update)
+
+If you start the app for at least a second time (i.e. after having at least
+once performed step 5.1) and do not need up-to-date operational and analytical
+data, it is sufficient to run the following code (i.e. with "use_live_data = FALSE"):
+
+```r
+kwb.pilot::run_app()
+```

@@ -1,0 +1,8 @@
+ParameterCode,ParameterName,ParameterUnit,SiteCode,ParameterThresholdComparison,ParameterThreshold,ParameterThresholdSource
+Upv,Battery voltage,V,,>=,22,Autarcon
+Cl2-tot,total Chlorine,mg/L,SP4,>=,0.2,Indian drinking water
+Coliforms,Coliforms Total,MPN,SP4,=,0,Indian drinking water
+Ecoli,E. coli,MPN,SP4,=,0,Indian drinking water
+Cl-,Chloride,mg/L,SP4,<=,250,Indian drinking water
+Fe-tot,Total Iron,mg/L,SP4,<=,0.3,Indian drinking water
+Mn-tot,Total Mangense,mg/L,SP4,<=,0.1,Indian drinking water

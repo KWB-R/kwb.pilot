@@ -1,0 +1,31 @@
+"ParameterCode","ParameterName","SiteCode","SiteName","ParameterName_SiteName","ProzessSignal","ProzessID","ProzessName","ParameterUnitOrg","ParameterUnit","ZeroOne"
+"C_O3_Zugas","Ozonkonzentration im Produktgas","","","A -  800001 - Ozonkonzentration im Produktgas","A",800001,"Ozonkonzentration im Produktgas","g/m³","g/m³",1
+"C_O3_Abgas","Ozonkonzentration im Offgas","","","A -  800002 - Ozonkonzentration im Offgas","A",800002,"Ozonkonzentration im Offgas","g/m³","g/m³",1
+"Q_Ozonanlage","Durchfluss Rohwasser","S1","Ozonung Zulauf","A -  800003 - Durchfluss Rohwasser","A",800003,"Durchfluss Rohwasser","m³/h","m³/h",1
+"c_O3","Ozonkonzentration im Wasser","","","A -  800004 - Ozonkonzentration im Wasser (Option)","A",800004,"Ozonkonzentration im Wasser (Option)","ppm","ppm",0
+"c_O3_Enviro","Ozonkonzentration Raumluft Container","","","A -  800005 - Ozonkonzentration Raumluft Container","A",800005,"Ozonkonzentration Raumluft Container","ppm","ppm",1
+"c_O2","Sauerstoffkonzentration Raumluft Container","","","A -  800006 - Sauerstoffkonzentration Raumluft Container","A",800006,"Sauerstoffkonzentration Raumluft Container","%","%",1
+"Soll_extern","Sollwert extern 4..20mA","","","A -  800007 - Sollwert extern 4..20mA","A",800007,"Sollwert extern 4..20mA","%","%",0
+"Fuellstand","Füllstand Entgasungsbehälter","","","A -  800008 - Füllstand Entgasungsbehälter","A",800008,"Füllstand Entgasungsbehälter","%","%",1
+"OSB_DOC_Inlet","OSB DOC","S1","Ozonung Zulauf","A -  800009 - OSB_DOC_Zulauf","A",800009,"OSB_DOC_Zulauf","mg_L","mg/L",0
+"SCAN_NTU_Inlet","SCAN Truebung","S1","Ozonung Zulauf","A -  800010 - SCAN_Truebung_Zulauf","A",800010,"SCAN_Truebung_Zulauf","NTU","NTU",1
+"OSB_DOC_Outlet","OSB DOC","S2","Ozonung Ablauf","A -  800011 - OSB_DOC_Ablauf","A",800011,"OSB_DOC_Ablauf","mg_L","mg/L",0
+"Q_WWTP_Outlet"," Volumenstrom Ablauf Klärwerk","","","A -  800012 - Volumenstrom Ablauf Klärwerk","A",800012,"Volumenstrom Ablauf Klärwerk","m³/h","m³/h",1
+"SCAN_SAK_Zulauf","SCAN SAK","S1","Ozonung Zulauf","A -  800013 - SCAN_SAK_Zulauf","A",800013,"SCAN_SAK_Zulauf","1/m","1/m",1
+"Q_Pilot_Outlet","Volumenstrom Ablauf Ozonanlage","S2","Ozonung Ablauf","A -  800014 - Volumenstrom Ablauf Ozonanlage","A",800014,"Volumenstrom Ablauf Ozonanlage","m³/h","m³/h",0
+"OSB_COD_Inlet","OSB COD","S1","Ozonung Zulauf","A -  800015 - OSB_COD_Zulauf","A",800015,"OSB_COD_Zulauf","mg_L","mg/L",0
+"OSB_COD_Outlet","OSB COD","S2","Ozonung Ablauf","A -  800016 - OSB_COD_Ablauf","A",800016,"OSB_COD_Ablauf","mg_L","mg/L",0
+"SCAN_SAK_Ablauf","SCAN SAK","S2","Ozonung Ablauf","A -  800017 - SCAN_SAK_Ablauf","A",800017,"SCAN_SAK_Ablauf","1/m","1/m",1
+"O3_prod","Ozonproduktion","","","A -  800018 - Ozonproduktion","A",800018,"Ozonproduktion","g/h","g/h",0
+"Q_Gas","Gasfluss (abgelesen)","","","A -  800019 - Gasfluss (abgelesen)","A",800019,"Gasfluss (abgelesen)","m³/h","m³/h",1
+"Soll_O3_c","Sollwert Ozonkonzentration (errechnet)","","","A -  800020 - Sollwert Ozonkonzentration (errechnet)","A",800020,"Sollwert Ozonkonzentration (errechnet)","g/m³","g/m³",0
+"Soll_O3_M","Sollwert Ozonmasse (errechnet)","","","A -  800021 - Sollwert Ozonmasse (errechnet)","A",800021,"Sollwert Ozonmasse (errechnet)","g/h","g/h",0
+"Soll_O3_Dosis","Sollwert Dosis (errechnet)","","","A -  800022 - Sollwert Dosis (errechnet)","A",800022,"Sollwert Dosis (errechnet)","g/m³","g/m³",1
+"Soll_O3_Dosis2","Sollwert Dosis (errechnet Fahrw. 2)","","","A -  800023 - Sollwert Dosis (errechnet Fahrw. 2)","A",800023,"Sollwert Dosis (errechnet Fahrw. 2)","g/m³","g/m³",1
+"Soll_O3_Dosis3","Sollwert Dosis neu (errechnet Fahrw. 3)","","","A -  800024 - Sollwert Dosis neu (errechnet Fahrw. 3)","A",800024,"Sollwert Dosis neu (errechnet Fahrw. 3)","g/m³","g/m³",1
+"Faktor","Faktor  (Fx,p+Fx,k / Fahrweise 3)","","","A -  800025 - Faktor  (Fx,p+Fx,k / Fahrweise 3)","A",800025,"Faktor  (Fx,p+Fx,k / Fahrweise 3)","%","%",0
+"SAK254_mean","SAK254 gemittelt","","","A -  800026 - SAK254 gemittelt","A",800026,"SAK254 gemittelt","%","%",0
+"OSB_SAK_Inlet","OSB SAK","S1","Ozonung Zulauf","A -  800028 - OSB_SAK_Zulauf","A",800028,"OSB_SAK_Zulauf","1/m","1/m",1
+"OSB_SAK_Outlet","OSB SAK","S2","Ozonung Ablauf","A -  800029 - OSB_SAK_Ablauf","A",800029,"OSB_SAK_Ablauf","1/m","1/m",1
+"OSB_Ventil_1","OSB Ventil 1","","","D -  800065 - OBS_Ventil_1","D",800065,"OBS_Ventil_1","V58","",0
+"OSB_Ventil_2","OSB Ventil 2","","","D -  800066 - OSB_Ventil_2","D",800066,"OSB_Ventil_2","V60","",0

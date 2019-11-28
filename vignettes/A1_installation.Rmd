@@ -1,0 +1,121 @@
+---
+title: "1 Installation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{1 Installation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+In the following the [required software](#1-1-pre-required-software) and the 
+workflow for installing the [R package kwb.pilot](#1-2-r-package-installation) 
+is described.
+
+# 1.1 Pre-required software
+
+
+- [R (>= 3.3.2)](https://cloud.r-project.org/): for the development of the R 
+package **kwb.pilot** R 3.3.2 was used. However, also later R releases 
+(e.g. 3.4) should be working.  
+
+- [Rtools](https://cran.rstudio.com/bin/windows/Rtools/): required to compile R 
+packages from source (Attention: the required version depends on the installed R 
+version on your OS)
+
+- [Pandoc](http://pandoc.org/installing.html): is required to convert the reports 
+from plain text format (markdown) into the different formats (docx, html, pdf). 
+
+- [Miktex](https://miktex.org/download): needs to be installed in case that **pdf** reports should be created.
+
+
+For the advanced user it is further recommended to install the latest version of 
+the integrated development environment (IDE) [RStudio Desktop "open source licence"](https://www.rstudio.com/products/rstudio/download2/#download). 
+
+
+# 1.2 Workflow
+
+Once all [pre-required software](#1-1-pre-required-software) is installed the R 
+package installation workflow as described below can be started.
+
+
+## 1.2.1 Step 1) Installation of R package "devtools" 
+
+The R package "devtools" is required for downloading and installing the R package 
+"kwb.pilot" from Github. Installation is done by executing the following 
+lines of code in R or RStudio (from now on written as R(Studio)):
+```r
+if (!require("devtools")) {
+  install.packages("devtools", repos = "https://cloud.r-project.org")
+}
+```
+
+## 1.2.2 Step 2) Installation of R package "kwb.pilot"
+#### 2.1) Specific release 
+
+In case you want to install a specific release you need to specify the 
+parameter "ref", which needs to be set to a valid release (check here: [releases](https://github.com/KWB-R/kwb.pilot/releases)) by running the following code in R(Studio). This tutorial at least requires release version [v.0.4.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v.0.4.0)):
+```r
+devtools::install_github("kwb-r/kwb.pilot", 
+                         ref = "v.0.4.0",
+                         dependencies = TRUE)
+```
+
+***Please cite [v.0.4.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v.0.4.0) 
+of the R package as follows:*** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.825030.svg)](https://doi.org/10.5281/zenodo.825030)
+
+## 1.2.3	Step 3) Check the installation folder of the package in R(Studio) with:
+
+By running the following code in R(Studio) you can check where the R package 
+“kwb.pilot” was installed on your computer:
+```{r eval = FALSE}
+system.file(package = "kwb.pilot")
+```
+
+Under Windows it will be located in your personal Documents/R/win-library folder 
+followed by the minor release version of the R version you are using (here: 3.3 
+because the R version used for this documentation is 3.3.2): 
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot""
+
+## 1.2.4	Step 4) Copy site specific files
+Knowing the installation folder of the “kwb.pilot” package is important, 
+because two additional files, which are described in detail in the following 
+sub-chapters need to be copied into the package directory, so that it is working 
+properly for the Haridwar site.
+
+### 1.2.4.1	mySQL configuration file ('.my.cnf')
+The '.my.cnf' file is required to establish a connection to the mySQL database 
+for querying the opera-tional data for the Haridwar site. It needs to be copied 
+into the directory which is returned after run-ning the following code in R(Studio) :
+```{r eval = FALSE}
+system.file("shiny/haridwar", package = "kwb.pilot")
+```
+
+In this example (which is based on the R 3.3.2 release) it will be located in 
+your personal documents folder under:
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar"
+
+**Important note:** 
+The “.my.cnf” configuration file  is not included in the R package, as it would 
+provide direct access to the MySQL database of the AUTARCON company!
+
+### 1.2.4.2	Analytics spreadsheet file ('analytics.xlsx')
+The 'analytics.xlsx' file contains the analytics data (results of lab measurements) 
+for the Haridwar site. It has a specific predefined structure which is expected 
+by the R package and should not be changed (e.g. for all analytical parameter 
+sheets to be imported the data entries are expected to start in row 70 and the 
+first column is of type “DateTime”). Automatic reading of this file is not 
+possible, if the structure is changed.
+This file needs to be copied into the directory which is returned after running 
+the following code in R(Studio):
+```{r eval = FALSE}
+system.file("shiny/haridwar/data", package = "kwb.pilot")
+```
+
+In this example (which is based on the R 3.3.2 release) it will be located in 
+your personal documents folder under:
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data"
+
+**Important note:**
+***The “analytics.xlsx” file  is not included in the R package due to IP reasons.***
+
+

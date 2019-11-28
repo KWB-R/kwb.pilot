@@ -1,0 +1,51 @@
+Parameter_Site_Unit,SiteCode,ParameterCode
+Durchfluss nach Rheinfiltratpumpe [l/h],RF-V-RP,1
+Durchfluss SAK254 vor AOP [l/h],RF-V-OnlineSSK,1
+SAK254 vor AOP [1/m],RF-V,15401
+Durchfluss EH-Sonden vor AOP [l/h],RF-V-OnlineSonden,1
+Sauerstoff vor AOP [mg/l],RF-V,13301
+Redoxpotential vor AOP [mV],RF-V,12601
+Leitfähigkeit vor AOP [µS/cm],RF-V,2
+pH vor AOP [pH],RF-V,3
+Temperatur vor AOP [°C],RF-V,12101
+Trübung vor AOP [FNU],RF-V,4
+Durchfluss GAC-Säule vor AOP [l/h],RF-V-AK,1
+Durchfluss Bodensäule vor AOP [l/h],RF-V-B,1
+UV-Intensität [W/m2],RF-V-Reaktor,5
+Durchfluss nach AOP [l/h],RF-N,1
+Durchfluss SAK254 nach AOP [l/h],RF-N-OnlineSSK,1
+SAK254 nach AOP [1/m],RF-N,15401
+Durchfluss H2O2 nach AOP [l/h],RF-N-OnlineH2O2,1
+H2O2 nach AOP [mg/l],RF-N,6
+Durchfluss EH-Sonden nach AOP [l/h],RF-N-OnlineSonden,1
+Sauerstoff nach AOP [mg/l],RF-N,13301
+Redoxpotential nach AOP [mV],RF-N,12601
+pH nach AOP [pH],RF-N,3
+Temperatur nach AOP [°C],RF-N,12101
+Durchfluss GAC-Säule nach AOP [l/h],RF-N-AK,1
+Durchfluss Bodensäule nach AOP [l/h],RF-N-B,1
+Durchfluss nach Sandfilter 1 [l/h],WF-V-WF1,1
+Durchfluss nach Sandfilter 2 [l/h],WF-V-WF2,1
+Durchfluss nach Wiesefiltratpumpe [l/h],WF-V-WP,1
+Durchfluss SAK254 vor AOP [l/h],WF-V-OnlineSSK,1
+SAK254 vor AOP [1/m],WF-V,15401
+Durchfluss EH-Sonden vor AOP [l/h],WF-V-OnlineSonden,1
+Sauerstoff vor AOP [mg/l],WF-V,13301
+Redoxpotential vor AOP [mV],WF-V,12601
+Leitfähigkeit vor AOP [µS/cm],WF-V,2
+pH vor AOP [pH],WF-V,3
+Temperatur vor AOP [°C],WF-V,12101
+Trübung vor AOP [FNU],WF-V,4
+Durchfluss GAC-Säule vor AOP [l/h],WF-V-AK,1
+UV-Intensität [W/m2],WF-V-Reaktor,5
+Durchfluss nach AOP [l/h],WF-N,1
+Durchfluss SAK254 nach AOP [l/h],WF-N-OnlineSSK,1
+SAK254 nach AOP [1/m],WF-N,15401
+Durchfluss H2O2 nach AOP [l/h],WF-N-OnlineH2O2,1
+H2O2 nach AOP [mg/l],WF-N,6
+Durchfluss EH-Sonden nach AOP [l/h],WF-N-OnlineSonden,1
+Sauerstoff nach AOP [mg/l],WF-N,13301
+Redoxpotential nach AOP [mV],WF-N,12601
+pH nach AOP [pH],WF-N,3
+Temperatur nach AOP [°C],WF-N,12101
+Durchfluss GAC-Säule nach AOP [l/h],WF-N-AK,1

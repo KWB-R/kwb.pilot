@@ -1,0 +1,53 @@
+---
+title: "0 Introduction"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{0 Introductiony}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+## 0.1	Background
+The massive amounts of data from sensors, which is usually recorded in a high 
+temporal resolution (up to every second) is challenging for data processing and 
+visualisation. Especially if standard tools like MS EXCEL are used, which are 
+not well suited for such tasks to data import restrictions (e.g. rows per 
+spreadsheet limited to maximum 1 million rows in MS EXCEL 2010) or missing 
+built-in features for data aggregation (e.g. calculating one hour median values 
+from the raw data).  
+In addition operational data often needs to be combined with analytical data 
+(usually with a temporal resolution of days to weeks) for example in order to 
+(1) assess the impact of the plant’s operation scheme (e.g. flow rate) on its 
+performance for reducing specific substances or for (2) calculating substance 
+loads (by multiplying substance concentrations with flow rates)
+
+Within the AQUANES project – in order to address the above challenges for small 
+companies or wa-ter operators – a data visualization and reporting tool was 
+developed with the software R (www.r-project.org), which enables the user to: 
+-	Explore online and offline data at different temporal aggregation levels 
+(e.g. raw data or 10 minutes median values)  
+-	Create automated reports not only including the raw (online/offline) data 
+but also with more advanced calculations combining different online and/or 
+offline data (e.g. specific en-ergy demand) 
+
+In a first step, the R reporting tool was implemented and tested for the 
+AQUANES site Haridwar, which is described in this report. 
+
+## 0.2	Objective
+The objective of this report is to document the following four processes for 
+the R reporting tool:
+
+-	[Installation](A1_installation.html)
+
+- [App start](A2_app_start.html)
+
+-	[GUI (Graphical User Interface)](A3_0_gui_overview.html) 
+
+-	[Modification](A4_modify.html) 
+
+
+**Note:**
+This report is based on version 0.0.0.9000 of the R package “kwb.pilot”, which 
+is available for download at [Github](https://github.com/KWB-R/kwb.pilot) and released 
+using the open-source [MIT licence](https://opensource.org/licenses/MIT).

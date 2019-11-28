@@ -1,0 +1,118 @@
+---
+title: "4 Modify"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{4 Modify}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+In the following sub-chapters three basic use cases – requiring no programming 
+skills - and one advanced use case – requiring advanced R programming skills – 
+are presented, in order to show how the R reporting tool can be modified.
+
+## 4.1	Basic: update operational/analytical data
+In order to use the latest operational data (from the MySQL DB of the Haridwar 
+site) in the R reporting tool you need to run the following code in R(Studio):
+
+```{r eval = FALSE}
+kwb.pilot::run_app(use_live_data = TRUE)
+```
+
+If also the analytical data was updated you need to save the analytics file 
+with the filename “analytics.xlsx” at the location returned by running the 
+following code in R(Studio): 
+
+```{r eval = FALSE}
+system.file("shiny/haridwar/data/analytics.xlsx", package = "kwb.pilot")
+```
+
+In this example (which is based on the R 3.3.2 release) it will be located in 
+your personal documents folder under:
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/analytics.xlsx"
+
+In order to use the latest analytics data in the R reporting tool you also need 
+to run the following code in R(Studio):
+
+```{r eval = FALSE}  
+kwb.pilot::run_app(use_live_data = TRUE)
+```
+
+## 4.2	Basic: update thresholds 
+The thresholds are defined in a CSV file, which is located at the location 
+returned by running the following code in R(Studio): 
+
+```{r eval = FALSE}  
+system.file("shiny/haridwar/data/thesholds.csv", package = "kwb.pilot")
+```
+
+In this example (which is based on the R 3.3.2 release) it will be located in 
+your personal documents folder under:
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/thresholds.csv"
+
+For updating e.g. the threshold for the parameter “Battery voltage” for example 
+to “24”, the value in column ParameterThreshold (see Table 1) needs to be 
+updated and saved. A threshold value for a parameter not defined in the table 
+below can be added by typing its ParameterCode, Parameter-Name, ParameterUnit 
+into a new line of “thresholds.csv”. For example all valid parameters values 
+for the operational Haridwar data are defined here: 
+
+```{r eval = FALSE}  
+system.file("shiny/haridwar/data/operation_parameters.csv", package = "kwb.pilot")
+```
+
+In addition data entries for the columns ParameterThresholdComparison (i.e. >=, 
+=, >=) and Pa-rameterThreshold are required, whilst ParameterThresholdSource can 
+be freely defined by the user or even left blank. 
+Finally the app needs to be restarted as described in Chapter 3.1.2 (in case no 
+new operation/analytical data should be used) or in Chapter 3.1.1 (in case also 
+new operational/analytical data should be used).
+
+
+```{r eval = FALSE}  
+knitr::kable(x = kwb.pilot::get_thresholds(), row.names = FALSE)
+```
+
+
+## 4.3	Basic: update map in site panel tab
+
+The two maps shown in the [site panel tab](A3_4_gui_site.html) can be adapted.
+During the app start the configuration file “site_info.csv”  is imported and 
+used for specifying the: 
+
+-	Coordinates: longitude and latitude 
+
+-	Popup menu: site name, location and link
+
+In case the user wants to change either coordinates, popup menu or both, the 
+configuration file needs to be modified. Its location will be returned by 
+running the following code in R(Studio):
+
+```{r, eval=FALSE}
+system.file("shiny/haridwar/data/site_info.csv", package = "kwb.pilot")
+```
+
+In this example (which is based on the R 3.3.2 release) it will be located in 
+your personal documents folder under:
+"C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/site_info.csv"
+ 
+## 4.4	Advanced: adapting to a different site
+
+In general, adapting the R reporting tool to other sites is possible, as the R 
+code is released using an open source [MIT licence](https://opensource.org/licenses/MIT) 
+on [Github](https://github.com/KWB-R/kwb.pilot) and [Zenodo](http://doi.org/10.5281/zenodo.825030).  
+However, advanced R programming techniques are required in order to adapt the 
+importing, aggregation and calculations for another site. Thus it is planned 
+within the AQUANES project to adapt the R reporting tool to the following five 
+additional AQUANES sites:
+
+-	Berlin-Tiefwerder (site 1)
+
+-	Basel-Lange Erlen (site 6)
+
+-	Agon-Countainville (site 8)
+
+-	Berlin-Schönerlinde (site 12)
+
+-	Packington (site 13) 

@@ -1,0 +1,105 @@
+authors:
+  Michael Rustler:
+    href: https://mrustl.de
+  
+  Kompetenzzentrum Wasser Berlin gGmbH:
+    href: https://www.kompetenz-wasser.de
+    html: <img src="http://www.kompetenz-wasser.de/wp-content/uploads/2017/08/cropped-logo-kwb_klein-new.png" height="24" />
+  AquaNES: 
+    href: http://aquanes.eu/Default.aspx?t=1593
+    html: <img src="http://aquanes.eu/App_Themes/assets/img/logo.png" height="24" />
+
+template:
+  params:
+    bootswatch: cerulean
+
+
+development:
+  mode: auto
+
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: 0 Intro
+    href: articles/A0_intro.html
+  - text: 1 Installation
+    href: articles/A1_installation.html
+  - text: 2 App start
+    href: articles/A2_app_start.html
+  - text: 3 GUI
+    menu: 
+    - text: 3.0 Overview
+      href: articles/A3_0_gui_overview.html
+    - text: 3.1 Explore panel
+      href: articles/A3_1_gui_explore.html
+    - text: 3.2 Report panel
+      href: articles/A3_2_gui_report.html
+    - text: 3.3 Background panel
+      href: articles/A3_3_gui_background.html
+    - text: 3.4 Site panel
+      href: articles/A3_4_gui_site.html
+  - text: 4 Modify
+    href: articles/A4_modify.html
+  - text: News
+    href: news/index.html
+  - text: Reference
+    href: reference/index.html
+
+reference:
+  - title: "All Pilot Plant Sites"
+    desc: >
+      General functions which can be used for all pilot plant (with default 
+      parameterisation "Haridwar" site)
+    contents: 
+      - run_app
+      - get_valid_timezones
+      - change_timezone
+      - set_timezone
+      - group_datetime
+      - calculate_operational_parameters
+      - get_thresholds
+      - check_thresholds
+      - dygraph_add_limits
+      - read_fst
+      - create_monthly_selection
+      - create_report_batch 
+      - starts_with("report_")
+
+
+  - title: Berlin-Tiefwerder (site 1)
+    desc: >
+      Functions for importing data of Berlin-Tiefwerder site
+    contents: 
+      - import_data_berlin_t
+      - read_pentair_data
+      - calculate_operational_parameters_berlin_t
+      - remove_duplicates
+      - aggregate_export_fst_berlin_t
+      - merge_and_export_fst
+      - load_fst_data
+
+  - title: Berlin-Schoenerlinde (site 12)
+    desc: >
+      Functions for importing data of Berlin-Schoenerlinde site
+    contents: 
+      - import_data_berlin_s
+      - read_wedeco_data
+      - calculate_operational_parameters_berlin_s
+      - create_wedeco_metafile
+      - remove_duplicates
+      - aggregate_export_fst_berlin_s
+      - merge_and_export_fst
+      - load_fst_data
+
+  - title: Basel-LangeErlen (site 6)
+    desc: >
+      Functions for importing data of Basel-LangeErlen site
+    contents:
+      - starts_with("add_")
+      - import_operation_basel
+      - import_analytics_basel
+      - import_operation_meta_basel
+      - import_analytics_meta_basel
+      - import_data_basel
+      - multiSubstitute

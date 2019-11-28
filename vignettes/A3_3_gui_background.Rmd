@@ -1,0 +1,16 @@
+---
+title: "3.3 GUI Background panel"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{3.3 GUI background panel}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The background panel simply consists of screenshot of the Haridwar site 
+description. It is linked to the [AQUANES website](http://www.aquanes-h2020.eu/Default.aspx?t=1668), 
+which – if clicked – is opened in a new browser tab. 
+
+```{r background_tab_panel, echo = FALSE}
+knitr::include_graphics("figures/27.png")
+```
