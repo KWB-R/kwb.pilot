@@ -5,15 +5,13 @@
 \title{Helper function: add parameter metadata}
 \usage{
 add_parameter_metadata(df,
-  meta_parameter_path = system.file("shiny/basel/data/metadata/meta_parameter.csv",
-  package = "kwb.pilot"))
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 }
 \arguments{
 \item{df}{data frame containing at least a column "ParameterCode"}
 
 \item{meta_parameter_path}{Define path of "meta_parameter.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-package = "kwb.pilot"))}
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))}
 }
 \value{
 returns input data frame with joined metadata (parameter codes/ methods

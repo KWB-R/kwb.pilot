@@ -15,7 +15,7 @@ day aggregation or "day", "month" or "year" for longer time spans}
 
 \item{fun}{function to be used for grouping measurement data of column ParameterValue
 (default: stats::median)
-(default: system.file("shiny/haridwar/.my.cnf", package = "kwb.pilot"))}
+(default: kwb.pilot:::package_file("shiny/haridwar/.my.cnf"))}
 
 \item{col_datetime}{column name of datetime column (default: DateTime)}
 

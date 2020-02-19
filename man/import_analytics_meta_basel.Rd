@@ -6,25 +6,19 @@
 "rhein" and "wiese")}
 \usage{
 
-  import_analytics_meta_basel(analytics_dir = system.file("shiny/basel/data/analytics",
-  package = "kwb.pilot"),
-  meta_site_path = system.file("shiny/basel/data/metadata/meta_site.csv",
-  package = "kwb.pilot"),
-  meta_parameter_path = system.file("shiny/basel/data/metadata/meta_parameter.csv",
-  package = "kwb.pilot"))
+  import_analytics_meta_basel(analytics_dir = package_file("shiny/basel/data/analytics"),
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 }
 \arguments{
 \item{analytics_dir}{Define directory with raw analytical data in CSV (.csv) format to
-be imported (default: system.file("shiny/basel/data/analytics",
-package = "kwb.pilot"))}
+be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))}
 
 \item{meta_site_path}{Define path of "meta_site.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_site.csv",
-package = "kwb.pilot"))}
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))}
 
 \item{meta_parameter_path}{Define path of "meta_parameter.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-package = "kwb.pilot"))}
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))}
 }
 \value{
 data.frame with analytics data for Basel sites including metadata

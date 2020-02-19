@@ -4,12 +4,12 @@
 \alias{get_thresholds}
 \title{Get thresholds for analytics/operational parameters}
 \usage{
-get_thresholds(csv_path = system.file(file.path("shiny/haridwar/data",
-  "thresholds.csv"), package = "kwb.pilot"))
+
+  get_thresholds(file = package_file("shiny/haridwar/data/thresholds.csv"))
 }
 \arguments{
-\item{csv_path}{path to csv file with thresholds for Haridwar site (default:
-system.file(file.path("shiny/haridwar/data", thresholds.csv")}
+\item{file}{path to csv file with thresholds for Haridwar site (default:
+\code{kwb.pilot:::package_file("shiny/haridwar/data/thresholds.csv")})}
 }
 \value{
 returns data frame thresholds for operational/analytical parameters
