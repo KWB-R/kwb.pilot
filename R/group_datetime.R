@@ -13,6 +13,7 @@
 #' @import dplyr
 #' @importFrom xts align.time
 #' @importFrom fasttime fastPOSIXct
+#' @importFrom kwb.utils stringList
 #' @export
 
 group_datetime <- function(df,
@@ -36,7 +37,7 @@ group_datetime <- function(df,
       "'%s' is no valid aggregation time step!\n Please select one of: %s for parameter 'by' or
                  provide a temporal aggregation interval in seconds (e.g. 600 in case of 10 minute aggregation))",
       by,
-      paste(names(grp_list), collapse = ", ")
+      kwb.utils::stringList(names(grp_list))
     )
     clean_stop(msg)
   } else if ((by %in% names(grp_list)) & !is.numeric(by)) {

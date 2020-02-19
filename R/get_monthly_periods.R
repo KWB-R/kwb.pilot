@@ -45,6 +45,7 @@ get_monthly_periods <- function(year_month_start = "2017-06",
 #' ending of month (default: 7)
 #' @return dataframe with monthly periods
 #' @importFrom lubridate days
+#' @importFrom kwb.utils stringList
 #' @export
 get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1, ],
                                         raw_data_dir = system.file(
@@ -68,7 +69,7 @@ get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1
       "Importing period: '%s'
                   No data for one of the following days in previous month found:\n%s",
       monthly_period$year_month,
-      paste0("'", min_offset, "'", collapse = ", ")
+      kwb.utils::stringList(min_offset)
     ))
     min_offset <- NA
   }
@@ -83,7 +84,7 @@ get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1
       "Importing period: '%s'
                   No data for one of the following days in next month found:\n%s",
       monthly_period$year_month,
-      paste0("'", max_offset, "'", collapse = ", ")
+      kwb.utils::stringList(max_offset)
     ))
     max_offset <- NA
   }

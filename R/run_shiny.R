@@ -8,6 +8,7 @@
 #' launched automatically after the app is started (default: TRUE)
 #' @param ... further arguments passed to shiny::runApp()
 #' @importFrom shiny runApp
+#' @importFrom kwb.utils stringList
 #' @export
 run_app <- function(
   siteName = "haridwar", use_live_data = FALSE, mySQL_conf = NULL, 
@@ -24,7 +25,7 @@ run_app <- function(
       "Could not find shiny app directory for %s.\n
                     Please select for parameter 'siteName' one of:\n'%s'",
       siteName,
-      paste(dir(shinyDir), collapse = ", ")
+      kwb.utils::stringList(dir(shinyDir))
     )
 
     clean_stop(msg)

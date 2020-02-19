@@ -59,6 +59,7 @@ fill_datetime <- function(df,
 #' @param tz_export specify timezone for data export (default: "UTC")
 #' @return returns data frame with normalised analytics data in list form
 #' @import readxl tidyr dplyr
+#' @importFrom kwb.utils stringList
 #' @keywords internal
 import_sheet <- function(xlsPath,
                          sheet,
@@ -92,7 +93,7 @@ import_sheet <- function(xlsPath,
       "All data values in first column need to be of type 'DATE/TIME'\n
                     The following value(s) do not satisfy this condition: %s\n
                     Please check/correct the value(s) in sheet '%s' of imported xls file '%s'!",
-      paste(non_datetime_values, collapse = ","),
+      kwb.utils::stringList(non_datetime_values),
       sheet,
       xlsPath
     )
@@ -166,7 +167,7 @@ import_sheet <- function(xlsPath,
       "All parameter values need to be numeric!\n
                    The following value(s) do not satisfy this condition: %s\n
                    Please check/correct the value(s) in sheet '%s' of imported xls file '%s'!",
-      paste(non_numeric_paravals, collapse = ","),
+      kwb.utils::stringList(non_numeric_paravals),
       sheet,
       xlsPath
     )
