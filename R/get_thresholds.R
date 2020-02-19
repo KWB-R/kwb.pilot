@@ -1,6 +1,6 @@
 #' Get thresholds for analytics/operational parameters
-#' @param csv_path path to csv file with thresholds for Haridwar site (default:
-#' system.file(file.path("shiny/haridwar/data", thresholds.csv")
+#' @param file path to csv file with thresholds for Haridwar site (default:
+#' \code{kwb.pilot:::package_file("shiny/haridwar/data/thresholds.csv")})
 #' @return returns data frame thresholds for operational/analytical parameters
 #' @import dplyr
 #' @importFrom utils read.csv

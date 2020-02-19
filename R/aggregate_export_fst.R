@@ -69,10 +69,7 @@ aggregate_export_fst_berlin_t <- function(year_month_start = "2017-06",
 
     export_dir_path <- sprintf(
       "%s/data/fst/%s",
-      system.file(
-        "shiny/berlin_t",
-        package = "kwb.pilot"
-      ),
+      package_file("shiny/berlin_t"),
       monthly_period$year_month
     )
 
@@ -196,10 +193,7 @@ aggregate_export_fst_berlin_s <- function(year_month_start = "2017-04",
 
     export_dir_path <- sprintf(
       "%s/data/fst/%s",
-      system.file(
-        "shiny/berlin_s",
-        package = "kwb.pilot"
-      ),
+      package_file("shiny/berlin_s"),
       monthly_period$year_month
     )
 

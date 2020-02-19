@@ -37,8 +37,7 @@ library(ggforce)
 library(dplyr)
 library(kwb.pilot)
 
-thresholds_file <- system.file("shiny/berlin_t/data/thresholds.csv",
-                              package = "kwb.pilot")
+thresholds_file <- kwb.pilot:::package_file("shiny/berlin_t/data/thresholds.csv")
 
 thresholds <- kwb.pilot::get_thresholds(thresholds_file)
 

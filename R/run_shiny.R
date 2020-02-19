@@ -17,7 +17,7 @@ run_app <- function(
 {
   use_live_data <- toupper(use_live_data)
 
-  shinyDir <- system.file("shiny", package = "kwb.pilot")
+  shinyDir <- package_file("shiny")
   appDir <- file.path(shinyDir, siteName)
 
   if (!siteName %in% dir(shinyDir)) {

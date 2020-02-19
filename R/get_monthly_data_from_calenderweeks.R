@@ -33,33 +33,29 @@ data.frame(date = dates,
 #' @importFrom tidyr separate
 #' @export
 get_monthly_data_from_calendarweeks <- function(year_month) {
-
-
-
-cw_for_month <- calenderweek_from_dates() %>%
+  
+  cw_for_month <- calenderweek_from_dates() %>%
     dplyr::filter_(~yearmonth == year_month) %>%
     dplyr::pull("cw") %>%
     unique()
 
-
-
-files_to_import <- tidyr::separate_(data = data.frame(files = list.files(system.file("shiny/berlin_s/data/operation",
-                                                                   package = "kwb.pilot"),
-                                                       pattern = ".csv"),
-                                    stringsAsFactors =  FALSE),
-                  col = "files",
-                  into = c("a", "year", "c", "cw", "e"),
-                  remove = FALSE) %>%
+  files_to_import <- tidyr::separate_(
+    data = data.frame(
+      files = list.files(
+        package_file("shiny/berlin_s/data/operation"), pattern = ".csv"
+      ),
+      stringsAsFactors =  FALSE),
+    col = "files",
+    into = c("a", "year", "c", "cw", "e"),
+    remove = FALSE) %>%
     dplyr::select_("files", "year", "cw") %>%
     dplyr::filter_(~cw %in% cw_for_month) %>%
     dplyr::mutate_(file_path =  "sprintf('%s/%s',
-                                       system.file('shiny/berlin_s/data/operation',
-                                                   package = 'kwb.pilot'),
+                                       package_file('shiny/berlin_s/data/operation'),
                                        files)") %>%
     dplyr::pull("file_path")
-
-
-return(files_to_import)
+  
+  files_to_import
 }
 
 if (FALSE) {
@@ -69,9 +65,9 @@ if (FALSE) {
 #### Make one CSV file of Ozone_2017_BisKW_29.csv for each calendar week 17-29
 ##########################################################################################
 
-old_data <- readLines(system.file("shiny/berlin_s/data/operation/Ozone_2017_BisKW_29.csv",
-                                  package = "kwb.pilot"))
-
+old_data <- readLines(kwb.pilot:::package_file(
+  "shiny/berlin_s/data/operation/Ozone_2017_BisKW_29.csv"
+))
 
 for (selected_cw in 17:29) {
 

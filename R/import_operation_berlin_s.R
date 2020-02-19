@@ -70,16 +70,12 @@ create_wedeco_metafile <- function(raw_data_file) {
 #' @importFrom lubridate parse_date_time2
 #' @importFrom data.table rbindlist
 #' @export
-read_wedeco_data <- function(raw_data_dir = system.file(
-                             "shiny/berlin_s/data/operation",
-                             package = "kwb.pilot"
-                           ),
-                           raw_data_files = NULL,
-                           meta_file_path = system.file(
-                             "shiny/berlin_s/data/parameter_site_metadata.csv",
-                             package = "kwb.pilot"
-                           )) {
-
+read_wedeco_data <- function(
+  raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+  raw_data_files = NULL,
+  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")
+)
+{
   meta_data <- read.csv(
     file = meta_file_path,
     stringsAsFactors = FALSE
@@ -181,29 +177,24 @@ read_wedeco_data <- function(raw_data_dir = system.file(
 }
 
 #' Import data for Berlin Schoenerlinde
-#' @param raw_data_dir path of directory containing WEDECO CSV files (default:
-#' (default: system.file("shiny/berlin_s/data/operation",
-#' package = "kwb.pilot"))))
+#' @param raw_data_dir path of directory containing WEDECO CSV files
+#' (default: kwb.pilot:::package_file("shiny/berlin_s/data/operation"))
 #' @param raw_data_files vector with full path to operational raw data files that
 #' allows to limit import to specific files (default: NULL). If specified parameter
 #' "raw_data_dir" will not be used
 #' @param meta_file_path path to metadata file (default:
-#' system.file("shiny/berlin_s/data/parameter_site_metadata.csv", package =
-#' "kwb.pilot")))
+#' kwb.pilot:::package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))
 #' @return list with "df": data.frame with imported operational data (analytics
 #' data to be added as soon as available) and "added_data_points": number of
 #' added data points in case of existing fst file was updated with new operational
 #' data
 #' @export
-import_data_berlin_s <- function(raw_data_dir = system.file(
-                                 "shiny/berlin_s/data/operation",
-                                 package = "kwb.pilot"
-                               ),
-                               raw_data_files = NULL,
-                               meta_file_path = system.file(
-                                 "shiny/berlin_s/data/parameter_site_metadata.csv",
-                                 package = "kwb.pilot"
-                               )) {
+import_data_berlin_s <- function(
+  raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+  raw_data_files = NULL,
+  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")
+)
+{
   data_berlin_s <- read_wedeco_data(
     raw_data_dir = raw_data_dir,
     raw_data_files = raw_data_files,
