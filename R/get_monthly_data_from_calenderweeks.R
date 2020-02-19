@@ -80,7 +80,7 @@ for (selected_cw in 17:29) {
     dplyr::pull(jahrmonattag)
 
   print(sprintf("Search data for calender week %d", selected_cw))
-  indices <- grep(stringr::str_sub(old_data, 1, 8),pattern = paste0(jahrmonattag,collapse = "|"))
+  indices <- grep(stringr::str_sub(old_data, 1, 8), pattern = to_pattern_or(jahrmonattag))
 
 
   writeLines(c(old_data[1:3], old_data[indices]),

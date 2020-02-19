@@ -24,7 +24,7 @@ group_fst_by_pattern <- function(time_pattern = NULL,
 
   if (!is.null(time_pattern)) {
 
-    if (length(time_pattern)>1) time_pattern <- paste0(time_pattern, collapse = "|")
+    if (length(time_pattern)>1) time_pattern <- to_pattern_or(time_pattern)
 
     indices <- stringr::str_detect(fst_file_paths, time_pattern)
     fst_file_paths <- fst_file_paths[indices]
