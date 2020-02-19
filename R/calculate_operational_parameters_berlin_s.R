@@ -33,7 +33,7 @@ calculate_operational_parameters_berlin_s <- function(df,
                                                         "Q_Gas",
                                                         "Q_Ozonanlage"
                                                       )) {
-  res <- kwb.pilot::calculate_operational_parameters(
+  res <- calculate_operational_parameters(
     df,
     calc_list,
     calc_list_name,

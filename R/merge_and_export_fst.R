@@ -36,8 +36,7 @@ group_fst_by_pattern <- function(
   ))
 
   system.time(merge_dt <- data.table::rbindlist(lapply(
-    fst_file_paths,
-    kwb.pilot::read_fst
+    fst_file_paths, read_fst
   )))
 
   return(merge_dt)

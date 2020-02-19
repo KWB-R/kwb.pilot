@@ -24,7 +24,7 @@ calculate_operational_parameters_berlin_t <- function(df,
                                                         "FY-20-01",
                                                         "FT-10-01"
                                                       )) {
-  res <-  kwb.pilot::calculate_operational_parameters(
+  res <-  calculate_operational_parameters(
     df,
     calc_list,
     calc_list_name,

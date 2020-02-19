@@ -85,7 +85,7 @@ import_operation_basel <- function(
   names(raw_data)[1] <- "DateTime"
 
   print(sprintf("Setting time zone to 'CET'"))
-  raw_data <- kwb.pilot::set_timezone(raw_data, tz = "CET")
+  raw_data <- set_timezone(raw_data, tz = "CET")
 
   raw_data_tidy <- tidyr::gather_(
     data = raw_data,
@@ -206,7 +206,7 @@ import_analytics_basel <- function(
   }
 
   print(sprintf("Setting time zone to 'CET'"))
-  raw_data <- kwb.pilot::set_timezone(raw_data, tz = "CET")
+  raw_data <- set_timezone(raw_data, tz = "CET")
 
   raw_data$ParameterValue <- as.numeric(raw_data$ParameterValue)
   raw_data$Source <- "offline"
