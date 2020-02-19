@@ -148,8 +148,7 @@
     </div>
 
     <pre class="usage"><span class='fu'>add_site_metadata</span>(<span class='no'>df</span>, <span class='kw'>df_col_sitecode</span> <span class='kw'>=</span> <span class='st'>"SiteCode"</span>,
-  <span class='kw'>meta_site_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/metadata/meta_site.csv"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+  <span class='kw'>meta_site_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/metadata/meta_site.csv"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,8 +164,7 @@
     <tr>
       <th>meta_site_path</th>
       <td><p>Define path of "meta_site.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_site.csv",
-package = "kwb.pilot"))</p></td>
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))</p></td>
     </tr>
     </table>
 

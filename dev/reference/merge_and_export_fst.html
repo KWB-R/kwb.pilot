@@ -148,9 +148,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>merge_and_export_fst</span>(<span class='kw'>time_pattern</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>compression</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>import_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_t/data/fst"</span>, <span class='kw'>package</span> <span class='kw'>=</span>
-  <span class='st'>"kwb.pilot"</span>), <span class='kw'>export_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_t/data"</span>, <span class='kw'>package</span> <span class='kw'>=</span>
-  <span class='st'>"kwb.pilot"</span>))</pre>
+  <span class='kw'>import_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_t/data/fst"</span>),
+  <span class='kw'>export_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_t/data"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -167,12 +166,12 @@ for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")</p></td>
     <tr>
       <th>import_dir</th>
       <td><p>directory with fst files or subdirs to be imported (default:
-system.file("shiny/berlin_t/data/fst",package = "kwb.pilot"))</p></td>
+kwb.pilot:::package_file("shiny/berlin_t/data/fst"))</p></td>
     </tr>
     <tr>
       <th>export_dir</th>
       <td><p>directory with fst directory for export (default:
-system.file("shiny/berlin_t/data",package = "kwb.pilot"))</p></td>
+kwb.pilot:::package_file("shiny/berlin_t/data"))</p></td>
     </tr>
     </table>
 

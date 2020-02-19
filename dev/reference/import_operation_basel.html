@@ -152,8 +152,7 @@ at once, e.g. "rhein" or "wiese")</h1>
 at once, e.g. "rhein" or "wiese")</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_operation_basel</span>(<span class='kw'>xlsx_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/operation/wiese"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+    <pre class="usage"><span class='fu'>import_operation_basel</span>(<span class='kw'>xlsx_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/operation/wiese"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -161,8 +160,7 @@ at once, e.g. "rhein" or "wiese")</p>
     <tr>
       <th>xlsx_dir</th>
       <td><p>Define directory with raw data in EXCEL spreadsheet (.xlsx) to
-be imported (default: system.file("shiny/basel/data/operation/wiese",
-package = "kwb.pilot"))</p></td>
+be imported (default: sema.pilot:::package_file("shiny/basel/data/operation/wiese"))</p></td>
     </tr>
     </table>
 

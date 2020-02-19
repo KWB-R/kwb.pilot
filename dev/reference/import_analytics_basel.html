@@ -147,8 +147,7 @@
     <p>Imports analytical data for Basel (without metadata)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_analytics_basel</span>(<span class='kw'>csv_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/analytics"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+    <pre class="usage"><span class='fu'>import_analytics_basel</span>(<span class='kw'>csv_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/analytics"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -156,8 +155,7 @@
     <tr>
       <th>csv_dir</th>
       <td><p>Define directory with raw analytical data in CSV (.csv) format to
-be imported (default: system.file("shiny/basel/data/analytics",
-package = "kwb.pilot"))</p></td>
+be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))</p></td>
     </tr>
     </table>
 

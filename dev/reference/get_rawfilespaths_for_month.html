@@ -148,8 +148,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>get_rawfilespaths_for_month</span>(<span class='kw'>monthly_period</span> <span class='kw'>=</span> <span class='fu'><a href='get_monthly_periods.html'>get_monthly_periods</a></span>()[<span class='fl'>1</span>, ],
-  <span class='kw'>raw_data_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_t/data/operation"</span>, <span class='kw'>package</span> <span class='kw'>=</span>
-  <span class='st'>"kwb.pilot"</span>), <span class='kw'>max_offset_days</span> <span class='kw'>=</span> <span class='fl'>7</span>)</pre>
+  <span class='kw'>raw_data_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_t/data/operation"</span>),
+  <span class='kw'>max_offset_days</span> <span class='kw'>=</span> <span class='fl'>7</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +162,7 @@ first row of get_monthly_periods(), i.e. year month is (default: '2017-06')</p><
     <tr>
       <th>raw_data_dir</th>
       <td><p>directory with operational raw data files for Berlin Tiefwerder
-(default: system.file("shiny/berlin_t/data/operation", package = "kwb.pilot")</p></td>
+(default: <code>kwb.pilot:::package_file("shiny/berlin_t/data/operation")</code>)</p></td>
     </tr>
     <tr>
       <th>max_offset_days</th>

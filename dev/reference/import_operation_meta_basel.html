@@ -152,16 +152,11 @@ both sites at once, i.e. "rhein" and "wiese")</h1>
 both sites at once, i.e. "rhein" and "wiese")</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_operation_meta_basel</span>(<span class='kw'>raw_dir_rhein</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"shiny"</span>,
-  <span class='st'>"basel/data/operation/rhein"</span>), <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>raw_dir_wiese</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/operation/wiese"</span>, <span class='kw'>package</span>
-  <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>meta_online_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/metadata/meta_online.csv"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>meta_site_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/metadata/meta_site.csv"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>meta_parameter_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/basel/data/metadata/meta_parameter.csv"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+    <pre class="usage"><span class='fu'>import_operation_meta_basel</span>(<span class='kw'>raw_dir_rhein</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/operation/rhein"</span>),
+  <span class='kw'>raw_dir_wiese</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/operation/wiese"</span>),
+  <span class='kw'>meta_online_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/metadata/meta_online.csv"</span>),
+  <span class='kw'>meta_site_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/metadata/meta_site.csv"</span>),
+  <span class='kw'>meta_parameter_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/basel/data/metadata/meta_parameter.csv"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -170,31 +165,28 @@ both sites at once, i.e. "rhein" and "wiese")</p>
       <th>raw_dir_rhein</th>
       <td><p>Define directory for site "rhein" with raw data in
 EXCEL spreadsheet format (.xlsx) to be imported (default:
-system.file("shiny/basel/data/operation/rhein", package = "kwb.pilot"))</p></td>
+sema.pilot:::package_file("shiny/basel/data/operation/rhein"))</p></td>
     </tr>
     <tr>
       <th>raw_dir_wiese</th>
       <td><p>Define directory for site "rhein" with raw data in
 EXCEL spreadsheet format (.xlsx) to be imported (default:
-system.file("shiny/basel/data/operation/wiese", package = "kwb.pilot"))</p></td>
+sema.pilot:::package_file("shiny/basel/data/operation/wiese"))</p></td>
     </tr>
     <tr>
       <th>meta_online_path</th>
       <td><p>path to file containing metadata for online data
-(default: system.file("shiny/basel/data/metadata/meta_online.csv",
-package = "kwb.pilot"))</p></td>
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_online.csv"))</p></td>
     </tr>
     <tr>
       <th>meta_site_path</th>
       <td><p>Define path of "meta_site.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_site.csv",
-package = "kwb.pilot"))</p></td>
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))</p></td>
     </tr>
     <tr>
       <th>meta_parameter_path</th>
       <td><p>Define path of "meta_parameter.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-package = "kwb.pilot"))</p></td>
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))</p></td>
     </tr>
     </table>
 

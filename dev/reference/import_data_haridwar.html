@@ -147,12 +147,9 @@
     <p>Imports Haridwar data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_data_haridwar</span>(<span class='kw'>analytics_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"shiny"</span>,
-  <span class='st'>"haridwar/data/analytics.xlsx"</span>), <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>operation_mySQL_conf</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/haridwar/.my.cnf"</span>, <span class='kw'>package</span> <span class='kw'>=</span>
-  <span class='st'>"kwb.pilot"</span>),
-  <span class='kw'>operation_meta_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='st'>"shiny/haridwar/data"</span>,
-  <span class='st'>"operation_parameters.csv"</span>), <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>),
+    <pre class="usage"><span class='fu'>import_data_haridwar</span>(<span class='kw'>analytics_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/haridwar/data/analytics.xlsx"</span>),
+  <span class='kw'>operation_mySQL_conf</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/haridwar/.my.cnf"</span>),
+  <span class='kw'>operation_meta_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/haridwar/data/operation_parameters.csv"</span>),
   <span class='kw'>excludedSheets</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Parameters"</span>, <span class='st'>"Location"</span>, <span class='st'>"Sites"</span>, <span class='st'>"#Summary"</span>,
   <span class='st'>"Site_and_Parameter"</span>, <span class='st'>"Observations"</span>, <span class='st'>"dP"</span>, <span class='st'>"ORP"</span>, <span class='st'>"Flow"</span>,
   <span class='st'>"Current_Voltage"</span>, <span class='st'>"As_total_Arsenator"</span>), <span class='kw'>skip</span> <span class='kw'>=</span> <span class='fl'>69</span>, <span class='kw'>debug</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
@@ -163,20 +160,17 @@
     <tr>
       <th>analytics_path</th>
       <td><p>Define path of analytics EXCEL spreadsheet to be
-imported (default: system.file(file.path("shiny/haridwar/data",
-"analytics.xlsx"),
-package = "kwb.pilot"))</p></td>
+imported (default: kwb.pilot:::package_file("shiny/haridwar/data/analytics.xlsx"))</p></td>
     </tr>
     <tr>
       <th>operation_mySQL_conf</th>
       <td><p>column name pattern for identifying raw data
-(default: system.file("shiny/haridwar/.my.cnf", package = "kwb.pilot"))</p></td>
+(default: kwb.pilot:::package_file("shiny/haridwar/.my.cnf"))</p></td>
     </tr>
     <tr>
       <th>operation_meta_path</th>
       <td><p>path to table with meta data for operational
-parameters (default: system.file(file.path("shiny/haridwar/data",
-"operation_parameters.csv"), package = "kwb.pilot"))</p></td>
+parameters (default: kwb.pilot:::package_file("shiny/haridwar/data/operation_parameters.csv"))</p></td>
     </tr>
     <tr>
       <th>excludedSheets</th>

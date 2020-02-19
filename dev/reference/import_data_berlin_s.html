@@ -147,19 +147,17 @@
     <p>Import data for Berlin Schoenerlinde</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_data_berlin_s</span>(<span class='kw'>raw_data_dir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_s/data/operation"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>), <span class='kw'>raw_data_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>meta_file_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_s/data/parameter_site_metadata.csv"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+    <pre class="usage"><span class='fu'>import_data_berlin_s</span>(<span class='kw'>raw_data_dir</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_s/data/operation"</span>),
+  <span class='kw'>raw_data_files</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>meta_file_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_s/data/parameter_site_metadata.csv"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>raw_data_dir</th>
-      <td><p>path of directory containing WEDECO CSV files (default:
-(default: system.file("shiny/berlin_s/data/operation",
-package = "kwb.pilot"))))</p></td>
+      <td><p>path of directory containing WEDECO CSV files
+(default: kwb.pilot:::package_file("shiny/berlin_s/data/operation"))</p></td>
     </tr>
     <tr>
       <th>raw_data_files</th>
@@ -170,8 +168,7 @@ allows to limit import to specific files (default: NULL). If specified parameter
     <tr>
       <th>meta_file_path</th>
       <td><p>path to metadata file (default:
-system.file("shiny/berlin_s/data/parameter_site_metadata.csv", package =
-"kwb.pilot")))</p></td>
+kwb.pilot:::package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))</p></td>
     </tr>
     </table>
 

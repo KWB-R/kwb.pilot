@@ -147,17 +147,15 @@
     <p>BerlinTiefwerder: import lab data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>import_lab_data_berlin_t</span>(<span class='kw'>xlsx_path</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='st'>"shiny/berlin_t/data/analytics.xlsx"</span>,
-  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"kwb.pilot"</span>))</pre>
+    <pre class="usage"><span class='fu'>import_lab_data_berlin_t</span>(<span class='kw'>xlsx_path</span> <span class='kw'>=</span> <span class='fu'>package_file</span>(<span class='st'>"shiny/berlin_t/data/analytics.xlsx"</span>))</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>xlsx_path</th>
-      <td><p>full path to lab data EXCEL file in xlsx format (default:
-(default: system.file("shiny/berlin_t/data/analytics.xlsx",
-package = "kwb.pilot"))))</p></td>
+      <td><p>full path to lab data EXCEL file in xlsx format
+(default: kwb.pilot:::package_file("shiny/berlin_t/data/analytics.xlsx"))</p></td>
     </tr>
     </table>
 
