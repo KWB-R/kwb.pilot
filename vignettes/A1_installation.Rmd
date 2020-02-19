@@ -11,8 +11,7 @@ In the following the [required software](#1-1-pre-required-software) and the
 workflow for installing the [R package kwb.pilot](#1-2-r-package-installation) 
 is described.
 
-# 1.1 Pre-required software
-
+# 1.1 Required software
 
 - [R (>= 3.3.2)](https://cloud.r-project.org/): for the development of the R 
 package **kwb.pilot** R 3.3.2 was used. However, also later R releases 
@@ -27,16 +26,13 @@ from plain text format (markdown) into the different formats (docx, html, pdf).
 
 - [Miktex](https://miktex.org/download): needs to be installed in case that **pdf** reports should be created.
 
-
 For the advanced user it is further recommended to install the latest version of 
 the integrated development environment (IDE) [RStudio Desktop "open source licence"](https://www.rstudio.com/products/rstudio/download2/#download). 
-
 
 # 1.2 Workflow
 
 Once all [pre-required software](#1-1-pre-required-software) is installed the R 
 package installation workflow as described below can be started.
-
 
 ## 1.2.1 Step 1) Installation of R package "devtools" 
 
@@ -77,12 +73,14 @@ because the R version used for this documentation is 3.3.2):
 "C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot""
 
 ## 1.2.4	Step 4) Copy site specific files
+
 Knowing the installation folder of the “kwb.pilot” package is important, 
 because two additional files, which are described in detail in the following 
 sub-chapters need to be copied into the package directory, so that it is working 
 properly for the Haridwar site.
 
 ### 1.2.4.1	mySQL configuration file ('.my.cnf')
+
 The '.my.cnf' file is required to establish a connection to the mySQL database 
 for querying the opera-tional data for the Haridwar site. It needs to be copied 
 into the directory which is returned after run-ning the following code in R(Studio) :
@@ -99,6 +97,7 @@ The “.my.cnf” configuration file  is not included in the R package, as it wo
 provide direct access to the MySQL database of the AUTARCON company!
 
 ### 1.2.4.2	Analytics spreadsheet file ('analytics.xlsx')
+
 The 'analytics.xlsx' file contains the analytics data (results of lab measurements) 
 for the Haridwar site. It has a specific predefined structure which is expected 
 by the R package and should not be changed (e.g. for all analytical parameter 
@@ -107,6 +106,7 @@ first column is of type “DateTime”). Automatic reading of this file is not
 possible, if the structure is changed.
 This file needs to be copied into the directory which is returned after running 
 the following code in R(Studio):
+
 ```{r eval = FALSE}
 system.file("shiny/haridwar/data", package = "kwb.pilot")
 ```
@@ -117,5 +117,3 @@ your personal documents folder under:
 
 **Important note:**
 ***The “analytics.xlsx” file  is not included in the R package due to IP reasons.***
-
-

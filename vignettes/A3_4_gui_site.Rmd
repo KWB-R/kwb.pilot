@@ -15,7 +15,6 @@ level (bottom).
 knitr::include_graphics("figures/28.png")
 ```
 
-
 Note: 
 The coordinates and the popup menu used for the two maps can be modified by the 
 user, which is described in Chapter 4.1.3.
