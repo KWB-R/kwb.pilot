@@ -9,3 +9,9 @@ to_list_items <- function(items)
 {
   paste("* ", items, collapse = "  \n")
 }
+
+# to_month_pattern -------------------------------------------------------------
+to_month_pattern <- function(from, to)
+{
+  paste0(c(from, to), collapse = "|")
+}

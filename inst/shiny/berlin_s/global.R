@@ -18,7 +18,7 @@ kwb.pilot::aggregate_export_fst_berlin_s(year_month_start = year_month_start,
                                                 year_month_end = year_month_end)
 
 
-month_pattern <- paste0(c(year_month_start,year_month_end), collapse = "|")
+month_pattern <- kwb.pilot:::to_month_pattern(year_month_start, year_month_end)
 kwb.pilot::merge_and_export_fst(time_pattern = month_pattern,
                                      import_dir = system.file("shiny/berlin_s/data/fst",
                                                   package = "kwb.pilot"),
