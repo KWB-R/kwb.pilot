@@ -59,9 +59,9 @@ logo <<- function
 
 # siteLogo ---------------------------------------------------------------------
 siteLogo <- logo(
-  src = "berlin_t.jpg",
-  href = "http://www.aquanes-h2020.eu/Default.aspx?t=1576",
-  label = "Site1_Berlin_Tiefwerder",
+  src = "berlin_f.jpg",
+  href = "https://www.kompetenz-wasser.de/en/project/suleman/",
+  label = "Site: Berlin (Friedrichshagen)",
   add_div = FALSE
 )
 
@@ -69,7 +69,7 @@ siteLogo <- logo(
 footer <- function
 (
   startCol = 9,
-  txt = "\u00A9 Kompetenzzentrum Wasser Berlin gGmbH 2017"
+  txt = "\u00A9 Kompetenzzentrum Wasser Berlin gGmbH 2020"
 )
 {
   footerTxt <- tags$footer(tags$h6(txt))

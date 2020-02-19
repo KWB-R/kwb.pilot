@@ -4,8 +4,11 @@
 \alias{aggregate_export_fst_berlin_t}
 \title{Berlin-Tiefwerder: aggregate and export to fst}
 \usage{
-aggregate_export_fst_berlin_t(year_month_start = "2017-06",
-  year_month_end = format(Sys.Date(), "\%Y-\%m"), compression = 100)
+aggregate_export_fst_berlin_t(
+  year_month_start = "2017-06",
+  year_month_end = format(Sys.Date(), "\%Y-\%m"),
+  compression = 100
+)
 }
 \arguments{
 \item{year_month_start}{start year month (default: '2017-06')}

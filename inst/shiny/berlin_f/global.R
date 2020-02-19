@@ -14,25 +14,27 @@ print(sprintf(" ###### Generating & exporting .fst files for months: %s - %s",
       year_month_end))
 print("#################################################################################")
 
-kwb.pilot::aggregate_export_fst_berlin_t(year_month_start = year_month_start,
+kwb.pilot::aggregate_export_fst_berlin_f(year_month_start = year_month_start,
                                               year_month_end = year_month_end)
 
 
-month_pattern <- kwb.pilot:::to_month_pattern(year_month_start, year_month_end)
+month_pattern <- paste0(c(year_month_start,year_month_end), collapse = "|")
 kwb.pilot::merge_and_export_fst(time_pattern = month_pattern)
 
 }
 
-kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/berlin_t/data"))
+kwb.pilot::load_fst_data(fst_dir = system.file("shiny/berlin_f/data",
+                                                    package = "kwb.pilot"))
 
 print("### Step 5: Importing threshold information ##########################")
 
-threshold_file <- kwb.pilot:::package_file("shiny/berlin_t/data/thresholds.csv")
+threshold_file <- system.file("shiny/berlin_f/data/thresholds.csv",
+                              package = "kwb.pilot")
 
-thresholds <- kwb.pilot::get_thresholds(threshold_file)
+thresholds <- kwb.pilot::get_thresholds(csv_path = threshold_file)
 
 print("### Step 6: Specify available months for reporting ##########################")
-report_months <- kwb.pilot::create_monthly_selection(startDate = "2017-06-01")
+report_months <- kwb.pilot::create_monthly_selection(startDate = "2019-11-01")
 
 #print("### Step 7: Add default calculated operational parameters ##########################")
 

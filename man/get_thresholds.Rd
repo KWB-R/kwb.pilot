@@ -4,8 +4,7 @@
 \alias{get_thresholds}
 \title{Get thresholds for analytics/operational parameters}
 \usage{
-
-  get_thresholds(file = package_file("shiny/haridwar/data/thresholds.csv"))
+get_thresholds(file = package_file("shiny/haridwar/data/thresholds.csv"))
 }
 \arguments{
 \item{file}{path to csv file with thresholds for Haridwar site (default:

@@ -4,9 +4,11 @@
 \alias{get_rawfilespaths_for_month}
 \title{Berlin-Tiefwerder: get rawfilepaths for months}
 \usage{
-get_rawfilespaths_for_month(monthly_period = get_monthly_periods()[1, ],
+get_rawfilespaths_for_month(
+  monthly_period = get_monthly_periods()[1, ],
   raw_data_dir = package_file("shiny/berlin_t/data/operation"),
-  max_offset_days = 7)
+  max_offset_days = 7
+)
 }
 \arguments{
 \item{monthly_period}{one row of data.frame as retrieved by function

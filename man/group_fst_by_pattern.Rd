@@ -4,8 +4,11 @@
 \alias{group_fst_by_pattern}
 \title{Helper function: group fst by pattern}
 \usage{
-group_fst_by_pattern(time_pattern = NULL, fst_pattern = "raw",
-  fst_dir = package_file("shiny/berlin_t/data/fst"))
+group_fst_by_pattern(
+  time_pattern = NULL,
+  fst_pattern = "raw",
+  fst_dir = package_file("shiny/berlin_t/data/fst")
+)
 }
 \arguments{
 \item{time_pattern}{optional pattern to filter months to be imported (default: NULL),

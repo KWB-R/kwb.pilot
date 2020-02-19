@@ -1,5 +1,5 @@
 ---
-title: "Automated report for Berlin Tiefwerder"
+title: "Automated report for Berlin Friedrichshagen"
 output:
   html_document:
     fig_height: 7
@@ -37,15 +37,16 @@ library(ggforce)
 library(dplyr)
 library(kwb.pilot)
 
-thresholds_file <- kwb.pilot:::package_file("shiny/berlin_t/data/thresholds.csv")
+thresholds_file <- system.file("shiny/berlin_f/data/thresholds.csv",
+                              package = "kwb.pilot")
 
-thresholds <- kwb.pilot::get_thresholds(thresholds_file)
+thresholds <- kwb.pilot::get_thresholds(csv_path = thresholds_file )
 
 
 if (params$run_as_standalone) {
   
 ### Raw data
-dat <- kwb.pilot::import_data_berlin_t()
+dat <- kwb.pilot::import_data_berlin_f()
 
 conf_template <- kwb.pilot::report_config_template(df = dat,
                                        temporal_aggregation = "raw", 
@@ -68,7 +69,7 @@ input <- list(report_sitenames = unique(dat$SiteName),
               report_parameters_online = unique(dat$ParameterName[dat$Source == "online"])[1],
               report_parameters_offline = unique(dat$ParameterName[dat$Source == "offline"])[6],
               report_add_thresholds = FALSE,
-              report_daterange = c("2017-06-01", "2017-06-30"),
+              report_daterange = c("2019-11-01", "2019-11-30"),
               report_timezone = "CET")
 
 }
@@ -123,7 +124,6 @@ config <- list(run_as_standalone = TRUE,
 ```
 
 # Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
-
 Here are the time series plots for the reporting period from `r config$report_daterange[1]` to  `r config$report_daterange[2]`
 using the timezone "`r config$report_timezone`" with the following temporal aggregation 
 level (i.e. median values): "`r config$report_aggregation`"
@@ -141,14 +141,16 @@ Nothing defined yet !
 ```
 
 ## Online parameters
-
 **You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
 
 `r kwb.pilot:::to_list_items(config$report_parameters_online)`
 
+
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
 `r kwb.pilot:::to_list_items(config$report_sitenames)`
+
+
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -199,6 +201,8 @@ Nothing defined yet !
 
 `r kwb.pilot:::to_list_items(config$report_sitenames)`
 
+
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
    offline <- config$report_data[config$report_data[,"ParameterName"] %in% config$report_parameters_offline,] %>% 
@@ -241,10 +245,13 @@ Nothing defined yet !
     }
 ```
 
-## Calculated parameters
+##Calculated parameters
 
 Not implemented yet!
 
 # Correlations
 
 Not implemented yet!
+
+
+
