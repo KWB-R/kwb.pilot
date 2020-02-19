@@ -1,24 +1,21 @@
-if(FALSE) {
+if (FALSE)
+{
   pkgs_cran <- c("dplyr", "remotes", "tidyr")
   
   install.packages(pkgs_cran)
-  
   
   remotes::install_github("kwb-r/aquanes.report")
   remotes::install_github("kwb-r/kwb.utils")
 }
 
-
-paths_list <- list(
+paths <- kwb.utils::resolve(list(
   servername = "server_name",
-  rawdata = "<servername>/projekte$/WWT_Department/Projects/SULEMAN/Exchange/10_rawdata",
+  suleman = "<servername>/projekte$/WWT_Department/Projects/SULEMAN",
+  rawdata = "<suleman>/Exchange/10_rawdata",
   online =  "<rawdata>/online_data"
-)
+))
 
-paths <- kwb.utils::resolve(paths_list)
-
-
-files <- fs::dir_ls(paths$online,recurse = TRUE, regexp = "^[^~].*\\.xlsx$")
+files <- fs::dir_ls(paths$online, recurse = TRUE, regexp = "^[^~].*\\.xlsx$")
 
 paraname_site <- basename(dirname(files))
 
@@ -27,7 +24,10 @@ paraname_site <- basename(dirname(files))
 # read_weintek -----------------------------------------------------------------
 read_weintek <- function(path, tz = "CET", dbg = TRUE)
 {
-  if(dbg) message(sprintf("Importing file: %s", path))
+  if (dbg) {
+    message("Importing file: ", path)
+  }
+  
   df <- kwb.utils::renameColumns(readxl::read_xlsx(path), renamings = list(
     Datum = "DateTime",
     Date = "DateTime",
@@ -37,46 +37,52 @@ read_weintek <- function(path, tz = "CET", dbg = TRUE)
     "32-bit Float" = "ParameterValue"
   ))
   
-  df <- df[, intersect(names(df), c("DateTime", "Millisecond", "ParameterValue"))]
+  columns <- intersect(names(df), c("DateTime", "Millisecond", "ParameterValue"))
   
-  aquanes.report:::set_timezone(df,
-                                tz = tz,
-                                col_datetime = "DateTime")
+  df <- df[, columns]
+  
+  aquanes.report:::set_timezone(df, tz = tz, col_datetime = "DateTime")
 }
 
+# read_weintek_batch -----------------------------------------------------------
+read_weintek_batch <- function(files, tz = "CET", dbg = TRUE)
+{
+  data_list <- setNames(
+    object = lapply(files, read_weintek , tz = tz, dbg = dbg), 
+    nm = paraname_site
+  )
 
-read_weintek_batch <- function(files, tz = "CET", dbg = TRUE) {
-  
-  data_list <- setNames(lapply(files, function(file) {
-    read_weintek(file, tz, dbg)}), nm = paraname_site)
-  
-  
-  
-  data_df <- data.table::rbindlist(data_list, fill = TRUE, idcol = "paraname_site") %>%
-    tidyr::separate(col = "paraname_site",
-                    into = c("ParameterName", "SiteName"),
-                    sep = "_") %>%
+  data_list %>%
+    data.table::rbindlist(fill = TRUE, idcol = "paraname_site") %>%
+    tidyr::separate(
+      col = "paraname_site",
+      into = c("ParameterName", "SiteName"),
+      sep = "_"
+    ) %>%
     dplyr::mutate(DataType = "raw") %>%
     dplyr::select(- Millisecond) %>%
     aquanes.report::remove_duplicates()
-  
-  data_df
 }
 
-
-
-long_to_wide <- function(df) {
+# long_to_wide -----------------------------------------------------------------
+long_to_wide <- function(df)
+{
   df  %>%  
-    dplyr::mutate(ParameterName_SiteName = sprintf("%s_%s", 
-                                                   .data$ParameterName, 
-                                                   .data$SiteName)) %>%  
-    dplyr::select(.data$DateTime, 
-                  .data$ParameterName_SiteName, 
-                  .data$ParameterValue) %>%  
-    tidyr::spread(key = .data$ParameterName_SiteName, 
-                  value = .data$ParameterValue)
+    dplyr::mutate(
+      ParameterName_SiteName = sprintf(
+        "%s_%s", .data$ParameterName, .data$SiteName
+      )
+    ) %>%  
+    dplyr::select(
+      .data$DateTime, 
+      .data$ParameterName_SiteName, 
+      .data$ParameterValue
+    ) %>%  
+    tidyr::spread(
+      key = .data$ParameterName_SiteName, 
+      value = .data$ParameterValue
+    )
 }
-
 
 weintek_data_raw <- read_weintek_batch(files)
 
@@ -84,62 +90,52 @@ weintek_data_raw <- read_weintek_batch(files)
 #   dplyr::group_by(DateTime) %>%
 #   dplyr::summarise(n = dplyr::n())
 
-
-export_data <- function(df_long, 
-                        export_dir = "//medusa/processing/suleman", 
-                        dbg = TRUE) {
-  
+# export_data ------------------------------------------------------------------
+export_data <- function(
+  df_long, export_dir = "//medusa/processing/suleman", dbg = TRUE
+)
+{
   fs::dir_create(sprintf("%s/data", export_dir))
   
   df_name <- deparse(substitute(df_long))
   
-  df_file <- sprintf("%s/data/%s.csv", 
-                     export_dir, 
-                     df_name)
+  df_file <- sprintf("%s/data/%s.csv", export_dir, df_name)
   
-  
-  kwb.utils::catAndRun(sprintf("Export data to %s", df_file), 
-                       expr = {
-                         df_wide <- long_to_wide(df_long)
-                         readr::write_csv2(df_wide, path = df_file)
-                       }, 
-                       dbg = dbg)
+  kwb.utils::catAndRun(sprintf("Export data to %s", df_file), dbg = dbg, {
+    df_wide <- long_to_wide(df_long)
+    readr::write_csv2(df_wide, path = df_file)
+  })
 }
 
-plot_data <- function(df_long, 
-                      export_dir = "//medusa/processing/suleman", 
-                      dbg = TRUE) {
-  
+# plot_data --------------------------------------------------------------------
+plot_data <- function(
+  df_long, export_dir = "//medusa/processing/suleman", dbg = TRUE
+)
+{
   fs::dir_create(sprintf("%s/plots", export_dir))
-  
-  
+
   df_name <- deparse(substitute(df_long))
+
+  plot_file <- sprintf("%s/plots/%s.html", export_dir, df_name)
   
-  
-  plot_file <- sprintf("%s/plots/%s.html", 
-                       export_dir, 
-                       df_name)
-  
-  
-  
-  kwb.utils::catAndRun(sprintf("Export plot: %s", plot_file), 
-                       expr = {
-                         g1 <- df_long %>%
-                           ggplot2::ggplot(mapping = ggplot2::aes(x = DateTime,
-                                                                  y = ParameterValue,
-                                                                  col = SiteName)) +
-                           ggplot2::facet_wrap(~ParameterName, scales = "free_y", ncol = 1) +
-                           ggplot2::geom_point() +
-                           ggplot2::theme_bw()
-                         
-                         
-                         withr::with_dir(sprintf("%s/plots", export_dir), 
-                                         code = { 
-                                           plotly::ggplotly(g1) %>%  htmlwidgets::saveWidget(basename(plot_file),
-                                                                                             selfcontained = FALSE,
-                                                                                             title = df_name)})}, 
-                       dbg = dbg
-  )
+  kwb.utils::catAndRun(sprintf("Export plot: %s", plot_file), dbg = dbg, {
+    
+    g1 <- df_long %>%
+      ggplot2::ggplot(mapping = ggplot2::aes(
+        x = DateTime, y = ParameterValue, col = SiteName
+      )) +
+      ggplot2::facet_wrap(~ParameterName, scales = "free_y", ncol = 1) +
+      ggplot2::geom_point() +
+      ggplot2::theme_bw()
+
+    withr::with_dir(sprintf("%s/plots", export_dir), code = { 
+      plotly::ggplotly(g1) %>%
+        htmlwidgets::saveWidget(
+          basename(plot_file), selfcontained = FALSE, title = df_name
+        )
+    })
+    
+  })
 }
 
 
@@ -153,9 +149,6 @@ export_data(weintek_data_raw)
 export_data(weintek_data_10min)
 export_data(weintek_data_1hour)
 
-
 plot_data(weintek_data_1hour)
 plot_data(weintek_data_10min)
 #plot_data(weintek_data_raw)
-
-
