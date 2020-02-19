@@ -20,6 +20,18 @@ comma_to_dot <- function(x)
   gsub(',', '.', x)
 }
 
+# list_full_csv_files ----------------------------------------------------------
+list_full_csv_files <- function(path)
+{
+  list.files(path, pattern = "\\.csv", full.names = TRUE)
+}
+
+# list_full_xls_files ----------------------------------------------------------
+list_full_xls_files <- function(path)
+{
+  list.files(path, pattern = "\\.xls", full.names = TRUE)
+}
+
 # num_column_to_posix_cet ------------------------------------------------------
 num_column_to_posix_cet <- function(df, column)
 {

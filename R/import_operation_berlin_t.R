@@ -94,11 +94,8 @@ read_pentair_data <- function(
   ))
   
   xls_files <- if (is.null(raw_data_files)) {
-    
-    list.files(path = raw_data_dir, pattern = "*.xls", full.names = TRUE)
-    
+    list_full_xls_files(raw_data_dir)
   } else {
-    
     raw_data_files
   }
   

@@ -11,12 +11,7 @@ import_operation_basel <- function(
   xlsx_dir = package_file("shiny/basel/data/operation/wiese")
 ) 
 {
-  xlsx_files <- list.files(
-    path = xlsx_dir,
-    pattern = "\\.xls",
-    full.names = TRUE
-  )
-
+  xlsx_files <- list_full_xls_files()
 
   for (xlsx_file in xlsx_files) {
     print(sprintf("Importing: %s", xlsx_file))
@@ -65,12 +60,7 @@ import_analytics_basel <- function(
   csv_dir = package_file("shiny/basel/data/analytics")
 )
 {
-  csv_files <- list.files(
-    path = csv_dir,
-    pattern = "\\.csv",
-    full.names = TRUE
-  )
-
+  csv_files <- list_full_csv_files(csv_dir)
 
   for (csv_file in csv_files) {
     print(sprintf("Importing: %s", csv_file))
