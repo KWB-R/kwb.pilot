@@ -3,3 +3,9 @@ clean_stop <- function(...)
 {
   stop(..., call. = FALSE)
 }
+
+# to_list_items ----------------------------------------------------------------
+to_list_items <- function(items)
+{
+  paste("* ", items, collapse = "  \n")
+}

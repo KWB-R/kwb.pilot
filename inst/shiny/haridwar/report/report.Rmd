@@ -37,8 +37,6 @@ library(ggforce)
 library(dplyr)
 library(kwb.pilot)
 
-print_items <- function(items) paste("* ", items, collapse = "  \n")
-
 thresholds <- kwb.pilot::get_thresholds()
 
 if (params$run_as_standalone) {
@@ -140,11 +138,11 @@ knitr::kable(x = table_thresholds, row.names = FALSE)
 
 **You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
 
-`r print_items(config$report_parameters_online)`
+`r kwb.pilot:::to_list_items(config$report_parameters_online)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r print_items(config$report_sitenames)`
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -189,11 +187,11 @@ knitr::kable(x = table_thresholds, row.names = FALSE)
 
 **You selected the following `r length(config$report_parameters_offline)` parameter(s) for plotting:**
 
-`r print_items(config$report_parameters_offline)`
+`r kwb.pilot:::to_list_items(config$report_parameters_offline)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r print_items(config$report_sitenames)`
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -241,7 +239,7 @@ knitr::kable(x = table_thresholds, row.names = FALSE)
 
 **You selected the following `r length(config$report_parameters_calculated)` parameter(s) for plotting:**
 
-`r print_items(config$report_parameters_calculated)`
+`r kwb.pilot:::to_list_items(config$report_parameters_calculated)`
 
 ```{r, echo=FALSE, message=FALSE}
 calc_paras <- kwb.pilot::calculate_operational_parameters(df = config$report_tz)

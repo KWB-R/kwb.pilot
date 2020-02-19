@@ -37,8 +37,6 @@ library(ggforce)
 library(dplyr)
 library(kwb.pilot)
 
-print_items <- function(items) paste("* ", items, collapse = "  \n")
-
 thresholds_file <- system.file("shiny/berlin_s/data/thresholds.csv",
                               package = "kwb.pilot")
 
@@ -147,11 +145,11 @@ Nothing defined yet !
 
 **You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
 
-`r print_items(config$report_parameters_online)`
+`r kwb.pilot:::to_list_items(config$report_parameters_online)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r print_items(config$report_sitenames)`
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -196,11 +194,11 @@ Nothing defined yet !
 
 **You selected the following `r length(config$report_parameters_offline)` parameter(s) for plotting:**
 
-`r print_items(config$report_parameters_offline)`
+`r kwb.pilot:::to_list_items(config$report_parameters_offline)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r print_items(config$report_sitenames)`
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
