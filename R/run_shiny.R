@@ -6,7 +6,7 @@
 #' the selected site (default: NULL)
 #' @param launch.browser If true, the system's default web browser will be
 #' launched automatically after the app is started (default: TRUE)
-#' @param ... further arguments passed to shiny::runApp()
+#' @param \dots further arguments passed to shiny::runApp()
 #' @importFrom shiny runApp
 #' @importFrom kwb.utils stringList
 #' @export
@@ -18,46 +18,44 @@ run_app <- function(
   use_live_data <- toupper(use_live_data)
 
   shinyDir <- package_file("shiny")
+  
   appDir <- file.path(shinyDir, siteName)
 
-  if (!siteName %in% dir(shinyDir)) {
-    msg <- sprintf(
-      "Could not find shiny app directory for %s.\n
-                    Please select for parameter 'siteName' one of:\n'%s'",
-      siteName,
-      kwb.utils::stringList(dir(shinyDir))
+  site_names <- dir(shinyDir)
+  
+  if (! siteName %in% site_names) {
+    clean_stop(
+      "Could not find shiny app directory for ", siteName, ".\n",
+      "Please select for parameter 'siteName' one of:\n",
+      kwb.utils::stringList(site_names)
     )
-
-    clean_stop(msg)
   }
-
+  
   if (siteName == "haridwar") {
+
     mySQL_conf_path <- file.path(appDir, ".my.cnf")
 
     if (use_live_data) {
-      if (!is.null(mySQL_conf)) {
-        file.copy(
-          from = mySQL_conf,
-          to = mySQL_conf_path
-        )
+      
+      if (! is.null(mySQL_conf)) {
+        file.copy(from = mySQL_conf, to = mySQL_conf_path)
       }
 
-      if (!file.exists(mySQL_conf_path)) {
-        msg <- sprintf("No '.my.cnf' file located under: %s\n.
-           Please once specify the path to a valid MySQL config file with parameter
-              'mySQL_conf'", appDir)
-        clean_stop(msg)
+      if (! file.exists(mySQL_conf_path)) {
+        clean_stop(
+          "No '.my.cnf' file located under: ", appDir, ".\n",
+          "Please once specify the path to a valid MySQL config file with ", 
+          "parameter 'mySQL_conf'"
+        )
       }
     }
   }
 
   global_path <- file.path(appDir, "global.R")
 
-
-  if (file.exists(global_path) == FALSE) {
+  if (! file.exists(global_path)) {
     clean_stop("Could not find a 'global.R' in: ", appDir)
   }
-
 
   ### adapt "global.R" to use live data or not
   global_string <- readLines(global_path)
