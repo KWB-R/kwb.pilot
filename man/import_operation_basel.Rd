@@ -6,13 +6,11 @@
 at once, e.g. "rhein" or "wiese")}
 \usage{
 
-  import_operation_basel(xlsx_dir = system.file("shiny/basel/data/operation/wiese",
-  package = "kwb.pilot"))
+  import_operation_basel(xlsx_dir = package_file("shiny/basel/data/operation/wiese"))
 }
 \arguments{
 \item{xlsx_dir}{Define directory with raw data in EXCEL spreadsheet (.xlsx) to
-be imported (default: system.file("shiny/basel/data/operation/wiese",
-package = "kwb.pilot"))}
+be imported (default: sema.pilot:::package_file("shiny/basel/data/operation/wiese"))}
 }
 \value{
 returns data frame with imported raw operational data

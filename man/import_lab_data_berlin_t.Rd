@@ -5,13 +5,11 @@
 \title{BerlinTiefwerder: import lab data}
 \usage{
 
-  import_lab_data_berlin_t(xlsx_path = system.file("shiny/berlin_t/data/analytics.xlsx",
-  package = "kwb.pilot"))
+  import_lab_data_berlin_t(xlsx_path = package_file("shiny/berlin_t/data/analytics.xlsx"))
 }
 \arguments{
-\item{xlsx_path}{full path to lab data EXCEL file in xlsx format (default:
-(default: system.file("shiny/berlin_t/data/analytics.xlsx",
-package = "kwb.pilot"))))}
+\item{xlsx_path}{full path to lab data EXCEL file in xlsx format
+(default: kwb.pilot:::package_file("shiny/berlin_t/data/analytics.xlsx"))}
 }
 \value{
 a list of imported lab data for Berlin-Tiefwerder

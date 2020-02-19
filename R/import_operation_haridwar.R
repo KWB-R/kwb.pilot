@@ -12,17 +12,15 @@
 #' @importFrom dplyr src_mysql
 #' @importFrom dbplyr src_dbi
 #' @keywords internal
-src_mysql_from_cnf <- function(dbname,
-                               group = NULL,
-                               dir=file.path(getwd(), ".my.cnf"),
-                               host=NULL,
-                               user=NULL,
-                               password=NULL,
-                               ...) {
+src_mysql_from_cnf <- function(
+  dbname, group = NULL, dir = file.path(getwd(), ".my.cnf"), host = NULL, 
+  user = NULL, password = NULL, ...
+)
+{
   dir <- normalizePath(dir)
-  if (!(file.exists(dir))) {
-    stop(sprintf("No such file '%s'", dir))
-  }
+  
+  kwb.utils::safePath(dir)
+  
   dplyr::src_mysql(
     dbname,
     group = group,
@@ -41,21 +39,16 @@ src_mysql_from_cnf <- function(dbname,
 #' @return returns data frame operational data from MySQL db
 #' @import dplyr
 #' @export
-import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
-  sumewa <- src_mysql_from_cnf(
-    dbname = "sumewa",
-    group = "autarcon",
-    dir = mysql_conf
-  )
-
-
+import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf"))
+{
+  sumewa <- src_mysql_from_cnf("sumewa", "autarcon", dir = mysql_conf)
+  
   tbl_live <- dplyr::tbl(sumewa, "live") %>%
     dplyr::filter_(~AnlagenID == 4014) %>%
     dplyr::tbl_df() %>%
     dplyr::rename_("Redox_Out1" = "Red1", "Redox_Out2" = "Red2") %>%
     dplyr::tbl_df()
-
-
+  
   tbl_india <- dplyr::tbl(sumewa, "indienmesssystem") %>%
     dplyr::filter_(~AnlagenID == 4013) %>%
     dplyr::select_(
@@ -89,30 +82,25 @@ import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
       "H20Head" = "Up"
     ) %>%
     dplyr::tbl_df()
-
-
-
+  
   tbl_tmp <- plyr::rbind.fill(tbl_live, tbl_india)
-
-
+  
   duplicated_datetimes <- names(which(table(tbl_tmp$time) != 1))
-
-  operation <- tbl_tmp[!tbl_tmp$time %in% duplicated_datetimes, ] %>%
+  
+  tbl_tmp[! tbl_tmp$time %in% duplicated_datetimes, ] %>%
     left_join(data.frame(
       AnlagenID = c(4013, 4014),
       LocationName = rep("Haridwar", 2)
     )) %>%
     dplyr::rename_("DateTime" = "time") %>%
     dplyr::mutate_("DateTime" = "as.POSIXct(DateTime,tz = 'UTC')")
-
-  return(operation)
 }
 
-
-
-if (FALSE) {
+# MAIN -------------------------------------------------------------------------
+if (FALSE)
+{
   operation <- import_operation()
-
+  
   ### Calculate additional parameters:
   operation <- operation %>%
     dplyr::mutate_(
@@ -123,50 +111,49 @@ if (FALSE) {
       Pump_WhPerCbm = "Power_pump/Flux/1000",
       Cell_WhPerCbm = "Power_cell/Flux/1000"
     )
-
-
-
+  
   ### Aggregation of online data to user defined
   drop.cols <- "LocationName"
   operation_grouped <- kwb.base::hsGroupByInterval(
-    data = operation %>%
-      dplyr::select_(.dots = setdiff(names(.), drop.cols)),
+    data = dplyr::select_(operation, .dots = setdiff(names(.), drop.cols)),
     interval = 60 * 15,
     tsField = "DateTime",
     FUN = "median"
   )
-
+  
   ### Plot it
-  pdf(file = "report/datenanalyse_haridwar.pdf", width = 7, height = 5)
-
+  
   operation_grouped_tidy1 <- tidyr::gather(
     operation_grouped[, c("DateTime", "Redox_Out1", "Redox_Out2", "Redox_In")],
     key = "Parameter",
     value = "Value", -DateTime
   )
-
-  p1 <- ggplot(data = operation_grouped_tidy1, aes(x = DateTime, y = Value, col = Parameter)) +
-    geom_point() +
-    labs(list(x = "Datetime (UTC)", y = "Redox potential (mV)")) +
-    theme_bw() +
-    theme(legend.position = "top")
-  print(p1)
-
-
+  
   operation_grouped_tidy2 <- tidyr::gather(
     operation_grouped[, c("DateTime", "Redox_Out", "Redox_In")],
     key = "Parameter",
     value = "Value", -DateTime
   )
-
-  p2 <- ggplot(data = operation_grouped_tidy2, aes(x = DateTime, y = Value, col = Parameter)) +
+  
+  p1 <- ggplot(data = operation_grouped_tidy1, aes(
+    x = DateTime, y = Value, col = Parameter
+  )) +
     geom_point() +
     labs(list(x = "Datetime (UTC)", y = "Redox potential (mV)")) +
     theme_bw() +
     theme(legend.position = "top")
-  print(p2)
 
-  p3 <- ggplot(data = operation %>% select(DateTime, Redox_Diff), aes(x = DateTime, y = Redox_Diff)) +
+  p2 <- ggplot(data = operation_grouped_tidy2, aes(
+    x = DateTime, y = Value, col = Parameter
+  )) +
+    geom_point() +
+    labs(list(x = "Datetime (UTC)", y = "Redox potential (mV)")) +
+    theme_bw() +
+    theme(legend.position = "top")
+
+  p3 <- ggplot(data = operation %>% select(DateTime, Redox_Diff), aes(
+    x = DateTime, y = Redox_Diff
+  )) +
     geom_point() +
     # geom_vline()
     labs(list(
@@ -175,12 +162,27 @@ if (FALSE) {
     )) +
     theme_bw() +
     theme(legend.position = "top")
-  print(p3)
-
-
+  
   backwash <- operation[operation$Anlauf == 90, "DateTime"]
 
-  p4 <- ggplot(data = operation_grouped %>% filter(DiffPressure < 10), aes(x = DateTime, y = DiffPressure)) +
+  energy_tidy <- operation %>% 
+    select(DateTime, Pump_WhPerCbm, Cell_WhPerCbm) %>% 
+    gather(key = "Key", value = "Value", -DateTime) %>%
+    tidyr::separate(
+      col = "Key",
+      into = c("System component", "Unit"),
+      sep = "_"
+    )
+  
+  energy_title <- sprintf(
+    "Based on 15 minute median values of online data\n(period: %s to %s)",
+    min(energy_tidy$DateTime),
+    max(energy_tidy$DateTime)
+  )
+  
+  p4 <- ggplot(data = operation_grouped %>% filter(DiffPressure < 10), aes(
+    x = DateTime, y = DiffPressure
+  )) +
     geom_point() +
     geom_vline(xintercept = as.numeric(backwash), col = "red") +
     labs(list(
@@ -189,22 +191,6 @@ if (FALSE) {
     )) +
     theme_bw() +
     theme(legend.position = "top")
-  print(p4)
-
-
-  energy_tidy <- operation %>% select(DateTime, Pump_WhPerCbm, Cell_WhPerCbm) %>% gather(key = "Key", value = "Value", -DateTime)
-  energy_tidy <- tidyr::separate(
-    energy_tidy,
-    col = "Key",
-    into = c("System component", "Unit"),
-    sep = "_"
-  )
-
-  energy_title <- sprintf(
-    "Based on 15 minute median values of online data\n(period: %s to %s)",
-    min(energy_tidy$DateTime),
-    max(energy_tidy$DateTime)
-  )
 
   p5 <- ggplot(energy_tidy, aes_string(
     x = "DateTime",
@@ -221,8 +207,7 @@ if (FALSE) {
     )) +
     theme_bw() +
     theme(legend.position = "top")
-  print(p5)
-
+  
   p6 <- ggplot(energy_tidy, aes_string(
     x = "`System component`",
     y = "Value",
@@ -237,7 +222,15 @@ if (FALSE) {
     )) +
     theme_bw() +
     theme(legend.position = "top")
+  
+  pdf(file = "report/datenanalyse_haridwar.pdf", width = 7, height = 5)
+  
+  print(p1)
+  print(p2)
+  print(p3)
+  print(p4)
+  print(p5)
   print(p6)
-
+  
   dev.off()
 }

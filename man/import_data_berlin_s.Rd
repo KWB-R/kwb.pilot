@@ -5,23 +5,20 @@
 \title{Import data for Berlin Schoenerlinde}
 \usage{
 
-  import_data_berlin_s(raw_data_dir = system.file("shiny/berlin_s/data/operation",
-  package = "kwb.pilot"), raw_data_files = NULL,
-  meta_file_path = system.file("shiny/berlin_s/data/parameter_site_metadata.csv",
-  package = "kwb.pilot"))
+  import_data_berlin_s(raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+  raw_data_files = NULL,
+  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))
 }
 \arguments{
-\item{raw_data_dir}{path of directory containing WEDECO CSV files (default:
-(default: system.file("shiny/berlin_s/data/operation",
-package = "kwb.pilot"))))}
+\item{raw_data_dir}{path of directory containing WEDECO CSV files
+(default: kwb.pilot:::package_file("shiny/berlin_s/data/operation"))}
 
 \item{raw_data_files}{vector with full path to operational raw data files that
 allows to limit import to specific files (default: NULL). If specified parameter
 "raw_data_dir" will not be used}
 
 \item{meta_file_path}{path to metadata file (default:
-system.file("shiny/berlin_s/data/parameter_site_metadata.csv", package =
-"kwb.pilot")))}
+kwb.pilot:::package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))}
 }
 \value{
 list with "df": data.frame with imported operational data (analytics

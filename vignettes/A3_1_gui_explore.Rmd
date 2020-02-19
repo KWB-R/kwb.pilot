@@ -14,18 +14,15 @@ The explore panel (see Figure 1) enables the user to:
 
 -	Export data
 
-
 With the panel on the left hand sight the user can change the initial settings 
 (e.g. temporal data ag-gregation level, select different sampling points, 
 parameters or date ranges).
-
 
 The two plots on the right hand sight are coupled (i.e. both share the same 
 x-axis limits), which ena-bles an easy comparison in case two different 
 parameters are selected for top and bottom plot.
 
 All available features are described in detail in the following sub-chapters.
-
 
 ```{r fig1, echo = FALSE}
 knitr::include_graphics("figures/1.png")
@@ -34,12 +31,10 @@ knitr::include_graphics("figures/1.png")
 The “select temporal aggregation” input menu offers four different options as 
 shown below: 
 
-
 ```{r fig2, echo = FALSE}
 knitr::include_graphics("figures/2.png")
 ```
 Figure 2  Select temporal aggregation (default setting)
-
 
 Only in case of “raw” no temporal aggregation is performed and just the raw 
 data will be returned. However, this can be quite time consuming in case of 
@@ -95,17 +90,16 @@ and the zoom is set to a specific period (e.g. ~ 2016-10-10 – ~ 2016-10-11 as
 shown in Figure 7), the zoom level will be lost (Figure 8) if the parameterisation 
 is changed (e.g. switching from “10min” to “hour” values). 
 
-
 ```{r fig7, echo = FALSE}
 knitr::include_graphics("figures/7.png")
 ```
 Figure 7  Interactive zoom to user defined period (~2016-10-10 to ~2016-10-11) 
 with 10min aggregation
  
-
 ```{r fig8, echo = FALSE}
 knitr::include_graphics("figures/8.png")
 ```
+
 Figure 8 Plot with disabled “Fix daterange” after change of temporal aggregation 
 (“hour”) 
 
@@ -116,15 +110,16 @@ afterwards as shown in Figure 9.
 ```{r fig9, echo = FALSE}
 knitr::include_graphics("figures/9.png")
 ```
+
 Figure 9 Plot with enabled “Fix daterange”: changed temporal aggregation (“hour”) 
 
 ## 3.1.5	Select sampling point(s)
 By default all available sampling points are selected, as shown below in Figure 10.
 
-
 ```{r fig10, echo = FALSE}
 knitr::include_graphics("figures/10.png")
 ```
+
 Figure 10  Select a sampling point (default setting)
 
 For removal of selected sampling points they need to be marked (by holding Ctrl 
@@ -136,16 +131,18 @@ they can be easily added again (i.e. by selecting them with the mouse).
 ```{r fig11, echo = FALSE}
 knitr::include_graphics("figures/11.png")
 ```   
+
 Figure 11  Select a sampling point (change default setting)
 
 ## 3.1.6	Select parameter(s) for plot 1/2
+
 By default, one parameter for each plot is pre-selected (i.e. battery voltage 
 for plot1 and total chlorine for plot2), as shown below in Figure 12.
-
 
 ```{r fig12, echo = FALSE}
 knitr::include_graphics("figures/12.png")
 ```
+
 Figure 12  Select parameter(s) for plot 1/2 (default setting)
 
 One the one hand it is possible to select a different parameter for each plot 
@@ -155,6 +152,7 @@ dropdown list) as shown in Figure 13 below:
 ```{r fig13, echo = FALSE}
 knitr::include_graphics("figures/13.png")
 ```    
+
 Figure 13  Select parameter(s) for plot 1 and 2 (change default setting)
 
 On the other hand it is also possible to select multiple parameters for one plot. 
@@ -173,6 +171,7 @@ pre-defined threshold.
 ```{r fig14, echo = FALSE}
 knitr::include_graphics("figures/14.png")
 ```
+
 Figure 14  Add thresholds to plots 1+2 (default setting)
 
 **Note:**
@@ -191,5 +190,3 @@ for the parameters in plot 1 or 2 (Chapter 3.1.6), respectively.
 points of selected temporal aggregation). This document still provides interactive 
 zooming capabilities for the selected dataset and can be send as stand-alone HTML 
 document via email.
-
-

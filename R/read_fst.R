@@ -8,65 +8,33 @@
 #' @return data.frame with formatting of DateTime column POSIXct
 #' @importFrom fst read.fst
 #' @export
-read_fst <- function(path,
-                     tz = "CET",
-                     col_datetime = "DateTime",
-                     ...) {
-  df <- fst::read.fst(
-    path,
-    ...
-  )
+read_fst <- function(path, tz = "CET", col_datetime = "DateTime", ...)
+{
+  df <- fst::read.fst(path, ...)
   df[, col_datetime] <- as.POSIXct(df[, col_datetime], origin = "1970-01-01", tz = "CET")
-  return(df)
+  df
 }
 
 
 #' Load fst data for shiny app
 #'
 #' @param fst_dir directory of fst files to be loaded
+#' @importFrom kwb.utils assignGlobally
 #' @export
-load_fst_data <- function(fst_dir) {
+load_fst_data <- function(fst_dir)
+{
   print("### Step 4: Loading data ##########################")
-  print("### 1): Raw data")
-  assign(
-    x = "siteData_raw_list",
-    value = kwb.pilot::read_fst(path = file.path(
-      fst_dir,
-      "siteData_raw_list.fst"
-    )),
-    envir = .GlobalEnv
-  )
-
-
-  print("### 2) 10 minutes data")
-  assign(
-    x = "siteData_10min_list",
-    value = kwb.pilot::read_fst(path = file.path(
-      fst_dir,
-      "siteData_10min_list.fst"
-    )),
-    envir = .GlobalEnv
-  )
-
-
-  print("### 3) hourly data")
-  assign(
-    x = "siteData_hour_list",
-    value = kwb.pilot::read_fst(path = file.path(
-      fst_dir,
-      "siteData_hour_list.fst"
-    )),
-    envir = .GlobalEnv
-  )
-
-
-  print("### 4) daily data")
-  assign(
-    x = "siteData_day_list",
-    value = kwb.pilot::read_fst(path = file.path(
-      fst_dir,
-      "siteData_day_list.fst"
-    )),
-    envir = .GlobalEnv
-  )
+  
+  step_no <- 0L
+  
+  step_assign <- function(title, varname, filename) {
+    step_no <<- step_no + 1L
+    print(sprintf("### %d): %s", step_no, title))
+    kwb.utils::assignGlobally(varname, read_fst(file.path(fst_dir, filename)))
+  }
+  
+  step_assign("Raw data", "siteData_raw_list", "siteData_raw_list.fst")
+  step_assign("10 minutes data", "siteData_10min_list", "siteData_10min_list.fst")
+  step_assign("hourly data", "siteData_hour_list", "siteData_hour_list.fst")
+  step_assign("daily data", "siteData_day_list", "siteData_day_list.fst")
 }

@@ -117,36 +117,32 @@ table_thresholds <- kwb.pilot::check_thresholds(df = config$report_tz)
 
 ```
 
-#Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
+# Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
+
 Here are the time series plots for the reporting period from `r config$report_daterange[1]` to  `r config$report_daterange[2]`
 using the timezone "`r config$report_timezone`" with the following temporal aggregation 
 level (i.e. median values): "`r config$report_aggregation`"
 
 
-##Thresholds
+## Thresholds
 
 The threshold satisfaction analysis is performed using the available data for 
 `r nrow(table_thresholds)` parameters with pre-defined thresholds within the 
 reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`).
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
-
-
-knitr::kable(x = table_thresholds, 
-             row.names = FALSE)
+knitr::kable(x = table_thresholds, row.names = FALSE)
 ```
 
-##Online parameters
+## Online parameters
+
 **You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
 
-`r paste("* ", config$report_parameters_online,collapse = "  \n")`
-
+`r kwb.pilot:::to_list_items(config$report_parameters_online)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r paste("* ", config$report_sitenames,collapse = "  \n")`
-
-
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -187,18 +183,15 @@ knitr::kable(x = table_thresholds,
     }
 ```
 
-##Offline parameters
+## Offline parameters
 
 **You selected the following `r length(config$report_parameters_offline)` parameter(s) for plotting:**
 
-`r paste("* ", config$report_parameters_offline,collapse = "  \n")`
-
+`r kwb.pilot:::to_list_items(config$report_parameters_offline)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r paste("* ", config$report_sitenames,collapse = "  \n")`
-
-
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -242,11 +235,11 @@ knitr::kable(x = table_thresholds,
     }
 ```
 
-##Calculated parameters
+## Calculated parameters
 
 **You selected the following `r length(config$report_parameters_calculated)` parameter(s) for plotting:**
 
-`r paste("* ", config$report_parameters_calculated,collapse = "  \n")`
+`r kwb.pilot:::to_list_items(config$report_parameters_calculated)`
 
 ```{r, echo=FALSE, message=FALSE}
 calc_paras <- kwb.pilot::calculate_operational_parameters(df = config$report_tz)
@@ -254,21 +247,16 @@ calc_paras <- kwb.pilot::calculate_operational_parameters(df = config$report_tz)
 idx_selected_paras <- calc_paras$ParameterName %in% config$report_parameters_calculated
 
 plot_calculated_operational_timeseries(calc_paras[idx_selected_paras,])
-
-
 ```
 
 # Correlations
 
 ## Flow vs. redox potential difference (outflow - inflow)
 
-
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 calc_paras <- kwb.pilot::calculate_operational_parameters(df = config$report_tz)
 
-
 flux <- config$report_tz[config$report_tz$ParameterCode == "Flux", c("DateTime", "ParameterCode", "ParameterValue")]
-
 
 tmp <- calc_paras %>% 
   dplyr::filter_(~ParameterCode %in% c("Pump_WhPerCbm", "Cell_WhPerCbm", "Redox_Diff")) %>% 
@@ -298,14 +286,10 @@ print(g)
 }
 
 plot_correlation(tmp)
-
 ```
 
 ## Flow vs. specific energy demand of electrolysis cell
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 plot_correlation(tmp, y = "Cell_WhPerCbm", ylab = "Specific energy demand of cell (Wh/m3)")
-
 ```
-
-

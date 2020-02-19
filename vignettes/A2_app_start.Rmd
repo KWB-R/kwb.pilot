@@ -13,21 +13,15 @@ Once the [installation](A1_installation.html) is completed the (shiny) app can b
 
 If you start the app for the first time you need to set the parameter "use_live_data = TRUE", so that the:
 
-
 1. Latest operational data is downloaded from the mySQL Database and
 
-
 2. Analytics data is imported from the file 'analytics.xlsx' (see [Installation, Step 4.2](A1_installation.html#analytics-spreadsheet-file-analytics-xlsx))
-
 
 ```r
 kwb.pilot::run_app(use_live_data = TRUE)
 ```
 
-
 ***This step also always needs to be performed in case you want to import the latest operational and analytical data!***
-
-
 
 ## Case 2) Subsequent app launch (without data update)
 

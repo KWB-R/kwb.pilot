@@ -5,8 +5,7 @@
 \title{Helper function: group fst by pattern}
 \usage{
 group_fst_by_pattern(time_pattern = NULL, fst_pattern = "raw",
-  fst_dir = system.file("shiny/berlin_t/data/fst", package =
-  "kwb.pilot"))
+  fst_dir = package_file("shiny/berlin_t/data/fst"))
 }
 \arguments{
 \item{time_pattern}{optional pattern to filter months to be imported (default: NULL),
@@ -15,7 +14,7 @@ for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")}
 \item{fst_pattern}{pattern to search for in fst filename (default: "raw")}
 
 \item{fst_dir}{directory with fst files or subdirs to be imported (default:
-system.file("shiny/berlin_t/data/fst",package = "kwb.pilot"))}
+kwb.pilot:::package_file("shiny/berlin_t/data/fst"))}
 }
 \value{
 merged data.frame

@@ -37,10 +37,9 @@ library(ggforce)
 library(dplyr)
 library(kwb.pilot)
 
-thresholds_file <- system.file("shiny/berlin_s/data/thresholds.csv",
-                              package = "kwb.pilot")
+thresholds_file <- kwb.pilot:::package_file("shiny/berlin_s/data/thresholds.csv")
 
-thresholds <- kwb.pilot::get_thresholds(csv_path = thresholds_file )
+thresholds <- kwb.pilot::get_thresholds(thresholds_file)
 
 if (params$run_as_standalone) {
   
@@ -126,13 +125,14 @@ config <- list(run_as_standalone = TRUE,
 
 ```
 
-#Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
+# Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
+
 Here are the time series plots for the reporting period from `r config$report_daterange[1]` to  `r config$report_daterange[2]`
 using the timezone "`r config$report_timezone`" with the following temporal aggregation 
 level (i.e. median values): "`r config$report_aggregation`"
 
 
-##Thresholds
+## Thresholds
 
 Nothing defined yet !
 
@@ -143,17 +143,14 @@ Nothing defined yet !
 #             row.names = FALSE)
 ```
 
-##Online parameters
+## Online parameters
 **You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
 
-`r paste("* ", config$report_parameters_online,collapse = "  \n")`
-
+`r kwb.pilot:::to_list_items(config$report_parameters_online)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r paste("* ", config$report_sitenames,collapse = "  \n")`
-
-
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -194,18 +191,15 @@ Nothing defined yet !
     }
 ```
 
-##Offline parameters
+## Offline parameters
 
 **You selected the following `r length(config$report_parameters_offline)` parameter(s) for plotting:**
 
-`r paste("* ", config$report_parameters_offline,collapse = "  \n")`
-
+`r kwb.pilot:::to_list_items(config$report_parameters_offline)`
 
 **At the following `r length(config$report_sitenames)` sampling location(s):**
 
-`r paste("* ", config$report_sitenames,collapse = "  \n")`
-
-
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 
@@ -249,7 +243,7 @@ Nothing defined yet !
     }
 ```
 
-##Calculated parameters
+## Calculated parameters
 
 Not implemented yet!
 

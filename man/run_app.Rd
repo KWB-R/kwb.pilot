@@ -19,7 +19,7 @@ the selected site (default: NULL)}
 \item{launch.browser}{If true, the system's default web browser will be
 launched automatically after the app is started (default: TRUE)}
 
-\item{...}{further arguments passed to shiny::runApp()}
+\item{\dots}{further arguments passed to shiny::runApp()}
 }
 \description{
 Runs Shiny app for an AQUANES site
