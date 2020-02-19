@@ -23,7 +23,7 @@ the dygraph (e.g. as retrieved by function get_thresholds())}
 \item{col_label}{column in limits_df containing the label values (default:
 "label")}
 
-\item{...}{further arguments passed to dygraphs::dyLimit()}
+\item{\dots}{further arguments passed to dygraphs::dyLimit()}
 }
 \value{
 add limits to existing dygraph object
