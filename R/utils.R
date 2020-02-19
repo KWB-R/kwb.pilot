@@ -4,6 +4,12 @@ clean_stop <- function(...)
   stop(..., call. = FALSE)
 }
 
+# package_file -----------------------------------------------------------------
+package_file <- function(...) 
+{
+  system.file(..., package = "kwb.pilot")
+}
+
 # print_to_text ----------------------------------------------------------------
 #' @importFrom utils capture.output
 print_to_text <- function(x)

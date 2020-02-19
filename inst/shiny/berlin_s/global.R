@@ -35,7 +35,7 @@ print("### Step 5: Importing threshold information ##########################")
 threshold_file <- system.file("shiny/berlin_s/data/thresholds.csv",
                               package = "kwb.pilot")
 
-thresholds <- kwb.pilot::get_thresholds(csv_path = threshold_file)
+thresholds <- kwb.pilot::get_thresholds(threshold_file)
 
 print("### Step 6: Specify available months for reporting ##########################")
 report_months <- kwb.pilot::create_monthly_selection(startDate = "2017-04-01")
