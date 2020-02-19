@@ -8,29 +8,22 @@
 #' @importFrom lubridate days_in_month
 #' @export
 
-create_monthly_selection <- function(startDate = "2016-09-01",
-                                     endDate = Sys.Date()) {
-  startDate <- as.Date(startDate)
+create_monthly_selection <- function(
+  startDate = "2016-09-01", endDate = Sys.Date()
+)
+{
+  ym <- function(x) format(x, "%Y-%m")
+  
+  endMonth <- as.Date(sprintf("%s-01", ym(endDate)))
 
-  endMonth <- as.Date(sprintf(
-    "%s-01",
-    format(endDate, "%Y-%m")
-  ))
+  start <- seq(as.Date(startDate), endMonth, by = "1 month")
+  
+  end <- as.Date(sprintf("%s-%s", ym(start), lubridate::days_in_month(start)))
 
-
-
-  df <- data.frame(start = seq(startDate, endMonth, by = "1 month"))
-
-
-  days_in_months <- lubridate::days_in_month(df$start)
-
-  df$end <- as.Date(sprintf(
-    "%s-%s",
-    format(df$start, "%Y-%m"),
-    days_in_months
-  ))
-
-  df$label <- format(df$start, "%B %Y")
-
-  return(df)
+  data.frame(
+    start = start, 
+    end = end, 
+    label = format(start, "%B %Y"),
+    stringsAsFactors = FALSE
+  )
 }
