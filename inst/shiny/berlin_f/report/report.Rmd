@@ -1,0 +1,250 @@
+---
+title: "Automated report for Berlin Tiefwerder"
+output:
+  html_document:
+    fig_height: 7
+    fig_width: 12
+    number_sections: yes
+    toc: yes
+  pdf_document:
+    fig_height: 4.8
+    fig_width: 7  
+    highlight: zenburn
+    number_sections: yes
+    toc: yes
+  word_document:
+    fig_height: 5
+    fig_width: 7
+    toc: yes
+params:
+  report_aggregation: day
+  report_tz: NA
+  report_data: NA
+  report_daterange: NA
+  report_parameters_offline: NA
+  report_parameters_online: NA
+  report_parameters_calculated: NA
+  report_add_thresholds: NA
+  report_sitenames: NA
+  report_timezone: NA
+  run_as_standalone: yes
+---
+
+```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
+library(RMySQL)
+library(ggplot2)
+library(ggforce)
+library(dplyr)
+library(kwb.pilot)
+
+thresholds_file <- kwb.pilot:::package_file("shiny/berlin_t/data/thresholds.csv")
+
+thresholds <- kwb.pilot::get_thresholds(thresholds_file)
+
+
+if (params$run_as_standalone) {
+  
+### Raw data
+dat <- kwb.pilot::import_data_berlin_t()
+
+conf_template <- kwb.pilot::report_config_template(df = dat,
+                                       temporal_aggregation = "raw", 
+                                       output_timezone = "Europe/Berlin")
+kwb.pilot::report_config_to_txt(config_list = conf_template, "report_config_template.txt")
+
+report_config_path <- file.path(getwd(), "report_config.txt")
+
+if (file.exists(report_config_path)) {
+
+### Import & use report configuration from "report_config.txt"
+input <- kwb.pilot::report_txt_to_config(report_config_path)
+  
+} else {
+
+
+### Set a dummy configuration in case no "report_config.txt" exists 
+input <- list(report_sitenames = unique(dat$SiteName),
+              report_aggregation = "day",
+              report_parameters_online = unique(dat$ParameterName[dat$Source == "online"])[1],
+              report_parameters_offline = unique(dat$ParameterName[dat$Source == "offline"])[6],
+              report_add_thresholds = FALSE,
+              report_daterange = c("2017-06-01", "2017-06-30"),
+              report_timezone = "CET")
+
+}
+
+### Aggregate to user defined time period
+
+if (input$report_aggregation != "raw") {
+dat <- kwb.pilot::group_datetime(dat,
+                                      by = input$report_aggregation)
+}
+
+
+date_idx <- as.Date(dat[,"DateTime"]) >= input$report_daterange[1] & as.Date(dat[,"DateTime"]) <= input$report_daterange[2]
+site_idx <- dat[,"SiteName"] %in% input$report_sitenames
+para_idx <- dat[,"ParameterName"] %in% c(input$report_parameters_online, input$report_parameters_offline)
+row_idx <- date_idx & site_idx & para_idx
+
+
+config <- list(run_as_standalone = TRUE,
+               report_tz = kwb.pilot::change_timezone(dat,tz = input$report_timezone)[date_idx,],
+               report_data = kwb.pilot::change_timezone(dat[row_idx,],tz = input$report_timezone), 
+               report_aggregation = input$report_aggregation,
+               report_sitenames = input$report_sitenames,
+               report_parameters_online = input$report_parameters_online,
+               report_parameters_offline = input$report_parameters_offline,
+               report_parameters_calculated = unique(kwb.pilot::calculate_operational_parameters(df = dat)$ParameterName),
+               report_add_thresholds = input$report_add_thresholds,
+               report_daterange = input$report_daterange,
+               report_timezone = input$report_timezone
+               )
+} else {
+  
+
+  
+ config <- list(run_as_standalone = params$run_as_standalone,
+                report_tz = params$report_tz,
+                report_data = params$report_data,
+                report_aggregation = params$report_aggregation,
+                report_sitenames = params$report_sitenames,
+                report_parameters_online = params$report_parameters_online,
+                report_parameters_offline = params$report_parameters_offline,
+                report_parameters_calculated = params$report_parameters_calculated,
+                report_add_thresholds = params$report_add_thresholds,
+                report_daterange = params$report_daterange,
+                report_timezone = params$report_timezone)
+}
+
+
+#table_thresholds <- kwb.pilot::check_thresholds(df = config$report_tz,
+#                                                     thresholds = thresholds)
+
+```
+
+# Reporting period (`r config$report_daterange[1]` -  `r config$report_daterange[2]`)
+
+Here are the time series plots for the reporting period from `r config$report_daterange[1]` to  `r config$report_daterange[2]`
+using the timezone "`r config$report_timezone`" with the following temporal aggregation 
+level (i.e. median values): "`r config$report_aggregation`"
+
+
+## Thresholds
+
+Nothing defined yet !
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='asis'}
+
+
+#knitr::kable(x = table_thresholds, 
+#             row.names = FALSE)
+```
+
+## Online parameters
+
+**You selected the following `r length(config$report_parameters_online)` parameter(s) for plotting:**
+
+`r kwb.pilot:::to_list_items(config$report_parameters_online)`
+
+**At the following `r length(config$report_sitenames)` sampling location(s):**
+
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+   online <- config$report_data[config$report_data[,"ParameterName"] %in% config$report_parameters_online,] %>% 
+             dplyr::mutate_(label = "sprintf('%s (%s)',ParameterName, ParameterUnit)")
+
+    for (i in seq_along(config$report_parameters_online)) {
+      
+    sel_par1 <- config$report_parameters_online[order(config$report_parameters_online)][i]
+      
+    n_measurements <- nrow(online[online[,"ParameterName"] == sel_par1,])
+    
+    if (n_measurements > 0) {
+    
+    g1 <- ggplot2::ggplot(online, ggplot2::aes_string(x = "DateTime",
+                                    y = "ParameterValue",
+                                    col = "SiteName")) +
+      ggforce::facet_wrap_paginate(~label,
+                                   nrow = 1,
+                                   ncol = 1,
+                                   scales = "free_y",
+                                   page = i) +
+      ggplot2::geom_point() +  
+      ggplot2::theme_bw(base_size = 20) +
+      ggplot2::theme(legend.position = "top"
+                     , strip.text.x = element_text(face = "bold")
+                     , legend.title = element_blank()
+                     ) +
+      ggplot2::labs(x = "", y = "")
+    
+     if (config$report_add_thresholds == TRUE & sel_par1 %in% unique(thresholds$ParameterName)) {
+     sel_threshold1 <- thresholds[thresholds$ParameterName == sel_par1,]
+     g1 <- g1 + ggplot2::geom_hline(yintercept =  sel_threshold1$ParameterThreshold, 
+                                   linetype = "dashed")   
+     } 
+     print(g1) 
+    }
+    }
+```
+
+## Offline parameters
+
+**You selected the following `r length(config$report_parameters_offline)` parameter(s) for plotting:**
+
+`r kwb.pilot:::to_list_items(config$report_parameters_offline)`
+
+**At the following `r length(config$report_sitenames)` sampling location(s):**
+
+`r kwb.pilot:::to_list_items(config$report_sitenames)`
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+   offline <- config$report_data[config$report_data[,"ParameterName"] %in% config$report_parameters_offline,] %>% 
+              dplyr::mutate_(label = "sprintf('%s (%s)',ParameterName, ParameterUnit)")
+
+    for (i in seq_along(config$report_parameters_offline)) {
+      
+    sel_par2 <- config$report_parameters_offline[order(config$report_parameters_offline)][i]
+      
+    n_measurements <- nrow(offline[offline[,"ParameterName"] == sel_par2,])
+    
+    if (n_measurements > 0) {
+    
+    g2 <- ggplot2::ggplot(offline, ggplot2::aes_string(x = "DateTime",
+                                    y = "ParameterValue",
+                                    col = "SiteName")) +
+      ggforce::facet_wrap_paginate(~label,
+                                   nrow = 1,
+                                   ncol = 1,
+                                   scales = "free_y",
+                                   page = i) +
+      ggplot2::geom_point() +
+      ggplot2::geom_line() +
+      ggplot2::theme_bw(base_size = 20) +
+      ggplot2::theme(legend.position = "top" 
+                     , strip.text.x = element_text(face = "bold") 
+                     , legend.title = element_blank()
+                     #, axis.title = element_text(colour="black", size = 20)
+                     #, axis.text = element_text(colour="black", size = 20)
+                     ) +
+      ggplot2::labs(x = "", y = "")
+    
+    if (config$report_add_thresholds == TRUE & sel_par2 %in% unique(thresholds$ParameterName)) {
+     sel_threshold2 <- thresholds[thresholds$ParameterName == sel_par2,]
+     g2 <- g2 + ggplot2::geom_hline(yintercept =  sel_threshold2$ParameterThreshold, 
+                                   linetype = "dashed")   
+     } 
+    print(g2) 
+    }
+    }
+```
+
+## Calculated parameters
+
+Not implemented yet!
+
+# Correlations
+
+Not implemented yet!
