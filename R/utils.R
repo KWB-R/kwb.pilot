@@ -4,6 +4,13 @@ clean_stop <- function(...)
   stop(..., call. = FALSE)
 }
 
+# print_to_text ----------------------------------------------------------------
+#' @importFrom utils capture.output
+print_to_text <- function(x)
+{
+  paste(utils::capture.output(print(x)), collapse = "\n")
+}
+
 # to_list_items ----------------------------------------------------------------
 to_list_items <- function(items)
 {
