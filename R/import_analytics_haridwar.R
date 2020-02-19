@@ -97,7 +97,7 @@ import_sheet <- function(xlsPath,
       xlsPath
     )
 
-    stop(msg, call. = FALSE)
+    clean_stop(msg)
   }
 
   ### Fill missing date/time entries in case samples were taken
@@ -171,7 +171,7 @@ import_sheet <- function(xlsPath,
       xlsPath
     )
 
-    stop(msg, call. = FALSE)
+    clean_stop(msg)
   }
 
   return(tmp_par7_list)

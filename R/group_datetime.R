@@ -38,10 +38,7 @@ group_datetime <- function(df,
       by,
       paste(names(grp_list), collapse = ", ")
     )
-    stop(
-      msg,
-      call. = FALSE
-    )
+    clean_stop(msg)
   } else if ((by %in% names(grp_list)) & !is.numeric(by)) {
     datetime_org <- df[, col_datetime]
     tz_org <- base::check_tzones(datetime_org)

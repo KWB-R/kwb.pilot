@@ -26,7 +26,10 @@ set_timezone <- function(df, tz = "UTC", col_datetime = "DateTime") {
     df[, col_datetime] <- as.character(df[, col_datetime])
     df[, col_datetime] <- as.POSIXct(df[, col_datetime], tz = tz)
   } else {
-    stop(sprintf("Column %s  needs to be of type DATE/TIME (POSIXct). Please check sheet 'xyz' of imported xls file 'xyz'!", col_datetime))
+    clean_stop(
+      "Column ", col_datetime, " needs to be of type DATE/TIME (POSIXct). ", 
+      "Please check sheet 'xyz' of imported xls file 'xyz'!"
+    )
   }
   return(df)
 }
@@ -65,7 +68,10 @@ change_timezone <- function(df, tz = "UTC", col_datetime = "DateTime",
       }
       df[, col_datetime] <- lubridate::with_tz(time = df[, col_datetime], tzone = tz)
     } else {
-      stop(sprintf("Column %s  needs to be of type DATE/TIME (POSIXct). Please check sheet 'xyz' of imported xls file 'xyz'!", col_datetime))
+      clean_stop(
+        "Column ", col_datetime, " needs to be of type DATE/TIME (POSIXct). ", 
+        "Please check sheet 'xyz' of imported xls file 'xyz'!"
+      )
     }
     return(df)
   }

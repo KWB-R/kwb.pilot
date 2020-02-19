@@ -10,7 +10,7 @@ remove_duplicates <- function(df,
   col_names_in_df <- col_names %in% names(df)
 
   if (!all(col_names_in_df)) {
-    stop(sprintf(
+    clean_stop(sprintf(
       "The following 'col_names' specified by the user are not defined in the 'df': %s",
       paste(col_names[!col_names_in_df], collapse = ",")
     ))

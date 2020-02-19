@@ -64,10 +64,7 @@ import_data_haridwar <- function(analytics_path = system.file(
       basename(analytics_path),
       dirname(analytics_path)
     )
-    stop(
-      msg,
-      call. = FALSE
-    )
+    clean_stop(msg)
   }
 
 
@@ -75,10 +72,7 @@ import_data_haridwar <- function(analytics_path = system.file(
     msg <- sprintf("No '.my.cnf' file located under: %s\n.
                    Please once specify the path to a valid MySQL config file with parameter
                    'mySQL_conf'", dirname(operation_mySQL_conf))
-    stop(
-      msg,
-      call. = FALSE
-    )
+    clean_stop(msg)
   }
 
   ###############################################################################

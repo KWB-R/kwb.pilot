@@ -21,7 +21,7 @@ src_mysql_from_cnf <- function(dbname,
                                ...) {
   dir <- normalizePath(dir)
   if (!(file.exists(dir))) {
-    stop(sprintf("No such file '%s'", dir))
+    clean_stop(sprintf("No such file '%s'", dir))
   }
   dplyr::src_mysql(
     dbname,
