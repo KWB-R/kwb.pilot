@@ -13,16 +13,16 @@
 #' @export
 import_data_berlin_f <- function(
   raw_data_dir = package_file("shiny/berlin_f/data/operation"),
-  raw_data_files = NULL,
+  raw_data_files = fs::dir_ls(raw_data_dir, recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
   analytics_path = package_file("shiny/berlin_f/data/analytics.xlsx"),
   meta_file_path = package_file("shiny/berlin_f/data/parameter_site_metadata.csv")
 )
 {
-  data_berlin_f <- read_pentair_data(
-    raw_data_dir = raw_data_dir,
-    raw_data_files = raw_data_files,
-    meta_file_path = meta_file_path
-  )
+
+
+  data_berlin_f <- read_weintek_batch(raw_data_files)
+  
+
   
   #### To do: joind with ANALYTICS data as soon as available
   # data_berlin_f_offline <- read_pentair_data(raw_data_dir = raw_data_dir,
@@ -46,7 +46,7 @@ import_data_berlin_f <- function(
   ### Remove duplicates if any exist
   data_berlin_f <- remove_duplicates(
     df = data_berlin_f,
-    col_names = c("DateTime", "ParameterCode", "SiteCode")
+    col_names = c("DateTime", "ParameterName", "SiteName")
   )
   
   return(data_berlin_f)
