@@ -84,7 +84,7 @@ read_wedeco_data <- function(
   )
 
   files_to_import <- if (is.null(raw_data_files)) {
-    list.files(raw_data_dir, pattern = ".csv", full.names = TRUE)
+    list_full_csv_files(raw_data_dir)
   } else {
     raw_data_files
   }
