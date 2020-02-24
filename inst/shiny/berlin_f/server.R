@@ -13,8 +13,7 @@ library(kwb.pilot)
 
 # By default, the file size limit is 5MB. It can be changed by
 # setting this option. Here we'll raise limit to 9MB.
-options(shiny.maxRequestSize = 9*1024^2)
-
+options(shiny.maxRequestSize = 9*1024^2, encoding = 'UTF-8')
 
 # Global settings (for all sessions)
 my_theme <<- shinytheme("readable")
@@ -34,11 +33,11 @@ if (exists_userTable) {
 # logo -------------------------------------------------------------------------
 logo <<- function
 (
-  src="aquanes.png",
+  src="suleman.png",
   target = "_blank", ### opens new tab/window
-  href="http://aquanes-h2020.eu",
+  href="https://www.kompetenz-wasser.de/en/project/suleman/",
   align="middle",
-  label = "AQUANES_homepage",
+  label = "SULEMAN_homepage",
   add_div = TRUE,
   ... ### add. arguments passed to img(), e.g. height=40
 )
@@ -59,7 +58,7 @@ logo <<- function
 
 # siteLogo ---------------------------------------------------------------------
 siteLogo <- logo(
-  src = "berlin_f.jpg",
+  src = "berlin_f.png",
   href = "https://www.kompetenz-wasser.de/en/project/suleman/",
   label = "Site: Berlin (Friedrichshagen)",
   add_div = FALSE

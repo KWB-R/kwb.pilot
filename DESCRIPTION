@@ -9,7 +9,7 @@ Authors@R:
              role = c("aut", "cre"),
              email = "michael.rustler@kompetenz-wasser.de",
              comment = c(ORCID = "0000-0003-0647-7726")),
-    c(person(given = "Hauke",
+      person(given = "Hauke",
              family = "Sonnenberg",
              role = c("ctb"),
              email = "hauke.sonnenberg@kompetenz-wasser.de",

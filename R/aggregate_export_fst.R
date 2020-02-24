@@ -131,7 +131,6 @@ aggregate_export_fst_berlin_s <- function(
 
   as_posix_cet <- function(fmt, x) as.POSIXct(sprintf(fmt, x), tz = "CET")
   
-  times <- kwb.utils::selectColumns()
   
   for (year_month in monthly_periods$year_month) {
     
@@ -225,6 +224,8 @@ aggregate_export_fst_berlin_s <- function(
 #' @return exports data for each month into subfolder: /data/fst/year-month
 #' @importFrom data.table rbindlist
 #' @importFrom fst write.fst
+#' @importFrom stringr str_remove
+#' @importFrom fs dir_ls
 #' @export
 aggregate_export_fst_berlin_f <- function(
   year_month_start = "2019-11",
@@ -239,18 +240,19 @@ aggregate_export_fst_berlin_f <- function(
   
   as_posix_cet <- function(fmt, x) as.POSIXct(sprintf(fmt, x), tz = "CET")
   
-  times <- kwb.utils::selectColumns()
-  
+
   for (year_month in monthly_periods$year_month) {
     
     monthly_period <- monthly_periods[monthly_periods$year_month == year_month,]
     
     print(sprintf("Importing data for month '%s':", year_month))
     
-    raw_data_file_paths <- get_monthly_data_from_calendarweeks(
-      year_month = monthly_period$year_month
-    )
+    raw_data_file_paths <- fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data"), 
+                        recurse = TRUE, regexp = sprintf("^[^~].*%s[0-3][0-9].*\\.xlsx$", 
+                                                         stringr::str_remove(year_month, "-")))
     
+    
+  
     system.time(
       siteData_raw_list <- import_data_berlin_f(raw_data_files = raw_data_file_paths)
     )
@@ -270,13 +272,7 @@ aggregate_export_fst_berlin_f <- function(
       as.character(max(siteData_raw_list$DateTime))
     ))
     
-    calc_dat <- calculate_operational_parameters_berlin_f(df = siteData_raw_list)
-    
-    siteData_raw_list <- data.table::rbindlist(
-      l = list(siteData_raw_list, calc_dat), use.names = TRUE, fill = TRUE
-    ) %>%
-      as.data.frame()
-    
+
     export_dir_path <- sprintf(
       "%s/data/fst/%s",
       package_file("shiny/berlin_f"),
@@ -304,7 +300,7 @@ aggregate_export_fst_berlin_f <- function(
     )
     
     system.time(
-      siteData_hour_list <- group_datetime(siteData_10min_list, by = 60 * 60)
+      siteData_hour_list <- group_datetime(siteData_raw_list, by = 60 * 60)
     )
     
     fst::write.fst(
@@ -314,7 +310,7 @@ aggregate_export_fst_berlin_f <- function(
     )
     
     system.time(
-      siteData_day_list <- group_datetime(siteData_hour_list, by = "day")
+      siteData_day_list <- group_datetime(siteData_raw_list, by = "day")
     )
     
     fst::write.fst(

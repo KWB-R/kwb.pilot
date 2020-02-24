@@ -35,7 +35,7 @@ read_weintek <- function(path, tz = "CET", dbg = TRUE)
 #' @param files path to Weintek files
 #' @param tz  time zone (default: CET)
 #' @param dbg debug (default: TRUE)
-#'
+#' @importFrom stats setNames
 #' @return data frame with Weintek raw data
 #' @export
 #'
@@ -43,7 +43,7 @@ read_weintek_batch <- function(files, tz = "CET", dbg = TRUE)
 {
   paraname_site <- basename(dirname(files))
   
-  data_list <- setNames(
+  data_list <- stats::setNames(
     object = lapply(files, read_weintek , tz = tz, dbg = dbg), 
     nm = paraname_site
   )
@@ -55,7 +55,7 @@ read_weintek_batch <- function(files, tz = "CET", dbg = TRUE)
       into = c("ParameterName", "SiteName"),
       sep = "_"
     ) %>%
-    dplyr::mutate(DataType = "raw") %>%
-    dplyr::select(- Millisecond) %>%
-    kwb.pilot::remove_duplicates()
+    dplyr::mutate(DataType = "raw", 
+                  Source = "online") %>%
+    dplyr::select(- .data$Millisecond)
 }
