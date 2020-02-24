@@ -16,6 +16,15 @@ import_data_berlin_f <- function(
 )
 {
 
+# =======
+#   raw_data_dir = package_file("shiny/berlin_f/data/operation"),
+#   raw_data_files = fs::dir_ls(raw_data_dir, recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
+#   analytics_path = package_file("shiny/berlin_f/data/analytics.xlsx"),
+#   meta_file_path = package_file("shiny/berlin_f/data/parameter_site_metadata.csv")
+# )
+# {
+
+
   data_berlin_f <- read_weintek_batch(raw_data_files)
   
 
@@ -30,7 +39,9 @@ import_data_berlin_f <- function(
   
   data_berlin_f$DataType <- "raw"
   
+
   meta_data <- readr::read_csv(meta_file_path, col_types = "cc", locale = readr::locale(encoding = "UTF-8"))
+
   
   data_berlin_f <- data_berlin_f %>%  
     dplyr::left_join(meta_data) %>%  
@@ -41,6 +52,11 @@ import_data_berlin_f <- function(
   
   ### Remove duplicates if any exist
    remove_duplicates(col_names = c("DateTime", "ParameterName", "SiteName"))
+
+#   data_berlin_f <- remove_duplicates(
+#     df = data_berlin_f,
+#     col_names = c("DateTime", "ParameterName", "SiteName")
+#   )
 
   
   return(data_berlin_f)

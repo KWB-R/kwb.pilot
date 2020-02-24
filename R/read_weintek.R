@@ -58,4 +58,5 @@ read_weintek_batch <- function(files, tz = "CET", dbg = TRUE)
     dplyr::mutate(DataType = "raw", 
                   Source = "online") %>%
     dplyr::select(- .data$Millisecond)
+
 }
