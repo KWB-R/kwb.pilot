@@ -224,16 +224,8 @@ aggregate_export_fst_berlin_s <- function(
 #' @return exports data for each month into subfolder: /data/fst/year-month
 #' @importFrom data.table rbindlist
 #' @importFrom fst write.fst
-<<<<<<< HEAD
 #' @importFrom stringr str_remove
 #' @importFrom fs dir_ls
-=======
-#<<<<<<< HEAD
-#' @importFrom stringr str_remove
-#' @importFrom fs dir_ls
-#=======
-#>>>>>>> 591dee808dea6cb67180a6fab98e4d25637cbc85
->>>>>>> 24332ecdbb581d66d26e25f640227e9f50b4604a
 #' @export
 aggregate_export_fst_berlin_f <- function(
   year_month_start = "2019-11",
@@ -248,42 +240,19 @@ aggregate_export_fst_berlin_f <- function(
   
   as_posix_cet <- function(fmt, x) as.POSIXct(sprintf(fmt, x), tz = "CET")
   
-<<<<<<< HEAD
 
-=======
-#<<<<<<< HEAD
-
-#=======
-#  times <- kwb.utils::selectColumns()
-  
-#>>>>>>> 591dee808dea6cb67180a6fab98e4d25637cbc85
->>>>>>> 24332ecdbb581d66d26e25f640227e9f50b4604a
   for (year_month in monthly_periods$year_month) {
     
     monthly_period <- monthly_periods[monthly_periods$year_month == year_month,]
     
     print(sprintf("Importing data for month '%s':", year_month))
     
-<<<<<<< HEAD
     raw_data_file_paths <- fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data"), 
-=======
-#<<<<<<< HEAD
-    raw_data_file_paths <- fs::dir_ls(package_file("shiny/berlin_f/data/operation"), 
->>>>>>> 24332ecdbb581d66d26e25f640227e9f50b4604a
                         recurse = TRUE, regexp = sprintf("^[^~].*%s[0-3][0-9].*\\.xlsx$", 
                                                          stringr::str_remove(year_month, "-")))
     
     
   
-<<<<<<< HEAD
-=======
-#=======
-#    raw_data_file_paths <- get_monthly_data_from_calendarweeks(
-#      year_month = monthly_period$year_month
-#    )
-#    
-#>>>>>>> 591dee808dea6cb67180a6fab98e4d25637cbc85
->>>>>>> 24332ecdbb581d66d26e25f640227e9f50b4604a
     system.time(
       siteData_raw_list <- import_data_berlin_f(raw_data_files = raw_data_file_paths)
     )
@@ -303,26 +272,7 @@ aggregate_export_fst_berlin_f <- function(
       as.character(max(siteData_raw_list$DateTime))
     ))
     
-<<<<<<< HEAD
 
-=======
-#<<<<<<< HEAD
-    #calc_dat <- calculate_operational_parameters_berlin_f(df = siteData_raw_list)
-    
-    # siteData_raw_list <- data.table::rbindlist(
-    #   l = list(siteData_raw_list, calc_dat), use.names = TRUE, fill = TRUE
-    # ) %>%
-    #   as.data.frame()
-#=======
-#    calc_dat <- calculate_operational_parameters_berlin_f(df = siteData_raw_list)
-    
-#    siteData_raw_list <- data.table::rbindlist(
-#      l = list(siteData_raw_list, calc_dat), use.names = TRUE, fill = TRUE
-#    ) %>%
-#      as.data.frame()
-#>>>>>>> 591dee808dea6cb67180a6fab98e4d25637cbc85
-    
->>>>>>> 24332ecdbb581d66d26e25f640227e9f50b4604a
     export_dir_path <- sprintf(
       "%s/data/fst/%s",
       package_file("shiny/berlin_f"),
