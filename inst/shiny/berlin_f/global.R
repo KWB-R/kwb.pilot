@@ -20,19 +20,17 @@ kwb.pilot::aggregate_export_fst_berlin_f(year_month_start = year_month_start,
 
 month_pattern <- paste0(c(year_month_start,year_month_end), collapse = "|")
 kwb.pilot::merge_and_export_fst(time_pattern = month_pattern, 
-                                import_dir = package_file("shiny/berlin_f/data/fst"),
-                                export_dir = package_file("shiny/berlin_f/data"))
+                                import_dir = kwb.pilot:::package_file("shiny/berlin_f/data/fst"),
+                                export_dir = kwb.pilot:::package_file("shiny/berlin_f/data"))
 
 }
 
-kwb.pilot::load_fst_data(fst_dir = system.file("shiny/berlin_f/data",
-                                                    package = "kwb.pilot"))
+kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/berlin_f/data/fst"))
 
 print("### Step 5: Importing threshold information ##########################")
 
 print("### NOT IMPLEMENTED YET")
-# threshold_file <- system.file("shiny/berlin_f/data/thresholds.csv",
-#                               package = "kwb.pilot")
+# threshold_file <- kwb.pilot:::package_file("shiny/berlin_f/data/thresholds.csv")
 # 
 # thresholds <- kwb.pilot::get_thresholds(csv_path = threshold_file)
 
