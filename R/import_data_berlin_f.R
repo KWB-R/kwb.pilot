@@ -45,7 +45,10 @@ import_data_berlin_f <- function(
   
   data_berlin_f <- data_berlin_f %>%  
     dplyr::left_join(meta_data) %>%  
-    dplyr::mutate(SiteName_ParaName_Unit = sprintf("%s: %s (%s)",
+    dplyr::mutate(ParameterCode = sprintf("%s_%s", 
+                                          .data$ParameterName, 
+                                          .data$SiteName),
+                  SiteName_ParaName_Unit = sprintf("%s: %s (%s)",
                                                    .data$SiteName,
                                                    .data$ParameterName,
                                                    .data$ParameterUnit)) %>%  
