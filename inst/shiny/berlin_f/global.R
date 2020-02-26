@@ -25,7 +25,7 @@ kwb.pilot::merge_and_export_fst(time_pattern = month_pattern,
 
 }
 
-kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/berlin_f/data/fst"))
+kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/berlin_f/data"))
 
 print("### Step 5: Importing threshold information ##########################")
 
