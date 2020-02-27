@@ -24,11 +24,6 @@ import_data_berlin_f <- function(
 # )
 # {
 
-
-  data_berlin_f <- read_weintek_batch(raw_data_files)
-  
-
-  
   #### To do: joind with ANALYTICS data as soon as available
   # data_berlin_f_offline <- read_pentair_data(raw_data_dir = raw_data_dir,
   #                                    meta_file_path = meta_file_path)
@@ -37,15 +32,16 @@ import_data_berlin_f <- function(
   #                                           meta_file_path = meta_file_path)
   
   
-  data_berlin_f$DataType <- "raw"
-  
 
-  meta_data <- readr::read_csv(meta_file_path, col_types = "cc", locale = readr::locale(encoding = "UTF-8"))
+  meta_data <- readr::read_csv(meta_file_path, 
+                               col_types = "cc", 
+                               locale = readr::locale(encoding = "UTF-8"))
 
   
-  data_berlin_f <- data_berlin_f %>%  
+  data_berlin_f <- read_weintek_batch(raw_data_files)  %>%  
     dplyr::left_join(meta_data) %>%  
-    dplyr::mutate(ParameterCode = sprintf("%s_%s", 
+    dplyr::mutate(DataType = "raw", 
+                  ParameterCode = sprintf("%s_%s", 
                                           .data$ParameterName, 
                                           .data$SiteName),
                   SiteName_ParaName_Unit = sprintf("%s: %s (%s)",
