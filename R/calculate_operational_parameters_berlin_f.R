@@ -18,20 +18,35 @@
 calculate_operational_parameters_berlin_f <- function(
   df,
   calc_list = list(vfrPerm = "`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`", 
-                   recovery = "100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`", 
+                   yield = "100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`", 
+                   recovery = "100*(1 - `LF_Permeat` / `LF_Rohwasser`)", 
                    deltaPreProcFeed = "`Druck_Arbeitsdruck` - `Druck_Rohwasser`",
-                   deltaPreProcConc = "`Druck_Arbeitsdruck` - `Druck_Konzentrat`"                 
+                   deltaPreProcConc = "`Druck_Arbeitsdruck` - `Druck_Konzentrat`",
+                   #Membranfläche NF 270 37m² (4x in Reihe) (update 2019-12-03)
+                   #surf <- 4*37
+                   flux = "(vfrPerm + `Durchfluss_Rezirkulation`)/(4*37)" 
                    ),
   calc_list_name = c("Durchfluss Permeat", 
+                     "Ausbeute", 
                      "Rückhalt", 
                      "Differenzdruck Rohwasser", 
-                     "Differenzdruck Konzentrat"),
-  calc_list_unit = c("l/h", "%", "bar", "bar"),
+                     "Differenzdruck Konzentrat", 
+                     "Flux"),
+  calc_list_unit = c("l/h", 
+                     "%", 
+                     "%", 
+                     "bar", 
+                     "bar", 
+                     "l/h/m2"),
   calc_paras = c("Durchfluss_Rohwasser", 
                  "Durchfluss_Konzentrat", 
+                 "Durchfluss_Rezirkulation",
                  "Druck_Arbeitsdruck", 
                  "Druck_Rohwasser",
-                 "Druck_Konzentrat")
+                 "Druck_Konzentrat", 
+                 "LF_Permeat", 
+                 "LF_Rohwasser",
+                 "Durchfluss_Rezirkulation")
 )
 {
   res <-  calculate_operational_parameters(
