@@ -30,9 +30,9 @@ kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/berlin_f/data
 print("### Step 5: Importing threshold information ##########################")
 
 print("### NOT IMPLEMENTED YET")
-# threshold_file <- kwb.pilot:::package_file("shiny/berlin_f/data/thresholds.csv")
-# 
-# thresholds <- kwb.pilot::get_thresholds(csv_path = threshold_file)
+threshold_file <- kwb.pilot:::package_file("shiny/berlin_f/data/thresholds.csv")
+ 
+thresholds <- kwb.pilot::get_thresholds(threshold_file)
 
 print("### Step 6: Specify available months for reporting ##########################")
 report_months <- kwb.pilot::create_monthly_selection(startDate = "2019-11-01")

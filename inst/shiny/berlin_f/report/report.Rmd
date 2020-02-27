@@ -40,7 +40,7 @@ library(kwb.pilot)
 thresholds_file <- system.file("shiny/berlin_f/data/thresholds.csv",
                               package = "kwb.pilot")
 
-thresholds <- kwb.pilot::get_thresholds(csv_path = thresholds_file )
+thresholds <- kwb.pilot::get_thresholds(thresholds_file)
 
 
 if (params$run_as_standalone) {
