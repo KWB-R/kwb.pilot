@@ -287,11 +287,20 @@ aggregate_export_fst_berlin_f <- function(
       compress = compression
     ))
     
-    print("### Step 4: Performing temporal aggregation ##########################")
+    print("### Step 4: Performing temporal aggregation (10 min) #########################")
     
     system.time(
       siteData_10min_list <- group_datetime(siteData_raw_list, by = 10 * 60)
     )
+    
+    print("### Step 5: Calcualtating Performing temporal aggregation ##########################")
+    calc_dat <- calculate_operational_parameters_berlin_f(df = siteData_10min_list)
+    
+    siteData_10min_list <- data.table::rbindlist(
+      l = list(siteData_10min_list, calc_dat), use.names = TRUE, fill = TRUE
+    ) %>%
+      as.data.frame()
+    
     
     fst::write.fst(
       siteData_10min_list,
@@ -299,8 +308,10 @@ aggregate_export_fst_berlin_f <- function(
       compress = compression
     )
     
+    print("### Step 6: Performing temporal aggregation (1 h, 1 day) #########################")
+    
     system.time(
-      siteData_hour_list <- group_datetime(siteData_raw_list, by = 60 * 60)
+      siteData_hour_list <- group_datetime(siteData_10min_list, by = 60 * 60)
     )
     
     fst::write.fst(
@@ -310,7 +321,7 @@ aggregate_export_fst_berlin_f <- function(
     )
     
     system.time(
-      siteData_day_list <- group_datetime(siteData_raw_list, by = "day")
+      siteData_day_list <- group_datetime(siteData_10min_list, by = "day")
     )
     
     fst::write.fst(
