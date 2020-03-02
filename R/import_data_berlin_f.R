@@ -16,6 +16,8 @@ import_data_berlin_f <- function(
 )
 {
 
+  #kwb.utils::assignPackageObjects("kwb.pilot")
+  
 # =======
 #   raw_data_dir = package_file("shiny/berlin_f/data/operation"),
 #   raw_data_files = fs::dir_ls(raw_data_dir, recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
@@ -51,6 +53,9 @@ import_data_berlin_f <- function(
   
   ### Remove duplicates if any exist
    remove_duplicates(col_names = c("DateTime", "ParameterName", "SiteName"))
+  
+  
+  Encoding(data_berlin_f$ParameterUnit) <- "UTF-8"
 
 #   data_berlin_f <- remove_duplicates(
 #     df = data_berlin_f,
