@@ -321,7 +321,7 @@ aggregate_export_fst_berlin_f <- function(
     )
     
     system.time(
-      siteData_day_list <- group_datetime(siteData_10min_list, by = "day")
+      siteData_day_list <- group_datetime(siteData_hour_list, by = "day")
     )
     
     fst::write.fst(

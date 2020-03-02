@@ -69,7 +69,7 @@ group_datetime <- function(
       "Performing temporal aggregation for", by, "seconds time periods!"
     )
     
-    times <- xts::align.time(timestamps, n = by)
+    times <- xts::align.time(timestamps, n = by) - by/2
     
     descriptions <- sprintf("%d seconds %s", by, fun)
   }
