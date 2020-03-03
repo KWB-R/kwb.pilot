@@ -7,7 +7,7 @@ normalised_permeate_flow <- function(tempFeed,
                                      prePerm,
                                      preProc, 
                                      preConc,
-                                     nwp0 = 1.3,
+                                     nwp0 = 1.429162,
                                      vfrPerm0 = 800) {
 
 res <- tibble::tibble(tcf = exp(3020 * (1/298 - (1/(273 + tempFeed)))), 
