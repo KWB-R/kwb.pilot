@@ -10,6 +10,7 @@
 #' @return data.frame with imported operational data (analytics´data to be added as
 #' soon as available)
 #' @export
+#' @importFrom fs dir_ls
 import_data_berlin_f <- function(
   raw_data_files = fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data"), recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
   meta_file_path = package_file("shiny/berlin_f/data/raw/online_data/parameter_unit_metadata.csv")

@@ -52,7 +52,8 @@ Imports:
     fst (>= 0.8),
     magrittr (>= 1.5),
     janitor (>= 0.3.0),
-    kwb.utils (>= 0.5.0)
+    kwb.utils (>= 0.5.0),
+    fs
 Suggests:
     devtools (>= 1.13.0),
     knitr (>= 1.25),
