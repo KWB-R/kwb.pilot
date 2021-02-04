@@ -39,6 +39,7 @@ Imports:
     fst (>= 0.9.4),
     ggplot2 (>= 3.3.2),
     ggforce (>= 0.3.2),
+    htmlwidgets (>= 1.5.3),
     janitor (>= 2.0.1),
     kwb.utils (>= 0.7.0),
     leaflet (>= 2.0.3),
