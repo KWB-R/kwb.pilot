@@ -34,14 +34,14 @@ the integrated development environment (IDE) [RStudio Desktop "open source licen
 Once all [pre-required software](#1-1-pre-required-software) is installed the R 
 package installation workflow as described below can be started.
 
-## 1.2.1 Step 1) Installation of R package "devtools" 
+## 1.2.1 Step 1) Installation of R package "remotes" 
 
-The R package "devtools" is required for downloading and installing the R package 
+The R package "remotes" is required for downloading and installing the R package 
 "kwb.pilot" from Github. Installation is done by executing the following 
 lines of code in R or RStudio (from now on written as R(Studio)):
 ```r
-if (!require("devtools")) {
-  install.packages("devtools", repos = "https://cloud.r-project.org")
+if (!require("remotes")) {
+  install.packages("remotes", repos = "https://cloud.r-project.org")
 }
 ```
 
@@ -51,8 +51,8 @@ if (!require("devtools")) {
 In case you want to install a specific release you need to specify the 
 parameter "ref", which needs to be set to a valid release (check here: [releases](https://github.com/KWB-R/kwb.pilot/releases)) by running the following code in R(Studio). This tutorial at least requires release version [v.0.4.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v.0.4.0)):
 ```r
-devtools::install_github("kwb-r/kwb.pilot", 
-                         ref = "v.0.4.0",
+remotes::install_github("kwb-r/kwb.pilot", 
+                         ref = "v.0.1.0",
                          dependencies = TRUE)
 ```
 
