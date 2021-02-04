@@ -78,9 +78,9 @@ plot_data <- function(df_long,
   kwb.utils::catAndRun(sprintf("Export plot: %s", plot_file),
                        expr = {
                          g1 <- df_long %>%
-                           ggplot2::ggplot(mapping = ggplot2::aes(x = DateTime,
-                                                                  y = ParameterValue,
-                                                                  col = SiteName)) +
+                           ggplot2::ggplot(mapping = ggplot2::aes_string(x = "DateTime",
+                                                                  y = "ParameterValue",
+                                                                  col = "SiteName")) +
                            ggplot2::facet_wrap( ~ ParameterName, scales = "free_y", ncol = 1) +
                            ggplot2::geom_point() +
                            ggplot2::theme_bw()

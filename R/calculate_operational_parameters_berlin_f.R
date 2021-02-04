@@ -30,10 +30,10 @@ normalised_permeate_flow <- function(tempFeed,
 res <- tibble::tibble(tcf = exp(3020 * (1/298 - (1/(273 + tempFeed)))), 
                cfc = conLoop * 0.65 * ((log(1/(1 - vfrPerm / (vfrLoop + vfrFeed)))) / (vfrPerm/(vfrLoop + vfrFeed))), 
                ###Osmotischer Druck
-               preOsmo = (cfc * (tempFeed + 320)) / 491000,
-               nwp = ((preProc - (preProc - preConc) / 2 - prePerm - preOsmo) * tcf),
-               nwpt = (vfrPerm * (nwp0 / nwp)) * (vfrPerm / vfrPerm0),
-               nwpr = - (1 - nwpt / vfrPerm) * 100
+               preOsmo = (.data$cfc * (tempFeed + 320)) / 491000,
+               nwp = ((preProc - (preProc - preConc) / 2 - prePerm - .data$preOsmo) * .data$tcf),
+               nwpt = (vfrPerm * (nwp0 / .data$nwp)) * (vfrPerm / vfrPerm0),
+               nwpr = - (1 - .data$nwpt / vfrPerm) * 100
                )
 
 res$nwpt
@@ -46,13 +46,12 @@ res$nwpt
 #' Calculate operational parameters for Berlin-Friedrichshagen
 #' @param df a data frame as retrieved by import_data_berlin_f()
 #' @param calc_list list with calculation operations to be carried out
-#' (default: list(recovery  = "100*`FY-20-01`/`FT-10-01`"))
 #' @param calc_list_name full names of parameters to be used for plotting for each
-#' calculation specified wit 'calc_list'. default: c('recovery')
+#' calculation specified wit 'calc_list'.
 #' @param calc_list_unit units of parameters to be used for plotting for each
-#' calculation specified wit 'calc_list'. default: c("percent")
+#' calculation specified wit 'calc_list'. 
 #' @param calc_paras a vector with parameter codes used for performing calculations
-#' defined in 'calc_list' (default: c("FY-20-01", "FT-10-01")
+#' defined in 'calc_list' 
 #' @return dataframe with calculated operational parameters
 #' @export
 #' @examples
@@ -67,7 +66,7 @@ calculate_operational_parameters_berlin_f <- function(
                    conLoop = "(`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser` + `Durchfluss_Rezirkulation`)", 
                    recovery = "100*(1 - `LF_Permeat` / conLoop)", 
                    deltaPreProcConc = "`Druck_Arbeitsdruck` - `Druck_Konzentrat`",
-                   #Membranfläche NF 4x in Reihe: #4 x NF 270-4040 mit 7,6 m² aktiver Fläche
+                   #Membranflaeche NF 4x in Reihe: #4 x NF 270-4040 mit 7,6 m2 aktiver Flaeche
                    #surf = 4 * 7.6
                    flux = "vfrPerm / (4 * 7.6)", 
                    cfv =  "(`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2) * 1000 * 3600)",
@@ -86,18 +85,18 @@ calculate_operational_parameters_berlin_f <- function(
                    ),
   calc_list_name = c("Durchfluss Permeat", 
                      "Ausbeute", 
-                     "Leitfähigkeit Rezirkulation",
-                     "Rückhalt", 
+                     "Leitf\u00E4higkeit Rezirkulation",
+                     "R\u00FCckhalt", 
                      "Druckverlust (Feed - Konzentrat)", 
                      "Flux", 
-                     "Überströmungsgeschwindigkeit",
+                     "\u00DCberstr\u00F6mungsgeschwindigkeit",
                      "Transmembrandruck", 
                      "Normalisierter Permeatstrom",
                      "Relativer Permeatstrom"
                      ),
   calc_list_unit = c("l/h", 
                      "%", 
-                     "µS/cm",
+                     "\u00B5S/cm",
                      "%", 
                      "bar", 
                      "l/h/m2",

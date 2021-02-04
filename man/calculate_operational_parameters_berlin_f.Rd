@@ -32,17 +32,16 @@ calculate_operational_parameters_berlin_f(
 \arguments{
 \item{df}{a data frame as retrieved by import_data_berlin_f()}
 
-\item{calc_list}{list with calculation operations to be carried out
-(default: list(recovery  = "100*`FY-20-01`/`FT-10-01`"))}
+\item{calc_list}{list with calculation operations to be carried out}
 
 \item{calc_list_name}{full names of parameters to be used for plotting for each
-calculation specified wit 'calc_list'. default: c('recovery')}
+calculation specified wit 'calc_list'.}
 
 \item{calc_list_unit}{units of parameters to be used for plotting for each
-calculation specified wit 'calc_list'. default: c("percent")}
+calculation specified wit 'calc_list'.}
 
 \item{calc_paras}{a vector with parameter codes used for performing calculations
-defined in 'calc_list' (default: c("FY-20-01", "FT-10-01")}
+defined in 'calc_list'}
 }
 \value{
 dataframe with calculated operational parameters
