@@ -1,8 +1,8 @@
 ---
-title: "Suleman"
+title: "5.1 Pilot: SULEMAN"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Suleman}
+  %\VignetteIndexEntry{Pilot: SULEMAN}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -1,8 +1,8 @@
 ---
-title: "3.2 GUI Report panel"
+title: "3.2 GUI Report Panel"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3.2 GUI report panel}
+  %\VignetteIndexEntry{3.2 GUI Report Panel}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

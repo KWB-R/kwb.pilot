@@ -42,6 +42,10 @@ navbar:
       href: articles/A3_4_gui_site.html
   - text: 4 Modify
     href: articles/A4_modify.html
+  - text: 5 KWB Pilots
+    menu:
+    - text: 5.1 Suleman
+      href: articles/suleman.html
   - text: News
     href: news/index.html
   - text: Reference
@@ -51,24 +55,27 @@ reference:
   - title: "All Pilot Plant Sites"
     desc: >
       General functions which can be used for all pilot plant (with default 
-      parameterisation "Haridwar" site)
+      parameterisation "AquaNES: Haridwar" site)
     contents: 
-      - run_app
-      - get_valid_timezones
-      - change_timezone
-      - set_timezone
-      - group_datetime
       - calculate_operational_parameters
-      - get_thresholds
+      - change_timezone
       - check_thresholds
-      - dygraph_add_limits
-      - read_fst
       - create_monthly_selection
       - create_report_batch 
+      - dygraph_add_limits
+      - export_data
+      - get_valid_timezones
+      - get_thresholds
+      - group_datetime
+      - long_to_wide
+      - plot_data
+      - read_fst
       - starts_with("report_")
+      - run_app
+      - set_timezone
 
 
-  - title: Berlin-Tiefwerder (site 1)
+  - title: "AquaNES: Berlin-Tiefwerder (site 1)"
     desc: >
       Functions for importing data of Berlin-Tiefwerder site
     contents: 
@@ -80,7 +87,7 @@ reference:
       - merge_and_export_fst
       - load_fst_data
 
-  - title: Berlin-Schoenerlinde (site 12)
+  - title: "AquaNES: Berlin-Schoenerlinde (site 12)"
     desc: >
       Functions for importing data of Berlin-Schoenerlinde site
     contents: 
@@ -93,7 +100,7 @@ reference:
       - merge_and_export_fst
       - load_fst_data
 
-  - title: Basel-LangeErlen (site 6)
+  - title: "AquaNES: Basel-LangeErlen (site 6)"
     desc: >
       Functions for importing data of Basel-LangeErlen site
     contents:
@@ -103,3 +110,10 @@ reference:
       - import_operation_meta_basel
       - import_analytics_meta_basel
       - import_data_basel
+
+  - title: "SULEMAN: Berlin Friedrichshagen"
+    desc: >
+      Functions for importing Weintek data of Berlin Friedrichsagen
+    contents:
+      - read_weintek
+      - read_weintek_batch
