@@ -1,4 +1,21 @@
 
+#' Calculate normalised permeate flow
+#'
+#' @param tempFeed tempFeed 
+#' @param conLoop conLoop
+#' @param vfrPerm vfrPerm
+#' @param vfrLoop vfrLoop
+#' @param vfrFeed vfrFeed
+#' @param prePerm prePerm
+#' @param preProc preProc
+#' @param preConc preConc
+#' @param nwp0 nwp0
+#' @param vfrPerm0 vfrPerm0 
+#'
+#' @return nwpt
+#' @export
+#' @importFrom tibble tibble
+#' 
 normalised_permeate_flow <- function(tempFeed, 
                                      conLoop, 
                                      vfrPerm, 
