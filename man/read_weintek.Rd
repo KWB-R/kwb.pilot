@@ -2,14 +2,15 @@
 % Please edit documentation in R/read_weintek.R
 \name{read_weintek}
 \alias{read_weintek}
-\title{read_weintek}
+\title{Read Weintek data from single file}
 \usage{
 read_weintek(path, tz = "CET", dbg = TRUE)
 }
 \arguments{
 \item{path}{path to Weintek file}
 
-\item{tz}{time zone (default: CET)}
+\item{tz}{time zone (default: CET) the measurements are taken (passed to 
+function kwb.pilot:::set_timezone())}
 
 \item{dbg}{debug (default: TRUE)}
 }
@@ -17,5 +18,5 @@ read_weintek(path, tz = "CET", dbg = TRUE)
 data frame with Weintek raw data
 }
 \description{
-read_weintek
+Read Weintek data from single file
 }

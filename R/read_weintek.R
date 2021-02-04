@@ -1,7 +1,8 @@
-#' read_weintek
+#' Read Weintek data from single file
 #'
 #' @param path path to Weintek file
-#' @param tz time zone (default: CET)
+#' @param tz time zone (default: CET) the measurements are taken (passed to 
+#' function kwb.pilot:::set_timezone())
 #' @param dbg debug (default: TRUE)
 #'
 #' @return data frame with Weintek raw data
@@ -26,14 +27,15 @@ read_weintek <- function(path, tz = "CET", dbg = TRUE)
   
   df <- df[, columns]
   
-  kwb.pilot::set_timezone(df, tz = tz, col_datetime = "DateTime")
+  set_timezone(df, tz = tz, col_datetime = "DateTime")
 }
 
 
-#' read_weintek_batch
+#' Read Weintek data from multiple files
 #'
 #' @param files path to Weintek files
-#' @param tz  time zone (default: CET)
+#' @param tz time zone (default: CET) the measurements are taken (passed to 
+#' function kwb.pilot:::set_timezone())
 #' @param dbg debug (default: TRUE)
 #' @importFrom stats setNames
 #' @return data frame with Weintek raw data

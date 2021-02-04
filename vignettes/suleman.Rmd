@@ -1,0 +1,91 @@
+---
+title: "Suleman"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Suleman}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Install R package
+
+```{r install, eval = FALSE}
+remotes::install_github("kwb-r/kwb.pilot@dev", upgrade = "always")
+```
+
+## Define paths 
+
+### Option 1: At KWB
+
+In `paths_list` you need to replace the dummy value `kwb-server` 
+for the key `servername`.
+
+```{r paths_kwb, eval = FALSE}
+
+#KWB server
+paths_list <- list(
+  servername = "kwb-server",
+  root = "//<servername>/projekte$/WWT_Department/Projects/SULEMAN/Exchange/",
+  rawdata = "<root>/10_rawdata",
+  online =  "<rawdata>/online_data",
+  export_dir = "//<servername>/processing/suleman"
+  )
+
+paths <- kwb.utils::resolve(paths_list)
+```
+
+### Option 2: At Home
+
+```{r paths_home, eval = FALSE}
+paths_list <- list(
+  root = "C:/kwb/projects/suleman",
+  rawdata = "<root>/10_rawdata",
+  online =  "<rawdata>/online_data",
+  export_dir = "<root>/export"
+)
+paths <- kwb.utils::resolve(paths_list)
+```
+
+## Import 
+
+```{r import, eval = FALSE}
+### Recursive listing of all ".xlsx" Weintek files in rawdata directory:
+files <- fs::dir_ls(paths$online,recurse = TRUE, regexp = "^[^~].*\\.xlsx$")
+
+weintek_data_raw <- kwb.pilot::read_weintek_batch(files)
+```
+
+## Aggregate
+
+```{r aggregate, eval = FALSE}
+weintek_data_10min <- weintek_data_raw %>% kwb.pilot::group_datetime(by = 600)
+weintek_data_1hour <- weintek_data_raw %>% kwb.pilot::group_datetime(by = 3600)
+```
+
+## Export 
+
+### CSV files 
+
+```{r export_data, eval = FALSE}
+kwb.pilot::export_data(weintek_data_raw, export_dir = paths$export_dir)
+kwb.pilot::export_data(weintek_data_10min, export_dir = paths$export_dir)
+kwb.pilot::export_data(weintek_data_1hour, export_dir = paths$export_dir)
+```
+
+### Interactive HTML plots
+
+```{r plot_data, eval = FALSE}
+kwb.pilot::plot_data(weintek_data_1hour, export_dir = paths$export_dir)
+kwb.pilot::plot_data(weintek_data_10min, export_dir = paths$export_dir)
+#kwb.pilot::plot_data(weintek_data_raw, export_dir = paths$export_dir)
+```
+
+
+```
