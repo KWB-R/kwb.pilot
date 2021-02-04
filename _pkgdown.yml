@@ -6,9 +6,10 @@ authors:
     href: https://www.kompetenz-wasser.de
     html: <img src="http://www.kompetenz-wasser.de/wp-content/uploads/2017/08/cropped-logo-kwb_klein-new.png" height="24" />
   AquaNES: 
-    href: http://aquanes.eu/Default.aspx?t=1593
-    html: <img src="http://aquanes.eu/App_Themes/assets/img/logo.png" height="24" />
-
+    href: https://www.kompetenz-wasser.de/en/project/aquanes/
+    html: <img src="https://www.kompetenz-wasser.de/wp-content/uploads/2017/09/11-558x122.jpg" height="24" />
+  SULEMAN: 
+    href: https://www.kompetenz-wasser.de/en/project/suleman/
 template:
   params:
     bootswatch: cerulean

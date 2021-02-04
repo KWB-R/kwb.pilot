@@ -17,6 +17,8 @@ Authors@R:
       person(given = "Kompetenzzentrum Wasser Berlin gGmbH",
              role = "cph"),
       person(given = "AquaNES",
+             role = "fnd"),
+      person(given = "SULEMAN",
              role = "fnd"))
 Description: Collects, aggregates and visualises operational and
     analytical data from water suppliers (including a standardised
