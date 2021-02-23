@@ -8,6 +8,10 @@
 #' launched automatically after the app is started (default: TRUE)
 #' @param \dots further arguments passed to shiny::runApp()
 #' @importFrom shiny runApp
+#' @importFrom digest digest
+#' @import leaflet
+#' @importFrom rmarkdown render
+#' @importFrom shinythemes shinytheme
 #' @importFrom kwb.utils stringList
 #' @export
 run_app <- function(
