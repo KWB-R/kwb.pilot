@@ -31,11 +31,6 @@ params:
 ---
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
-library(RMySQL)
-library(ggplot2)
-library(ggforce)
-library(dplyr)
-library(kwb.pilot)
 
 thresholds_file <- system.file("shiny/berlin_f/data/thresholds.csv",
                               package = "kwb.pilot")
