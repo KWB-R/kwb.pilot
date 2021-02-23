@@ -120,7 +120,7 @@ read_wedeco_data <- function(
       
       relevant_paras <- names(ozone)[names(ozone) %in% columns]
       
-      ozone[, ..relevant_paras] %>%
+      ozone[, relevant_paras] %>%
         tidyr::gather_(
           key_col = "ProzessID",
           value_col = "ParameterValue",
