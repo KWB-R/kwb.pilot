@@ -4,11 +4,19 @@
 \alias{import_sheets}
 \title{Imports multiple analytics sheets from an EXCEL spreadsheet}
 \usage{
-import_sheets(xlsPath, sheets_analytics, sheet_parameters = "Parameters",
-  sheet_sites = "Sites", sheet_location = "Location",
+import_sheets(
+  xlsPath,
+  sheets_analytics,
+  sheet_parameters = "Parameters",
+  sheet_sites = "Sites",
+  sheet_location = "Location",
   col_rawData_pattern = "raw",
-  col_ignore_pattern = "mean|empty|X_|RX|not_used", skip = 69,
-  tz_org = NULL, tz_export = "UTC", dbg = TRUE)
+  col_ignore_pattern = "mean|empty|X_|RX|not_used",
+  skip = 69,
+  tz_org = NULL,
+  tz_export = "UTC",
+  dbg = TRUE
+)
 }
 \arguments{
 \item{xlsPath}{path to xls file with analytics data}

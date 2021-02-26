@@ -4,8 +4,11 @@
 \alias{report_config_template}
 \title{Report config: generate template}
 \usage{
-report_config_template(df = NULL, temporal_aggregation = "raw",
-  output_timezone = "UTC")
+report_config_template(
+  df = NULL,
+  temporal_aggregation = "raw",
+  output_timezone = "UTC"
+)
 }
 \arguments{
 \item{df}{a dataframe as retrieved by import_data_haridwar()}

@@ -4,8 +4,13 @@
 \alias{run_app}
 \title{Runs Shiny app for an AQUANES site}
 \usage{
-run_app(siteName = "haridwar", use_live_data = FALSE,
-  mySQL_conf = NULL, launch.browser = TRUE, ...)
+run_app(
+  siteName = "haridwar",
+  use_live_data = FALSE,
+  mySQL_conf = NULL,
+  launch.browser = TRUE,
+  ...
+)
 }
 \arguments{
 \item{siteName}{site name for shiny app (default: "haridwar")}

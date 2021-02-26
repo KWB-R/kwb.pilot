@@ -4,8 +4,7 @@
 \alias{change_timezone}
 \title{Timezone change: changes time zone to user defined time zone}
 \usage{
-change_timezone(df, tz = "UTC", col_datetime = "DateTime",
-  debug = TRUE)
+change_timezone(df, tz = "UTC", col_datetime = "DateTime", debug = TRUE)
 }
 \arguments{
 \item{df}{a dataframe containing a datetime column}

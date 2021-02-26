@@ -4,8 +4,10 @@
 \alias{add_parameter_metadata}
 \title{Helper function: add parameter metadata}
 \usage{
-add_parameter_metadata(df,
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"))
+add_parameter_metadata(
+  df,
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
+)
 }
 \arguments{
 \item{df}{data frame containing at least a column "ParameterCode"}

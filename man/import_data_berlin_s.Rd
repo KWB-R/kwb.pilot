@@ -4,10 +4,11 @@
 \alias{import_data_berlin_s}
 \title{Import data for Berlin Schoenerlinde}
 \usage{
-
-  import_data_berlin_s(raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+import_data_berlin_s(
+  raw_data_dir = package_file("shiny/berlin_s/data/operation"),
   raw_data_files = NULL,
-  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))
+  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")
+)
 }
 \arguments{
 \item{raw_data_dir}{path of directory containing WEDECO CSV files

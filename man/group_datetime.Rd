@@ -4,8 +4,14 @@
 \alias{group_datetime}
 \title{Group DateTime by user defined period (year, month, day, hour, minute)}
 \usage{
-group_datetime(df, by = 600, fun = "stats::median",
-  col_datetime = "DateTime", col_datatype = "DataType", dbg = TRUE)
+group_datetime(
+  df,
+  by = 600,
+  fun = "stats::median",
+  col_datetime = "DateTime",
+  col_datatype = "DataType",
+  dbg = TRUE
+)
 }
 \arguments{
 \item{df}{a data frame as retrieved by import_data_haridwar()}

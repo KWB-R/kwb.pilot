@@ -4,9 +4,12 @@
 \alias{merge_and_export_fst}
 \title{Helper function: merge and export fst files into main shiny data folder}
 \usage{
-merge_and_export_fst(time_pattern = NULL, compression = 100,
+merge_and_export_fst(
+  time_pattern = NULL,
+  compression = 100,
   import_dir = package_file("shiny/berlin_t/data/fst"),
-  export_dir = package_file("shiny/berlin_t/data"))
+  export_dir = package_file("shiny/berlin_t/data")
+)
 }
 \arguments{
 \item{time_pattern}{optional pattern to filter months to be imported (default: NULL),

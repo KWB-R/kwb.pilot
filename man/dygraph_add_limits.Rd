@@ -4,8 +4,14 @@
 \alias{dygraph_add_limits}
 \title{Dygraph: add (multiple) horizontal lines to plot}
 \usage{
-dygraph_add_limits(dygraph, limits_df, label_loc = "left",
-  col_limits = "ParameterThreshold", col_label = "label", ...)
+dygraph_add_limits(
+  dygraph,
+  limits_df,
+  label_loc = "left",
+  col_limits = "ParameterThreshold",
+  col_label = "label",
+  ...
+)
 }
 \arguments{
 \item{dygraph}{a dygraph object where (possibly) multiple horizontal lines

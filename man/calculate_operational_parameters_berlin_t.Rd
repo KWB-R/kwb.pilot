@@ -4,9 +4,13 @@
 \alias{calculate_operational_parameters_berlin_t}
 \title{Calculate operational parameters for Berlin-Tiefwerder}
 \usage{
-calculate_operational_parameters_berlin_t(df, calc_list = list(recovery =
-  "100*`FY-20-01`/`FT-10-01`"), calc_list_name = c("recovery"),
-  calc_list_unit = c("\%"), calc_paras = c("FY-20-01", "FT-10-01"))
+calculate_operational_parameters_berlin_t(
+  df,
+  calc_list = list(recovery = "100*`FY-20-01`/`FT-10-01`"),
+  calc_list_name = c("recovery"),
+  calc_list_unit = c("\%"),
+  calc_paras = c("FY-20-01", "FT-10-01")
+)
 }
 \arguments{
 \item{df}{a data frame as retrieved by read_pentair_data()}

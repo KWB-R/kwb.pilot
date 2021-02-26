@@ -65,7 +65,7 @@ doLogin <- reactive({
       whichUser <- which(userTable$user == input$account)
       if(length(whichUser) > 0) {
         salt <- userTable$nacl[whichUser]
-        hash <- digest(paste0(salt, input$pwd), algo="sha256")
+        hash <- digest::digest(paste0(salt, input$pwd), algo="sha256")
         if(hash == userTable$login[whichUser]) {
           loginData$Account <<- input$account
           loginData$Session <<- "Session ID" # TODO
