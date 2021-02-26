@@ -96,7 +96,7 @@ calculate_operational_parameters_berlin_f <- function(
                      ),
   calc_list_unit = c("l/h", 
                      "%", 
-                     "\u00B5S/cm",
+                     "\xB5S/cm",
                      "%", 
                      "bar", 
                      "l/h/m2",
