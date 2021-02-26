@@ -4,9 +4,13 @@
 \alias{add_label}
 \title{Helper function: add label ("SiteName_ParaName_Unit_Method")}
 \usage{
-add_label(df, col_sitename = "SiteName",
+add_label(
+  df,
+  col_sitename = "SiteName",
   col_parametername = "ParameterName",
-  col_parameterunit = "ParameterUnit", col_method = "Method_Org")
+  col_parameterunit = "ParameterUnit",
+  col_method = "Method_Org"
+)
 }
 \arguments{
 \item{df}{data frame containing at least a columns "SiteName", "ParameterName",

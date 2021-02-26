@@ -4,9 +4,13 @@
 \alias{create_report_batch}
 \title{Report batch: creates batch file for report}
 \usage{
-create_report_batch(batchDir = file.path(tempdir(), "batch_report"),
-  batchName = "create_report.bat", report_path = NULL,
-  report_config_path = NULL, open_in_explorer = TRUE)
+create_report_batch(
+  batchDir = file.path(tempdir(), "batch_report"),
+  batchName = "create_report.bat",
+  report_path = NULL,
+  report_config_path = NULL,
+  open_in_explorer = TRUE
+)
 }
 \arguments{
 \item{batchDir}{path to report batch directory (default: tempdir())}

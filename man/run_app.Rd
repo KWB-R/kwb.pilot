@@ -4,8 +4,13 @@
 \alias{run_app}
 \title{Runs Shiny app for an AQUANES site}
 \usage{
-run_app(siteName = "haridwar", use_live_data = FALSE,
-  mySQL_conf = NULL, launch.browser = TRUE, ...)
+run_app(
+  siteName = "haridwar",
+  use_live_data = FALSE,
+  mySQL_conf = NULL,
+  launch.browser = TRUE,
+  ...
+)
 }
 \arguments{
 \item{siteName}{site name for shiny app (default: "haridwar")}
@@ -19,7 +24,7 @@ the selected site (default: NULL)}
 \item{launch.browser}{If true, the system's default web browser will be
 launched automatically after the app is started (default: TRUE)}
 
-\item{...}{further arguments passed to shiny::runApp()}
+\item{\dots}{further arguments passed to shiny::runApp()}
 }
 \description{
 Runs Shiny app for an AQUANES site

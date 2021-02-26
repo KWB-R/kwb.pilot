@@ -1,8 +1,8 @@
 ---
-title: "3.4 GUI Site panel"
+title: "3.4 GUI Site Panel"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3.4 GUI site panel}
+  %\VignetteIndexEntry{3.4 GUI Site Panel}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,7 +14,6 @@ level (bottom).
 ```{r site_tab_panel, echo = FALSE}
 knitr::include_graphics("figures/28.png")
 ```
-
 
 Note: 
 The coordinates and the popup menu used for the two maps can be modified by the 

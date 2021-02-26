@@ -5,8 +5,12 @@
 \title{Helper function: fill empty datetime & create measurementID column in case of
 samples}
 \usage{
-fill_datetime(df, col_rawData_pattern = "raw",
-  col_datetime = "DateTime", dbg = FALSE)
+fill_datetime(
+  df,
+  col_rawData_pattern = "raw",
+  col_datetime = "DateTime",
+  dbg = FALSE
+)
 }
 \arguments{
 \item{df}{a dataframe}

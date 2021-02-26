@@ -4,17 +4,19 @@
 \alias{calculate_operational_parameters}
 \title{Calculate operational parameters}
 \usage{
-calculate_operational_parameters(df, calc_list = list(Redox_Out =
-  "(Redox_Out1+Redox_Out2)/2", Redox_Diff = "Redox_Out - Redox_In",
-  Power_pump = "Up*Ip", Power_cell = "Uz*Iz", Pump_WhPerCbm =
-  "Power_pump/(Flux/1000)", Cell_WhPerCbm = "Power_cell/(Flux/1000)"),
+calculate_operational_parameters(
+  df,
+  calc_list = list(Redox_Out = "(Redox_Out1+Redox_Out2)/2", Redox_Diff =
+    "Redox_Out - Redox_In", Power_pump = "Up*Ip", Power_cell = "Uz*Iz", Pump_WhPerCbm =
+    "Power_pump/(Flux/1000)", Cell_WhPerCbm = "Power_cell/(Flux/1000)"),
   calc_list_name = c("Mean redox potential in tank",
-  "Difference (outflow - inflow) of redox potential",
-  "Power demand of pump", "Power demand of cell",
-  "Specific energy demand of pump", "Specific energy demand of cell"),
+    "Difference (outflow - inflow) of redox potential", "Power demand of pump",
+    "Power demand of cell", "Specific energy demand of pump",
+    "Specific energy demand of cell"),
   calc_list_unit = c("mV", "mV", "W", "W", "Wh/m3", "Wh/m3"),
-  calc_paras = c("Redox_Out1", "Redox_Out2", "Redox_In", "Flux", "Up",
-  "Ip", "Uz", "Iz"))
+  calc_paras = c("Redox_Out1", "Redox_Out2", "Redox_In", "Flux", "Up", "Ip", "Uz",
+    "Iz")
+)
 }
 \arguments{
 \item{df}{a data frame as retrieved by import_data_haridwar()}

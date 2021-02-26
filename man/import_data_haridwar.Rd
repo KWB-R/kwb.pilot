@@ -4,28 +4,26 @@
 \alias{import_data_haridwar}
 \title{Imports Haridwar data}
 \usage{
-import_data_haridwar(analytics_path = system.file(file.path("shiny",
-  "haridwar/data/analytics.xlsx"), package = "kwb.pilot"),
-  operation_mySQL_conf = system.file("shiny/haridwar/.my.cnf", package =
-  "kwb.pilot"),
-  operation_meta_path = system.file(file.path("shiny/haridwar/data",
-  "operation_parameters.csv"), package = "kwb.pilot"),
+import_data_haridwar(
+  analytics_path = package_file("shiny/haridwar/data/analytics.xlsx"),
+  operation_mySQL_conf = package_file("shiny/haridwar/.my.cnf"),
+  operation_meta_path = package_file("shiny/haridwar/data/operation_parameters.csv"),
   excludedSheets = c("Parameters", "Location", "Sites", "#Summary",
-  "Site_and_Parameter", "Observations", "dP", "ORP", "Flow",
-  "Current_Voltage", "As_total_Arsenator"), skip = 69, debug = TRUE)
+    "Site_and_Parameter", "Observations", "dP", "ORP", "Flow", "Current_Voltage",
+    "As_total_Arsenator"),
+  skip = 69,
+  debug = TRUE
+)
 }
 \arguments{
 \item{analytics_path}{Define path of analytics EXCEL spreadsheet to be
-imported (default: system.file(file.path("shiny/haridwar/data",
-"analytics.xlsx"),
-package = "kwb.pilot"))}
+imported (default: kwb.pilot:::package_file("shiny/haridwar/data/analytics.xlsx"))}
 
 \item{operation_mySQL_conf}{column name pattern for identifying raw data
-(default: system.file("shiny/haridwar/.my.cnf", package = "kwb.pilot"))}
+(default: kwb.pilot:::package_file("shiny/haridwar/.my.cnf"))}
 
 \item{operation_meta_path}{path to table with meta data for operational
-parameters (default: system.file(file.path("shiny/haridwar/data",
-"operation_parameters.csv"), package = "kwb.pilot"))}
+parameters (default: kwb.pilot:::package_file("shiny/haridwar/data/operation_parameters.csv"))}
 
 \item{excludedSheets}{all sheets, which are not listed here will be imported
 as lab data sheets (default: c("Parameters", "Location", "Sites", "#Summary",

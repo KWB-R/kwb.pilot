@@ -17,6 +17,7 @@
 #' defined in 'calc_list' (default: c('Redox_Out1', 'Redox_Out2', 'Redox_In',
 #' 'Flux', 'Up', 'Ip', 'Uz', 'Iz'))
 #' @return dataframe with calculated operational parameters
+#' @importFrom kwb.utils stringList
 #' @export
 #' @examples
 #' \dontrun{
@@ -62,7 +63,7 @@ calculate_operational_parameters <- function(df,
   print(sprintf(
     "Calculating %d operational parameter(s): %s",
     length(calc_list_name),
-    paste(calc_list_name, collapse = ", ")
+    kwb.utils::stringList(calc_list_name)
   ))
 
   meta_data <- data.frame(

@@ -4,9 +4,11 @@
 \alias{add_site_metadata}
 \title{Helper function: add site metadata}
 \usage{
-add_site_metadata(df, df_col_sitecode = "SiteCode",
-  meta_site_path = system.file("shiny/basel/data/metadata/meta_site.csv",
-  package = "kwb.pilot"))
+add_site_metadata(
+  df,
+  df_col_sitecode = "SiteCode",
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")
+)
 }
 \arguments{
 \item{df}{data frame containing at least a column "SiteCode"}
@@ -14,8 +16,7 @@ add_site_metadata(df, df_col_sitecode = "SiteCode",
 \item{df_col_sitecode}{column in df containing site code (default: "SiteCode")}
 
 \item{meta_site_path}{Define path of "meta_site.csv" to be imported
-(default: system.file("shiny/basel/data/metadata/meta_site.csv",
-package = "kwb.pilot"))}
+(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))}
 }
 \value{
 returns input data frame with joined metadata

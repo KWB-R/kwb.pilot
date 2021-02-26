@@ -4,8 +4,15 @@
 \alias{src_mysql_from_cnf}
 \title{Helper function: store MySQL database credentials in ".my.cnf"}
 \usage{
-src_mysql_from_cnf(dbname, group = NULL, dir = file.path(getwd(),
-  ".my.cnf"), host = NULL, user = NULL, password = NULL, ...)
+src_mysql_from_cnf(
+  dbname,
+  group = NULL,
+  dir = file.path(getwd(), ".my.cnf"),
+  host = NULL,
+  user = NULL,
+  password = NULL,
+  ...
+)
 }
 \arguments{
 \item{dbname}{name of database to be accessed}

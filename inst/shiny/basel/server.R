@@ -17,7 +17,7 @@ options(shiny.maxRequestSize = 9*1024^2)
 
 
 # Global settings (for all sessions)
-my_theme <<- shinytheme("readable")
+my_theme <<- shinythemes::shinytheme("readable")
 
 
 #Read user table for deployment from user table

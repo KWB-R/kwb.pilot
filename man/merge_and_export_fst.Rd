@@ -4,10 +4,12 @@
 \alias{merge_and_export_fst}
 \title{Helper function: merge and export fst files into main shiny data folder}
 \usage{
-merge_and_export_fst(time_pattern = NULL, compression = 100,
-  import_dir = system.file("shiny/berlin_t/data/fst", package =
-  "kwb.pilot"), export_dir = system.file("shiny/berlin_t/data", package =
-  "kwb.pilot"))
+merge_and_export_fst(
+  time_pattern = NULL,
+  compression = 100,
+  import_dir = package_file("shiny/berlin_t/data/fst"),
+  export_dir = package_file("shiny/berlin_t/data")
+)
 }
 \arguments{
 \item{time_pattern}{optional pattern to filter months to be imported (default: NULL),
@@ -16,10 +18,10 @@ for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")}
 \item{compression}{compression for fst export (default: 100)}
 
 \item{import_dir}{directory with fst files or subdirs to be imported (default:
-system.file("shiny/berlin_t/data/fst",package = "kwb.pilot"))}
+kwb.pilot:::package_file("shiny/berlin_t/data/fst"))}
 
 \item{export_dir}{directory with fst directory for export (default:
-system.file("shiny/berlin_t/data",package = "kwb.pilot"))}
+kwb.pilot:::package_file("shiny/berlin_t/data"))}
 }
 \value{
 imports multiple fst files and exports them to be used for app

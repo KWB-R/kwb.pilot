@@ -10,27 +10,33 @@
 #' "label")
 #' @param label_loc Location for horizontal dygraph labels (left or right).
 #' (default: "left)
-#' @param ... further arguments passed to dygraphs::dyLimit()
+#' @param \dots further arguments passed to dygraphs::dyLimit()
 #' @return add limits to existing dygraph object
 #' @import dygraphs
 #' @export
-dygraph_add_limits <- function(dygraph,
-                               limits_df, # thresholds[thresholds$ParameterName %in% "Battery voltage",],
-                               label_loc = "left",
-                               col_limits = "ParameterThreshold",
-                               col_label = "label",
-                               ...) {
-  if (nrow(limits_df) > 0) {
-    for (i in seq_len(nrow(limits_df))) {
-      dygraph <- dygraphs::dyLimit(
-        dygraph = dygraph,
-        limit = limits_df[i, col_limits],
-        label = limits_df[i, col_label],
-        labelLoc = label_loc,
-        ...
-      )
-    }
+dygraph_add_limits <- function(
+  dygraph,
+  limits_df, # thresholds[thresholds$ParameterName %in% "Battery voltage",],
+  label_loc = "left",
+  col_limits = "ParameterThreshold",
+  col_label = "label",
+  ...
+)
+{
+  if (nrow(limits_df) == 0) {
+    return(dygraph)
   }
-
-  return(dygraph)
+  
+  for (i in seq_len(nrow(limits_df))) {
+    
+    dygraph <- dygraphs::dyLimit(
+      dygraph = dygraph,
+      limit = limits_df[i, col_limits],
+      label = limits_df[i, col_label],
+      labelLoc = label_loc,
+      ...
+    )
+  }
+  
+  dygraph
 }

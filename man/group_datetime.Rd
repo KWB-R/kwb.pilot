@@ -4,8 +4,14 @@
 \alias{group_datetime}
 \title{Group DateTime by user defined period (year, month, day, hour, minute)}
 \usage{
-group_datetime(df, by = 600, fun = "stats::median",
-  col_datetime = "DateTime", col_datatype = "DataType", dbg = TRUE)
+group_datetime(
+  df,
+  by = 600,
+  fun = "stats::median",
+  col_datetime = "DateTime",
+  col_datatype = "DataType",
+  dbg = TRUE
+)
 }
 \arguments{
 \item{df}{a data frame as retrieved by import_data_haridwar()}
@@ -15,7 +21,7 @@ day aggregation or "day", "month" or "year" for longer time spans}
 
 \item{fun}{function to be used for grouping measurement data of column ParameterValue
 (default: stats::median)
-(default: system.file("shiny/haridwar/.my.cnf", package = "kwb.pilot"))}
+(default: kwb.pilot:::package_file("shiny/haridwar/.my.cnf"))}
 
 \item{col_datetime}{column name of datetime column (default: DateTime)}
 

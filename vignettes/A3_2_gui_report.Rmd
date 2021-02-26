@@ -1,8 +1,8 @@
 ---
-title: "3.2 GUI Report panel"
+title: "3.2 GUI Report Panel"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3.2 GUI report panel}
+  %\VignetteIndexEntry{3.2 GUI Report Panel}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -53,18 +53,15 @@ Figure below.
 knitr::include_graphics("figures/19.png")
 ```
 
-
-
 **User defined**
 This option enables the user to select a specific time period (e.g. 2016-09-05 
 to 2016-10-31) by defining the date range as already described in [Chapter 3.2.3](##3-2-3-select-a-reporting-period).
-
 
 ## 3.2.4	Select sampling points 
 
 see Chapter 3.1.5
 
-##3.2.5	Select parameters 
+## 3.2.5	Select parameters 
 
 The user can select the following parameters: 
 
@@ -77,10 +74,9 @@ The user can select the following parameters:
 **Note:**
 ***The parameter selection workflow is the same as described in Chapter 3.1.6.***
 
-##3.2.6	Add thresholds to offline/online parameters
+## 3.2.6	Add thresholds to offline/online parameters
 
 see Chapter 3.1.7
-
 
 ## 3.2.7	Download options
 
@@ -107,7 +103,6 @@ Figure 19 Report download options
 Due to the higher complexity for using the standalone report option the required 
 workflow.
 
-
 ***Step 1: Download*** 
 Download a “report_DatTime.zip” (with DateTime = date time of download)  by 
 clicking on “Down-load standalone report (zip)”
@@ -124,16 +119,12 @@ subfolder “input” should must to be identical with the ones shown in Figure 
 knitr::include_graphics("figures/21.png")
 ```
 
-
 Figure 21 Folder “…/report_20170717153145” with unzipped files of “report_20170717153145.zip”
-
-
 
 ```{r file2, echo = FALSE}
 knitr::include_graphics("figures/22.png")
 ```
 Figure 22 Files in subfolder “input” of “report_20170717153145”
-
 
 ***Step 2b (optional): Change reporting period*** 
 Inspecting “report_config.txt” in an editor shows which user defined 
@@ -199,4 +190,3 @@ created subfolder “/output” (Figure 28).
 knitr::include_graphics("figures/28.png")
 ```
 Figure 28 Report files in subfolder “output” of “report_20170717153145”
-

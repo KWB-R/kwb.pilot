@@ -1,76 +1,17 @@
-# multiSubstitute (copied from: "kwb.utils" R package to avoid importing it)
-# Source: file.path(https://github.com/KWB-R/kwb.utils/blob",
-#         "59d4de1357932d2b8e20e9b7e48362350364c078/R/string.R")
-
-#' Multiple Substitutions
-#'
-#' apply multiple substitutions on a vector of character. For each element in
-#'   \emph{replacements} gsub is called with the element name being the pattern
-#'   and the element value being the replacement.
-#'
-#' @param strings vector of character
-#' @param replacements list of pattern = replacement pairs.
-#' @param \dots additional arguments passed to gsub
-#' @param dbg if \code{TRUE} (the default is \code{FALSE}) it is shown which
-#'   strings were replaced
-#'
-multiSubstitute <- function(strings, replacements, ..., dbg = FALSE)
-{
-  for (pattern in names(replacements)) {
-
-    if (dbg) {
-
-      strings.bak <- strings
-    }
-
-    replacement <- replacements[[pattern]]
-
-    strings <- gsub(pattern, replacement, strings, ...)
-
-    if (dbg) {
-
-      changed <- strings != strings.bak
-
-      if (any(changed)) {
-
-        frequencies <- table(strings.bak[changed])
-
-        items <- sprintf("'%s' (%d-times)", names(frequencies), frequencies)
-
-        cat(sprintf(
-          paste0(
-            "In the following strings the parts matching the pattern ",
-            "'%s' are replaced with '%s':\n  %s\n"
-          ),
-          pattern, replacement, collapsed(items, ",\n  ")
-        ))
-      }
-    }
-  }
-
-  strings
-}
-
 #' Imports operational data for Basel (without metadata and only for one site
 #' at once, e.g. "rhein" or "wiese")
 #' @param xlsx_dir Define directory with raw data in EXCEL spreadsheet (.xlsx) to
-#' be imported (default: system.file("shiny/basel/data/operation/wiese",
-#' package = "kwb.pilot"))
+#' be imported (default: sema.pilot:::package_file("shiny/basel/data/operation/wiese"))
 #' @return returns data frame with imported raw operational data
 #' @importFrom  readxl read_excel
 #' @importFrom  tidyr gather_
 #' @export
 
-import_operation_basel <- function(xlsx_dir = system.file(
-                                   "shiny/basel/data/operation/wiese",
-                                   package = "kwb.pilot"
-                                 )) {
-  xlsx_files <- list.files(
-    path = xlsx_dir,
-    pattern = "\\.xls",
-    full.names = TRUE
-  )
-
+import_operation_basel <- function(
+  xlsx_dir = package_file("shiny/basel/data/operation/wiese")
+) 
+{
+  xlsx_files <- list_full_xls_files()
 
   for (xlsx_file in xlsx_files) {
     print(sprintf("Importing: %s", xlsx_file))
@@ -86,7 +27,7 @@ import_operation_basel <- function(xlsx_dir = system.file(
   names(raw_data)[1] <- "DateTime"
 
   print(sprintf("Setting time zone to 'CET'"))
-  raw_data <- kwb.pilot::set_timezone(raw_data, tz = "CET")
+  raw_data <- set_timezone(raw_data, tz = "CET")
 
   raw_data_tidy <- tidyr::gather_(
     data = raw_data,
@@ -106,8 +47,7 @@ import_operation_basel <- function(xlsx_dir = system.file(
 
 #' Imports analytical data for Basel (without metadata)
 #' @param csv_dir Define directory with raw analytical data in CSV (.csv) format to
-#' be imported (default: system.file("shiny/basel/data/analytics",
-#' package = "kwb.pilot"))
+#' be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))
 #' @return returns data frame with imported raw analytics data
 #' @importFrom janitor clean_names
 #' @importFrom  readxl read_excel
@@ -116,16 +56,11 @@ import_operation_basel <- function(xlsx_dir = system.file(
 #' @export
 
 
-import_analytics_basel <- function(csv_dir = system.file(
-                                   "shiny/basel/data/analytics",
-                                   package = "kwb.pilot"
-                                 )) {
-  csv_files <- list.files(
-    path = csv_dir,
-    pattern = "\\.csv",
-    full.names = TRUE
-  )
-
+import_analytics_basel <- function(
+  csv_dir = package_file("shiny/basel/data/analytics")
+)
+{
+  csv_files <- list_full_csv_files(csv_dir)
 
   for (csv_file in csv_files) {
     print(sprintf("Importing: %s", csv_file))
@@ -148,7 +83,7 @@ import_analytics_basel <- function(csv_dir = system.file(
                         "\\<Cyprosulfamid\\>" = "Cyprosulfamide")
 
     tmp$prufpunkt_bezeichnung_cor <-
-      multiSubstitute(strings = tmp$prufpunkt_bezeichnung,
+      kwb.utils::multiSubstitute(strings = tmp$prufpunkt_bezeichnung,
                       replacements = rep_strings)
 
 
@@ -208,7 +143,7 @@ import_analytics_basel <- function(csv_dir = system.file(
   }
 
   print(sprintf("Setting time zone to 'CET'"))
-  raw_data <- kwb.pilot::set_timezone(raw_data, tz = "CET")
+  raw_data <- set_timezone(raw_data, tz = "CET")
 
   raw_data$ParameterValue <- as.numeric(raw_data$ParameterValue)
   raw_data$Source <- "offline"
@@ -222,18 +157,17 @@ import_analytics_basel <- function(csv_dir = system.file(
 #' @param df data frame containing at least a column "SiteCode"
 #' @param df_col_sitecode column in df containing site code (default: "SiteCode")
 #' @param meta_site_path Define path of "meta_site.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_site.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))
 #' @return returns input data frame with joined metadata
 #' @importFrom  tidyr separate_
 #' @export
 
-add_site_metadata <- function(df,
-                              df_col_sitecode = "SiteCode",
-                              meta_site_path = system.file(
-                                "shiny/basel/data/metadata/meta_site.csv",
-                                package = "kwb.pilot"
-                              )) {
+add_site_metadata <- function(
+  df, 
+  df_col_sitecode = "SiteCode", 
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")
+)
+{
   meta_site <- read.csv(
     file = meta_site_path,
     stringsAsFactors = FALSE,
@@ -284,17 +218,16 @@ add_site_metadata <- function(df,
 #' Helper function: add parameter metadata
 #' @param df data frame containing at least a column "ParameterCode"
 #' @param meta_parameter_path Define path of "meta_parameter.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 #' @return returns input data frame with joined metadata (parameter codes/ methods
 #' not included in meta_parameter file will not be imported!!!!)
 #' @importFrom  dplyr left_join
 #' @export
-add_parameter_metadata <- function(df,
-                                   meta_parameter_path = system.file(
-                                     "shiny/basel/data/metadata/meta_parameter.csv",
-                                     package = "kwb.pilot"
-                                   )) {
+add_parameter_metadata <- function(
+  df,
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
+)
+{
   meta_parameter <- read.csv(
     file = meta_parameter_path,
     stringsAsFactors = FALSE,
@@ -363,48 +296,29 @@ add_label <- function(df,
 #' both sites at once, i.e. "rhein" and "wiese")
 #' @param raw_dir_rhein Define directory for site "rhein" with raw data in
 #' EXCEL spreadsheet format (.xlsx) to be imported (default:
-#' system.file("shiny/basel/data/operation/rhein", package = "kwb.pilot"))
+#' sema.pilot:::package_file("shiny/basel/data/operation/rhein"))
 #' @param raw_dir_wiese Define directory for site "rhein" with raw data in
 #' EXCEL spreadsheet format (.xlsx) to be imported (default:
-#' system.file("shiny/basel/data/operation/wiese", package = "kwb.pilot"))
+#' sema.pilot:::package_file("shiny/basel/data/operation/wiese"))
 #' @param meta_online_path path to file containing metadata for online data
-#' (default: system.file("shiny/basel/data/metadata/meta_online.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_online.csv"))
 #' @param meta_site_path Define path of "meta_site.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_site.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))
 #' @param meta_parameter_path Define path of "meta_parameter.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 #' @return returns data frame with imported raw operational data with metadata
 #' for both sites (i.e."rhein" and "wiese")
 #' @importFrom  dplyr left_join
 #' @return data.frame with operational data for Basel sites including metadata
 #' @export
 import_operation_meta_basel <- function(
-                                        raw_dir_rhein = system.file(file.path(
-                                          "shiny",
-                                          "basel/data/operation/rhein"
-                                        ), package = "kwb.pilot"),
-                                        raw_dir_wiese = system.file(
-                                          "shiny/basel/data/operation/wiese",
-                                          package = "kwb.pilot"
-                                        ),
-                                        meta_online_path =
-                                        system.file(
-                                          "shiny/basel/data/metadata/meta_online.csv",
-                                          package = "kwb.pilot"
-                                        ),
-                                        meta_site_path =
-                                        system.file(
-                                          "shiny/basel/data/metadata/meta_site.csv",
-                                          package = "kwb.pilot"
-                                        ),
-                                        meta_parameter_path =
-                                        system.file(
-                                          "shiny/basel/data/metadata/meta_parameter.csv",
-                                          package = "kwb.pilot"
-                                        )) {
+  raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
+  raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
+  meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
+)
+{
   meta_online <- read.csv(
     file = meta_online_path,
     stringsAsFactors = FALSE,
@@ -450,29 +364,19 @@ import_operation_meta_basel <- function(
 #' Imports analytical data for Basel (with metadata for both sites at once, i.e.
 #' "rhein" and "wiese")
 #' @param analytics_dir Define directory with raw analytical data in CSV (.csv) format to
-#' be imported (default: system.file("shiny/basel/data/analytics",
-#' package = "kwb.pilot"))
+#' be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))
 #' @param meta_site_path Define path of "meta_site.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_site.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))
 #' @param meta_parameter_path Define path of "meta_parameter.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 #' @return data.frame with analytics data for Basel sites including metadata
 #' @export
 import_analytics_meta_basel <- function(
-                                        analytics_dir = system.file(
-                                          "shiny/basel/data/analytics",
-                                          package = "kwb.pilot"
-                                        ),
-                                        meta_site_path = system.file(
-                                          "shiny/basel/data/metadata/meta_site.csv",
-                                          package = "kwb.pilot"
-                                        ),
-                                        meta_parameter_path = system.file(
-                                          "shiny/basel/data/metadata/meta_parameter.csv",
-                                          package = "kwb.pilot"
-                                        )) {
+  analytics_dir = package_file("shiny/basel/data/analytics"),
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
+)
+{
   print("###################################################################")
   print("###### Importing analytics data with metadata for sites 'Wiese' and Rhein'")
   print("###################################################################")
@@ -488,51 +392,31 @@ import_analytics_meta_basel <- function(
 #' Imports operational & analytical data for Basel (with metadata for both sites
 #' at once, i.e. "rhein" and "wiese")
 #' @param analytics_dir Define directory with raw analytical data in CSV (.csv) format to
-#' be imported (default: system.file("shiny/basel/data/analytics",
-#' package = "kwb.pilot"))
+#' be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))
 #' @param raw_dir_rhein Define directory for site "rhein" with raw data in
 #' EXCEL spreadsheet format (.xlsx) to be imported (default:
-#' system.file("shiny/basel/data/operation/rhein", package = "kwb.pilot"))
+#' sema.pilot:::package_file("shiny/basel/data/operation/rhein"))
 #' @param raw_dir_wiese Define directory for site "rhein" with raw data in
 #' EXCEL spreadsheet format (.xlsx) to be imported (default:
-#' system.file("shiny/basel/data/operation/wiese", package = "kwb.pilot"))
+#' sema.pilot:::package_file("shiny/basel/data/operation/wiese"))
 #' @param meta_online_path path to file containing metadata for online data
-#' (default: system.file("shiny/basel/data/metadata/meta_online.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_online.csv"))
 #' @param meta_parameter_path Define path of "meta_parameter.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_parameter.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 #' @param meta_site_path Define path of "meta_site.csv" to be imported
-#' (default: system.file("shiny/basel/data/metadata/meta_site.csv",
-#' package = "kwb.pilot"))
+#' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))
 #' @return data.frame with analytical & operational data for Basel
 #' @importFrom plyr rbind.fill
 #' @export
 import_data_basel <- function(
-                              analytics_dir = system.file(
-                                "shiny/basel/data/analytics",
-                                package = "kwb.pilot"
-                              ),
-                              raw_dir_rhein = system.file(
-                                "shiny/basel/data/operation/rhein",
-                                package = "kwb.pilot"
-                              ),
-                              raw_dir_wiese = system.file(
-                                "shiny/basel/data/operation/wiese",
-                                package = "kwb.pilot"
-                              ),
-                              meta_online_path = system.file(
-                                "shiny/basel/data/metadata/meta_online.csv",
-                                package = "kwb.pilot"
-                              ),
-                              meta_parameter_path = system.file(
-                                "shiny/basel/data/metadata/meta_parameter.csv",
-                                package = "kwb.pilot"
-                              ),
-                              meta_site_path = system.file(
-                                "shiny/basel/data/metadata/meta_site.csv",
-                                package = "kwb.pilot"
-                              )) {
+  analytics_dir = package_file("shiny/basel/data/analytics"),
+  raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
+  raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
+  meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
+  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"),
+  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")
+)
+{
   operation_meta <- import_operation_meta_basel(
     raw_dir_rhein = raw_dir_rhein,
     raw_dir_wiese = raw_dir_wiese,

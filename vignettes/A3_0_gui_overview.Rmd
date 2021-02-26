@@ -2,7 +2,7 @@
 title: "3.0 GUI Overview"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3.0 GUI overview}
+  %\VignetteIndexEntry{3.0 GUI Overview}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

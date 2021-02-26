@@ -1,4 +1,5 @@
 #' Check thresholds
+#' 
 #' @param df a dataframe as retrieved by import_data_haridwar()
 #' @param thresholds thresholds dataframe as retrieved by get_thresholds()
 #' (default: "raw")
@@ -7,15 +8,16 @@
 #' 'thresholds')
 #' @export
 
-
-check_thresholds <- function(df, # haridwar_day_list,
-                             thresholds = get_thresholds()) {
+check_thresholds <- function(
+  df, # haridwar_day_list,
+  thresholds = get_thresholds()
+)
+{
   thresholds$ParameterThresholdComparisonR <- gsub(
     pattern = "^[=]",
     replacement = "==",
     thresholds$ParameterThresholdComparison
   )
-
 
   thresholds$number_total <- 0
   thresholds$number_of_satisfying <- 0
@@ -23,35 +25,35 @@ check_thresholds <- function(df, # haridwar_day_list,
 
   thresholds$exceedanceLabel <- "No data within reporting period!"
 
-
-  for (idx in seq_len(nrow(thresholds))) {
-    cond1 <- df$ParameterCode == thresholds$ParameterCode[idx] & df$SiteCode == thresholds$SiteCode[idx] & !is.na(df$ParameterValue)
+  for (i in seq_len(nrow(thresholds))) {
+    
+    cond1 <- df$ParameterCode == thresholds$ParameterCode[i] 
+    cond1 <- cond1 & df$SiteCode == thresholds$SiteCode[i] 
+    cond1 <- cond1 & ! is.na(df$ParameterValue)
+    
     cond2 <- eval(parse(text = sprintf(
       "df$ParameterValue %s %s",
-      thresholds$ParameterThresholdComparisonR[idx],
-      thresholds$ParameterThreshold[idx]
+      thresholds$ParameterThresholdComparisonR[i],
+      thresholds$ParameterThreshold[i]
     )))
 
     condition <- cond1 & cond2
 
-    number_total <- nrow(df[cond1, ])
+    n_total <- nrow(df[cond1, ])
 
-    number_of_satisfying <- nrow(df[condition, ])
-    number_of_exceedances <- number_total - number_of_satisfying
+    n_satisfy <- nrow(df[condition, ])
+    n_exceed <- n_total - n_satisfy
 
-    thresholds$number_total[idx] <- number_total
-    thresholds$number_of_satisfying[idx] <- number_of_satisfying
+    thresholds$number_total[i] <- n_total
+    thresholds$number_of_satisfying[i] <- n_satisfy
 
-    if (number_total > 0) {
-      thresholds$numberOfExceedance[idx] <- number_of_exceedances
-      thresholds$exceedanceLabel[idx] <- sprintf(
-        "%d (%2.1f %%)",
-        number_of_exceedances,
-        100 * number_of_exceedances / number_total
+    if (n_total > 0) {
+      thresholds$numberOfExceedance[i] <- n_exceed
+      thresholds$exceedanceLabel[i] <- sprintf(
+        "%d (%2.1f %%)", n_exceed, kwb.utils::percentage(n_exceed, n_total)
       )
     }
   }
-
 
   thresholds$Threshold <- sprintf(
     "%s %3.1f %s (%s)",
@@ -61,17 +63,11 @@ check_thresholds <- function(df, # haridwar_day_list,
     thresholds$ParameterThresholdSource
   )
 
-
   thresholds <- thresholds[order(thresholds$ParameterName), ]
 
-
-  thresholds <- thresholds[, c("ParameterName", "Threshold", "exceedanceLabel")]
-
-  names(thresholds) <- c(
-    "Parameter",
-    "Threshold criterium",
-    "Number/Percentage of non-satifying measurements"
-  )
-
-  return(thresholds)
+  kwb.utils::renameAndSelect(thresholds, list(
+    ParameterName = "Parameter", 
+    Threshold = "Threshold criterium", 
+    exceedanceLabel = "Number/Percentage of non-satifying measurements"
+  ))
 }

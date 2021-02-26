@@ -4,8 +4,11 @@
 \alias{get_monthly_periods}
 \title{Get monthly periods}
 \usage{
-get_monthly_periods(year_month_start = "2017-06",
-  year_month_end = format(Sys.Date(), "\%Y-\%m"), tz = "CET")
+get_monthly_periods(
+  year_month_start = "2017-06",
+  year_month_end = format(Sys.Date(), "\%Y-\%m"),
+  tz = "CET"
+)
 }
 \arguments{
 \item{year_month_start}{start year month (default: '2017-06')}
