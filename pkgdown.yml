@@ -1,0 +1,16 @@
+pandoc: 2.7.3
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  A0_intro: A0_intro.html
+  A1_installation: A1_installation.html
+  A2_app_start: A2_app_start.html
+  A3_0_gui_overview: A3_0_gui_overview.html
+  A3_1_gui_explore: A3_1_gui_explore.html
+  A3_2_gui_report: A3_2_gui_report.html
+  A3_3_gui_background: A3_3_gui_background.html
+  A3_4_gui_site: A3_4_gui_site.html
+  A4_modify: A4_modify.html
+  suleman: suleman.html
+last_built: 2021-02-26T13:05Z
+
