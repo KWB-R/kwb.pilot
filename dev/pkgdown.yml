@@ -1,5 +1,5 @@
-pandoc: '2.2'
-pkgdown: 1.4.1
+pandoc: 2.7.3
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   A0_intro: A0_intro.html
@@ -11,4 +11,6 @@ articles:
   A3_3_gui_background: A3_3_gui_background.html
   A3_4_gui_site: A3_4_gui_site.html
   A4_modify: A4_modify.html
+  suleman: suleman.html
+last_built: 2021-02-26T12:57Z
 

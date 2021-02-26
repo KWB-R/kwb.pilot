@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -109,6 +113,18 @@
 <li>
   <a href="../articles/A4_modify.html">4 Modify</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    5 KWB Pilots
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/suleman.html">5.1 Suleman</a>
+    </li>
+  </ul>
+</li>
 <li>
   <a href="../news/index.html">News</a>
 </li>
@@ -118,8 +134,8 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/kwb-r/kwb.pilot">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/kwb-r/kwb.pilot/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -151,21 +167,20 @@
       <tr>
         <th colspan="2">
           <h2 id="section-all-pilot-plant-sites" class="hasAnchor"><a href="#section-all-pilot-plant-sites" class="anchor"></a>All Pilot Plant Sites</h2>
-          <p class="section-desc"><p>General functions which can be used for all pilot plant (with default parameterisation “Haridwar” site)</p></p>
+          <p class="section-desc"><p>General functions which can be used for all pilot plant (with default parameterisation “AquaNES: Haridwar” site)</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
-          <p><code><a href="run_app.html">run_app()</a></code> </p>
+          <p><code><a href="calculate_operational_parameters.html">calculate_operational_parameters()</a></code> </p>
         </td>
-        <td><p>Runs Shiny app for an AQUANES site</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_valid_timezones.html">get_valid_timezones()</a></code> </p>
-        </td>
-        <td><p>Timezone: get valid time zones from Wikipedia</p></td>
+        <td><p>Calculate operational parameters</p></td>
       </tr><tr>
         
         <td>
@@ -175,45 +190,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="set_timezone.html">set_timezone()</a></code> </p>
-        </td>
-        <td><p>Timezone set: sets a user defined time zone</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="group_datetime.html">group_datetime()</a></code> </p>
-        </td>
-        <td><p>Group DateTime by user defined period (year, month, day, hour, minute)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="calculate_operational_parameters.html">calculate_operational_parameters()</a></code> </p>
-        </td>
-        <td><p>Calculate operational parameters</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_thresholds.html">get_thresholds()</a></code> </p>
-        </td>
-        <td><p>Get thresholds for analytics/operational parameters</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="check_thresholds.html">check_thresholds()</a></code> </p>
         </td>
         <td><p>Check thresholds</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="dygraph_add_limits.html">dygraph_add_limits()</a></code> </p>
-        </td>
-        <td><p>Dygraph: add (multiple) horizontal lines to plot</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="read_fst.html">read_fst()</a></code> </p>
-        </td>
-        <td><p>Wrapper for fst::read.fst to read DateTime column in POSIXct format</p></td>
       </tr><tr>
         
         <td>
@@ -226,6 +205,54 @@
           <p><code><a href="create_report_batch.html">create_report_batch()</a></code> </p>
         </td>
         <td><p>Report batch: creates batch file for report</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dygraph_add_limits.html">dygraph_add_limits()</a></code> </p>
+        </td>
+        <td><p>Dygraph: add (multiple) horizontal lines to plot</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="export_data.html">export_data()</a></code> </p>
+        </td>
+        <td><p>CSV data export in "wide" format</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_valid_timezones.html">get_valid_timezones()</a></code> </p>
+        </td>
+        <td><p>Timezone: get valid time zones from Wikipedia</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_thresholds.html">get_thresholds()</a></code> </p>
+        </td>
+        <td><p>Get thresholds for analytics/operational parameters</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="group_datetime.html">group_datetime()</a></code> </p>
+        </td>
+        <td><p>Group DateTime by user defined period (year, month, day, hour, minute)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="long_to_wide.html">long_to_wide()</a></code> </p>
+        </td>
+        <td><p>Helper function: transform "long" to "wide"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="plot_data.html">plot_data()</a></code> </p>
+        </td>
+        <td><p>Export interactive HTML plot with "plotly"</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_fst.html">read_fst()</a></code> </p>
+        </td>
+        <td><p>Wrapper for fst::read.fst to read DateTime column in POSIXct format</p></td>
       </tr><tr>
         
         <td>
@@ -244,14 +271,31 @@
           <p><code><a href="report_txt_to_config.html">report_txt_to_config()</a></code> </p>
         </td>
         <td><p>Report config: imports text file to list</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="run_app.html">run_app()</a></code> </p>
+        </td>
+        <td><p>Runs Shiny app for an AQUANES site</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="set_timezone.html">set_timezone()</a></code> </p>
+        </td>
+        <td><p>Timezone set: sets a user defined time zone</p></td>
       </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-berlin-tiefwerder-site-" class="hasAnchor"><a href="#section-berlin-tiefwerder-site-" class="anchor"></a>Berlin-Tiefwerder (site 1)</h2>
+          <h2 id="section-aquanes-berlin-tiefwerder-site-" class="hasAnchor"><a href="#section-aquanes-berlin-tiefwerder-site-" class="anchor"></a>AquaNES: Berlin-Tiefwerder (site 1)</h2>
           <p class="section-desc"><p>Functions for importing data of Berlin-Tiefwerder site</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -298,10 +342,15 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-berlin-schoenerlinde-site-" class="hasAnchor"><a href="#section-berlin-schoenerlinde-site-" class="anchor"></a>Berlin-Schoenerlinde (site 12)</h2>
+          <h2 id="section-aquanes-berlin-schoenerlinde-site-" class="hasAnchor"><a href="#section-aquanes-berlin-schoenerlinde-site-" class="anchor"></a>AquaNES: Berlin-Schoenerlinde (site 12)</h2>
           <p class="section-desc"><p>Functions for importing data of Berlin-Schoenerlinde site</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -354,10 +403,15 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-basel-langeerlen-site-" class="hasAnchor"><a href="#section-basel-langeerlen-site-" class="anchor"></a>Basel-LangeErlen (site 6)</h2>
+          <h2 id="section-aquanes-basel-langeerlen-site-" class="hasAnchor"><a href="#section-aquanes-basel-langeerlen-site-" class="anchor"></a>AquaNES: Basel-LangeErlen (site 6)</h2>
           <p class="section-desc"><p>Functions for importing data of Basel-LangeErlen site</p></p>
         </th>
       </tr>
+      
+      
+    </tbody><tbody>
+      
+      
       <tr>
         
         <td>
@@ -411,29 +465,50 @@ both sites at once, i.e. "rhein" and "wiese")</p></td>
         <td><p>Imports operational &amp; analytical data for Basel (with metadata for both sites
 at once, i.e. "rhein" and "wiese")</p></td>
       </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-suleman-berlin-friedrichshagen" class="hasAnchor"><a href="#section-suleman-berlin-friedrichshagen" class="anchor"></a>SULEMAN: Berlin Friedrichshagen</h2>
+          <p class="section-desc"><p>Functions for importing Weintek data of Berlin Friedrichsagen</p></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="read_weintek.html">read_weintek()</a></code> </p>
+        </td>
+        <td><p>Read Weintek data from single file</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="read_weintek_batch.html">read_weintek_batch()</a></code> </p>
+        </td>
+        <td><p>Read Weintek data from multiple files</p></td>
+      </tr>
     </tbody>
     </table>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-pilot-plant-sites">All Pilot Plant Sites</a></li>
-      <li><a href="#section-berlin-tiefwerder-site-">Berlin-Tiefwerder (site 1)</a></li>
-      <li><a href="#section-berlin-schoenerlinde-site-">Berlin-Schoenerlinde (site 12)</a></li>
-      <li><a href="#section-basel-langeerlen-site-">Basel-LangeErlen (site 6)</a></li>
-    </ul>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
 
       <footer>
       <div class="copyright">
-  <p>Developed by <a href='https://mrustl.de'>Michael Rustler</a>, <a href='http://aquanes.eu/Default.aspx?t=1593'><img src="http://aquanes.eu/App_Themes/assets/img/logo.png" height="24" /></a>.</p>
+  <p>Developed by <a href='https://mrustl.de'>Michael Rustler</a>, <a href='https://www.kompetenz-wasser.de/en/project/aquanes/'><img src="https://www.kompetenz-wasser.de/wp-content/uploads/2017/09/11-558x122.jpg" height="24" /></a>, <a href='https://www.kompetenz-wasser.de/en/project/suleman/'>SULEMAN</a>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
