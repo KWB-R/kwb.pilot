@@ -1,5 +1,5 @@
 
-# [kwb.pilot 0.1.0](https://github.com/KWB-R/kwb.pilot/v0.1.0) <small>2021-02-26</small>
+# [kwb.pilot 0.1.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.1.0) <small>2021-02-26</small>
 
 * Add functions for project [SULEMAN](https://https://www.kompetenz-wasser.de/en/project/suleman/) 
 
