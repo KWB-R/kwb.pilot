@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 ## Install R package
 
 ```{r install, eval = FALSE}
-remotes::install_github("kwb-r/kwb.pilot@dev", upgrade = "always")
+remotes::install_github("kwb-r/kwb.pilot", upgrade = "always")
 ```
 
 ## Define paths 
