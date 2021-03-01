@@ -2,7 +2,7 @@ Type: Package
 Package: kwb.pilot
 Title: Importing, Aggregating and Visualising Data From KWB
     Pilot Plants
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     c(person(given = "Michael",
              family = "Rustler",
