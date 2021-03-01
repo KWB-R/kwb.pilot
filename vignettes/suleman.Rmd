@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 ```{r install, eval = FALSE}
 remotes::install_github("kwb-r/kwb.pilot", upgrade = "always")
+
+library(kwb.pilot)
 ```
 
 ## Define paths 
