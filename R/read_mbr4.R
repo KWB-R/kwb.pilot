@@ -5,7 +5,7 @@
 #' key value pair "MBR4.0_URL" = "download-url-martin-systems") so 
 #' that this function works automatically
 #' @param target_path to download data (default: file.path(tempdir(), "mbr4.tsv"))
-#' @param debug print debug messages (default: FALSE)
+#' @param dbg print debug messages (default: FALSE)
 #' @param ... additional arguments passed to  \link[readr]{read_tsv}
 #' @return tibble with imported MBR4.0 data
 #' @importFrom readr read_tsv locale cols col_double col_character col_datetime

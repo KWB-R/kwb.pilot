@@ -19,9 +19,9 @@ that this function works automatically}
 
 \item{target_path}{to download data (default: file.path(tempdir(), "mbr4.tsv"))}
 
-\item{...}{additional arguments passed to  \link[readr]{read_tsv}}
+\item{dbg}{print debug messages (default: FALSE)}
 
-\item{debug}{print debug messages (default: FALSE)}
+\item{...}{additional arguments passed to  \link[readr]{read_tsv}}
 }
 \value{
 tibble with imported MBR4.0 data
