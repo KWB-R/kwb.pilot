@@ -14,8 +14,9 @@ metadata_mbr4_wide %>%
   tidyr::separate("Beschreibung", 
                   into = c("ParamaterName", "SiteName"), 
                   sep = "\\s", extra = "merge", remove = FALSE) %>% 
-  dplyr::rename(Unit = Einheit, 
-                Comment = Bemerkung) %>% 
+  dplyr::rename("ParameterName_SiteName" = Beschreibung,
+                "Unit" = Einheit, 
+                "Comment" = Bemerkung) %>% 
   dplyr::mutate(Source = "online", 
                 DataType = dplyr::if_else(!is.na(Comment) & Comment == "SUMME", 
                                           "calculated", "raw")) %>% 
