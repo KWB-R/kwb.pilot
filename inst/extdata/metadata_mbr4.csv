@@ -1,4 +1,4 @@
-ParameterCode_SiteCode;ParameterCode;SiteCode;ParameterName_SiteName;ParamaterName;SiteName;ParameterUnit;Comment;Source;DataType
+ParameterCode_SiteCode;ParameterCode;SiteCode;ParameterName_SiteName;ParameterName;SiteName;ParameterUnit;Comment;Source;DataType
 h_grob;h;grob;Füllstand Grobstofftank;Füllstand;Grobstofftank;%;;online;raw
 h_bel;h;bel;Füllstand Belebung;Füllstand;Belebung;%;;online;raw
 h_filt;h;filt;Füllstand Filtration;Füllstand;Filtration;%;;online;raw
@@ -32,7 +32,7 @@ temp_nitri;temp;nitri;Temperatur Nitrifikation;Temperatur;Nitrifikation;°C;;onl
 ammonium_zulauf;ammonium;zulauf;Ammonium Zulauf;Ammonium;Zulauf;mg/l;;online;raw
 kalium_zulauf;kalium;zulauf;Kalium Zulauf;Kalium;Zulauf;mg/l;;online;raw
 temp_zulauf;temp;zulauf;Temperatur Zulauf NH4- Sonde;Temperatur;Zulauf NH4-Sonde;°C;;online;raw
-leitf_zulauf;leitf;zulauf;Leifähigkeit Zulauf;Leifähigkeit;Zulauf;µS/cm;;online;raw
+leitf_zulauf;leitf;zulauf;Leitfähigkeit Zulauf;Leitfähigkeit;Zulauf;µS/cm;;online;raw
 leitf_zulauf_temp;leitf;zulauf_temp;Temperatur Zulauf LF-Sonde;Temperatur;Zulauf LF-Sonde;°C;;online;raw
 ph_filter;ph;filter;ph Filtration;ph;Filtration;-;;online;raw
 ph_filter_temp;ph;filter_temp;Temperatur Filtration pH- Sonde;Temperatur;Filtration pH-Sonde;°C;;online;raw
