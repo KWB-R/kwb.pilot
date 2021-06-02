@@ -39,7 +39,7 @@ read_mbr4 <- function(url = Sys.getenv("MBR4.0_URL"),
                   trim_ws = TRUE,
                   ...
                   ) %>% 
-    dplyr::select(! tidyselect::starts_with("X[0-9]+"))
+    dplyr::select(! tidyselect::matches("X[0-9]+"))
   }
   
   if(dbg) {
@@ -50,4 +50,5 @@ read_mbr4 <- function(url = Sys.getenv("MBR4.0_URL"),
   } 
 
 }
+
 

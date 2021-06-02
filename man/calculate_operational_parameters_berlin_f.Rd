@@ -21,7 +21,7 @@ calculate_operational_parameters_berlin_f(
     "Rückhalt", "Druckverlust (Feed - Konzentrat)", "Flux",
     "Überströmungsgeschwindigkeit", "Transmembrandruck", "Normalisierter Permeatstrom",
     "Relativer Permeatstrom"),
-  calc_list_unit = c("l/h", "\%", "\\xb5S/cm", "\%", "bar", "l/h/m2", "m/s", "bar",
+  calc_list_unit = c("l/h", "\%", "ÂµS/cm", "\%", "bar", "l/h/m2", "m/s", "bar",
     "l/h", "\%"),
   calc_paras = c("Durchfluss_Rohwasser", "Durchfluss_Konzentrat",
     "Durchfluss_Rezirkulation", "Druck_Arbeitsdruck", "Druck_Rohwasser",
