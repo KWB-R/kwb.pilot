@@ -25,5 +25,5 @@ metadata_mbr4_wide %>%
              row.names = FALSE, 
              na = "")
 
-metadata_tidy <- readr::read_csv2("inst/extdata/metadata_mbr4.csv")
+mbr4.0_metadata <- readr::read_csv2("inst/extdata/metadata_mbr4.csv")
 usethis::use_data(mbr4.0_metadata, overwrite = TRUE)

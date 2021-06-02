@@ -1,4 +1,4 @@
-ParameterCode_SiteCode;ParameterCode;SiteCode;ParameterName_SiteName;ParamaterName;SiteName;Unit;Comment;Source;DataType
+ParameterCode_SiteCode;ParameterCode;SiteCode;ParameterName_SiteName;ParamaterName;SiteName;ParameterUnit;Comment;Source;DataType
 h_grob;h;grob;Füllstand Grobstofftank;Füllstand;Grobstofftank;%;;online;raw
 h_bel;h;bel;Füllstand Belebung;Füllstand;Belebung;%;;online;raw
 h_filt;h;filt;Füllstand Filtration;Füllstand;Filtration;%;;online;raw
