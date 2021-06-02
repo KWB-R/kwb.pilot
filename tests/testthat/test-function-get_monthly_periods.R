@@ -3,7 +3,5 @@
 #
 
 test_that("get_monthly_periods() works", {
-
   kwb.pilot:::get_monthly_periods()
 })
-

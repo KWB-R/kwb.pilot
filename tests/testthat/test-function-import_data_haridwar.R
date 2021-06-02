@@ -3,7 +3,5 @@
 #
 
 test_that("import_data_haridwar() works", {
-
   expect_error(kwb.pilot:::import_data_haridwar())
 })
-

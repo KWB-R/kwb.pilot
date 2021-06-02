@@ -3,7 +3,5 @@
 #
 
 test_that("calenderweek_from_dates() works", {
-
   kwb.pilot:::calenderweek_from_dates()
 })
-

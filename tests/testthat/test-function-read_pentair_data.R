@@ -3,7 +3,5 @@
 #
 
 test_that("read_pentair_data() works", {
-
   expect_error(kwb.pilot:::read_pentair_data())
 })
-
