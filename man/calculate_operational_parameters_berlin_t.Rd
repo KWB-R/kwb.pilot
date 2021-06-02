@@ -36,5 +36,7 @@ Calculate operational parameters for Berlin-Tiefwerder
 \examples{
 \dontrun{
 raw_list <- read_pentair_data()
-myDat <- calculate_operational_parameters_berlin_t(df = raw_list)}
+myDat <- calculate_operational_parameters_berlin_t(df = raw_list)
+}
+
 }

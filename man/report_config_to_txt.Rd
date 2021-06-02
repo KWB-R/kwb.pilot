@@ -24,7 +24,9 @@ Report config: saves config to text file
 ### Creates a configuration template
 config <- report_config_template()
 ### Saves list config in text
-report_config_to_txt(config_list = config,
-output_file = "report_config.txt")
+report_config_to_txt(
+  config_list = config,
+  output_file = "report_config.txt"
+)
 }
 }

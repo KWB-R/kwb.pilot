@@ -12,9 +12,9 @@ read_mbr4(
 )
 }
 \arguments{
-\item{url}{url to download site (default: Sys.getenv("MBR4.0_URL"), 
-please use run \link[usethis]{edit_r_environ} and define a 
-key value pair "MBR4.0_URL" = "download-url-martin-systems") so 
+\item{url}{url to download site (default: Sys.getenv("MBR4.0_URL"),
+please use run \link[usethis]{edit_r_environ} and define a
+key value pair "MBR4.0_URL" = "download-url-martin-systems") so
 that this function works automatically}
 
 \item{target_path}{to download data (default: file.path(tempdir(), "mbr4.tsv"))}

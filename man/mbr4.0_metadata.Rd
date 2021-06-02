@@ -11,8 +11,8 @@ A data frame with 78 rows and 10 variables
 mbr4.0_metadata
 }
 \description{
-A dataset with the following columns:  ParameterCode_SiteCode, 
-ParameterCode, SiteCode, ParameterName_SiteName, ParameterName, 
+A dataset with the following columns:  ParameterCode_SiteCode,
+ParameterCode, SiteCode, ParameterName_SiteName, ParameterName,
 SiteName, ParameterUnit, Comment, Source, DataType
 }
 \keyword{datasets}
