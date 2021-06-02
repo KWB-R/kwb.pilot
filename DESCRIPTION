@@ -64,7 +64,8 @@ Suggests:
     covr (>= 3.5.1),
     knitr (>= 1.30),
     remotes (>= 2.2.0),
-    testthat (>= 3.0.1)
+    testthat (>= 3.0.1),
+    usethis
 VignetteBuilder: 
     knitr
 Remotes: 
