@@ -15,7 +15,7 @@ calculate_operational_parameters_berlin_f(
     "(`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2) * 1000 * 3600)",
          tmp = "((`Druck_Arbeitsdruck` + `Druck_Konzentrat`) / 2) - `Druck_Permeat`",
     nwpt =
-    "normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`, \\n                                     conLoop = `conLoop`,\\n                                     vfrPerm = `vfrPerm`, \\n                                     vfrLoop = `Durchfluss_Rezirkulation`,\\n                                     vfrFeed = `Durchfluss_Rohwasser`, \\n                                     prePerm = `Druck_Permeat`, \\n                                     preProc = `Druck_Arbeitsdruck`, \\n                                     preConc = `Druck_Konzentrat`,\\n                                     nwp0 = 1.429162,\\n                                     vfrPerm0 = 800)",
+    "normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`,\\n                                     conLoop = `conLoop`,\\n                                     vfrPerm = `vfrPerm`,\\n                                     vfrLoop = `Durchfluss_Rezirkulation`,\\n                                     vfrFeed = `Durchfluss_Rohwasser`,\\n                                     prePerm = `Druck_Permeat`,\\n                                     preProc = `Druck_Arbeitsdruck`,\\n                                     preConc = `Druck_Konzentrat`,\\n                                     nwp0 = 1.429162,\\n                                     vfrPerm0 = 800)",
          nwpr = "- ((1 - (nwpt / vfrPerm))) * 100"),
   calc_list_name = c("Durchfluss Permeat", "Ausbeute", "Leitfähigkeit Rezirkulation",
     "Rückhalt", "Druckverlust (Feed - Konzentrat)", "Flux",
@@ -52,5 +52,7 @@ Calculate operational parameters for Berlin-Friedrichshagen
 \examples{
 \dontrun{
 raw_list <- import_data_berlin_f()
-myDat <- calculate_operational_parameters_berlin_f(df = raw_list)}
+myDat <- calculate_operational_parameters_berlin_f(df = raw_list)
+}
+
 }
