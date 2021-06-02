@@ -3,10 +3,12 @@ on:
     branches:
       - main
       - master
+      - dev
   pull_request:
     branches:
       - main
       - master
+      - dev
 
 name: lint
 
@@ -15,6 +17,7 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MBR4.0_URL: ${{ secrets.MBR40_URL }}
     steps:
       - uses: actions/checkout@v2
 
