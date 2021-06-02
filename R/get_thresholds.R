@@ -6,10 +6,7 @@
 #' @importFrom utils read.csv
 #' @export
 
-get_thresholds <- function(
-  file = package_file("shiny/haridwar/data/thresholds.csv")
-)
-{
+get_thresholds <- function(file = package_file("shiny/haridwar/data/thresholds.csv")) {
   read.csv(file, stringsAsFactors = FALSE) %>%
     dplyr::mutate_(
       "label" = "sprintf('%s %s %3.1f (%s)',

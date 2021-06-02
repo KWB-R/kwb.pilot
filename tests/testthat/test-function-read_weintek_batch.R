@@ -6,12 +6,10 @@
 #
 
 test_that("read_weintek_batch() works", {
-
   f <- kwb.pilot:::read_weintek_batch
 
   expect_error(
     kwb.pilot:::read_weintek_batch()
     # Argument "files" fehlt (ohne Standardwert)
   )
-
 })

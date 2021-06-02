@@ -3,7 +3,5 @@
 #
 
 test_that("import_analytics_meta_basel() works", {
-
   expect_error(kwb.pilot:::import_analytics_meta_basel())
 })
-

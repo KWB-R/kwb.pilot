@@ -3,7 +3,5 @@
 #
 
 test_that("last_day() works", {
-
   expect_error(kwb.pilot:::last_day())
 })
-

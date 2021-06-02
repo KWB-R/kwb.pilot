@@ -6,12 +6,10 @@
 #
 
 test_that("check_or_create_export_dir() works", {
-
   f <- kwb.pilot:::check_or_create_export_dir
 
   expect_error(
     f()
     # Argument "path" fehlt (ohne Standardwert)
   )
-
 })

@@ -13,28 +13,26 @@
 #' @examples
 #' \dontrun{
 #' raw_list <- read_pentair_data()
-#' myDat <- calculate_operational_parameters_berlin_t(df = raw_list)}
-
-calculate_operational_parameters_berlin_t <- function(
-  df,
-  calc_list = list(recovery = "100*`FY-20-01`/`FT-10-01`"),
-  calc_list_name = c("recovery"),
-  calc_list_unit = c("%"),
-  calc_paras = c("FY-20-01", "FT-10-01")
-)
-{
-  res <-  calculate_operational_parameters(
+#' myDat <- calculate_operational_parameters_berlin_t(df = raw_list)
+#' }
+#'
+calculate_operational_parameters_berlin_t <- function(df,
+                                                      calc_list = list(recovery = "100*`FY-20-01`/`FT-10-01`"),
+                                                      calc_list_name = c("recovery"),
+                                                      calc_list_unit = c("%"),
+                                                      calc_paras = c("FY-20-01", "FT-10-01")) {
+  res <- calculate_operational_parameters(
     df,
     calc_list,
     calc_list_name,
     calc_list_unit,
     calc_paras
   )
-  
+
   res$SiteName <- "General"
   res$SiteName_ParaName_Unit <- paste("General (calculated):", res$ParameterLabel)
   res$DataType <- "calculated"
   res$Source <- "online"
-  
+
   res
 }

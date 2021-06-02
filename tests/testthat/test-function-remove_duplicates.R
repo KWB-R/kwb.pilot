@@ -3,7 +3,5 @@
 #
 
 test_that("remove_duplicates() works", {
-
   expect_error(kwb.pilot:::remove_duplicates())
 })
-

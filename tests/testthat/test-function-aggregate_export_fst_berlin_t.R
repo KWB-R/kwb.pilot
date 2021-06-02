@@ -3,7 +3,5 @@
 #
 
 test_that("aggregate_export_fst_berlin_t() works", {
-
   expect_error(kwb.pilot:::aggregate_export_fst_berlin_t())
 })
-

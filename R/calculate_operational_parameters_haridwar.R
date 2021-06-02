@@ -22,9 +22,9 @@
 #' @examples
 #' \dontrun{
 #' haridwar_raw_list <- import_data_haridwar()
-#' myDat <- calculate_operational_parameters(df = haridwar_raw_list)}
-
-
+#' myDat <- calculate_operational_parameters(df = haridwar_raw_list)
+#' }
+#'
 calculate_operational_parameters <- function(df,
                                              calc_list = list(
                                                Redox_Out = "(Redox_Out1+Redox_Out2)/2",
@@ -115,8 +115,9 @@ calculate_operational_parameters <- function(df,
 #' \dontrun{
 #' haridwar_raw_list <- import_data_haridwar()
 #' myDat <- calculate_operational_parameters(df = haridwar_raw_list)
-#' plot_calculated_operational_timeseries(myDat)}
-
+#' plot_calculated_operational_timeseries(myDat)
+#' }
+#'
 plot_calculated_operational_timeseries <- function(df) {
   calculated_paras <- unique(df$ParameterLabel)
 
@@ -141,9 +142,9 @@ plot_calculated_operational_timeseries <- function(df) {
         ggplot2::geom_point() +
         ggplot2::theme_bw(base_size = 20) +
         ggplot2::theme(
-          legend.position = "top"
-          , strip.text.x = element_text(face = "bold")
-          , legend.title = element_blank()
+          legend.position = "top",
+          strip.text.x = element_text(face = "bold"),
+          legend.title = element_blank()
         ) +
         ggplot2::labs(x = "", y = "")
 
