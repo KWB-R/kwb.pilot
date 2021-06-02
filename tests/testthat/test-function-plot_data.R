@@ -6,12 +6,10 @@
 #
 
 test_that("plot_data() works", {
-
   f <- kwb.pilot:::plot_data
 
   expect_error(
     kwb.pilot:::plot_data()
     # Argument "export_dir" fehlt (ohne Standardwert)
   )
-
 })
