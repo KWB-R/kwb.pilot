@@ -17,27 +17,29 @@ knitr::opts_chunk$set(
 ## Install R package
 
 ```{r install, eval = FALSE}
-remotes::install_github("kwb-r/kwb.pilot", upgrade = "always")
+remotes::install_github("kwb-r/kwb.pilot", 
+                        upgrade = "always",
+                        dependencies = TRUE)
 
 library(kwb.pilot)
 ```
 
 ## Define paths 
 
-### Option 1: At KWB
+In `paths_list` you need set the environment variable ` Sys.getenv("MBR4.0_URL")` **only once** with `usethis::edit_r_environ()` as shown below:
 
-In `paths_list` you need to replace the dummy value `kwb-server` 
-for the key `servername`.
+```{r r_environment, eval = FALSE}
+MBR4.0_URL = "url-to-download-pilot-plant-data"
+```
 
-```{r paths_kwb, eval = FALSE}
+Subsequently click **Save** and restart RStudio.
 
-#KWB server
+```{r paths_kwb, eval = TRUE}
+
 paths_list <- list(
-  servername = "kwb-server",
-  root = "//<servername>/projekte$/WWT_Department/Projects/SULEMAN/Exchange/",
-  rawdata = "<root>/10_rawdata",
-  online =  "<rawdata>/online_data",
-  export_dir = "//<servername>/processing/suleman"
+  url = Sys.getenv("MBR4.0_URL"),
+  export_dir = tempdir(),
+  tsv_file = "<export_dir>/mbr4.tsv"
   )
 
 paths <- kwb.utils::resolve(paths_list)
@@ -47,17 +49,23 @@ paths <- kwb.utils::resolve(paths_list)
 
 ## Import 
 
-```{r import, eval = FALSE}
-### Recursive listing of all ".xlsx" Weintek files in rawdata directory:
+```{r import, eval = TRUE}
 
-weintek_data_raw <- kwb.pilot::mb4read_weintek_batch(files)
+mbr4_data_raw <- kwb.pilot::read_mbr4(url = paths$url, 
+                                      target_path = paths$tsv_file)
+str(mbr4_data_raw)
+
+mbr4_data_tidy <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw)
+
+str(mbr4_data_tidy)
+
 ```
 
 ## Aggregate
 
-```{r aggregate, eval = FALSE}
-weintek_data_10min <- weintek_data_raw %>% kwb.pilot::group_datetime(by = 600)
-weintek_data_1hour <- weintek_data_raw %>% kwb.pilot::group_datetime(by = 3600)
+```{r aggregate, eval = TRUE}
+mbr4_data_tidy_10min <- mbr4_data_tidy %>% kwb.pilot::group_datetime(by = 600)
+mbr4_data_tidy_1hour <- mbr4_data_tidy %>% kwb.pilot::group_datetime(by = 3600)
 ```
 
 ## Export 
@@ -65,18 +73,16 @@ weintek_data_1hour <- weintek_data_raw %>% kwb.pilot::group_datetime(by = 3600)
 ### CSV files 
 
 ```{r export_data, eval = FALSE}
-kwb.pilot::export_data(weintek_data_raw, export_dir = paths$export_dir)
-kwb.pilot::export_data(weintek_data_10min, export_dir = paths$export_dir)
-kwb.pilot::export_data(weintek_data_1hour, export_dir = paths$export_dir)
+kwb.pilot::export_data(mbr4_data_tidy, export_dir = paths$export_dir)
+kwb.pilot::export_data(mbr4_data_tidy_10min, export_dir = paths$export_dir)
+kwb.pilot::export_data(mbr4_data_tidy_1hour, export_dir = paths$export_dir)
 ```
 
 ### Interactive HTML plots
 
 ```{r plot_data, eval = FALSE}
-kwb.pilot::plot_data(weintek_data_1hour, export_dir = paths$export_dir)
-kwb.pilot::plot_data(weintek_data_10min, export_dir = paths$export_dir)
-#kwb.pilot::plot_data(weintek_data_raw, export_dir = paths$export_dir)
+kwb.pilot::plot_data(mbr4_data_tidy_10min, export_dir = paths$export_dir)
+kwb.pilot::plot_data(mbr4_data_tidy_1hour, export_dir = paths$export_dir)
+#kwb.pilot::plot_data(mbr4_data_tidy, export_dir = paths$export_dir)
 ```
 
-
-```
