@@ -20,9 +20,10 @@ metadata_mbr4_wide %>%
   dplyr::mutate(Source = "online", 
                 DataType = dplyr::if_else(!is.na(Comment) & Comment == "SUMME", 
                                           "calculated", "raw")) %>% 
-  write.csv2("inst/extdata/metadata_mbr4.csv", 
+  ## first script based on XLSX (not needed anymore after "cleaning by Jette)
+  write.csv2("inst/extdata/metadata_mbr4_untidy.csv", 
              row.names = FALSE, 
              na = "")
 
-metadata_tidy <- readr::read_csv2("inst/extdata/metadata_mbr4.csv"")
+metadata_tidy <- readr::read_csv2("inst/extdata/metadata_mbr4.csv")
 usethis::use_data(mbr4.0_metadata, overwrite = TRUE)
