@@ -21,7 +21,6 @@ remotes::install_github("kwb-r/kwb.pilot",
                         upgrade = "always",
                         dependencies = TRUE)
 
-library(kwb.pilot)
 ```
 
 ## Define paths 
@@ -50,6 +49,7 @@ paths <- kwb.utils::resolve(paths_list)
 ## Import 
 
 ```{r import, eval = TRUE}
+library(kwb.pilot)
 
 mbr4_data_raw <- kwb.pilot::read_mbr4(url = paths$url, 
                                       target_path = paths$tsv_file)

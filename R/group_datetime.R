@@ -83,8 +83,8 @@ group_datetime <- function(
 
   kwb.utils::catAndRun(text, dbg = dbg, expr = {
     df %>%
-      dplyr::group_by_(.dots = dplyr::setdiff(names(df), "ParameterValue")) %>%
-      dplyr::summarise_(ParameterValue = paste0(fun, "(ParameterValue)")) %>%
+      dplyr::group_by(-.data$ParameterValue) %>%
+      dplyr::summarise(ParameterValue = paste0(fun, "(ParameterValue)")) %>%
       as.data.frame()
   })
 }
