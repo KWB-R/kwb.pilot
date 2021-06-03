@@ -1,0 +1,77 @@
+---
+title: "Report"
+output:
+  html_document:
+    fig_width: 12
+    fig_height: 10
+params:
+  myDateRange: NA
+  myTimezone: NA
+  myData1: NA
+  myData2: NA
+  para1: NA
+  para2: NA
+  add_thresholds: NA
+---
+
+Here is the dygraph output from `r params$myDateRange[1]` to  `r params$myDateRange[2]` 
+using the timezone "`r params$myTimezone`".
+
+```{r, fig.width=12, fig.height=7, echo=FALSE}
+
+thresholds <- kwb.pilot::get_thresholds()
+
+if (!all(is.na(params$myData1))) {
+
+dy1 <- dygraph(data = params$myData1,
+         group = "dy_group",
+           # main = unique(ts_data()$LocationName),
+                    ylab = "Parameter value") %>%
+             # dySeries("V1",
+             #          label = sprintf("%s (%s)",
+             #                          unique(ts_data()$ParameterName),
+             #                          unique(ts_data()$ParameterUnit))) %>%
+             dyLegend(show = "always", 
+                      hideOnMouseOut = FALSE,
+                      width = 500) %>%
+             dyRangeSelector(dateWindow = params$myDateRange) %>%
+             dyOptions(useDataTimezone = TRUE, 
+                       drawPoints = TRUE, 
+                       pointSize = 2)
+
+if(params$add_thresholds == TRUE) {
+kwb.pilot::dygraph_add_limits(dygraph = dy1, 
+                                   limits_df = thresholds[thresholds$ParameterName %in% params$para1,])
+} else {
+dy1 
+}
+
+}
+```
+
+```{r, fig.width=12, fig.height=7, echo=FALSE}
+if (!all(is.na(params$myData2))) {
+dy2 <- dygraph(data = params$myData2,
+         group = "dy_group",
+           # main = unique(ts_data()$LocationName),
+                    ylab = "Parameter value") %>%
+             # dySeries("V1",
+             #          label = sprintf("%s (%s)",
+             #                          unique(ts_data()$ParameterName),
+             #                          unique(ts_data()$ParameterUnit))) %>%
+             dyLegend(show = "always", 
+                      hideOnMouseOut = FALSE,
+                      width = 500) %>%
+             dyRangeSelector(dateWindow = params$myDateRange) %>%
+             dyOptions(useDataTimezone = TRUE, 
+                       drawPoints = TRUE, 
+                       pointSize = 2)
+
+if(params$add_thresholds == TRUE) {  
+kwb.pilot::dygraph_add_limits(dygraph = dy2, 
+                                   limits_df = thresholds[thresholds$ParameterName %in% params$para2,])
+} else {
+dy2 
+}
+}
+```
