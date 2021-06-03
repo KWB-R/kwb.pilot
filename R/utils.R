@@ -39,6 +39,18 @@ package_file <- function(...) {
   system.file(..., package = "kwb.pilot")
 }
 
+#' Path to Shiny File in Package
+#'
+#' @param ... relative path to file in "shiny" folder of R package "kwb.pilot" 
+#'
+#' @return path to file (if existing)
+#' @export
+#' @examples
+#' shiny_file()
+shiny_file <- function(...) {
+  system.file("shiny", ... , package = "kwb.pilot")
+}
+
 # print_to_text ----------------------------------------------------------------
 #' @importFrom utils capture.output
 print_to_text <- function(x) {

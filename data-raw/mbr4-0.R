@@ -36,4 +36,20 @@ metadata_mbr4_wide %>%
   )
 
 mbr4.0_metadata <- readr::read_csv2("inst/extdata/metadata_mbr4.csv")
-usethis::use_data(mbr4.0_metadata, overwrite = TRUE)
+readr::write_csv(mbr4.0_metadata, "inst/shiny/mbr4.0/data/metadata.csv")
+
+selected_cols <- c("ParameterCode",
+                   "ParameterName",
+                   "ParameterUnit",
+                   "SiteCode",
+                   "SiteName")
+
+ignore_paras <- c("Zustand", "Meldungen", "Laufende Nr.", "Zeitstempel")
+
+mbr4.0_metadata[,selected_cols] %>% 
+  dplyr::filter(!ParameterName %in% ignore_paras) %>% 
+  dplyr::mutate(ParameterThresholdComparison = NA_character_,
+                ParameterThreshold = NA_character_,
+                ParameterThresholdSource = NA_character_) %>% 
+  readr::write_csv2("inst/shiny/mbr4.0/data/thresholds.csv")  
+

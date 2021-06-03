@@ -10,14 +10,6 @@ map_kwb <- function (zoom) {
            <a target="_blank" href="http://www.kompetenz-wasser.de">http://www.kompetenz-wasser.de</a>')
 }
 
-# ui_kwb <- function (...) {
-#   navbarPage(title="Interactive Hantush",
-#   navbarMenu("More",
-#              tabPanel("Leaflet",
-#                       leafletOutput("kwbLocation"))
-#      ))
-# }
-
 ui_kwb <- function (output) {
 tabPanel("KWB",
          leafletOutput("kwbMap_world"),
@@ -29,8 +21,3 @@ server_kwb <- function(input, output) {
   output$kwbMap_world <- leaflet::renderLeaflet({map_kwb(zoom=1)})
   output$kwbMap_local <- leaflet::renderLeaflet({map_kwb(zoom=15)})
 }
-
-# runApp(list(
-#   ui = ui_kwb,
-#   server = server_kwb
-# ))

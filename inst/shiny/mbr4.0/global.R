@@ -4,12 +4,17 @@ if (use_live_data) {
 
 library(kwb.pilot)
 
-kwb.pilot::
+paths_list <- list(
+  url = Sys.getenv("MBR4.0_URL"),
+  export_dir = "data/",
+  tsv_file = "<export_dir>/mbr4.tsv"
+  )
+paths <- kwb.utils::resolve(paths_list)
 
 print("### Step 5: Importing threshold information ##########################")
 
 print("### NOT IMPLEMENTED YET")
-threshold_file <- kwb.pilot:::package_file("shiny/berlin_f/data/thresholds.csv")
+threshold_file <- kwb.pilot:::package_file("shiny/mbr4.0/data/thresholds.csv")
  
 thresholds <- kwb.pilot::get_thresholds(threshold_file)
 

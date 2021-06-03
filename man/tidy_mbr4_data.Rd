@@ -4,7 +4,10 @@
 \alias{tidy_mbr4_data}
 \title{MBR 4.0 Data Tidy}
 \usage{
-tidy_mbr4_data(mbr4_data)
+tidy_mbr4_data(
+  mbr4_data,
+  path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")
+)
 }
 \arguments{
 \item{mbr4_data}{tibble as retrieved by \link{read_mbr4}}
@@ -18,6 +21,6 @@ MBR 4.0 Data Tidy
 \examples{
 \dontrun{
 mbr4_data <- read_mbr4()
-mbr4_data_tidy <- tidy_mbr4_data(mbr4_data)
+mbr4_data_tidy <- kwb.pilot::tidy_mbr4_data(mbr4_data)
 }
 }
