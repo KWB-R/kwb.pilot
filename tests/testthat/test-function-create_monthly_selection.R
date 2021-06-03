@@ -3,7 +3,5 @@
 #
 
 test_that("create_monthly_selection() works", {
-
   kwb.pilot:::create_monthly_selection()
 })
-

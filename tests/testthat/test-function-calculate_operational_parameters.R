@@ -3,7 +3,5 @@
 #
 
 test_that("calculate_operational_parameters() works", {
-
   expect_error(kwb.pilot:::calculate_operational_parameters())
 })
-

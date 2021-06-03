@@ -3,7 +3,5 @@
 #
 
 test_that("read_fst() works", {
-
   expect_error(kwb.pilot:::read_fst())
 })
-

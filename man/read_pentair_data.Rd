@@ -11,7 +11,7 @@ read_pentair_data(
 )
 }
 \arguments{
-\item{raw_data_dir}{path of directory containing PENTAIR xls files 
+\item{raw_data_dir}{path of directory containing PENTAIR xls files
 (default: kwb.pilot:::package_file("shiny/berlin_t/data/operation"))}
 
 \item{raw_data_files}{vector with full path to operational raw data files that

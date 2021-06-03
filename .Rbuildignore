@@ -16,3 +16,5 @@ README.md
 ^\.travis\.yml$
 LICENSE.md
 \.github
+^data-raw$
+^\.github$

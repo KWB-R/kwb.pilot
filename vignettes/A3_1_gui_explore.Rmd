@@ -1,8 +1,8 @@
 ---
-title: "3.1 GUI Explore panel"
+title: "3.1 GUI Explore Panel"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{3.1 GUI explore panel}
+  %\VignetteIndexEntry{3.1 GUI Explore Panel}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

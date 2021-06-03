@@ -3,7 +3,5 @@
 #
 
 test_that("import_sheets() works", {
-
   expect_error(kwb.pilot:::import_sheets())
 })
-

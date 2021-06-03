@@ -6,12 +6,10 @@
 #
 
 test_that("normalised_permeate_flow() works", {
-
   f <- kwb.pilot:::normalised_permeate_flow
 
   expect_error(
     kwb.pilot:::normalised_permeate_flow()
     # Argument "tempFeed" fehlt (ohne Standardwert)
   )
-
 })

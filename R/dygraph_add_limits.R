@@ -14,21 +14,17 @@
 #' @return add limits to existing dygraph object
 #' @import dygraphs
 #' @export
-dygraph_add_limits <- function(
-  dygraph,
-  limits_df, # thresholds[thresholds$ParameterName %in% "Battery voltage",],
-  label_loc = "left",
-  col_limits = "ParameterThreshold",
-  col_label = "label",
-  ...
-)
-{
+dygraph_add_limits <- function(dygraph,
+                               limits_df, # thresholds[thresholds$ParameterName %in% "Battery voltage",],
+                               label_loc = "left",
+                               col_limits = "ParameterThreshold",
+                               col_label = "label",
+                               ...) {
   if (nrow(limits_df) == 0) {
     return(dygraph)
   }
-  
+
   for (i in seq_len(nrow(limits_df))) {
-    
     dygraph <- dygraphs::dyLimit(
       dygraph = dygraph,
       limit = limits_df[i, col_limits],
@@ -37,6 +33,6 @@ dygraph_add_limits <- function(
       ...
     )
   }
-  
+
   dygraph
 }

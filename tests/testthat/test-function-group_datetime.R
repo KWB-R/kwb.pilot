@@ -3,7 +3,5 @@
 #
 
 test_that("group_datetime() works", {
-
   expect_error(kwb.pilot:::group_datetime())
 })
-

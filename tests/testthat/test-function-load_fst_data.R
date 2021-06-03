@@ -3,7 +3,5 @@
 #
 
 test_that("load_fst_data() works", {
-
   expect_error(kwb.pilot:::load_fst_data())
 })
-

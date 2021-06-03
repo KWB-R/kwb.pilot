@@ -6,12 +6,10 @@
 #
 
 test_that("long_to_wide() works", {
-
   f <- kwb.pilot:::long_to_wide
 
   expect_error(
     kwb.pilot:::long_to_wide()
     # Argument "df" fehlt (ohne Standardwert)
   )
-
 })

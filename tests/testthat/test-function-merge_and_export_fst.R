@@ -3,7 +3,5 @@
 #
 
 test_that("merge_and_export_fst() works", {
-
   expect_error(kwb.pilot:::merge_and_export_fst())
 })
-

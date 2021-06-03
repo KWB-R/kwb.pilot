@@ -3,7 +3,5 @@
 #
 
 test_that("import_data_basel() works", {
-
   expect_error(kwb.pilot:::import_data_basel())
 })
-

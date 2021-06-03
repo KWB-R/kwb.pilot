@@ -3,7 +3,5 @@
 #
 
 test_that("dygraph_add_limits() works", {
-
   expect_error(kwb.pilot:::dygraph_add_limits())
 })
-

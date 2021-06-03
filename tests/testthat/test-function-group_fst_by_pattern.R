@@ -3,7 +3,5 @@
 #
 
 test_that("group_fst_by_pattern() works", {
-
   kwb.pilot:::group_fst_by_pattern()
 })
-

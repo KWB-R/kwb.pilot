@@ -19,5 +19,7 @@ Plot calculate operational time series
 \dontrun{
 haridwar_raw_list <- import_data_haridwar()
 myDat <- calculate_operational_parameters(df = haridwar_raw_list)
-plot_calculated_operational_timeseries(myDat)}
+plot_calculated_operational_timeseries(myDat)
+}
+
 }

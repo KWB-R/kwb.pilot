@@ -3,7 +3,5 @@
 #
 
 test_that("import_operation() works", {
-
   expect_error(kwb.pilot:::import_operation())
 })
-

@@ -111,7 +111,7 @@ import_sheet <- function(xlsPath,
     tmp_par1[, cols_with_headers],
     col_rawData_pattern = col_rawData_pattern
   ) %>%
-    dplyr::filter_(~totSamples > 0)
+    dplyr::filter_(~ totSamples > 0)
 
 
 
@@ -332,7 +332,7 @@ plot_analytics <- function(df) {
         col = "SiteLabel"
       )) +
         ggforce::facet_wrap_paginate(
-          ~ ParameterName,
+          ~ParameterName,
           nrow = 1,
           ncol = 1,
           scales = "free_y",
@@ -358,7 +358,7 @@ plot_analytics <- function(df) {
         col = "SiteLabel"
       )) +
         ggforce::facet_wrap_paginate(
-          ~ ParameterName,
+          ~ParameterName,
           nrow = 1,
           ncol = 1,
           scales = "free_y",

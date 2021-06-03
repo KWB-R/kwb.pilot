@@ -1,5 +1,5 @@
 #' Check thresholds
-#' 
+#'
 #' @param df a dataframe as retrieved by import_data_haridwar()
 #' @param thresholds thresholds dataframe as retrieved by get_thresholds()
 #' (default: "raw")
@@ -8,11 +8,8 @@
 #' 'thresholds')
 #' @export
 
-check_thresholds <- function(
-  df, # haridwar_day_list,
-  thresholds = get_thresholds()
-)
-{
+check_thresholds <- function(df, # haridwar_day_list,
+                             thresholds = get_thresholds()) {
   thresholds$ParameterThresholdComparisonR <- gsub(
     pattern = "^[=]",
     replacement = "==",
@@ -26,11 +23,10 @@ check_thresholds <- function(
   thresholds$exceedanceLabel <- "No data within reporting period!"
 
   for (i in seq_len(nrow(thresholds))) {
-    
-    cond1 <- df$ParameterCode == thresholds$ParameterCode[i] 
-    cond1 <- cond1 & df$SiteCode == thresholds$SiteCode[i] 
-    cond1 <- cond1 & ! is.na(df$ParameterValue)
-    
+    cond1 <- df$ParameterCode == thresholds$ParameterCode[i]
+    cond1 <- cond1 & df$SiteCode == thresholds$SiteCode[i]
+    cond1 <- cond1 & !is.na(df$ParameterValue)
+
     cond2 <- eval(parse(text = sprintf(
       "df$ParameterValue %s %s",
       thresholds$ParameterThresholdComparisonR[i],
@@ -66,8 +62,8 @@ check_thresholds <- function(
   thresholds <- thresholds[order(thresholds$ParameterName), ]
 
   kwb.utils::renameAndSelect(thresholds, list(
-    ParameterName = "Parameter", 
-    Threshold = "Threshold criterium", 
+    ParameterName = "Parameter",
+    Threshold = "Threshold criterium",
     exceedanceLabel = "Number/Percentage of non-satifying measurements"
   ))
 }

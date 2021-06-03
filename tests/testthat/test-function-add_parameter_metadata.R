@@ -3,7 +3,5 @@
 #
 
 test_that("add_parameter_metadata() works", {
-
   expect_error(kwb.pilot:::add_parameter_metadata())
 })
-

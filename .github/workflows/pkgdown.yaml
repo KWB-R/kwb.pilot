@@ -12,6 +12,7 @@ jobs:
     runs-on: macOS-latest
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MBR4.0_URL: ${{ secrets.MBR40_URL }}
     steps:
       - uses: actions/checkout@v2
 

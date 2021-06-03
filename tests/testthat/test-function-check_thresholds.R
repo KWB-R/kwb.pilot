@@ -3,7 +3,5 @@
 #
 
 test_that("check_thresholds() works", {
-
   expect_error(kwb.pilot:::check_thresholds())
 })
-

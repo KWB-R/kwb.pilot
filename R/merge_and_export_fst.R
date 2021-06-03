@@ -1,5 +1,5 @@
 #' Helper function: group fst by pattern
-#' 
+#'
 #' @param fst_pattern pattern to search for in fst filename (default: "raw")
 #' @param time_pattern optional pattern to filter months to be imported (default: NULL),
 #' for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")
@@ -10,16 +10,12 @@
 #' @return merged data.frame
 #' @keywords internal
 
-group_fst_by_pattern <- function(
-  time_pattern = NULL,
-  fst_pattern = "raw",
-  fst_dir = package_file("shiny/berlin_t/data/fst")
-)
-{
+group_fst_by_pattern <- function(time_pattern = NULL,
+                                 fst_pattern = "raw",
+                                 fst_dir = package_file("shiny/berlin_t/data/fst")) {
   files <- list.files(fst_dir, fst_pattern, recursive = TRUE, full.names = TRUE)
 
-  if (! is.null(time_pattern)) {
-
+  if (!is.null(time_pattern)) {
     if (length(time_pattern) > 1) {
       time_pattern <- to_pattern_or(time_pattern)
     }
@@ -31,7 +27,7 @@ group_fst_by_pattern <- function(
     messageText = sprintf(
       "Importing the following fst files:\n%s\n",
       paste(files, collapse = "\n")
-    ), 
+    ),
     expr = {
       data.table::rbindlist(lapply(files, read_fst))
     }
@@ -39,7 +35,7 @@ group_fst_by_pattern <- function(
 }
 
 #' Helper function: merge and export fst files into main shiny data folder
-#' 
+#'
 #' @param time_pattern optional pattern to filter months to be imported (default: NULL),
 #' for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")
 #' @param compression compression for fst export (default: 100)
@@ -49,23 +45,18 @@ group_fst_by_pattern <- function(
 #' kwb.pilot:::package_file("shiny/berlin_t/data"))
 #' @return imports multiple fst files and exports them to be used for app
 #' @export
-merge_and_export_fst <- function(
-  time_pattern = NULL,
-  compression = 100,
-  import_dir = package_file("shiny/berlin_t/data/fst"),
-  export_dir = package_file("shiny/berlin_t/data")
-)
-{
-  if (! dir.exists(export_dir)) {
-    
+merge_and_export_fst <- function(time_pattern = NULL,
+                                 compression = 100,
+                                 import_dir = package_file("shiny/berlin_t/data/fst"),
+                                 export_dir = package_file("shiny/berlin_t/data")) {
+  if (!dir.exists(export_dir)) {
     kwb.utils::catAndRun(
       sprintf("Creating export path: %s", export_dir),
       dir.create(export_dir, recursive = TRUE)
     )
   }
-  
-  for (fst_pattern in c("raw", "10min", "hour", "day")) {
 
+  for (fst_pattern in c("raw", "10min", "hour", "day")) {
     site_data_list <- kwb.utils::catAndRun(
       paste("Grouping by", fst_pattern),
       group_fst_by_pattern(
@@ -76,7 +67,7 @@ merge_and_export_fst <- function(
     )
 
     file <- file.path(export_dir, sprintf("siteData_%s_list.fst", fst_pattern))
-    
+
     kwb.utils::catAndRun(
       sprintf("Writing fst: %s (with compression %d)\n", file, compression),
       fst::write.fst(site_data_list, path = file, compress = compression)

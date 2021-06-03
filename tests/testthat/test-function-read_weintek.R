@@ -6,12 +6,10 @@
 #
 
 test_that("read_weintek() works", {
-
   f <- kwb.pilot:::read_weintek
 
   expect_error(
     kwb.pilot:::read_weintek()
     # Argument "path" fehlt (ohne Standardwert)
   )
-
 })

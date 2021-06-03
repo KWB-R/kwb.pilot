@@ -6,12 +6,10 @@
 #
 
 test_that("calculate_operational_parameters_berlin_f() works", {
-
   f <- kwb.pilot:::calculate_operational_parameters_berlin_f
 
   expect_error(
     kwb.pilot:::calculate_operational_parameters_berlin_f()
     # Argument "df" fehlt (ohne Standardwert)
   )
-
 })

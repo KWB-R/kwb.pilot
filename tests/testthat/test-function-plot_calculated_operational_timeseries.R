@@ -3,7 +3,5 @@
 #
 
 test_that("plot_calculated_operational_timeseries() works", {
-
   expect_error(kwb.pilot:::plot_calculated_operational_timeseries())
 })
-

@@ -13,12 +13,12 @@ import_data_berlin_f(
 }
 \arguments{
 \item{raw_data_files}{vector with full path to operational raw data files that
-allows to limit import to specific files (default:  
-fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data""), recurse = TRUE, 
+allows to limit import to specific files (default:
+fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data""), recurse = TRUE,
 regexp = "^[^~].*\\.xlsx$")).}
 
 \item{meta_file_path}{path to metadata file (default:
-kwb.pilot:::package_file(file.path("shiny/berlin_f/data/raw/online_data", 
+kwb.pilot:::package_file(file.path("shiny/berlin_f/data/raw/online_data",
 "parameter_site_metadata.csv"))}
 }
 \value{

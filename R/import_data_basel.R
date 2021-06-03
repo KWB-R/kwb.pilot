@@ -7,10 +7,7 @@
 #' @importFrom  tidyr gather_
 #' @export
 
-import_operation_basel <- function(
-  xlsx_dir = package_file("shiny/basel/data/operation/wiese")
-) 
-{
+import_operation_basel <- function(xlsx_dir = package_file("shiny/basel/data/operation/wiese")) {
   xlsx_files <- list_full_xls_files()
 
   for (xlsx_file in xlsx_files) {
@@ -56,10 +53,7 @@ import_operation_basel <- function(
 #' @export
 
 
-import_analytics_basel <- function(
-  csv_dir = package_file("shiny/basel/data/analytics")
-)
-{
+import_analytics_basel <- function(csv_dir = package_file("shiny/basel/data/analytics")) {
   csv_files <- list_full_csv_files(csv_dir)
 
   for (csv_file in csv_files) {
@@ -77,26 +71,36 @@ import_analytics_basel <- function(
     ### "prufpunkt < 94000"
 
 
-    rep_strings <- list("Metolachlor OA" = "Metolachlor-OXA",
-                        "Metolachlor ESA" = "Metolachlor-ESA",
-                        "N-Acetyl-4-aminoantipyri" = "N-Acetyl-4-Aminoantipyri",
-                        "\\<Cyprosulfamid\\>" = "Cyprosulfamide")
+    rep_strings <- list(
+      "Metolachlor OA" = "Metolachlor-OXA",
+      "Metolachlor ESA" = "Metolachlor-ESA",
+      "N-Acetyl-4-aminoantipyri" = "N-Acetyl-4-Aminoantipyri",
+      "\\<Cyprosulfamid\\>" = "Cyprosulfamide"
+    )
 
     tmp$prufpunkt_bezeichnung_cor <-
-      kwb.utils::multiSubstitute(strings = tmp$prufpunkt_bezeichnung,
-                      replacements = rep_strings)
+      kwb.utils::multiSubstitute(
+        strings = tmp$prufpunkt_bezeichnung,
+        replacements = rep_strings
+      )
 
 
 
     correction_df <- tmp %>%
-      dplyr::group_by_("prufpunkt_bezeichnung",
-                       "prufpunkt") %>%
+      dplyr::group_by_(
+        "prufpunkt_bezeichnung",
+        "prufpunkt"
+      ) %>%
       dplyr::summarise(total.count = n()) %>%
-      dplyr::select_("prufpunkt_bezeichnung",
-                     "prufpunkt") %>%
+      dplyr::select_(
+        "prufpunkt_bezeichnung",
+        "prufpunkt"
+      ) %>%
       dplyr::filter_("prufpunkt < 94000 | prufpunkt %in% c(94004,94006)") %>%
-      dplyr::rename_("prufpunkt_bezeichnung_cor" = "prufpunkt_bezeichnung",
-                     "prufpunkt_cor" = "prufpunkt")
+      dplyr::rename_(
+        "prufpunkt_bezeichnung_cor" = "prufpunkt_bezeichnung",
+        "prufpunkt_cor" = "prufpunkt"
+      )
 
     tmp <- tmp %>%
       dplyr::left_join(correction_df) %>%
@@ -162,12 +166,9 @@ import_analytics_basel <- function(
 #' @importFrom  tidyr separate_
 #' @export
 
-add_site_metadata <- function(
-  df, 
-  df_col_sitecode = "SiteCode", 
-  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")
-)
-{
+add_site_metadata <- function(df,
+                              df_col_sitecode = "SiteCode",
+                              meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")) {
   meta_site <- read.csv(
     file = meta_site_path,
     stringsAsFactors = FALSE,
@@ -223,11 +224,8 @@ add_site_metadata <- function(
 #' not included in meta_parameter file will not be imported!!!!)
 #' @importFrom  dplyr left_join
 #' @export
-add_parameter_metadata <- function(
-  df,
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
-)
-{
+add_parameter_metadata <- function(df,
+                                   meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")) {
   meta_parameter <- read.csv(
     file = meta_parameter_path,
     stringsAsFactors = FALSE,
@@ -257,35 +255,35 @@ add_label <- function(df,
                       col_parametername = "ParameterName",
                       col_parameterunit = "ParameterUnit",
                       col_method = "Method_Org") {
-
-
   col_method_exists <- col_method %in% names(df)
 
-  if(col_method_exists) {
-  boolean_no_method <- is.na(df[,col_method]) | df[,col_method] == ""
+  if (col_method_exists) {
+    boolean_no_method <- is.na(df[, col_method]) | df[, col_method] == ""
   } else {
-  boolean_no_method <- rep(TRUE, times = nrow(df))
+    boolean_no_method <- rep(TRUE, times = nrow(df))
   }
 
   df$SiteName_ParaName_Unit_Method <- ""
 
 
-  if(any(boolean_no_method)) {
+  if (any(boolean_no_method)) {
     ind <- which(boolean_no_method)
     df$SiteName_ParaName_Unit_Method[ind] <- sprintf(
       "%s: %s (%s)",
-      df[ind , col_sitename],
-      df[ind , col_parametername],
-      df[ind , col_parameterunit]) }
+      df[ind, col_sitename],
+      df[ind, col_parametername],
+      df[ind, col_parameterunit]
+    )
+  }
 
-  if(any(!boolean_no_method)) {
+  if (any(!boolean_no_method)) {
     ind <- which(!boolean_no_method)
-        df$SiteName_ParaName_Unit_Method[!boolean_no_method] <- sprintf(
+    df$SiteName_ParaName_Unit_Method[!boolean_no_method] <- sprintf(
       "%s: %s (%s, Method: %s)",
-      df[ind , col_sitename],
-      df[ind , col_parametername],
-      df[ind , col_parameterunit],
-      df[ind , col_method]
+      df[ind, col_sitename],
+      df[ind, col_parametername],
+      df[ind, col_parameterunit],
+      df[ind, col_method]
     )
   }
   return(df)
@@ -311,14 +309,11 @@ add_label <- function(df,
 #' @importFrom  dplyr left_join
 #' @return data.frame with operational data for Basel sites including metadata
 #' @export
-import_operation_meta_basel <- function(
-  raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
-  raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
-  meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
-  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
-)
-{
+import_operation_meta_basel <- function(raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
+                                        raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
+                                        meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
+                                        meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
+                                        meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")) {
   meta_online <- read.csv(
     file = meta_online_path,
     stringsAsFactors = FALSE,
@@ -371,12 +366,9 @@ import_operation_meta_basel <- function(
 #' (default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))
 #' @return data.frame with analytics data for Basel sites including metadata
 #' @export
-import_analytics_meta_basel <- function(
-  analytics_dir = package_file("shiny/basel/data/analytics"),
-  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
-)
-{
+import_analytics_meta_basel <- function(analytics_dir = package_file("shiny/basel/data/analytics"),
+                                        meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
+                                        meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")) {
   print("###################################################################")
   print("###### Importing analytics data with metadata for sites 'Wiese' and Rhein'")
   print("###################################################################")
@@ -408,15 +400,12 @@ import_analytics_meta_basel <- function(
 #' @return data.frame with analytical & operational data for Basel
 #' @importFrom plyr rbind.fill
 #' @export
-import_data_basel <- function(
-  analytics_dir = package_file("shiny/basel/data/analytics"),
-  raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
-  raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
-  meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"),
-  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")
-)
-{
+import_data_basel <- function(analytics_dir = package_file("shiny/basel/data/analytics"),
+                              raw_dir_rhein = package_file("shiny/basel/data/operation/rhein"),
+                              raw_dir_wiese = package_file("shiny/basel/data/operation/wiese"),
+                              meta_online_path = package_file("shiny/basel/data/metadata/meta_online.csv"),
+                              meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv"),
+                              meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv")) {
   operation_meta <- import_operation_meta_basel(
     raw_dir_rhein = raw_dir_rhein,
     raw_dir_wiese = raw_dir_wiese,

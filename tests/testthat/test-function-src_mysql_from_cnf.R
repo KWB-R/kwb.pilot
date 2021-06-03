@@ -3,7 +3,5 @@
 #
 
 test_that("src_mysql_from_cnf() works", {
-
   expect_error(kwb.pilot:::src_mysql_from_cnf())
 })
-

@@ -3,7 +3,5 @@
 #
 
 test_that("add_label() works", {
-
   expect_error(kwb.pilot:::add_label())
 })
-

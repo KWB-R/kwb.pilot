@@ -3,7 +3,5 @@
 #
 
 test_that("add_site_metadata() works", {
-
   expect_error(kwb.pilot:::add_site_metadata())
 })
-

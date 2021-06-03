@@ -40,5 +40,7 @@ Calculate operational parameters for Berlin-Schoenerlinde
 \examples{
 \dontrun{
 raw_list <- read_wedeco_data()
-myDat <- calculate_operational_parameters_berlin_s(df = raw_list)}
+myDat <- calculate_operational_parameters_berlin_s(df = raw_list)
+}
+
 }

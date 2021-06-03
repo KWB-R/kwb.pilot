@@ -3,7 +3,5 @@
 #
 
 test_that("get_rawfilespaths_for_month() works", {
-
   kwb.pilot:::get_rawfilespaths_for_month()
 })
-
