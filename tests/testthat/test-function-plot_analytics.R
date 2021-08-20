@@ -3,7 +3,5 @@
 #
 
 test_that("plot_analytics() works", {
-
   expect_error(kwb.pilot:::plot_analytics())
 })
-

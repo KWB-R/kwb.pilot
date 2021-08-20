@@ -3,7 +3,5 @@
 #
 
 test_that("create_wedeco_metafile() works", {
-
   expect_error(kwb.pilot:::create_wedeco_metafile())
 })
-

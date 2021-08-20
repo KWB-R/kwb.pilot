@@ -1,0 +1,79 @@
+ParameterCode_SiteCode,ParameterCode,SiteCode,ParameterName_SiteName,ParameterName,SiteName,ParameterUnit,Comment,Source,DataType
+h_grob,h,grob,Füllstand Grobstofftank,Füllstand,Grobstofftank,%,NA,online,raw
+h_bel,h,bel,Füllstand Belebung,Füllstand,Belebung,%,NA,online,raw
+h_filt,h,filt,Füllstand Filtration,Füllstand,Filtration,%,NA,online,raw
+q_filt,q,filt,Durchfluss Filtrat 1,Durchfluss,Filtrat 1,l/h,NA,online,raw
+p_filt,p,filt,Druck Filtrat 1,Druck,Filtrat 1,mbar,NA,online,raw
+q_sg1,q,sg1,Durchfluss Verdichter 1 Filtration,Durchfluss,Verdichter 1 Filtration,Nm3/h,NA,online,raw
+q_sg2,q,sg2,Durchfluss Verdichter 2 Filtration,Durchfluss,Verdichter 2 Filtration,Nm3/h,NA,online,raw
+q_nitri,q,nitri,Durchfluss Verdichter Nitrifikation,Durchfluss,Verdichter Nitrifikation,Nm3/h,NA,online,raw
+q_zp,q,zp,Durchfluss Zulaufpumpe,Durchfluss,Zulaufpumpe,l/h,NA,online,raw
+q_rp,q,rp,Durchfluss Rezipumpe,Durchfluss,Rezipumpe,l/h,NA,online,raw
+q_filtrat2,q,filtrat2,Durchfluss Filtrat 2,Durchfluss,Filtrat 2,l/h,NA,online,raw
+p_filtrat2,p,filtrat2,Druck Filtrat 2,Druck,Filtrat 2,mbar,NA,online,raw
+p_sg1,p,sg1,Druck Verdichter 1 Filtration,Druck,Verdichter 1 Filtration,mbar,NA,online,raw
+p_sg2,p,sg2,Druck Verdichter 2 Filtration,Druck,Verdichter 2 Filtration,mbar,NA,online,raw
+ldo_nitri,ldo,nitri,Sauerstoff Nitrifikation,Sauerstoff,Nitrifikation,mg/l,NA,online,raw
+ldo_nitri_temp,ldo,nitri_temp,Temperatur Nitrifikation O2-Sonde,Temperatur,Nitrifikation O2-Sonde,°C,NA,online,raw
+ldo_filter,ldo,filter,Sauerstoff Filtration,Sauerstoff,Filtration,mg/l,NA,online,raw
+ldo_filter_temp,ldo,filter_temp,Temperatur Filtration O2-Sonde,Temperatur,Filtration O2-Sonde,°C,NA,online,raw
+redox_deni,redox,deni,Redox Denitrifikation,Redox,Denitrifikation,mV,NA,online,raw
+redox_deni_temp,redox,deni_temp,Temperatur Denitrifikation Redox-Sonde,Temperatur,Denitrifikation Redox-Sonde,°C,NA,online,raw
+ts_filter,ts,filter,TS Filtration,TS,Filtration,g/l,NA,online,raw
+ts_nitri,ts,nitri,TS Nitrifikation,TS,Nitrifikation,g/l,NA,online,raw
+ammonium_ablauf,ammonium,ablauf,Ammonium Ablauf,Ammonium,Ablauf,mg/l,NA,online,raw
+nitrat_ablauf,nitrat,ablauf,Nitrat Ablauf,Nitrat,Ablauf,mg/l,NA,online,raw
+kalium_ablauf,kalium,ablauf,Kalium Ablauf,Kalium,Ablauf,mg/l,NA,online,raw
+chlorid_ablauf,chlorid,ablauf,Chlorid Ablauf,Chlorid,Ablauf,mg/l,NA,online,raw
+temp_ablauf,temp,ablauf,Tempartur Ablauf,Temperatur,Ablauf,°C,NA,online,raw
+ammonium_nitri,ammonium,nitri,Ammonium Nitrifikation,Ammonium,Nitrifikation,mg/l,NA,online,raw
+kalium_nitri,kalium,nitri,Kalium Nitrifikation,Kalium,Nitrifikation,mg/l,NA,online,raw
+temp_nitri,temp,nitri,Temperatur Nitrifikation,Temperatur,Nitrifikation,°C,NA,online,raw
+ammonium_zulauf,ammonium,zulauf,Ammonium Zulauf,Ammonium,Zulauf,mg/l,NA,online,raw
+kalium_zulauf,kalium,zulauf,Kalium Zulauf,Kalium,Zulauf,mg/l,NA,online,raw
+temp_zulauf,temp,zulauf,Temperatur Zulauf NH4- Sonde,Temperatur,Zulauf NH4-Sonde,°C,NA,online,raw
+leitf_zulauf,leitf,zulauf,Leitfähigkeit Zulauf,Leitfähigkeit,Zulauf,µS/cm,NA,online,raw
+leitf_zulauf_temp,leitf,zulauf_temp,Temperatur Zulauf LF-Sonde,Temperatur,Zulauf LF-Sonde,°C,NA,online,raw
+ph_filter,ph,filter,ph Filtration,ph,Filtration,-,NA,online,raw
+ph_filter_temp,ph,filter_temp,Temperatur Filtration pH- Sonde,Temperatur,Filtration pH-Sonde,°C,NA,online,raw
+ph_nitri,ph,nitri,pH Nitrifikation,pH,Nitrifikation,-,NA,online,raw
+ph_nitri_temp,ph,nitri_temp,Temperatur Nitrifikation pH-Sonde,Temperatur,Nitrifikation pH-Sonde,°C,NA,online,raw
+q_bypass_rezi,q,bypass_rezi,Durchfluss Rezi nach Deni,Durchfluss,Rezi nach Deni,l/h,NA,online,raw
+q_filter_rezi,q,filter_rezi,Druchfluss Rezi nach Filtration,Druchfluss,Rezi nach Filtration,l/h,NA,online,raw
+p_komp,p,komp,Druckkompensation,Druck,Druckkompensation,mbar,NA,online,raw
+p_zulauf,p,zulauf,Druck Zulaufbehälter,Druck,Zulaufbehälter,mbar,NA,online,raw
+p_filt1_diff,p,filt1_diff,dp Filtrat 1,Differenzdruck,Filtrat 1,mbar,NA,online,raw
+p_filt2_diff,p,filt2_diff,dp Filtrat 2,Differenzdruck,Filtrat 2,mbar,NA,online,raw
+trios_zulauf_no3n,trios,zulauf_no3n,Nitrat Zulauf Trios-Sonde,Nitrat,Zulauf Trios-Sonde,mg/l,NA,online,raw
+trios_zulauf_no2n,trios,zulauf_no2n,Nitrit Zulauf Trios-Sonde,Nitrit,Zulauf Trios-Sonde,mg/l,NA,online,raw
+trios_zulauf_csb,trios,zulauf_csb,CSBeq Zulauf,CSBeq,Zulauf,mg/l,NA,online,raw
+trios_zulauf_sak,trios,zulauf_sak,SAK254 Zulauf,SAK254,Zulauf,1/m,NA,online,raw
+trios_ablauf_no3n,trios,ablauf_no3n,Nitrat Ablauf Trios-Sonde,Nitrat,Ablauf Trios-Sonde,mg/l,NA,online,raw
+trios_ablauf_no2n,trios,ablauf_no2n,Nitrit Ablauf Trios-Sonde,Nitrit,Ablauf Trios-Sonde,mg/l,NA,online,raw
+trios_ablauf_csb,trios,ablauf_csb,CSBeq Ablauf,CSBeq,Ablauf,mg/l,NA,online,raw
+trios_ablauf_sak,trios,ablauf_sak,SAK254 Ablauf,SAK254,Ablauf,1/m,NA,online,raw
+q_gesamt,q,gesamt,Filtratmenge Filtrat 1 gesamt,Filtratmenge,Filtrat 1 gesamt,L,SUMME,online,calculated
+q_gestern,q,gestern,Filtratmenge Filtrat 1 gestern,Filtratmenge,Filtrat 1 gestern,L,SUMME,online,calculated
+q_gesamt_filt2,q,gesamt_filt2,Filtratmenge Filtrat 2 gesamt,Filtratmenge,Filtrat 2 gesamt,L,SUMME,online,calculated
+q_gestern_filt2,q,gestern_filt2,Filtratmenge Filtrat 2 gestern,Filtratmenge,Filtrat 2 gestern,L,SUMME,online,calculated
+q-nitri-gesamt,q-nitri-gesamt,NA,Luftmenge Verdichter Nitrifikation gesamt,Luftmenge,Verdichter Nitrifikation gesamt,Nm3,SUMME,online,calculated
+q_sg1_gesamt,q,sg1_gesamt,Luftmenge Verdichter 1 Filtration gesamt,Luftmenge,Verdichter 1 Filtration gesamt,Nm3,SUMME,online,calculated
+q_sg2_gesamt,q,sg2_gesamt,Luftmenge Verdichter 2 Filtration gesamt,Luftmenge,Verdichter 2 Filtration gesamt,Nm3,SUMME,online,calculated
+q_zp_gesamt,q,zp_gesamt,Zulauf gesamt,Zulaufmenge,gesamt,L,SUMME,online,calculated
+q_zp_gestern,q,zp_gestern,Zulauf gestern,Zulaufmenge,gestern,L,SUMME,online,calculated
+q_uss_gesamt,q,uss_gesamt,ÜSS gesamt,ÜSS-Menge,gesamt,L,SUMME,online,calculated
+t_rechen,t,rechen,Betriebsstunden Rechen,Betriebsstunden,Rechen,h,SUMME,online,calculated
+t_nitri,t,nitri,Betriebsstunden Verdichter Nitrifikation,Betriebsstunden,Verdichter Nitrifikation,h,SUMME,online,calculated
+t_rp,t,rp,Betriebsstunden Rezipumpe,Betriebsstunden,Rezipumpe,h,SUMME,online,calculated
+t_sg1,t,sg1,Betriebsstunden Verdichter 1 Filtration,Betriebsstunden,Verdichter 1 Filtration,h,SUMME,online,calculated
+t_sg2,t,sg2,Betriebsstunden Verdichter 2 Filtration,Betriebsstunden,Verdichter 2 Filtration,h,SUMME,online,calculated
+t_fp,t,fp,Betriebsstunden Filtratpumpe 1,Betriebsstunden,Filtratpumpe 1,h,SUMME,online,calculated
+t_fp2,t,fp2,Betriebsstunden Filtratpumpe 2,Betriebsstunden,Filtratpumpe 2,h,SUMME,online,calculated
+t_rw1,t,rw1,Betriebsstunden Rührwerk 1,Betriebsstunden,Rührwerk 1,h,SUMME,online,calculated
+t_rw2,t,rw2,Betriebsstunden Rührwerk 2,Betriebsstunden,Rührwerk 2,h,SUMME,online,calculated
+t_zp1,t,zp1,Betriebsstunden Zulaufpumpe,Betriebsstunden,Zulaufpumpe,h,SUMME,online,calculated
+t_grobstoffp,t,grobstoffp,Betriebsstunden Grobstoffpumpe,Betriebsstunden,Grobstoffpumpe,h,SUMME,online,calculated
+zustand,zustand,NA,Zustand,Zustand,NA,NA,NA,online,raw
+meldungen,meldungen,NA,Meldungen,Meldungen,NA,NA,NA,online,raw
+id,id,NA,Laufende Nr.,Laufende Nr.,NA,NA,NA,online,raw
+Zeitstempel,Zeitstempel,NA,Zeitstempel,Zeitstempel,NA,NA,NA,online,raw

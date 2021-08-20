@@ -1,3 +1,6 @@
+# [kwb.pilot 0.2.0]
+
+* Add functions for project [MBR 4.0](https://https://www.kompetenz-wasser.de/en/project/mbr40/)
 
 # [kwb.pilot 0.1.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.1.0) <small>2021-02-26</small>
 

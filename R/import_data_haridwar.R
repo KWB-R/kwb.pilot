@@ -1,5 +1,5 @@
 #' Imports Haridwar data
-#' 
+#'
 #' @param analytics_path Define path of analytics EXCEL spreadsheet to be
 #' imported (default: kwb.pilot:::package_file("shiny/haridwar/data/analytics.xlsx"))
 #' @param operation_mySQL_conf column name pattern for identifying raw data
@@ -21,42 +21,37 @@
 #' @importFrom utils read.csv
 #' @export
 
-import_data_haridwar <- function(
-  analytics_path = package_file("shiny/haridwar/data/analytics.xlsx"),
-  operation_mySQL_conf = package_file("shiny/haridwar/.my.cnf"),
-  operation_meta_path = package_file("shiny/haridwar/data/operation_parameters.csv"),
-  excludedSheets = c(
-    "Parameters",
-    "Location",
-    "Sites",
-    "#Summary",
-    "Site_and_Parameter",
-    "Observations",
-    "dP",
-    "ORP",
-    "Flow",
-    "Current_Voltage",
-    #"SAK_254",
-    #"SAK_463",
-    "As_total_Arsenator"
-  ),
-  skip = 69,
-  debug = TRUE
-)
-{
-  if (! file.exists(analytics_path)) {
-
+import_data_haridwar <- function(analytics_path = package_file("shiny/haridwar/data/analytics.xlsx"),
+                                 operation_mySQL_conf = package_file("shiny/haridwar/.my.cnf"),
+                                 operation_meta_path = package_file("shiny/haridwar/data/operation_parameters.csv"),
+                                 excludedSheets = c(
+                                   "Parameters",
+                                   "Location",
+                                   "Sites",
+                                   "#Summary",
+                                   "Site_and_Parameter",
+                                   "Observations",
+                                   "dP",
+                                   "ORP",
+                                   "Flow",
+                                   "Current_Voltage",
+                                   # "SAK_254",
+                                   # "SAK_463",
+                                   "As_total_Arsenator"
+                                 ),
+                                 skip = 69,
+                                 debug = TRUE) {
+  if (!file.exists(analytics_path)) {
     clean_stop(sprintf(
       "No analytics file %s is located under: %s",
       basename(analytics_path), dirname(analytics_path)
     ))
   }
 
-  if (! file.exists(operation_mySQL_conf)) {
-
+  if (!file.exists(operation_mySQL_conf)) {
     clean_stop(
       "No '.my.cnf' file located under: ", dirname(operation_mySQL_conf), ".\n",
-      "Please once specify the path to a valid MySQL config file with ", 
+      "Please once specify the path to a valid MySQL config file with ",
       "parameter 'mySQL_conf'"
     )
   }
@@ -76,7 +71,7 @@ import_data_haridwar <- function(
 
   all_sheets <- readxl::excel_sheets(path = analytics_path)
 
-  analytics_to_import <- all_sheets[! all_sheets %in% excludedSheets]
+  analytics_to_import <- all_sheets[!all_sheets %in% excludedSheets]
 
   analytics_4014 <- import_sheets(
     xlsPath = analytics_path,
@@ -126,20 +121,20 @@ import_data_haridwar <- function(
     file = operation_meta_path,
     stringsAsFactors = FALSE
   )
-  
+
   columns <- dplyr::setdiff(names(operation_para_names), c(
     "Comments",
     "ParameterThresholdComparison",
     "ParameterThreshold",
     "ParameterThresholdSource"
   ))
-  
+
   operation_para_names <- operation_para_names %>%
     dplyr::select_(.dots = columns) %>%
     left_join(sites_meta)
 
   has_no_name <- is.na(operation_para_names$SiteName)
-  
+
   operation_para_names$SiteName[has_no_name] <- "General"
 
   operation_list <- operation_list %>%

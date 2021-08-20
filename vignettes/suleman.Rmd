@@ -1,5 +1,5 @@
 ---
-title: "5.1 Pilot: SULEMAN"
+title: "Pilot: SULEMAN"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Pilot: SULEMAN}
@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 
 ```{r install, eval = FALSE}
 remotes::install_github("kwb-r/kwb.pilot", upgrade = "always")
+
+library(kwb.pilot)
 ```
 
 ## Define paths 
@@ -52,7 +54,7 @@ paths_list <- list(
 )
 
 # Only execute "At Home" if not at "KWB" (i.e. KWB server path does not exist) 
-if(!fs::dir_exists(paths$online)) {
+if(dir.exists(paths$online)) {
 paths <- kwb.utils::resolve(paths_list)
 }
 ```

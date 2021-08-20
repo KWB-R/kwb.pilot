@@ -9,7 +9,7 @@ read_weintek_batch(files, tz = "CET", dbg = TRUE)
 \arguments{
 \item{files}{path to Weintek files}
 
-\item{tz}{time zone (default: CET) the measurements are taken (passed to 
+\item{tz}{time zone (default: CET) the measurements are taken (passed to
 function kwb.pilot:::set_timezone())}
 
 \item{dbg}{debug (default: TRUE)}

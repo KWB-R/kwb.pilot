@@ -3,7 +3,5 @@
 #
 
 test_that("fill_datetime() works", {
-
   expect_error(kwb.pilot:::fill_datetime())
 })
-
