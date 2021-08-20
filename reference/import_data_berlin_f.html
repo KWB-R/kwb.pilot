@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">kwb.pilot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -122,7 +122,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/suleman.html">5.1 Suleman</a>
+      <a href="../articles/mbr40.html">5.1 MBR4.0</a>
+    </li>
+    <li>
+      <a href="../articles/suleman.html">5.2 Suleman</a>
     </li>
   </ul>
 </li>
@@ -175,14 +178,14 @@
     <tr>
       <th>raw_data_files</th>
       <td><p>vector with full path to operational raw data files that
-allows to limit import to specific files (default:  
-fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data""), recurse = TRUE, 
+allows to limit import to specific files (default:
+fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data""), recurse = TRUE,
 regexp = "^[^~].*\.xlsx$")).</p></td>
     </tr>
     <tr>
       <th>meta_file_path</th>
       <td><p>path to metadata file (default:
-kwb.pilot:::package_file(file.path("shiny/berlin_f/data/raw/online_data", 
+kwb.pilot:::package_file(file.path("shiny/berlin_f/data/raw/online_data",
 "parameter_site_metadata.csv"))</p></td>
     </tr>
     </table>

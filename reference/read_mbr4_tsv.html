@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Helper function: group fst by pattern — group_fst_by_pattern • kwb.pilot</title>
+<title>Read MBR4.0 tsv data — read_mbr4_tsv • kwb.pilot</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Helper function: group fst by pattern — group_fst_by_pattern" />
-<meta property="og:description" content="Helper function: group fst by pattern" />
+<meta property="og:title" content="Read MBR4.0 tsv data — read_mbr4_tsv" />
+<meta property="og:description" content="Read MBR4.0 tsv data" />
 
 
 
@@ -156,43 +156,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Helper function: group fst by pattern</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kwb-r/kwb.pilot/blob/master/R/merge_and_export_fst.R'><code>R/merge_and_export_fst.R</code></a></small>
-    <div class="hidden name"><code>group_fst_by_pattern.Rd</code></div>
+    <h1>Read MBR4.0 tsv data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/kwb-r/kwb.pilot/blob/master/R/read_mbr4.R'><code>R/read_mbr4.R</code></a></small>
+    <div class="hidden name"><code>read_mbr4_tsv.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Helper function: group fst by pattern</p>
+    <p>Read MBR4.0 tsv data</p>
     </div>
 
-    <pre class="usage"><span class='fu'>group_fst_by_pattern</span><span class='op'>(</span>
-  time_pattern <span class='op'>=</span> <span class='cn'>NULL</span>,
-  fst_pattern <span class='op'>=</span> <span class='st'>"raw"</span>,
-  fst_dir <span class='op'>=</span> <span class='fu'>package_file</span><span class='op'>(</span><span class='st'>"shiny/berlin_t/data/fst"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>read_mbr4_tsv</span><span class='op'>(</span><span class='va'>path</span>, dbg <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>time_pattern</th>
-      <td><p>optional pattern to filter months to be imported (default: NULL),
-for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")</p></td>
+      <th>path</th>
+      <td><p>path to tsv file to be imported</p></td>
     </tr>
     <tr>
-      <th>fst_pattern</th>
-      <td><p>pattern to search for in fst filename (default: "raw")</p></td>
+      <th>dbg</th>
+      <td><p>print debug messages (default: FALSE)</p></td>
     </tr>
     <tr>
-      <th>fst_dir</th>
-      <td><p>directory with fst files or subdirs to be imported (default:
-kwb.pilot:::package_file("shiny/berlin_t/data/fst"))</p></td>
+      <th>...</th>
+      <td><p>additional arguments passed to  <a href='https://readr.tidyverse.org/reference/read_delim.html'>read_tsv</a></p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>merged data.frame</p>
+    <p>Reads MBR4.0 tsv data</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
