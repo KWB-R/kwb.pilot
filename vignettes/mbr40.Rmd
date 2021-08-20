@@ -16,34 +16,55 @@ knitr::opts_chunk$set(
 
 ## Install R package
 
+
 ```{r install, eval = FALSE}
-remotes::install_github("kwb-r/kwb.pilot", 
-                        upgrade = "always",
-                        dependencies = TRUE)
+
+# Install latest stable version from KWB-R R-Universe
+options(repos = c(
+    kwbr = 'https://kwb-r.r-universe.dev',
+    CRAN = 'https://cloud.r-project.org'))
+
+
+install.packages('kwb.pilot')
+
 
 ```
 
-## Define paths 
+## Setup Environment Variables 
 
-In `paths_list` you need set the environment variable ` Sys.getenv("MBR4.0_URL")` **only once** with `usethis::edit_r_environ()` as shown below:
+For downloading the `latest` (from `Martin Systems webportal`) and `archived` (from 
+`KWB Nextcloud`) `.tsv` data files  you need set the following environment variables  
+**only once** as shown below. 
+
+For doing so follow the steps below: 
+
+1. Open `RStudio` and run `usethis::edit_r_environ()`
+
+2. In the opened window add the required environment variables
 
 ```{r r_environment, eval = FALSE}
 MBR4.0_URL = "url-to-download-pilot-plant-data"
+NEXTCLOUD_URL = "https://<replace-with-dwc-cloud-url>"
+NEXTCLOUD_USER = "<your-dwc-cloud-username>" # your username
+NEXTCLOUD_PASSWORD = "your-nextcloud-app-password" ### see details below
 ```
+
+To access the `archived` data you need to be a registered Nextcloud user with 
+access to the folder `projects/MBR4.0`
+
+For creating `<your-nextcloud-app-password>`:
+
+* go to: https://replace-with-kwb-cloud-url/index.php/settings/user/security
+
+* scroll down to `create new app password`
+
+* select a name e.g. `r-script` and copy the token and replace `your-nextcloud-app-password`
+
+
+3. Finally you need to restart Rstudio and proceed with the code below:
+
 
 Subsequently click **Save** and restart RStudio.
-
-```{r paths_kwb, eval = TRUE}
-
-paths_list <- list(
-  url = Sys.getenv("MBR4.0_URL"),
-  export_dir = tempdir(),
-  tsv_file = "<export_dir>/mbr4.tsv"
-  )
-
-paths <- kwb.utils::resolve(paths_list)
-```
-
 
 
 ## Import 
