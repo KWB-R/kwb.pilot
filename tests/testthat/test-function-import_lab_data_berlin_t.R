@@ -3,7 +3,5 @@
 #
 
 test_that("import_lab_data_berlin_t() works", {
-
   expect_error(kwb.pilot:::import_lab_data_berlin_t())
 })
-

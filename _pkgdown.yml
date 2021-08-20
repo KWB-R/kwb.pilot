@@ -44,7 +44,9 @@ navbar:
     href: articles/A4_modify.html
   - text: 5 KWB Pilots
     menu:
-    - text: 5.1 Suleman
+    - text: 5.1 MBR4.0
+      href: articles/mbr40.html
+    - text: 5.2 Suleman
       href: articles/suleman.html
   - text: News
     href: news/index.html

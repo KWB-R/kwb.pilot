@@ -3,7 +3,5 @@
 #
 
 test_that("get_thresholds() works", {
-
   kwb.pilot:::get_thresholds()
 })
-

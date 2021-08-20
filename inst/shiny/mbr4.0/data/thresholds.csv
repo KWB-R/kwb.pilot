@@ -1,0 +1,75 @@
+ParameterCode;ParameterName;ParameterUnit;SiteCode;SiteName;ParameterThresholdComparison;ParameterThreshold;ParameterThresholdSource
+h;Füllstand;%;grob;Grobstofftank;NA;NA;NA
+h;Füllstand;%;bel;Belebung;NA;NA;NA
+h;Füllstand;%;filt;Filtration;NA;NA;NA
+q;Durchfluss;l/h;filt;Filtrat 1;NA;NA;NA
+p;Druck;mbar;filt;Filtrat 1;NA;NA;NA
+q;Durchfluss;Nm3/h;sg1;Verdichter 1 Filtration;NA;NA;NA
+q;Durchfluss;Nm3/h;sg2;Verdichter 2 Filtration;NA;NA;NA
+q;Durchfluss;Nm3/h;nitri;Verdichter Nitrifikation;NA;NA;NA
+q;Durchfluss;l/h;zp;Zulaufpumpe;NA;NA;NA
+q;Durchfluss;l/h;rp;Rezipumpe;NA;NA;NA
+q;Durchfluss;l/h;filtrat2;Filtrat 2;NA;NA;NA
+p;Druck;mbar;filtrat2;Filtrat 2;NA;NA;NA
+p;Druck;mbar;sg1;Verdichter 1 Filtration;NA;NA;NA
+p;Druck;mbar;sg2;Verdichter 2 Filtration;NA;NA;NA
+ldo;Sauerstoff;mg/l;nitri;Nitrifikation;NA;NA;NA
+ldo;Temperatur;°C;nitri_temp;Nitrifikation O2-Sonde;NA;NA;NA
+ldo;Sauerstoff;mg/l;filter;Filtration;NA;NA;NA
+ldo;Temperatur;°C;filter_temp;Filtration O2-Sonde;NA;NA;NA
+redox;Redox;mV;deni;Denitrifikation;NA;NA;NA
+redox;Temperatur;°C;deni_temp;Denitrifikation Redox-Sonde;NA;NA;NA
+ts;TS;g/l;filter;Filtration;NA;NA;NA
+ts;TS;g/l;nitri;Nitrifikation;NA;NA;NA
+ammonium;Ammonium;mg/l;ablauf;Ablauf;NA;NA;NA
+nitrat;Nitrat;mg/l;ablauf;Ablauf;NA;NA;NA
+kalium;Kalium;mg/l;ablauf;Ablauf;NA;NA;NA
+chlorid;Chlorid;mg/l;ablauf;Ablauf;NA;NA;NA
+temp;Temperatur;°C;ablauf;Ablauf;NA;NA;NA
+ammonium;Ammonium;mg/l;nitri;Nitrifikation;NA;NA;NA
+kalium;Kalium;mg/l;nitri;Nitrifikation;NA;NA;NA
+temp;Temperatur;°C;nitri;Nitrifikation;NA;NA;NA
+ammonium;Ammonium;mg/l;zulauf;Zulauf;NA;NA;NA
+kalium;Kalium;mg/l;zulauf;Zulauf;NA;NA;NA
+temp;Temperatur;°C;zulauf;Zulauf NH4-Sonde;NA;NA;NA
+leitf;Leitfähigkeit;µS/cm;zulauf;Zulauf;NA;NA;NA
+leitf;Temperatur;°C;zulauf_temp;Zulauf LF-Sonde;NA;NA;NA
+ph;ph;-;filter;Filtration;NA;NA;NA
+ph;Temperatur;°C;filter_temp;Filtration pH-Sonde;NA;NA;NA
+ph;pH;-;nitri;Nitrifikation;NA;NA;NA
+ph;Temperatur;°C;nitri_temp;Nitrifikation pH-Sonde;NA;NA;NA
+q;Durchfluss;l/h;bypass_rezi;Rezi nach Deni;NA;NA;NA
+q;Druchfluss;l/h;filter_rezi;Rezi nach Filtration;NA;NA;NA
+p;Druck;mbar;komp;Druckkompensation;NA;NA;NA
+p;Druck;mbar;zulauf;Zulaufbehälter;NA;NA;NA
+p;Differenzdruck;mbar;filt1_diff;Filtrat 1;NA;NA;NA
+p;Differenzdruck;mbar;filt2_diff;Filtrat 2;NA;NA;NA
+trios;Nitrat;mg/l;zulauf_no3n;Zulauf Trios-Sonde;NA;NA;NA
+trios;Nitrit;mg/l;zulauf_no2n;Zulauf Trios-Sonde;NA;NA;NA
+trios;CSBeq;mg/l;zulauf_csb;Zulauf;NA;NA;NA
+trios;SAK254;1/m;zulauf_sak;Zulauf;NA;NA;NA
+trios;Nitrat;mg/l;ablauf_no3n;Ablauf Trios-Sonde;NA;NA;NA
+trios;Nitrit;mg/l;ablauf_no2n;Ablauf Trios-Sonde;NA;NA;NA
+trios;CSBeq;mg/l;ablauf_csb;Ablauf;NA;NA;NA
+trios;SAK254;1/m;ablauf_sak;Ablauf;NA;NA;NA
+q;Filtratmenge;L;gesamt;Filtrat 1 gesamt;NA;NA;NA
+q;Filtratmenge;L;gestern;Filtrat 1 gestern;NA;NA;NA
+q;Filtratmenge;L;gesamt_filt2;Filtrat 2 gesamt;NA;NA;NA
+q;Filtratmenge;L;gestern_filt2;Filtrat 2 gestern;NA;NA;NA
+q-nitri-gesamt;Luftmenge;Nm3;NA;Verdichter Nitrifikation gesamt;NA;NA;NA
+q;Luftmenge;Nm3;sg1_gesamt;Verdichter 1 Filtration gesamt;NA;NA;NA
+q;Luftmenge;Nm3;sg2_gesamt;Verdichter 2 Filtration gesamt;NA;NA;NA
+q;Zulaufmenge;L;zp_gesamt;gesamt;NA;NA;NA
+q;Zulaufmenge;L;zp_gestern;gestern;NA;NA;NA
+q;ÜSS-Menge;L;uss_gesamt;gesamt;NA;NA;NA
+t;Betriebsstunden;h;rechen;Rechen;NA;NA;NA
+t;Betriebsstunden;h;nitri;Verdichter Nitrifikation;NA;NA;NA
+t;Betriebsstunden;h;rp;Rezipumpe;NA;NA;NA
+t;Betriebsstunden;h;sg1;Verdichter 1 Filtration;NA;NA;NA
+t;Betriebsstunden;h;sg2;Verdichter 2 Filtration;NA;NA;NA
+t;Betriebsstunden;h;fp;Filtratpumpe 1;NA;NA;NA
+t;Betriebsstunden;h;fp2;Filtratpumpe 2;NA;NA;NA
+t;Betriebsstunden;h;rw1;Rührwerk 1;NA;NA;NA
+t;Betriebsstunden;h;rw2;Rührwerk 2;NA;NA;NA
+t;Betriebsstunden;h;zp1;Zulaufpumpe;NA;NA;NA
+t;Betriebsstunden;h;grobstoffp;Grobstoffpumpe;NA;NA;NA

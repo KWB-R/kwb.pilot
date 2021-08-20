@@ -1,6 +1,4 @@
-# [kwb.pilot 0.1.0.9000]
-
-Development version (instable): 
+# [kwb.pilot 0.2.0]
 
 * Add functions for project [MBR 4.0](https://https://www.kompetenz-wasser.de/en/project/mbr40/)
 
