@@ -2,32 +2,50 @@
 % Please edit documentation in R/read_mbr4.R
 \name{read_mbr4}
 \alias{read_mbr4}
-\title{Read MBR4.0 data from Martin Systems}
+\title{Read MBR4.0 data combining latest and archived data}
 \usage{
 read_mbr4(
-  url = Sys.getenv("MBR4.0_URL"),
-  target_path = file.path(tempdir(), "mbr4.tsv"),
+  latest_url = Sys.getenv("MBR4.0_URL"),
+  archived_file = "MBR_export_",
+  archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
+  archived_url = Sys.getenv("NEXTCLOUD_URL"),
+  archived_user = Sys.getenv("NEXTCLOUD_USER"),
+  archived_pw = Sys.getenv("NEXTCLOUD_USER"),
+  target_dir = tempdir(),
   dbg = FALSE,
   ...
 )
 }
 \arguments{
-\item{url}{url to download site (default: Sys.getenv("MBR4.0_URL"),
+\item{latest_url}{url to download latest .tsv file (default: Sys.getenv("MBR4.0_URL"),
 please use run \link[usethis]{edit_r_environ} and define a
 key value pair "MBR4.0_URL" = "download-url-martin-systems") so
 that this function works automatically}
 
-\item{target_path}{to download data (default: file.path(tempdir(), "mbr4.tsv"))}
+\item{archived_file}{file name/pattern of XLSX file  (default: "MBR_export_")}
+
+\item{archived_dir}{directory on Nextcloud containing file (default: 
+"projects/MBR4.0/Exchange/Rohdaten/Online_export")}
+
+\item{archived_url}{url of Nextcloud (default: Sys.getenv("NEXTCLOUD_URL"))}
+
+\item{archived_user}{username of Nextcloud  (default: Sys.getenv("NEXTCLOUD_USER"))}
+
+\item{archived_pw}{password of Nextcloud  (default: Sys.getenv("NEXTCLOUD_USER"))}
+
+\item{target_dir}{directory to download data (default: tempdir())}
 
 \item{dbg}{print debug messages (default: FALSE)}
 
 \item{...}{additional arguments passed to  \link[readr]{read_tsv}}
 }
 \value{
-tibble with imported MBR4.0 data
+tibble with imported MBR4.0 xlsx data (archived on Nextcloud since 
+start of operation)
 }
 \description{
-Read MBR4.0 data from Martin Systems
+Download latest data as 'tsv' from Martin Systems Webportal and 
+combine with archived ('tsv') on Nextcloud'
 }
 \examples{
 mbr4_data <- read_mbr4()

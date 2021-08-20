@@ -10,7 +10,10 @@ tidy_mbr4_data(
 )
 }
 \arguments{
-\item{mbr4_data}{tibble as retrieved by \link{read_mbr4}}
+\item{mbr4_data}{tibble as retrieved by \code{read_mbr4}}
+
+\item{path_metadata}{path to metadata file (default: 
+kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv"))}
 }
 \value{
 tidy MBR 4 data in long format

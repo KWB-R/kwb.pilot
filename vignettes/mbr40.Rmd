@@ -51,8 +51,7 @@ paths <- kwb.utils::resolve(paths_list)
 ```{r import, eval = TRUE}
 library(kwb.pilot)
 
-mbr4_data_raw <- kwb.pilot::read_mbr4(url = paths$url, 
-                                      target_path = paths$tsv_file)
+mbr4_data_raw <- kwb.pilot::read_mbr4()
 str(mbr4_data_raw)
 
 mbr4_data_tidy <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw)

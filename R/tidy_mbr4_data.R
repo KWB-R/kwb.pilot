@@ -1,13 +1,15 @@
 #' MBR 4.0 Data Tidy
 #'
-#' @param mbr4_data tibble as retrieved by \link{read_mbr4}
-#'
+#' @param mbr4_data tibble as retrieved by \code{read_mbr4}
+#' @param path_metadata path to metadata file (default: 
+#' kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv"))
 #' @return tidy MBR 4 data in long format
 #' @export
 #' @importFrom tidyr pivot_longer
 #' @importFrom tidyselect all_of
 #' @importFrom readr read_csv cols
 #' @importFrom dplyr rename filter left_join
+#' @export
 #' @examples
 #' \dontrun{
 #' mbr4_data <- read_mbr4()

@@ -41,6 +41,7 @@ Imports:
     ggforce (>= 0.3.2),
     htmlwidgets (>= 1.5.3),
     janitor (>= 2.0.1),
+    kwb.nextcloud,
     kwb.utils (>= 0.7.0),
     leaflet (>= 2.0.3),
     lubridate (>= 1.7.9.2),
