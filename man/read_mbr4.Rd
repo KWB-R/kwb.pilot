@@ -5,7 +5,7 @@
 \title{Read MBR4.0 data combining latest and archived data}
 \usage{
 read_mbr4(
-  latest_url = Sys.getenv("MBR4.0_URL"),
+  latest_url = Sys.getenv("MBR40_URL"),
   archived_file = "MBR_export_",
   archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
   archived_url = Sys.getenv("NEXTCLOUD_URL"),
@@ -17,9 +17,9 @@ read_mbr4(
 )
 }
 \arguments{
-\item{latest_url}{url to download latest .tsv file (default: Sys.getenv("MBR4.0_URL"),
+\item{latest_url}{url to download latest .tsv file (default: Sys.getenv("MBR40_URL"),
 please use run \link[usethis]{edit_r_environ} and define a
-key value pair "MBR4.0_URL" = "download-url-martin-systems") so
+key value pair "MBR40_URL" = "download-url-martin-systems") so
 that this function works automatically}
 
 \item{archived_file}{file name/pattern of XLSX file  (default: "MBR_export_")}

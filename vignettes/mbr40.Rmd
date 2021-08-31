@@ -43,7 +43,7 @@ For doing so follow the steps below:
 2. In the opened window add the required environment variables
 
 ```{r r_environment, eval = FALSE}
-MBR4.0_URL = "url-to-download-pilot-plant-data"
+MBR40_URL = "url-to-download-pilot-plant-data"
 NEXTCLOUD_URL = "https://<replace-with-dwc-cloud-url>"
 NEXTCLOUD_USER = "<your-dwc-cloud-username>" # your username
 NEXTCLOUD_PASSWORD = "your-nextcloud-app-password" ### see details below
