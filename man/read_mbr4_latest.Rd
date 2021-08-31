@@ -5,7 +5,7 @@
 \title{Read MBR4.0 data from Martin Systems Webportal (As "tsv")}
 \usage{
 read_mbr4_latest(
-  url = Sys.getenv("MBR4.0_URL"),
+  url = Sys.getenv("MBR40_URL"),
   target_dir = tempdir(),
   dbg = FALSE,
   ...
@@ -14,7 +14,7 @@ read_mbr4_latest(
 \arguments{
 \item{url}{url to download site (default: Sys.getenv("MBR4.0_URL"),
 please use run \link[usethis]{edit_r_environ} and define a
-key value pair "MBR4.0_URL" = "download-url-martin-systems") so
+key value pair "MBR40_URL" = "download-url-martin-systems") so
 that this function works automatically}
 
 \item{target_dir}{directory to download data (default: tempdir())}
