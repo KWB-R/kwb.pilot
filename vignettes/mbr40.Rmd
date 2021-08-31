@@ -66,6 +66,45 @@ For creating `<your-nextcloud-app-password>`:
 
 Subsequently click **Save** and restart RStudio.
 
+## Define paths 
+
+### Option 1: At KWB
+
+In `paths_list` you need to replace the dummy value `kwb-server` 
+for the key `servername`.
+
+```{r paths_kwb, eval = FALSE}
+
+#KWB server
+paths_list <- list(
+  servername = "kwb-server",
+  root = "//<servername>/projekte$/WWT_Department/Projects/MBR 4.0/Exchange/",
+  rawdata = "<root>/20_rawdata",
+  processing = "<root>/21_processing",
+  online =  "<rawdata>/online_data",
+  export_dir = "<processing>/online-data"
+  )
+
+paths <- kwb.utils::resolve(paths_list)
+```
+
+### Option 2: At Home
+
+```{r paths_home, eval = FALSE}
+paths_list <- list(
+  root = "C:/kwb/projects/mbr4.0",
+  rawdata = "<root>/20_rawdata",
+  processing = "<root>/21_processing",
+  online =  "<rawdata>/online_data",
+  export_dir = "<processing>/online-data"
+)
+
+# Only execute "At Home" if not at "KWB" (i.e. KWB server path does not exist) 
+if(dir.exists(paths$online)) {
+paths <- kwb.utils::resolve(paths_list)
+}
+```
+
 
 ## Import 
 
