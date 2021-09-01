@@ -5,7 +5,7 @@ if (use_live_data) {
 library(kwb.pilot)
 
 paths_list <- list(
-  url = Sys.getenv("MBR4.0_URL"),
+  url = Sys.getenv("MBR40_URL"),
   export_dir = "data/",
   tsv_file = "<export_dir>/mbr4.tsv"
   )

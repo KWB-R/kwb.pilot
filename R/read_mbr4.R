@@ -43,9 +43,9 @@ read_mbr4_tsv <- function(path,
 #' Read MBR4.0 data combining latest and archived data 
 #' @description  Download latest data as 'tsv' from Martin Systems Webportal and 
 #' combine with archived ('tsv') on Nextcloud'
-#' @param latest_url url to download latest .tsv file (default: Sys.getenv("MBR4.0_URL"),
+#' @param latest_url url to download latest .tsv file (default: Sys.getenv("MBR40_URL"),
 #' please use run \link[usethis]{edit_r_environ} and define a
-#' key value pair "MBR4.0_URL" = "download-url-martin-systems") so
+#' key value pair "MBR40_URL" = "download-url-martin-systems") so
 #' that this function works automatically
 #' @param archived_file file name/pattern of XLSX file  (default: "MBR_export_")
 #' @param archived_dir directory on Nextcloud containing file (default: 
@@ -63,7 +63,7 @@ read_mbr4_tsv <- function(path,
 #' @examples
 #' mbr4_data <- read_mbr4()
 #' str(mbr4_data)
-read_mbr4 <- function(latest_url = Sys.getenv("MBR4.0_URL"),
+read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
                       archived_file = "MBR_export_",
                       archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
                       archived_url = Sys.getenv("NEXTCLOUD_URL"),
@@ -111,7 +111,7 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR4.0_URL"),
 #'
 #' @param url url to download site (default: Sys.getenv("MBR4.0_URL"),
 #' please use run \link[usethis]{edit_r_environ} and define a
-#' key value pair "MBR4.0_URL" = "download-url-martin-systems") so
+#' key value pair "MBR40_URL" = "download-url-martin-systems") so
 #' that this function works automatically
 #' @param target_dir directory to download data (default: tempdir())
 #' @param dbg print debug messages (default: FALSE)
@@ -124,7 +124,7 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR4.0_URL"),
 #' @examples
 #' mbr4_data_latest <- read_mbr4_latest()
 #' str(mbr4_data_latest)
-read_mbr4_latest <- function(url = Sys.getenv("MBR4.0_URL"),
+read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
                       target_dir = tempdir(),
                       dbg = FALSE,
                       ...) {
