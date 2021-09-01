@@ -3,7 +3,7 @@
 #' (default: kwb.pilot:::package_file("shiny/berlin_t/data/analytics.xlsx"))
 #' @return a list of imported lab data for Berlin-Tiefwerder
 #' @import tidyr
-#' @import dplyr
+#' @importFrom dplyr left_join mutate
 #' @importFrom readxl read_xlsx
 #' @importFrom magrittr "%>%"
 #' @export

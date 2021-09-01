@@ -28,7 +28,7 @@ calenderweek_from_dates <- function(start = "2017-04-24", end = Sys.Date()) {
 #' @param year_month month to be imported (e.g. 2017-04')
 #' @return character vector with operational filenames with all calendar weeks
 #' that need to be imported for Berlin Schoenerlinde
-#' @import dplyr
+#' @importFrom dplyr filter_ pull
 #' @importFrom tidyr separate
 #' @export
 get_monthly_data_from_calendarweeks <- function(year_month) {

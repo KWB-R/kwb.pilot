@@ -324,7 +324,7 @@ aggregate_export_fst_berlin_f <- function(year_month_start = "2019-11",
 }
 
 #' MBR4.0: aggregate and export to fst
-#' @param mbr4_data_tidy tidy MBR4 data as retrieved by \link{tidy_mbr4_data},
+#' @param  siteData_raw_list tidy MBR4 data as retrieved by \code{\link{tidy_mbr4_data}},
 #' (default: kwb.pilot::tidy_mbr4_data(kwb.pilot::read_mbr4()))
 #' @param compression (default: 100)
 #' @return exports data for each month into subfolder: /data/fst/year-month
@@ -333,8 +333,9 @@ aggregate_export_fst_berlin_f <- function(year_month_start = "2019-11",
 #' @importFrom stringr str_remove
 #' @importFrom fs dir_ls
 #' @export
-aggregate_export_fst_mbr4 <- function(mbr4_data_tidy = tidy_mbr4_data(read_mbr4()), 
+aggregate_export_fst_mbr4 <- function(siteData_raw_list = tidy_mbr4_data(read_mbr4()), 
                                       compression = 100) {
+  
 
     
     export_dir_path <- sprintf(
@@ -345,7 +346,7 @@ aggregate_export_fst_mbr4 <- function(mbr4_data_tidy = tidy_mbr4_data(read_mbr4(
     check_or_create_export_dir(export_dir_path)
     
     system.time(fst::write.fst(
-      x = mbr4_data_tidy,
+      x =  siteData_raw_list,
       path = sprintf("%s/siteData_raw_list.fst", export_dir_path),
       compress = compression
     ))
@@ -356,13 +357,13 @@ aggregate_export_fst_mbr4 <- function(mbr4_data_tidy = tidy_mbr4_data(read_mbr4(
       siteData_10min_list <- group_datetime(siteData_raw_list, by = 10 * 60)
     )
     
-    print("### Step 5: Calcualtating Performing temporal aggregation ##########################")
-    calc_dat <- calculate_operational_parameters_berlin_f(df = siteData_10min_list)
+    #print("### Step 5: Calculating Performing temporal aggregation ##########################")
+    #calc_dat <- calculate_operational_parameters_mbr4(df = siteData_10min_list)
     
-    siteData_10min_list <- data.table::rbindlist(
-      l = list(siteData_10min_list, calc_dat), use.names = TRUE, fill = TRUE
-    ) %>%
-      as.data.frame()
+    #siteData_10min_list <- data.table::rbindlist(
+    #  l = list(siteData_10min_list, calc_dat), use.names = TRUE, fill = TRUE
+    #) %>%
+    #  as.data.frame()
     
     
     fst::write.fst(

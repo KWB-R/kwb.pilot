@@ -8,7 +8,6 @@
 #' @param dbg print debug messages (default: FALSE)
 #' @return returns data frame with filled "DateTime" column and new column
 #' "measurementID" in case of samples
-#' @import dplyr
 #' @importFrom plyr rbind.fill
 #' @keywords internal
 fill_datetime <- function(df,

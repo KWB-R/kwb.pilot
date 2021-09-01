@@ -5,12 +5,12 @@
 \title{MBR4.0: aggregate and export to fst}
 \usage{
 aggregate_export_fst_mbr4(
-  mbr4_data_tidy = tidy_mbr4_data(read_mbr4()),
+  siteData_raw_list = tidy_mbr4_data(read_mbr4()),
   compression = 100
 )
 }
 \arguments{
-\item{mbr4_data_tidy}{tidy MBR4 data as retrieved by \link{tidy_mbr4_data},
+\item{siteData_raw_list}{tidy MBR4 data as retrieved by \code{\link{tidy_mbr4_data}},
 (default: kwb.pilot::tidy_mbr4_data(kwb.pilot::read_mbr4()))}
 
 \item{compression}{(default: 100)}
