@@ -9,23 +9,28 @@ if (use_live_data) {
   year_month_start <- "2021-03"
   year_month_end <- format(Sys.Date(), format = "%Y-%m")
 
+  kwb.utils::catAndRun(messageText = "Raw data: Downloading", expr = {
+  siteData_raw <- kwb.pilot::read_mbr4(target_dir = kwb.pilot::shiny_file("mbr4.0/data/raw/online_data"))
+  })
+  kwb.utils::catAndRun(messageText = "Raw data: Tidying", expr = {
+  siteData_raw_list <-  kwb.pilot::tidy_mbr4_data(mbr4_data = siteData_raw, 
+                                                  path_metadata = kwb.pilot::shiny_file("mbr4.0/data/metadata.csv")
+                                                  )
+  })
+  
   print("#################################################################################")
   print(sprintf(" ###### Generating & exporting .fst files for months: %s - %s",
                 year_month_start,
                 year_month_end))
   print("#################################################################################")
-
-  kwb.pilot::aggregate_export_fst_mbr4()
+  
+  kwb.pilot::aggregate_export_fst_mbr4(mbr4_data_tidy = siteData_raw_list)
   
   
-  month_pattern <- paste0(c(year_month_start,year_month_end), collapse = "|")
-  kwb.pilot::merge_and_export_fst(time_pattern = month_pattern, 
-                                  import_dir = kwb.pilot:::package_file("shiny/mbr4.0/data/fst"),
-                                  export_dir = kwb.pilot:::package_file("shiny/mbr4.0/data"))
   
 }
 
-kwb.pilot::load_fst_data(fst_dir = kwb.pilot:::package_file("shiny/mbr4.0/data/"))
+kwb.pilot::load_fst_data(fst_dir = kwb.pilot::shiny_file("mbr4.0/data/fst"))
 
 print("### Step 5: Importing threshold information ##########################")
 
