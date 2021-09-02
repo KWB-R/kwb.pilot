@@ -24,7 +24,7 @@ if (use_live_data) {
                 year_month_end))
   print("#################################################################################")
   
-  kwb.pilot::aggregate_export_fst_mbr4(mbr4_data_tidy = siteData_raw_list)
+  kwb.pilot::aggregate_export_fst_mbr4(siteData_raw_list)
   
   
   
