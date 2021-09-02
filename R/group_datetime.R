@@ -79,7 +79,8 @@ group_datetime <- function(df,
       dplyr::group_by(dplyr::across(.cols = dplyr::setdiff(names(df), 
                                                            "ParameterValue"))
                       ) %>%
-      dplyr::summarise(ParameterValue = paste0(fun, "(ParameterValue)"),
+      dplyr::summarise(ParameterValue = eval(parse(text = paste0(fun, 
+                                                                 "(.data$ParameterValue)"))),
                        .groups = "keep") %>%
       as.data.frame()
   })
