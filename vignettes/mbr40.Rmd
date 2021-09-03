@@ -159,16 +159,7 @@ mbr4_data_tidy_hour <- mbr4_data_tidy_list %>%
 
 ### CSV files 
 
-Raw and aggregated data will be exported as `csv` in `wide` format by running `kwb.pilot::long_to_wide()` as shown below:
-
-```{r export_data_wide_example, eval = TRUE}
-mbr4_data_tidy_wide <- mbr4_data_tidy_list %>%  
-  kwb.pilot::long_to_wide()
-
-str(mbr4_data_tidy_wide)
-```
-
-For exporting all datasets to `.csv` run the following lines of code:
+Raw and aggregated data will be exported as `csv` in `wide` format (by running `kwb.pilot::long_to_wide()`) as shown below:
 
 ```{r export_data, eval = FALSE}
 
