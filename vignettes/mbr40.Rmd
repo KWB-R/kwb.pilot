@@ -66,7 +66,32 @@ For creating `<your-nextcloud-app-password>`:
 
 Subsequently click **Save** and restart RStudio.
 
-## Define paths 
+## Run Shiny App 
+
+For running the shiny app it is needed to setup the environment variables as shown above and run the following
+code.
+
+### Latest Data
+
+To use the `latest data` (downloads data from web) or if you run the app for the first time you need to run: 
+
+```{r app_latest, eval=FALSE}
+kwb.pilot::run_app("mbr4.0", use_live_data = TRUE)
+```
+
+### Local Data
+
+Once you have done the step above for one time, you can also just interactively load you datasets, which you downloaded
+during the command above by running:
+
+```{r app_archive, eval=FALSE}
+kwb.pilot::run_app("mbr4.0", use_live_data = FALSE)
+```
+
+## Define paths
+
+For performing data aggregation and export to post-process the data in `Excel` in a `wide` format the workflow defined 
+below has to be followed.
 
 ### Option 1: At KWB
 
@@ -114,34 +139,56 @@ library(kwb.pilot)
 mbr4_data_raw <- kwb.pilot::read_mbr4()
 str(mbr4_data_raw)
 
-mbr4_data_tidy <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw)
+mbr4_data_tidy_list <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw) 
 
-str(mbr4_data_tidy)
+str(mbr4_data_tidy_list)
 
 ```
 
 ## Aggregate
 
 ```{r aggregate, eval = TRUE}
-mbr4_data_tidy_10min <- mbr4_data_tidy %>% kwb.pilot::group_datetime(by = 600)
-mbr4_data_tidy_1hour <- mbr4_data_tidy %>% kwb.pilot::group_datetime(by = 3600)
+mbr4_data_tidy_list_10min <- mbr4_data_tidy_list %>%   
+  kwb.pilot::group_datetime(by = 600) 
+
+mbr4_data_tidy_hour <- mbr4_data_tidy_list %>%
+  kwb.pilot::group_datetime(by = 3600)
 ```
 
 ## Export 
 
 ### CSV files 
 
+Raw and aggregated data will be exported as `csv` in `wide` format by running `kwb.pilot::long_to_wide()` as shown below:
+
+```{r export_data_wide_example, eval = TRUE}
+mbr4_data_tidy_wide <- mbr4_data_tidy_list %>%  
+  kwb.pilot::long_to_wide()
+
+str(mbr4_data_tidy_wide)
+```
+
+For exporting all datasets to `.csv` run the following lines of code:
+
 ```{r export_data, eval = FALSE}
-kwb.pilot::export_data(mbr4_data_tidy, export_dir = paths$export_dir)
-kwb.pilot::export_data(mbr4_data_tidy_10min, export_dir = paths$export_dir)
-kwb.pilot::export_data(mbr4_data_tidy_1hour, export_dir = paths$export_dir)
+
+mbr4_data_tidy_list %>%  
+  kwb.pilot::long_to_wide() %>% 
+  kwb.pilot::export_data(export_dir = paths$export_dir)
+
+mbr4_data_tidy_10min %>%  
+  kwb.pilot::long_to_wide() %>% 
+  kwb.pilot::export_data(export_dir = paths$export_dir)
+
+mbr4_data_tidy_hour %>%  
+  kwb.pilot::long_to_wide() %>%
+  kwb.pilot::export_data(export_dir = paths$export_dir)
 ```
 
-### Interactive HTML plots
+Finally you can check the datasets in the export folder 
+by running:
 
-```{r plot_data, eval = FALSE}
-kwb.pilot::plot_data(mbr4_data_tidy_10min, export_dir = paths$export_dir)
-kwb.pilot::plot_data(mbr4_data_tidy_1hour, export_dir = paths$export_dir)
-#kwb.pilot::plot_data(mbr4_data_tidy, export_dir = paths$export_dir)
+
+```{r export_data_show, eval = FALSE}
+kwb.utils::hsOpenWindowsExplorer(paths$export_dir)
 ```
-
