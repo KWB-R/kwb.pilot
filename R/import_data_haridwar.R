@@ -16,7 +16,7 @@
 #' @return returns data frame with Haridwar raw data (operation & analytics)
 #' @import readxl
 #' @import tidyr
-#' @import dplyr
+#' @importFrom dplyr setdiff select_ filter_ mutate_
 #' @importFrom plyr rbind.fill
 #' @importFrom utils read.csv
 #' @export

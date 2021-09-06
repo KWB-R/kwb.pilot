@@ -34,7 +34,7 @@ src_mysql_from_cnf <- function(dbname, group = NULL, dir = file.path(getwd(), ".
 #'
 #' @param mysql_conf path to the MySQL configuration file
 #' @return returns data frame operational data from MySQL db
-#' @import dplyr
+#' @importFrom dplyr filter tbl tbl_df rename_ filter_ select_ mutate_
 #' @export
 import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
   sumewa <- src_mysql_from_cnf("sumewa", "autarcon", dir = mysql_conf)

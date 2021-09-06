@@ -237,7 +237,7 @@ ui_timeSeries <- function(...) {
                   selected = "CET"),
       dateRangeInput('daterange',
                      label = 'Date range input: yyyy-mm-dd',
-                     start = "2019-11-01",
+                     start = "2021-03-01",
                      end = Sys.Date()),
       checkboxInput('fix_daterange', "Fix daterange", value = FALSE),
       selectInput("sitename", label = "Select a sampling point",

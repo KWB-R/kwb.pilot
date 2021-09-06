@@ -49,7 +49,7 @@ import_operation_basel <- function(xlsx_dir = package_file("shiny/basel/data/ope
 #' @importFrom janitor clean_names
 #' @importFrom  readxl read_excel
 #' @importFrom  utils read.csv2
-#' @import dplyr
+#' @importFrom dplyr group_by summarise select_ filter_ rename_ left_join mutate
 #' @export
 
 

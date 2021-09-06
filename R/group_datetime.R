@@ -11,7 +11,7 @@
 #' @param dbg print debug information
 #' @return returns data frame with data aggregated according to user defined
 #' aggregation time step
-#' @import dplyr
+#' @importFrom dplyr across group_by setdiff summarise
 #' @importFrom xts align.time
 #' @importFrom fasttime fastPOSIXct
 #' @importFrom kwb.utils stringList
@@ -76,8 +76,12 @@ group_datetime <- function(df,
 
   kwb.utils::catAndRun(text, dbg = dbg, expr = {
     df %>%
-      dplyr::group_by(-.data$ParameterValue) %>%
-      dplyr::summarise(ParameterValue = paste0(fun, "(ParameterValue)")) %>%
+      dplyr::group_by(dplyr::across(.cols = dplyr::setdiff(names(df), 
+                                                           "ParameterValue"))
+                      ) %>%
+      dplyr::summarise(ParameterValue = eval(parse(text = paste0(fun, 
+                                                                 "(.data$ParameterValue)"))),
+                       .groups = "keep") %>%
       as.data.frame()
   })
 }

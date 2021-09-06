@@ -17,12 +17,15 @@
 #' }
 tidy_mbr4_data <- function(mbr4_data,
                            path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")) {
-  keep_cols <- c("Zeitstempel", "zustand", "meldungen", "id")
+  remove_cols <- c("zustand", "meldungen", "id")
+  
+  keep_cols <- c("Zeitstempel")
 
   metadata <- readr::read_csv(file = path_metadata, 
                               col_types = readr::cols(.default = "c"))
   
   mbr4_data %>%
+    dplyr::select(!tidyselect::all_of(remove_cols)) %>% 
     tidyr::pivot_longer(
       cols = !tidyselect::all_of(keep_cols),
       names_to = "ParameterCode_SiteCode",

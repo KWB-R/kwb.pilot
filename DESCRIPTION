@@ -18,6 +18,8 @@ Authors@R:
              role = "cph"),
       person(given = "AquaNES",
              role = "fnd"),
+      person(given = "MBR 4.0",
+             role = "fnd"),
       person(given = "SULEMAN",
              role = "fnd"))
 Description: Collects, aggregates and visualises operational and
