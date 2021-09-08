@@ -153,7 +153,7 @@ str(mbr4_data_tidy_raw)
 mbr4_data_tidy_10min <- mbr4_data_tidy_raw %>%   
   kwb.pilot::group_datetime(by = 600) 
 
-mbr4_data_tidy_hour <- mbr4_data_tidy_list %>%
+mbr4_data_tidy_hour <- mbr4_data_tidy_10min %>%
   kwb.pilot::group_datetime(by = 3600)
 ```
 
@@ -165,7 +165,7 @@ Raw and aggregated data will be exported as `csv` in `wide` format (by running `
 
 ```{r export_data, eval = FALSE}
 
-kwb.pilot::export_data(df_long = mbr4_data_tidy_list,
+kwb.pilot::export_data(df_long = mbr4_data_tidy_raw,
                        export_dir = paths$export_dir)
 
 kwb.pilot::export_data(df_long = mbr4_data_tidy_list_10min,
