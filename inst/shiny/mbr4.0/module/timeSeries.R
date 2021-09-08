@@ -245,12 +245,14 @@ ui_timeSeries <- function(...) {
                   multiple = TRUE,
                   selected = unique(siteData_10min_list$SiteName)),
       selectInput("parameter1", label = "Select a parameter(s) for plot 1",
-                  choices = list(Online =  unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online"]),
-                                 Offline = unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "offline"])),
+                  choices = list(Online_raw =  unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online" & stringr::str_starts(siteData_10min_list$DataType, "raw")]),
+                                 Online_calculated = unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online" & stringr::str_starts(siteData_10min_list$DataType, "calculated")])
+                                 ),
                   multiple = TRUE),
       selectInput("parameter2", label = "Select a parameter(s) for plot 2",
-                  choices = list(Online =  unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online"]),
-                                 Offline = unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "offline"])),
+                  choices = list(Online_raw =  unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online" & stringr::str_starts(siteData_10min_list$DataType, "raw")]),
+                                 Online_calculated = unique(siteData_10min_list$ParameterName[siteData_10min_list$Source == "online" & stringr::str_starts(siteData_10min_list$DataType, "calculated")])
+                                 ),
                   multiple = TRUE),
       checkboxInput('add_thresholds', "Add thresholds to plots 1+2", value = FALSE),
       downloadButton("report", "Download plot"),

@@ -110,7 +110,9 @@ paths_list <- list(
   export_dir = "<processing>/online-data"
   )
 
+if(dir.exists(paths$online)) {
 paths <- kwb.utils::resolve(paths_list)
+}
 ```
 
 ### Option 2: At Home
@@ -125,9 +127,9 @@ paths_list <- list(
 )
 
 # Only execute "At Home" if not at "KWB" (i.e. KWB server path does not exist) 
-if(dir.exists(paths$online)) {
+fs::dir_create(paths$online, recurse = TRUE)
 paths <- kwb.utils::resolve(paths_list)
-}
+
 ```
 
 
@@ -139,19 +141,19 @@ library(kwb.pilot)
 mbr4_data_raw <- kwb.pilot::read_mbr4()
 str(mbr4_data_raw)
 
-mbr4_data_tidy_list <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw) 
+mbr4_data_tidy_raw <- kwb.pilot::tidy_mbr4_data(mbr4_data = mbr4_data_raw) 
 
-str(mbr4_data_tidy_list)
+str(mbr4_data_tidy_raw)
 
 ```
 
 ## Aggregate
 
 ```{r aggregate, eval = TRUE}
-mbr4_data_tidy_list_10min <- mbr4_data_tidy_list %>%   
+mbr4_data_tidy_10min <- mbr4_data_tidy_raw %>%   
   kwb.pilot::group_datetime(by = 600) 
 
-mbr4_data_tidy_hour <- mbr4_data_tidy_list %>%
+mbr4_data_tidy_hour <- mbr4_data_tidy_10min %>%
   kwb.pilot::group_datetime(by = 3600)
 ```
 
@@ -163,17 +165,14 @@ Raw and aggregated data will be exported as `csv` in `wide` format (by running `
 
 ```{r export_data, eval = FALSE}
 
-mbr4_data_tidy_list %>%  
-  kwb.pilot::long_to_wide() %>% 
-  kwb.pilot::export_data(export_dir = paths$export_dir)
+kwb.pilot::export_data(df_long = mbr4_data_tidy_raw,
+                       export_dir = paths$export_dir)
 
-mbr4_data_tidy_10min %>%  
-  kwb.pilot::long_to_wide() %>% 
-  kwb.pilot::export_data(export_dir = paths$export_dir)
+kwb.pilot::export_data(df_long = mbr4_data_tidy_list_10min,
+                       export_dir = paths$export_dir)
 
-mbr4_data_tidy_hour %>%  
-  kwb.pilot::long_to_wide() %>%
-  kwb.pilot::export_data(export_dir = paths$export_dir)
+kwb.pilot::export_data(df_long = mbr4_data_tidy_list_hour,
+                       export_dir = paths$export_dir)
 ```
 
 Finally you can check the datasets in the export folder 

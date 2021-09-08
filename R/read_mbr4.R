@@ -90,21 +90,11 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
                                            dbg = dbg,
                                            ...)
   
-  mbr4_data <- dplyr::bind_rows(mbr4_data_latest,
-                                mbr4_data_archived)
+  dplyr::bind_rows(mbr4_data_latest,
+                   mbr4_data_archived) %>%
+    remove_duplicates()
   
-  
-  duplicates_bool <- duplicated(mbr4_data)
-  
-  if(any(duplicates_bool)) {
-  n_duplicates <- sum(duplicates_bool)
-  msg_text <- sprintf("Remove %d duplicated data points", n_duplicates)
-  mbr4_data <- kwb.utils::catAndRun(messageText = msg_text,
-                       mbr4_data[!duplicates_bool, ]
-                       )
-  
-}
- mbr4_data
+
 }
 
 #' Read MBR4.0 data from Martin Systems Webportal (As "tsv")

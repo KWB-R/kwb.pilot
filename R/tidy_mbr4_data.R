@@ -26,6 +26,7 @@ tidy_mbr4_data <- function(mbr4_data,
   
   mbr4_data %>%
     dplyr::select(!tidyselect::all_of(remove_cols)) %>% 
+    remove_duplicates() %>% 
     tidyr::pivot_longer(
       cols = !tidyselect::all_of(keep_cols),
       names_to = "ParameterCode_SiteCode",
