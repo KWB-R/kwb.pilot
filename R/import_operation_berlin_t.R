@@ -69,16 +69,20 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' "raw_data_dir" will not be used
 #' @param meta_file_path path to metadata file (default:
 #' kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))
+#' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET"))
+#' @param col_types col_types (default: \code{\link[readr]{cols}})
 #' @return data.frame with imported PENTAIR operational data
 #' @import tidyr
-#' @importFrom readr read_tsv
+#' @importFrom readr cols locale read_tsv
 #' @importFrom magrittr "%>%"
 #' @importFrom data.table rbindlist
 #' @importFrom kwb.utils catAndRun
 #' @export
 read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
                               raw_data_files = NULL,
-                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv")) {
+                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+                              locale = readr::locale(tz = "CET"),
+                              col_types = readr::cols()) {
   
   xls_files <- if (is.null(raw_data_files)) {
     list_full_xls_files(raw_data_dir)
@@ -97,7 +101,8 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
   
   raw_list <- lapply(xls_files, FUN = function(xls_file) {
     print(paste("Importing raw data file:", xls_file))
-    tmp <- readr::read_tsv(file = xls_file, locale = readr::locale(tz = "CET"))
+    tmp <- readr::read_tsv(file = xls_file, locale = locale,
+                           col_types = col_types)
     relevant_paras <- names(tmp)[names(tmp) %in% columns]
     tmp[, relevant_paras]
     
@@ -112,7 +117,9 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
 
     raw_list <- lapply(xls_files, FUN = function(xls_file) {
       print(paste("Importing raw data file:", xls_file))
-      tmp <- readr::read_tsv(file = xls_file, locale = readr::locale(tz = "CET"))
+      tmp <- readr::read_tsv(file = xls_file, 
+                             locale = locale,
+                             col_types = col_types)
     })
     
     df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
