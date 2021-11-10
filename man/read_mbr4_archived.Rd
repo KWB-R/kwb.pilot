@@ -9,6 +9,9 @@ read_mbr4_archived(
   dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
   target_dir = tempdir(),
   locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
+  col_types = readr::cols(.default = readr::col_double(), zustand =
+    readr::col_character(), meldungen = readr::col_character(), Zeitstempel =
+    readr::col_datetime(format = "\%d.\%m.\%Y \%H:\%M")),
   url = Sys.getenv("NEXTCLOUD_URL"),
   user = Sys.getenv("NEXTCLOUD_USER"),
   pw = Sys.getenv("NEXTCLOUD_USER"),
@@ -26,6 +29,13 @@ read_mbr4_archived(
 
 \item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET",
 decimal_mark = ",", grouping_mark = "."))}
+
+\item{col_types}{col_types (default: \code{\link[readr]{cols}}(
+.default = \code{\link[readr]{cols_double}},  
+ zustand  = \code{\link[readr]{col_character}},
+ meldungen  = \code{\link[readr]{col_character}},
+ Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
+ )}
 
 \item{url}{url of Nextcloud (default: Sys.getenv("NEXTCLOUD_URL"))}
 

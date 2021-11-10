@@ -7,6 +7,9 @@
 read_mbr4_tsv(
   path,
   locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
+  col_types = readr::cols(.default = readr::col_double(), zustand =
+    readr::col_character(), meldungen = readr::col_character(), Zeitstempel =
+    readr::col_datetime(format = "\%d.\%m.\%Y \%H:\%M")),
   dbg = FALSE,
   ...
 )
@@ -16,6 +19,13 @@ read_mbr4_tsv(
 
 \item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET",
 decimal_mark = ",", grouping_mark = "."))}
+
+\item{col_types}{col_types (default: \code{\link[readr]{cols}}(
+.default = \code{\link[readr]{cols_double}},  
+ zustand  = \code{\link[readr]{col_character}},
+ meldungen  = \code{\link[readr]{col_character}},
+ Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
+ )}
 
 \item{dbg}{print debug messages (default: FALSE)}
 
