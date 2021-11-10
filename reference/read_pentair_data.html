@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">kwb.pilot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
       </span>
     </div>
 
@@ -168,7 +168,9 @@
     <pre class="usage"><span class='fu'>read_pentair_data</span><span class='op'>(</span>
   raw_data_dir <span class='op'>=</span> <span class='fu'>package_file</span><span class='op'>(</span><span class='st'>"shiny/berlin_t/data/operation"</span><span class='op'>)</span>,
   raw_data_files <span class='op'>=</span> <span class='cn'>NULL</span>,
-  meta_file_path <span class='op'>=</span> <span class='fu'>package_file</span><span class='op'>(</span><span class='st'>"shiny/berlin_t/data/parameter_site_metadata.csv"</span><span class='op'>)</span>
+  meta_file_path <span class='op'>=</span> <span class='fu'>package_file</span><span class='op'>(</span><span class='st'>"shiny/berlin_t/data/parameter_site_metadata.csv"</span><span class='op'>)</span>,
+  locale <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/locale.html'>locale</a></span><span class='op'>(</span>tz <span class='op'>=</span> <span class='st'>"CET"</span><span class='op'>)</span>,
+  col_types <span class='op'>=</span> <span class='fu'>readr</span><span class='fu'>::</span><span class='fu'><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></span><span class='op'>(</span><span class='op'>)</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -189,6 +191,14 @@ allows to limit import to specific files (default: NULL). If specified parameter
       <th>meta_file_path</th>
       <td><p>path to metadata file (default:
 kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))</p></td>
+    </tr>
+    <tr>
+      <th>locale</th>
+      <td><p>locale (default: <code><a href='https://readr.tidyverse.org/reference/locale.html'>locale</a></code>(tz = "CET"))</p></td>
+    </tr>
+    <tr>
+      <th>col_types</th>
+      <td><p>col_types (default: <code><a href='https://readr.tidyverse.org/reference/cols.html'>cols</a></code>)</p></td>
     </tr>
     </table>
 
