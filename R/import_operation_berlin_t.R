@@ -77,6 +77,7 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' @importFrom magrittr "%>%"
 #' @importFrom data.table rbindlist
 #' @importFrom kwb.utils catAndRun
+#' @importFrom utils write.csv
 #' @export
 read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
                               raw_data_files = NULL,
@@ -127,7 +128,7 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
     gather_cols <- setdiff(names(df_tidy), "TimeStamp")
     
     meta_data <- tibble::tibble(ParameterCode = gather_cols, 
-                                ParameterName = ParameterCode, 
+                                ParameterName = gather_cols, 
                                 ParameterUnit = "", 
                                 SiteCode = "", 
                                 SiteName = "", 

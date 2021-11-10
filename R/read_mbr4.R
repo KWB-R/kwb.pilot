@@ -3,7 +3,7 @@
 #' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
 #' decimal_mark = ",", grouping_mark = "."))
 #' @param col_types col_types (default: \code{\link[readr]{cols}}(
-#' .default = \code{\link[readr]{cols_double}},  
+#' .default = \code{\link[readr]{col_double}},  
 #'  zustand  = \code{\link[readr]{col_character}},
 #'  meldungen  = \code{\link[readr]{col_character}},
 #'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
@@ -25,7 +25,7 @@ read_mbr4_tsv <- function(path,
                           ),
                           dbg = FALSE,
                           ...) {
-  
+
   import_raw <- function() {
   readr::read_tsv(
     file = path,
@@ -113,7 +113,7 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
 #' decimal_mark = ".", grouping_mark = ","))
 #' @param col_types col_types (default: \code{\link[readr]{cols}}(
-#' .default = \code{\link[readr]{cols_double}},  
+#' .default = \code{\link[readr]{col_double}},  
 #'  zustand  = \code{\link[readr]{col_character}},
 #'  meldungen  = \code{\link[readr]{col_character}},
 #'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%Y-%m-%d %H:%M:%S")
@@ -165,7 +165,7 @@ read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
 #' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
 #' decimal_mark = ",", grouping_mark = "."))
 #' @param col_types col_types (default: \code{\link[readr]{cols}}(
-#' .default = \code{\link[readr]{cols_double}},  
+#' .default = \code{\link[readr]{col_double}},  
 #'  zustand  = \code{\link[readr]{col_character}},
 #'  meldungen  = \code{\link[readr]{col_character}},
 #'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")

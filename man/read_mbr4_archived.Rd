@@ -31,7 +31,7 @@ read_mbr4_archived(
 decimal_mark = ",", grouping_mark = "."))}
 
 \item{col_types}{col_types (default: \code{\link[readr]{cols}}(
-.default = \code{\link[readr]{cols_double}},  
+.default = \code{\link[readr]{col_double}},  
  zustand  = \code{\link[readr]{col_character}},
  meldungen  = \code{\link[readr]{col_character}},
  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
