@@ -7,6 +7,7 @@
 read_mbr4_latest(
   url = Sys.getenv("MBR40_URL"),
   target_dir = tempdir(),
+  locale = readr::locale(tz = "CET", decimal_mark = ".", grouping_mark = ","),
   dbg = FALSE,
   ...
 )
@@ -18,6 +19,9 @@ key value pair "MBR40_URL" = "download-url-martin-systems") so
 that this function works automatically}
 
 \item{target_dir}{directory to download data (default: tempdir())}
+
+\item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET",
+decimal_mark = ".", grouping_mark = ","))}
 
 \item{dbg}{print debug messages (default: FALSE)}
 

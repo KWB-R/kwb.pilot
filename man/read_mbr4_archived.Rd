@@ -8,6 +8,7 @@ read_mbr4_archived(
   file = "MBR_export_",
   dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
   target_dir = tempdir(),
+  locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
   url = Sys.getenv("NEXTCLOUD_URL"),
   user = Sys.getenv("NEXTCLOUD_USER"),
   pw = Sys.getenv("NEXTCLOUD_USER"),
@@ -22,6 +23,9 @@ read_mbr4_archived(
 "projects/MBR4.0/Exchange/Rohdaten/Online_export")}
 
 \item{target_dir}{directory to download data (default: tempdir())}
+
+\item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET",
+decimal_mark = ",", grouping_mark = "."))}
 
 \item{url}{url of Nextcloud (default: Sys.getenv("NEXTCLOUD_URL"))}
 

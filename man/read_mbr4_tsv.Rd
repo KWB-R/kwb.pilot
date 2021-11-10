@@ -4,10 +4,18 @@
 \alias{read_mbr4_tsv}
 \title{Read MBR4.0 tsv data}
 \usage{
-read_mbr4_tsv(path, dbg = FALSE, ...)
+read_mbr4_tsv(
+  path,
+  locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
+  dbg = FALSE,
+  ...
+)
 }
 \arguments{
 \item{path}{path to tsv file to be imported}
+
+\item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET",
+decimal_mark = ",", grouping_mark = "."))}
 
 \item{dbg}{print debug messages (default: FALSE)}
 
