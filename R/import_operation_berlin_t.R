@@ -69,45 +69,99 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' "raw_data_dir" will not be used
 #' @param meta_file_path path to metadata file (default:
 #' kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))
+#' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET"))
+#' @param col_types col_types (default: \code{\link[readr]{cols}})
 #' @return data.frame with imported PENTAIR operational data
 #' @import tidyr
-#' @importFrom readr read_tsv
+#' @importFrom readr cols locale read_tsv
 #' @importFrom magrittr "%>%"
 #' @importFrom data.table rbindlist
+#' @importFrom kwb.utils catAndRun
+#' @importFrom utils write.csv
 #' @export
 read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
                               raw_data_files = NULL,
-                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv")) {
-  meta_data <- read.csv(
-    file = meta_file_path, header = TRUE, sep = ",", dec = ".",
-    stringsAsFactors = FALSE
-  )
-
-  meta_data$ParameterLabel <- sprintf_columns("%s (%s)", meta_data, columns = c(
-    "ParameterName", "ParameterUnit"
-  ))
-
+                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+                              locale = readr::locale(tz = "CET"),
+                              col_types = readr::cols()) {
+  
   xls_files <- if (is.null(raw_data_files)) {
     list_full_xls_files(raw_data_dir)
   } else {
     raw_data_files
   }
-
+  
+  if(file.exists(meta_file_path)) {
+    
+    meta_data <- read.csv(
+      file = meta_file_path, header = TRUE, sep = ",", dec = ".",
+      stringsAsFactors = FALSE
+    )
+  
   columns <- c("TimeStamp", meta_data$ParameterCode[meta_data$ZeroOne == 1])
-
+  
   raw_list <- lapply(xls_files, FUN = function(xls_file) {
     print(paste("Importing raw data file:", xls_file))
-    tmp <- readr::read_tsv(file = xls_file, locale = readr::locale(tz = "CET"))
+    tmp <- readr::read_tsv(file = xls_file, locale = locale,
+                           col_types = col_types)
     relevant_paras <- names(tmp)[names(tmp) %in% columns]
     tmp[, relevant_paras]
+    
+    df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
+    
+    
+    gather_cols <- setdiff(names(df_tidy), "TimeStamp")
+    
   })
+  
+  } else {
 
-  gather_cols <- setdiff(names(raw_list[[1]]), "TimeStamp")
-
-  df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE) %>%
-    tidyr::gather_("ParameterCode", "ParameterValue", gather_cols) %>%
-    dplyr::rename_(DateTime = "TimeStamp") %>%
-    dplyr::left_join(y = meta_data %>% select_(.dots = "-ZeroOne")) %>%
+    raw_list <- lapply(xls_files, FUN = function(xls_file) {
+      print(paste("Importing raw data file:", xls_file))
+      tmp <- readr::read_tsv(file = xls_file, 
+                             locale = locale,
+                             col_types = col_types)
+    })
+    
+    df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
+    
+    gather_cols <- setdiff(names(df_tidy), "TimeStamp")
+    
+    meta_data <- tibble::tibble(ParameterCode = gather_cols, 
+                                ParameterName = gather_cols, 
+                                ParameterUnit = "", 
+                                SiteCode = "", 
+                                SiteName = "", 
+                                ZeroOne = 1
+    )
+    
+    meta_path <- file.path(raw_data_dir, "parameter_site_metadata_dummy.csv")
+    
+    msg_text <- sprintf("No metadata file provided. Generating and exporting dummy metadata file to '%s'.",
+                        meta_path)
+    
+    kwb.utils::catAndRun(messageText = msg_text, expr = { 
+      write.csv(meta_data, file = meta_path, row.names = FALSE)
+    })
+    
+    
+  }
+    
+  meta_data$ParameterLabel <- sprintf_columns("%s (%s)", meta_data, columns = c(
+    "ParameterName", "ParameterUnit"))
+  
+  df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
+  
+  
+  gather_cols <- setdiff(names(df_tidy), "TimeStamp")
+  
+  
+  df_tidy <-  df_tidy %>%
+    tidyr::pivot_longer(cols = tidyselect::all_of(gather_cols),
+                        names_to = "ParameterCode", 
+                        values_to = "ParameterValue") %>%
+    dplyr::rename(DateTime = "TimeStamp") %>%
+    dplyr::left_join(y = meta_data %>% dplyr::select(-tidyselect::matches("ZeroOne"))) %>%
     as.data.frame()
 
   df_tidy$Source <- "online"

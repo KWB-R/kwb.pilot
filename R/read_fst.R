@@ -18,7 +18,6 @@ read_fst <- function(path, tz = "CET", col_datetime = "DateTime", ...) {
 #' Load fst data for shiny app
 #'
 #' @param fst_dir directory of fst files to be loaded
-#' @importFrom kwb.utils assignGlobally
 #' @export
 load_fst_data <- function(fst_dir) {
   print("### Step 4: Loading data ##########################")
@@ -28,7 +27,9 @@ load_fst_data <- function(fst_dir) {
   step_assign <- function(title, varname, filename) {
     step_no <<- step_no + 1L
     print(sprintf("### %d): %s", step_no, title))
-    kwb.utils::assignGlobally(varname, read_fst(file.path(fst_dir, filename)))
+    assign(x = varname, 
+           value = read_fst(file.path(fst_dir, filename)), 
+           envir = .GlobalEnv)
   }
 
   step_assign("Raw data", "siteData_raw_list", "siteData_raw_list.fst")
