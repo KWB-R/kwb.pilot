@@ -7,7 +7,9 @@
 read_pentair_data(
   raw_data_dir = package_file("shiny/berlin_t/data/operation"),
   raw_data_files = NULL,
-  meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv")
+  meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+  locale = readr::locale(tz = "CET"),
+  col_types = readr::cols()
 )
 }
 \arguments{
@@ -20,6 +22,10 @@ allows to limit import to specific files (default: NULL). If specified parameter
 
 \item{meta_file_path}{path to metadata file (default:
 kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))}
+
+\item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET"))}
+
+\item{col_types}{col_types (default: \code{\link[readr]{cols}})}
 }
 \value{
 data.frame with imported PENTAIR operational data

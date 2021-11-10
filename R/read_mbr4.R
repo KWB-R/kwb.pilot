@@ -1,30 +1,36 @@
 #' Read MBR4.0 tsv data  
 #' @param path path to tsv file to be imported 
+#' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
+#' decimal_mark = ",", grouping_mark = "."))
+#' @param col_types col_types (default: \code{\link[readr]{cols}}(
+#' .default = \code{\link[readr]{col_double}},  
+#'  zustand  = \code{\link[readr]{col_character}},
+#'  meldungen  = \code{\link[readr]{col_character}},
+#'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
+#'  )
 #' @param dbg print debug messages (default: FALSE)
 #' @param ... additional arguments passed to  \link[readr]{read_tsv}
 #' @return Reads MBR4.0 tsv data
 #' @importFrom readr read_tsv locale cols col_double col_character col_datetime
 
 read_mbr4_tsv <- function(path,
+                          locale = readr::locale(tz = "CET",
+                                                 decimal_mark = ",",
+                                                 grouping_mark = "."),
+                          col_types = readr::cols(
+                            .default = readr::col_double(),
+                            zustand = readr::col_character(),
+                            meldungen = readr::col_character(),
+                            Zeitstempel = readr::col_datetime(format = "%d.%m.%Y %H:%M")
+                          ),
                           dbg = FALSE,
                           ...) {
-  
+
   import_raw <- function() {
   readr::read_tsv(
     file = path,
-    locale = readr::locale(
-      date_format = "en",
-      time_format = "en",
-      tz = "CET",
-      decimal_mark = ",",
-      grouping_mark = "."
-    ),
-    col_types = readr::cols(
-      .default = readr::col_double(),
-      zustand = readr::col_character(),
-      meldungen = readr::col_character(),
-      Zeitstempel = readr::col_datetime(format = "")
-    ),
+    locale = locale,
+    col_types = col_types,
     trim_ws = TRUE,
     ...
   ) %>%
@@ -104,6 +110,14 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #' key value pair "MBR40_URL" = "download-url-martin-systems") so
 #' that this function works automatically
 #' @param target_dir directory to download data (default: tempdir())
+#' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
+#' decimal_mark = ".", grouping_mark = ","))
+#' @param col_types col_types (default: \code{\link[readr]{cols}}(
+#' .default = \code{\link[readr]{col_double}},  
+#'  zustand  = \code{\link[readr]{col_character}},
+#'  meldungen  = \code{\link[readr]{col_character}},
+#'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%Y-%m-%d %H:%M:%S")
+#'  )
 #' @param dbg print debug messages (default: FALSE)
 #' @param ... additional arguments passed to  \link[readr]{read_tsv}
 #' @return tibble with imported MBR4.0 tsv data (~ last four weeks)
@@ -116,6 +130,15 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #' str(mbr4_data_latest)
 read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
                       target_dir = tempdir(),
+                      locale = readr::locale(tz = "CET",
+                                             decimal_mark = ".",
+                                             grouping_mark = ","),
+                      col_types = readr::cols(
+                        .default = readr::col_double(),
+                        zustand = readr::col_character(),
+                        meldungen = readr::col_character(),
+                        Zeitstempel = readr::col_datetime(format = "%Y-%m-%d %H:%M:%S")
+                      ),
                       dbg = FALSE,
                       ...) {
   
@@ -126,7 +149,9 @@ read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
     destfile = target_path, quiet = !dbg
   )
   
-  read_mbr4_tsv(path = target_path, 
+  read_mbr4_tsv(path = target_path,
+                locale = locale,
+                col_types = col_types,
                 dbg = dbg, 
                 ...)
 
@@ -137,6 +162,14 @@ read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
 #' @param dir directory on Nextcloud containing file (default: 
 #' "projects/MBR4.0/Exchange/Rohdaten/Online_export")
 #' @param target_dir directory to download data (default: tempdir())
+#' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET",
+#' decimal_mark = ",", grouping_mark = "."))
+#' @param col_types col_types (default: \code{\link[readr]{cols}}(
+#' .default = \code{\link[readr]{col_double}},  
+#'  zustand  = \code{\link[readr]{col_character}},
+#'  meldungen  = \code{\link[readr]{col_character}},
+#'  Zeitstempel = \code{\link[readr]{col_datetime}}(format = "%d.%m.%Y %H:%M")
+#'  )
 #' @param url url of Nextcloud (default: Sys.getenv("NEXTCLOUD_URL"))
 #' @param user username of Nextcloud  (default: Sys.getenv("NEXTCLOUD_USER"))
 #' @param pw password of Nextcloud  (default: Sys.getenv("NEXTCLOUD_USER"))
@@ -154,6 +187,15 @@ read_mbr4_archived <- function(
   file = "MBR_export_",
   dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
   target_dir = tempdir(),
+  locale = readr::locale(tz = "CET",
+                         decimal_mark = ",",
+                         grouping_mark = "."),
+  col_types = readr::cols(
+    .default = readr::col_double(),
+    zustand = readr::col_character(),
+    meldungen = readr::col_character(),
+    Zeitstempel = readr::col_datetime(format = "%d.%m.%Y %H:%M")
+  ),
   url = Sys.getenv("NEXTCLOUD_URL"),
   user = Sys.getenv("NEXTCLOUD_USER"),
   pw = Sys.getenv("NEXTCLOUD_USER"),
@@ -183,6 +225,8 @@ read_mbr4_archived <- function(
                                              target_dir = target_dir)
   
   read_mbr4_tsv(path = archived_path, 
+                locale = locale,
+                col_types = col_types,
                 dbg = dbg,
                 ...)
 }
