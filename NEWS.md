@@ -1,3 +1,8 @@
+# [kwb.pilot 0.2.1]
+
+* MBR4.0: bugfix as data format changed from `de` to `en` for download from webportal
+of Martin Systems
+
 # [kwb.pilot 0.2.0]
 
 * Add functions for project [MBR 4.0](https://https://www.kompetenz-wasser.de/en/project/mbr40/)
