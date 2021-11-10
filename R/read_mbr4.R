@@ -67,8 +67,10 @@ read_mbr4_tsv <- function(path,
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' mbr4_data <- read_mbr4()
 #' str(mbr4_data)
+#' }
 read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
                       archived_file = "MBR_export_",
                       archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",

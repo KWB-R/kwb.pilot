@@ -48,6 +48,8 @@ Download latest data as 'tsv' from Martin Systems Webportal and
 combine with archived ('tsv') on Nextcloud'
 }
 \examples{
+\dontrun{
 mbr4_data <- read_mbr4()
 str(mbr4_data)
+}
 }
