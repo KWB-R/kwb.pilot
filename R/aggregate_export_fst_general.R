@@ -168,10 +168,11 @@ import_data_for_month <- function(
   
   siteData_raw_list <- siteData_raw_list[condition, ]
   
+  time_range_text <- as.character(range(siteData_raw_list$DateTime))
+  
   print(sprintf(
     "Reduced imported data points to time period: %s - %s",
-    as.character(min(siteData_raw_list$DateTime)),
-    as.character(max(siteData_raw_list$DateTime))
+    time_range_text[1L], time_range_text[2L]
   ))
   
   siteData_raw_list
@@ -180,7 +181,7 @@ import_data_for_month <- function(
 # add_operational --------------------------------------------------------------
 add_operational <- function(df, FUN_calculate_ops = NULL)
 {
-  print("### Step: Calcualtating operational parameters ##########################")
+  print("### Step: Calcualtating operational parameters ######################")
   
   if (is.null(FUN_calculate_ops)) {
     
@@ -190,10 +191,7 @@ add_operational <- function(df, FUN_calculate_ops = NULL)
   
   calc_dat <- FUN_calculate_ops(df = df)
   
-  data.table::rbindlist(
-    l = list(df, calc_dat), 
-    use.names = TRUE, 
-    fill = TRUE
-  ) %>%
-    as.data.frame()
+  as.data.frame(
+    data.table::rbindlist(l = list(df, calc_dat), use.names = TRUE, fill = TRUE)
+  )
 }
