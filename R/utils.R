@@ -1,3 +1,8 @@
+# as_posix_cet -----------------------------------------------------------------
+as_posix_cet <- function(fmt, x) {
+  as.POSIXct(sprintf(fmt, x), tz = "CET")  
+}  
+
 # clean_stop -------------------------------------------------------------------
 clean_stop <- function(...) {
   stop(..., call. = FALSE)
