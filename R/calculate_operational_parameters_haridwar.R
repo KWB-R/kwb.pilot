@@ -82,7 +82,7 @@ get_calc_info_haridwar <- function(what = "expr")
 # get_calc_config_haridwar -----------------------------------------------------
 get_calc_config_haridwar <- function()
 {
-  list(
+  config <- list(
     parameters = c(
       "Redox_Out1",
       "Redox_Out2",
@@ -126,17 +126,11 @@ get_calc_config_haridwar <- function()
       )
     )
   )
-}
-
-if (FALSE)
-{
+  
   file <- "./inst/shiny/haridwar/config/config.yml"
-  kwb.utils::createDirectory(dirname(file))
+  stopifnot(identical(config, yaml::read_yaml(file)))
   
-  config <- kwb.pilot:::get_calc_config_haridwar()
-  yaml::write_yaml(config, file)
-  
-  identical(config, yaml::read_yaml(file))
+  config
 }
 
 #' Plot calculate operational time series

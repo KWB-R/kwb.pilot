@@ -48,7 +48,7 @@ get_calc_info_berlin_s <- function(what = "expr")
 # get_calc_config_berlin_s -----------------------------------------------------
 get_calc_config_berlin_s <- function()
 {
-  list(
+  config <- list(
     parameters = c(
       "SCAN_SAK_Ablauf",
       "SCAN_SAK_Zulauf",
@@ -68,15 +68,9 @@ get_calc_config_berlin_s <- function()
         expr = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage")
     )
   )
-}
-
-if (FALSE)
-{
+  
   file <- "./inst/shiny/berlin_s/config/config.yml"
-  kwb.utils::createDirectory(dirname(file))
-  config <- kwb.pilot:::get_calc_config_berlin_s()
+  stopifnot(identical(config, yaml::read_yaml(file)))
   
-  yaml::write_yaml(config, file)
-  
-  identical(config, yaml::read_yaml(file))
+  config
 }

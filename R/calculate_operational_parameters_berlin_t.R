@@ -49,7 +49,7 @@ get_calc_info_berlin_t <- function(what = "expr")
 # get_calc_config_berlin_t -----------------------------------------------------
 get_calc_config_berlin_t <- function()
 {
-  list(
+  config <- list(
     parameters = c(
       "FY-20-01", 
       "FT-10-01"
@@ -61,15 +61,9 @@ get_calc_config_berlin_t <- function()
         expr = "100*`FY-20-01`/`FT-10-01`")
     )
   )
-}
-
-if (FALSE)
-{
+  
   file <- "./inst/shiny/berlin_t/config/config.yml"
-  kwb.utils::createDirectory(dirname(file))
+  stopifnot(identical(config, yaml::read_yaml(file)))
   
-  config <- kwb.pilot:::get_calc_config_berlin_t()
-  yaml::write_yaml(config, file)
-  
-  identical(config, yaml::read_yaml(file))
+  config
 }

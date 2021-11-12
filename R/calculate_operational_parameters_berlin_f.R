@@ -92,7 +92,7 @@ get_calc_info_berlin_f <- function(what = "expr")
 # get_calc_config_berlin_f -----------------------------------------------------
 get_calc_config_berlin_f <- function()
 {
-  list(
+  config <- list(
     parameters = c(
       "Durchfluss_Rohwasser",
       "Durchfluss_Konzentrat",
@@ -170,21 +170,9 @@ get_calc_config_berlin_f <- function()
       )
     )
   )
-}
-
-if (FALSE)
-{
-  config <- get_calc_config_berlin_f()
-  
-  name <- config$calculated$conLoop$name
-  unit <- config$calculated$conLoop$unit
-  
-  Encoding(name)# <- "latin1"
-  Encoding(unit)# <- "latin1"
   
   file <- "./inst/shiny/berlin_f/config/config.yml"
-  kwb.utils::createDirectory(dirname(file))
-  yaml::write_yaml(config, file)
+  stopifnot(identical(config, yaml::read_yaml(file)))
   
-  identical(config, yaml::read_yaml(file))
+  config
 }
