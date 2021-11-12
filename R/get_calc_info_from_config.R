@@ -17,6 +17,7 @@ get_calc_info_from_config <- function(config, what = "expr")
 }
 
 # get_calc_config --------------------------------------------------------------
+#' @importFrom yaml read_yaml
 get_calc_config <- function(site)
 {
   yaml::read_yaml(shiny_file(site, "config/config.yml"))
