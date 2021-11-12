@@ -10,13 +10,17 @@
 #' @return merged data.frame
 #' @keywords internal
 
-group_fst_by_pattern <- function(time_pattern = NULL,
-                                 fst_pattern = "raw",
-                                 fst_dir = shiny_file("berlin_t/data/fst")) {
+group_fst_by_pattern <- function(
+  time_pattern = NULL,
+  fst_pattern = "raw",
+  fst_dir = shiny_file("berlin_t/data/fst")
+)
+{
   files <- list.files(fst_dir, fst_pattern, recursive = TRUE, full.names = TRUE)
 
-  if (!is.null(time_pattern)) {
-    if (length(time_pattern) > 1) {
+  if (! is.null(time_pattern)) {
+    
+    if (length(time_pattern) > 1L) {
       time_pattern <- to_pattern_or(time_pattern)
     }
 
@@ -45,11 +49,14 @@ group_fst_by_pattern <- function(time_pattern = NULL,
 #' kwb.pilot:::shiny_file("berlin_t/data"))
 #' @return imports multiple fst files and exports them to be used for app
 #' @export
-merge_and_export_fst <- function(time_pattern = NULL,
-                                 compression = 100,
-                                 import_dir = shiny_file("berlin_t/data/fst"),
-                                 export_dir = shiny_file("berlin_t/data")) {
-  if (!dir.exists(export_dir)) {
+merge_and_export_fst <- function(
+  time_pattern = NULL,
+  compression = 100,
+  import_dir = shiny_file("berlin_t/data/fst"),
+  export_dir = shiny_file("berlin_t/data")
+)
+{
+  if (! dir.exists(export_dir)) {
     kwb.utils::catAndRun(
       sprintf("Creating export path: %s", export_dir),
       dir.create(export_dir, recursive = TRUE)
@@ -57,6 +64,7 @@ merge_and_export_fst <- function(time_pattern = NULL,
   }
 
   for (fst_pattern in c("raw", "10min", "hour", "day")) {
+    
     site_data_list <- kwb.utils::catAndRun(
       paste("Grouping by", fst_pattern),
       group_fst_by_pattern(
