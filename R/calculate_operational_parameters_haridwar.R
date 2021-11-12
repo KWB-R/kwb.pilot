@@ -128,6 +128,17 @@ get_calc_config_haridwar <- function()
   )
 }
 
+if (FALSE)
+{
+  file <- "./inst/shiny/haridwar/config/config.yml"
+  kwb.utils::createDirectory(dirname(file))
+  
+  config <- kwb.pilot:::get_calc_config_haridwar()
+  yaml::write_yaml(config, file)
+  
+  identical(config, yaml::read_yaml(file))
+}
+
 #' Plot calculate operational time series
 #' @param df a data frame as retrieved by calculate_operational_parameters()
 #' @return plots time series for calculated operational parameters

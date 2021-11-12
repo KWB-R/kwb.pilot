@@ -1,0 +1,65 @@
+parameters:
+- Durchfluss_Rohwasser
+- Durchfluss_Konzentrat
+- Durchfluss_Rezirkulation
+- Druck_Arbeitsdruck
+- Druck_Rohwasser
+- Druck_Konzentrat
+- Druck_Permeat
+- LF_Permeat
+- LF_Rohwasser
+- LF_Konzentrat
+- Temperatur_Rohwasser
+calculated:
+  vfrPerm:
+    name: Durchfluss Permeat
+    unit: l/h
+    expr: '`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`'
+  yield:
+    name: Ausbeute
+    unit: '%'
+    expr: 100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`
+  conLoop:
+    name: Leitfähigkeit Rezirkulation
+    unit: μS/cm
+    expr: (`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser`
+      + `Durchfluss_Rezirkulation`)
+  recovery:
+    name: Rückhalt
+    unit: '%'
+    expr: 100*(1 - `LF_Permeat` / conLoop)
+  deltaPreProcConc:
+    name: Druckverlust (Feed - Konzentrat)
+    unit: bar
+    expr: '`Druck_Arbeitsdruck` - `Druck_Konzentrat`'
+  flux:
+    name: Flux
+    unit: l/h/m2
+    expr: vfrPerm / (4 * 7.6)
+  cfv:
+    name: Überströmungsgeschwindigkeit
+    unit: m/s
+    expr: (`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2)
+      * 1000 * 3600)
+  tmp:
+    name: Transmembrandruck
+    unit: bar
+    expr: ((`Druck_Arbeitsdruck` + `Druck_Konzentrat`) / 2) - `Druck_Permeat`
+  nwpt:
+    name: Normalisierter Permeatstrom
+    unit: l/h
+    expr: |-
+      normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`,
+                                           conLoop = `conLoop`,
+                                           vfrPerm = `vfrPerm`,
+                                           vfrLoop = `Durchfluss_Rezirkulation`,
+                                           vfrFeed = `Durchfluss_Rohwasser`,
+                                           prePerm = `Druck_Permeat`,
+                                           preProc = `Druck_Arbeitsdruck`,
+                                           preConc = `Druck_Konzentrat`,
+                                           nwp0 = 1.429162,
+                                           vfrPerm0 = 800)
+  nwpr:
+    name: Relativer Permeatstrom
+    unit: '%'
+    expr: '- ((1 - (nwpt / vfrPerm))) * 100'

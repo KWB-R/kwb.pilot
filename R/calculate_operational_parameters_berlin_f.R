@@ -119,7 +119,7 @@ get_calc_config_berlin_f <- function()
       ),
       conLoop = list(
         name = "Leitf\u00E4higkeit Rezirkulation",
-        unit = "\xB5S/cm",
+        unit = "\u03BCS/cm", # "\xB5S/cm",
         expr = "(`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser` + `Durchfluss_Rezirkulation`)"
       ),
       recovery = list(
@@ -170,4 +170,21 @@ get_calc_config_berlin_f <- function()
       )
     )
   )
+}
+
+if (FALSE)
+{
+  config <- get_calc_config_berlin_f()
+  
+  name <- config$calculated$conLoop$name
+  unit <- config$calculated$conLoop$unit
+  
+  Encoding(name)# <- "latin1"
+  Encoding(unit)# <- "latin1"
+  
+  file <- "./inst/shiny/berlin_f/config/config.yml"
+  kwb.utils::createDirectory(dirname(file))
+  yaml::write_yaml(config, file)
+  
+  identical(config, yaml::read_yaml(file))
 }

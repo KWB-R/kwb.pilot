@@ -62,3 +62,14 @@ get_calc_config_berlin_t <- function()
     )
   )
 }
+
+if (FALSE)
+{
+  file <- "./inst/shiny/berlin_t/config/config.yml"
+  kwb.utils::createDirectory(dirname(file))
+  
+  config <- kwb.pilot:::get_calc_config_berlin_t()
+  yaml::write_yaml(config, file)
+  
+  identical(config, yaml::read_yaml(file))
+}
