@@ -42,35 +42,5 @@ calculate_operational_parameters_berlin_s <- function(
 # get_calc_info_berlin_s -------------------------------------------------------
 get_calc_info_berlin_s <- function(what = "expr")
 {
-  get_calc_info_from_config(config = get_calc_config_berlin_s(), what)
-}
-
-# get_calc_config_berlin_s -----------------------------------------------------
-get_calc_config_berlin_s <- function()
-{
-  config <- list(
-    parameters = c(
-      "SCAN_SAK_Ablauf",
-      "SCAN_SAK_Zulauf",
-      "C_O3_Zugas",
-      "C_O3_Abgas",
-      "Q_Gas",
-      "Q_Ozonanlage"
-    ),
-    calculated = list(    
-      deltaSAK = list(
-        name = "delta SAK", 
-        unit = "%", 
-        expr = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100"),
-      Ozoneintrag = list(
-        name = "Ozoneintrag",
-        unit = "mg-O3/L",
-        expr = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage")
-    )
-  )
-  
-  file <- "./inst/shiny/berlin_s/config/config.yml"
-  stopifnot(identical(config, yaml::read_yaml(file)))
-  
-  config
+  get_calc_info_from_config(config = get_calc_config("berlin_s"), what)
 }

@@ -43,27 +43,5 @@ calculate_operational_parameters_berlin_t <- function(
 # get_calc_info_berlin_t -------------------------------------------------------
 get_calc_info_berlin_t <- function(what = "expr")
 {
-  get_calc_info_from_config(config = get_calc_config_berlin_t(), what)
-}
-
-# get_calc_config_berlin_t -----------------------------------------------------
-get_calc_config_berlin_t <- function()
-{
-  config <- list(
-    parameters = c(
-      "FY-20-01", 
-      "FT-10-01"
-    ),
-    calculated = list(
-      recovery = list(
-        name = "recovery",
-        unit = "%",
-        expr = "100*`FY-20-01`/`FT-10-01`")
-    )
-  )
-  
-  file <- "./inst/shiny/berlin_t/config/config.yml"
-  stopifnot(identical(config, yaml::read_yaml(file)))
-  
-  config
+  get_calc_info_from_config(config = get_calc_config("berlin_t"), what)
 }
