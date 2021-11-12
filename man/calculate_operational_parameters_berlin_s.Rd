@@ -6,12 +6,10 @@
 \usage{
 calculate_operational_parameters_berlin_s(
   df,
-  calc_list = list(deltaSAK = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100", Ozoneintrag =
-    "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage"),
-  calc_list_name = c("delta SAK", "Ozoneintrag"),
-  calc_list_unit = c("\%", "mg-O3/L"),
-  calc_paras = c("SCAN_SAK_Ablauf", "SCAN_SAK_Zulauf", "C_O3_Zugas", "C_O3_Abgas",
-    "Q_Gas", "Q_Ozonanlage")
+  calc_list = get_calc_info_berlin_s(),
+  calc_list_name = get_calc_info_berlin_s("name"),
+  calc_list_unit = get_calc_info_berlin_s("unit"),
+  calc_paras = get_calc_info_berlin_s("paras")
 )
 }
 \arguments{

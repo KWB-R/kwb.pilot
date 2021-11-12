@@ -16,11 +16,14 @@
 #' myDat <- calculate_operational_parameters_berlin_t(df = raw_list)
 #' }
 #'
-calculate_operational_parameters_berlin_t <- function(df,
-                                                      calc_list = list(recovery = "100*`FY-20-01`/`FT-10-01`"),
-                                                      calc_list_name = c("recovery"),
-                                                      calc_list_unit = c("%"),
-                                                      calc_paras = c("FY-20-01", "FT-10-01")) {
+calculate_operational_parameters_berlin_t <- function(
+  df,
+  calc_list = get_calc_info_berlin_t(),
+  calc_list_name = get_calc_info_berlin_t("name"),
+  calc_list_unit = get_calc_info_berlin_t("unit"),
+  calc_paras = get_calc_info_berlin_t("paras")
+)
+{
   res <- calculate_operational_parameters(
     df,
     calc_list,
@@ -28,11 +31,30 @@ calculate_operational_parameters_berlin_t <- function(df,
     calc_list_unit,
     calc_paras
   )
-
+  
   res$SiteName <- "General"
   res$SiteName_ParaName_Unit <- paste("General (calculated):", res$ParameterLabel)
   res$DataType <- "calculated"
   res$Source <- "online"
-
+  
   res
+}
+
+# get_calc_info_berlin_t -------------------------------------------------------
+get_calc_info_berlin_t <- function(part = "")
+{
+  if (part == "name") return(c(
+    "recovery"
+  ))
+  
+  if (part == "unit") return(c(
+    "%"
+  ))
+  
+  if (part == "paras") return(c(
+    "FY-20-01", 
+    "FT-10-01"
+  ))
+  
+  list(recovery = "100*`FY-20-01`/`FT-10-01`")
 }

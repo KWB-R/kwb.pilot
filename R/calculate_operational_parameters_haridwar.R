@@ -25,47 +25,20 @@
 #' myDat <- calculate_operational_parameters(df = haridwar_raw_list)
 #' }
 #'
-calculate_operational_parameters <- function(df,
-                                             calc_list = list(
-                                               Redox_Out = "(Redox_Out1+Redox_Out2)/2",
-                                               Redox_Diff = "Redox_Out - Redox_In",
-                                               Power_pump = "Up*Ip",
-                                               Power_cell = "Uz*Iz",
-                                               Pump_WhPerCbm = "Power_pump/(Flux/1000)",
-                                               Cell_WhPerCbm = "Power_cell/(Flux/1000)"
-                                             ),
-                                             calc_list_name = c(
-                                               "Mean redox potential in tank",
-                                               "Difference (outflow - inflow) of redox potential",
-                                               "Power demand of pump",
-                                               "Power demand of cell",
-                                               "Specific energy demand of pump",
-                                               "Specific energy demand of cell"
-                                             ),
-                                             calc_list_unit = c(
-                                               "mV",
-                                               "mV",
-                                               "W",
-                                               "W",
-                                               "Wh/m3",
-                                               "Wh/m3"
-                                             ),
-                                             calc_paras = c(
-                                               "Redox_Out1",
-                                               "Redox_Out2",
-                                               "Redox_In",
-                                               "Flux",
-                                               "Up",
-                                               "Ip",
-                                               "Uz",
-                                               "Iz"
-                                             )) {
+calculate_operational_parameters <- function(
+  df,
+  calc_list = get_calc_info_haridwar(),
+  calc_list_name = get_calc_info_haridwar("name"),
+  calc_list_unit = get_calc_info_haridwar("unit"),
+  calc_paras = get_calc_info_haridwar("paras")
+)
+{
   print(sprintf(
     "Calculating %d operational parameter(s): %s",
     length(calc_list_name),
     kwb.utils::stringList(calc_list_name)
   ))
-
+  
   meta_data <- data.frame(
     ParameterCode = names(calc_list),
     ParameterName = calc_list_name,
@@ -73,26 +46,23 @@ calculate_operational_parameters <- function(df,
     ParameterLabel = sprintf("%s (%s)", calc_list_name, calc_list_unit),
     stringsAsFactors = FALSE
   )
-
-
-
+  
   operation <- df[df$ParameterCode %in% calc_paras, ] %>%
     filter_("!is.na(ParameterValue)") %>%
     select_("DateTime", "ParameterCode", "ParameterValue")
-
+  
   operation_matrix <- operation %>%
     tidyr::spread_(
       key_col = "ParameterCode",
       value_col = "ParameterValue"
     )
-
-
+  
   ### Calculate additional parameters:
   operation_calc <- operation_matrix %>%
     dplyr::mutate_(.dots = calc_list) %>%
     dplyr::select_(.dots = c("DateTime", names(calc_list)))
-
-  operation_calc_tidy <- tidyr::gather_(
+  
+  tidyr::gather_(
     operation_calc,
     key_col = "ParameterCode",
     value_col = "ParameterValue",
@@ -101,11 +71,49 @@ calculate_operational_parameters <- function(df,
     dplyr::filter_("!is.na(ParameterValue)") %>%
     dplyr::left_join(y = meta_data)
   # dplyr::mutate_(DataType = "'calculated'")
-
-
-  return(operation_calc_tidy)
 }
 
+# get_calc_info_haridwar -------------------------------------------------------
+get_calc_info_haridwar <- function(part = "")
+{
+  if (part == "name") return(c(
+    "Mean redox potential in tank",
+    "Difference (outflow - inflow) of redox potential",
+    "Power demand of pump",
+    "Power demand of cell",
+    "Specific energy demand of pump",
+    "Specific energy demand of cell"
+  ))
+
+  if (part == "unit") return(c(
+    "mV",
+    "mV",
+    "W",
+    "W",
+    "Wh/m3",
+    "Wh/m3"
+  ))
+
+  if (part == "paras") return(c(
+    "Redox_Out1",
+    "Redox_Out2",
+    "Redox_In",
+    "Flux",
+    "Up",
+    "Ip",
+    "Uz",
+    "Iz"
+  ))
+  
+  list(
+    Redox_Out = "(Redox_Out1+Redox_Out2)/2",
+    Redox_Diff = "Redox_Out - Redox_In",
+    Power_pump = "Up*Ip",
+    Power_cell = "Uz*Iz",
+    Pump_WhPerCbm = "Power_pump/(Flux/1000)",
+    Cell_WhPerCbm = "Power_cell/(Flux/1000)"
+  )
+}
 
 #' Plot calculate operational time series
 #' @param df a data frame as retrieved by calculate_operational_parameters()
@@ -120,13 +128,13 @@ calculate_operational_parameters <- function(df,
 #'
 plot_calculated_operational_timeseries <- function(df) {
   calculated_paras <- unique(df$ParameterLabel)
-
-
+  
+  
   for (i in seq_along(calculated_paras)) {
     sel_par1 <- df$ParameterLabel[order(calculated_paras)][i]
-
+    
     n_measurements <- nrow(df[df[, "ParameterLabel"] == sel_par1, ])
-
+    
     if (n_measurements > 0) {
       g1 <- ggplot2::ggplot(df, ggplot2::aes_string(
         x = "DateTime",
@@ -147,7 +155,7 @@ plot_calculated_operational_timeseries <- function(df) {
           legend.title = element_blank()
         ) +
         ggplot2::labs(x = "", y = "")
-
+      
       print(g1)
     }
   }
@@ -156,12 +164,12 @@ plot_calculated_operational_timeseries <- function(df) {
 
 if (FALSE) {
   myDat <- calculate_operational_parameters(df = haridwar_raw_list)
-
-
+  
+  
   plot_calculated_operational_timeseries(df = myDat)
-
+  
   ### Plot it
-
+  
   #
   # backwash <- operation[operation$Anlauf == 90,"DateTime"]
   #

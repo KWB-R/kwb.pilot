@@ -6,27 +6,10 @@
 \usage{
 calculate_operational_parameters_berlin_f(
   df,
-  calc_list = list(vfrPerm = "`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`", yield
-    = "100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`",
-    conLoop =
-    "(`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser` + `Durchfluss_Rezirkulation`)",
-    recovery = "100*(1 - `LF_Permeat` / conLoop)", deltaPreProcConc =
-    "`Druck_Arbeitsdruck` - `Druck_Konzentrat`", flux = "vfrPerm / (4 * 7.6)", cfv =
-    "(`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2) * 1000 * 3600)",
-         tmp = "((`Druck_Arbeitsdruck` + `Druck_Konzentrat`) / 2) - `Druck_Permeat`",
-    nwpt =
-    "normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`,\\n                                     conLoop = `conLoop`,\\n                                     vfrPerm = `vfrPerm`,\\n                                     vfrLoop = `Durchfluss_Rezirkulation`,\\n                                     vfrFeed = `Durchfluss_Rohwasser`,\\n                                     prePerm = `Druck_Permeat`,\\n                                     preProc = `Druck_Arbeitsdruck`,\\n                                     preConc = `Druck_Konzentrat`,\\n                                     nwp0 = 1.429162,\\n                                     vfrPerm0 = 800)",
-         nwpr = "- ((1 - (nwpt / vfrPerm))) * 100"),
-  calc_list_name = c("Durchfluss Permeat", "Ausbeute", "Leitfähigkeit Rezirkulation",
-    "Rückhalt", "Druckverlust (Feed - Konzentrat)", "Flux",
-    "Überströmungsgeschwindigkeit", "Transmembrandruck", "Normalisierter Permeatstrom",
-    "Relativer Permeatstrom"),
-  calc_list_unit = c("l/h", "\%", "\\xb5S/cm", "\%", "bar", "l/h/m2", "m/s", "bar",
-    "l/h", "\%"),
-  calc_paras = c("Durchfluss_Rohwasser", "Durchfluss_Konzentrat",
-    "Durchfluss_Rezirkulation", "Druck_Arbeitsdruck", "Druck_Rohwasser",
-    "Druck_Konzentrat", "Druck_Permeat", "LF_Permeat", "LF_Rohwasser", "LF_Konzentrat",
-    "Temperatur_Rohwasser")
+  calc_list = get_calc_info_berlin_f(),
+  calc_list_name = get_calc_info_berlin_f("name"),
+  calc_list_unit = get_calc_info_berlin_f("unit"),
+  calc_paras = get_calc_info_berlin_f("paras")
 )
 }
 \arguments{

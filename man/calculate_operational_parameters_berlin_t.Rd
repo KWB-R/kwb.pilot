@@ -6,10 +6,10 @@
 \usage{
 calculate_operational_parameters_berlin_t(
   df,
-  calc_list = list(recovery = "100*`FY-20-01`/`FT-10-01`"),
-  calc_list_name = c("recovery"),
-  calc_list_unit = c("\%"),
-  calc_paras = c("FY-20-01", "FT-10-01")
+  calc_list = get_calc_info_berlin_t(),
+  calc_list_name = get_calc_info_berlin_t("name"),
+  calc_list_unit = get_calc_info_berlin_t("unit"),
+  calc_paras = get_calc_info_berlin_t("paras")
 )
 }
 \arguments{

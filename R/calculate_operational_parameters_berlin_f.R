@@ -16,16 +16,19 @@
 #' @export
 #' @importFrom tibble tibble
 #'
-normalised_permeate_flow <- function(tempFeed,
-                                     conLoop,
-                                     vfrPerm,
-                                     vfrLoop,
-                                     vfrFeed,
-                                     prePerm,
-                                     preProc,
-                                     preConc,
-                                     nwp0 = 1.429162,
-                                     vfrPerm0 = 800) {
+normalised_permeate_flow <- function(
+  tempFeed,
+  conLoop,
+  vfrPerm,
+  vfrLoop,
+  vfrFeed,
+  prePerm,
+  preProc,
+  preConc,
+  nwp0 = 1.429162,
+  vfrPerm0 = 800
+)
+{
   res <- tibble::tibble(
     tcf = exp(3020 * (1 / 298 - (1 / (273 + tempFeed)))),
     cfc = conLoop * 0.65 * ((log(1 / (1 - vfrPerm / (vfrLoop + vfrFeed)))) / (vfrPerm / (vfrLoop + vfrFeed))),
@@ -35,11 +38,9 @@ normalised_permeate_flow <- function(tempFeed,
     nwpt = (vfrPerm * (nwp0 / .data$nwp)) * (vfrPerm / vfrPerm0),
     nwpr = -(1 - .data$nwpt / vfrPerm) * 100
   )
-
+  
   res$nwpt
 }
-
-
 
 #' Calculate operational parameters for Berlin-Friedrichshagen
 #' @param df a data frame as retrieved by import_data_berlin_f()
@@ -58,19 +59,85 @@ normalised_permeate_flow <- function(tempFeed,
 #' myDat <- calculate_operational_parameters_berlin_f(df = raw_list)
 #' }
 #'
-calculate_operational_parameters_berlin_f <- function(df,
-                                                      calc_list = list(
-                                                        vfrPerm = "`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`",
-                                                        yield = "100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`",
-                                                        conLoop = "(`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser` + `Durchfluss_Rezirkulation`)",
-                                                        recovery = "100*(1 - `LF_Permeat` / conLoop)",
-                                                        deltaPreProcConc = "`Druck_Arbeitsdruck` - `Druck_Konzentrat`",
-                                                        # Membranflaeche NF 4x in Reihe: #4 x NF 270-4040 mit 7,6 m2 aktiver Flaeche
-                                                        # surf = 4 * 7.6
-                                                        flux = "vfrPerm / (4 * 7.6)",
-                                                        cfv = "(`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2) * 1000 * 3600)",
-                                                        tmp = "((`Druck_Arbeitsdruck` + `Druck_Konzentrat`) / 2) - `Druck_Permeat`",
-                                                        nwpt = "normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`,
+calculate_operational_parameters_berlin_f <- function(
+  df,
+  calc_list = get_calc_info_berlin_f(),
+  calc_list_name = get_calc_info_berlin_f("name"),
+  calc_list_unit = get_calc_info_berlin_f("unit"),
+  calc_paras = get_calc_info_berlin_f("paras")
+)
+{
+  res <- calculate_operational_parameters(
+    df,
+    calc_list,
+    calc_list_name,
+    calc_list_unit,
+    calc_paras
+  )
+  
+  res$SiteName <- "General"
+  res$SiteName_ParaName_Unit <- paste("General (calculated):", res$ParameterLabel)
+  res$DataType <- "calculated"
+  res$Source <- "online"
+  
+  res
+}
+
+# get_calc_info_berlin_f -------------------------------------------------------
+get_calc_info_berlin_f <- function(part = "")
+{
+  if (part == "name") return(c(
+    "Durchfluss Permeat",
+    "Ausbeute",
+    "Leitf\u00E4higkeit Rezirkulation",
+    "R\u00FCckhalt",
+    "Druckverlust (Feed - Konzentrat)",
+    "Flux",
+    "\u00DCberstr\u00F6mungsgeschwindigkeit",
+    "Transmembrandruck",
+    "Normalisierter Permeatstrom",
+    "Relativer Permeatstrom"
+  ))
+  
+  if (part == "unit") return(c(
+    "l/h",
+    "%",
+    "\xB5S/cm",
+    "%",
+    "bar",
+    "l/h/m2",
+    "m/s",
+    "bar",
+    "l/h",
+    "%"
+  ))
+  
+  if (part == "paras") return(c(
+    "Durchfluss_Rohwasser",
+    "Durchfluss_Konzentrat",
+    "Durchfluss_Rezirkulation",
+    "Druck_Arbeitsdruck",
+    "Druck_Rohwasser",
+    "Druck_Konzentrat",
+    "Druck_Permeat",
+    "LF_Permeat",
+    "LF_Rohwasser",
+    "LF_Konzentrat",
+    "Temperatur_Rohwasser"
+  ))
+  
+  list(
+    vfrPerm = "`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`",
+    yield = "100*(`Durchfluss_Rohwasser` - `Durchfluss_Konzentrat`) / `Durchfluss_Rohwasser`",
+    conLoop = "(`Durchfluss_Rohwasser`*`LF_Rohwasser` + `Durchfluss_Rezirkulation`*`LF_Konzentrat`)/(`Durchfluss_Rohwasser` + `Durchfluss_Rezirkulation`)",
+    recovery = "100*(1 - `LF_Permeat` / conLoop)",
+    deltaPreProcConc = "`Druck_Arbeitsdruck` - `Druck_Konzentrat`",
+    # Membranflaeche NF 4x in Reihe: #4 x NF 270-4040 mit 7,6 m2 aktiver Flaeche
+    # surf = 4 * 7.6
+    flux = "vfrPerm / (4 * 7.6)",
+    cfv = "(`Durchfluss_Rohwasser`+ `Durchfluss_Rezirkulation`) / ((pi * 0.0095^2) * 1000 * 3600)",
+    tmp = "((`Druck_Arbeitsdruck` + `Druck_Konzentrat`) / 2) - `Druck_Permeat`",
+    nwpt = "normalised_permeate_flow(tempFeed = `Temperatur_Rohwasser`,
                                      conLoop = `conLoop`,
                                      vfrPerm = `vfrPerm`,
                                      vfrLoop = `Durchfluss_Rezirkulation`,
@@ -80,57 +147,6 @@ calculate_operational_parameters_berlin_f <- function(df,
                                      preConc = `Druck_Konzentrat`,
                                      nwp0 = 1.429162,
                                      vfrPerm0 = 800)",
-                                                        nwpr = "- ((1 - (nwpt / vfrPerm))) * 100"
-                                                      ),
-                                                      calc_list_name = c(
-                                                        "Durchfluss Permeat",
-                                                        "Ausbeute",
-                                                        "Leitf\u00E4higkeit Rezirkulation",
-                                                        "R\u00FCckhalt",
-                                                        "Druckverlust (Feed - Konzentrat)",
-                                                        "Flux",
-                                                        "\u00DCberstr\u00F6mungsgeschwindigkeit",
-                                                        "Transmembrandruck",
-                                                        "Normalisierter Permeatstrom",
-                                                        "Relativer Permeatstrom"
-                                                      ),
-                                                      calc_list_unit = c(
-                                                        "l/h",
-                                                        "%",
-                                                        "\xB5S/cm",
-                                                        "%",
-                                                        "bar",
-                                                        "l/h/m2",
-                                                        "m/s",
-                                                        "bar",
-                                                        "l/h",
-                                                        "%"
-                                                      ),
-                                                      calc_paras = c(
-                                                        "Durchfluss_Rohwasser",
-                                                        "Durchfluss_Konzentrat",
-                                                        "Durchfluss_Rezirkulation",
-                                                        "Druck_Arbeitsdruck",
-                                                        "Druck_Rohwasser",
-                                                        "Druck_Konzentrat",
-                                                        "Druck_Permeat",
-                                                        "LF_Permeat",
-                                                        "LF_Rohwasser",
-                                                        "LF_Konzentrat",
-                                                        "Temperatur_Rohwasser"
-                                                      )) {
-  res <- calculate_operational_parameters(
-    df,
-    calc_list,
-    calc_list_name,
-    calc_list_unit,
-    calc_paras
+    nwpr = "- ((1 - (nwpt / vfrPerm))) * 100"
   )
-
-  res$SiteName <- "General"
-  res$SiteName_ParaName_Unit <- paste("General (calculated):", res$ParameterLabel)
-  res$DataType <- "calculated"
-  res$Source <- "online"
-
-  res
 }

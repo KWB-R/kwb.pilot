@@ -19,29 +19,50 @@
 #' myDat <- calculate_operational_parameters_berlin_s(df = raw_list)
 #' }
 #'
-calculate_operational_parameters_berlin_s <- function(df,
-                                                      calc_list = list(
-                                                        deltaSAK = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100",
-                                                        Ozoneintrag = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage"
-                                                      ),
-                                                      calc_list_name = c("delta SAK", "Ozoneintrag"),
-                                                      calc_list_unit = c("%", "mg-O3/L"),
-                                                      calc_paras = c(
-                                                        "SCAN_SAK_Ablauf",
-                                                        "SCAN_SAK_Zulauf",
-                                                        "C_O3_Zugas",
-                                                        "C_O3_Abgas",
-                                                        "Q_Gas",
-                                                        "Q_Ozonanlage"
-                                                      )) {
+calculate_operational_parameters_berlin_s <- function(
+  df,
+  calc_list = get_calc_info_berlin_s(),
+  calc_list_name = get_calc_info_berlin_s("name"),
+  calc_list_unit = get_calc_info_berlin_s("unit"),
+  calc_paras = get_calc_info_berlin_s("paras")
+)
+{
   res <- calculate_operational_parameters(
     df, calc_list, calc_list_name, calc_list_unit, calc_paras
   )
-
+  
   res$SiteName <- "General"
   res$SiteName_ParaName_Unit <- paste("General (calculated):", res$ParameterLabel)
   res$DataType <- "calculated"
   res$Source <- "online"
-
+  
   res
+}
+
+# get_calc_info_berlin_s -------------------------------------------------------
+get_calc_info_berlin_s <- function(part = "")
+{
+  if (part == "name") return(c(
+    "delta SAK", 
+    "Ozoneintrag"
+  ))
+  
+  if (part == "unit") return(c(
+    "%", 
+    "mg-O3/L"
+  ))
+  
+  if (part == "paras") return(c(
+    "SCAN_SAK_Ablauf",
+    "SCAN_SAK_Zulauf",
+    "C_O3_Zugas",
+    "C_O3_Abgas",
+    "Q_Gas",
+    "Q_Ozonanlage"
+  ))
+  
+  list(
+    deltaSAK = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100",
+    Ozoneintrag = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage"
+  )
 }
