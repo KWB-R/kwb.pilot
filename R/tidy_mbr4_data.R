@@ -15,14 +15,19 @@
 #' mbr4_data <- read_mbr4()
 #' mbr4_data_tidy <- kwb.pilot::tidy_mbr4_data(mbr4_data)
 #' }
-tidy_mbr4_data <- function(mbr4_data,
-                           path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")) {
+tidy_mbr4_data <- function(
+  mbr4_data,
+  path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")
+)
+{
   remove_cols <- c("zustand", "meldungen", "id")
   
   keep_cols <- c("Zeitstempel")
 
-  metadata <- readr::read_csv(file = path_metadata, 
-                              col_types = readr::cols(.default = "c"))
+  metadata <- readr::read_csv(
+    file = path_metadata, 
+    col_types = readr::cols(.default = "c")
+  )
   
   mbr4_data %>%
     dplyr::select(!tidyselect::all_of(remove_cols)) %>% 
