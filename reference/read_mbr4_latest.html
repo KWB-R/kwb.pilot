@@ -223,88 +223,86 @@ decimal_mark = ".", grouping_mark = ","))</p></td>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> New names:</span>
 <span class='r-msg co'><span class='r-pr'>#&gt;</span> * `` -&gt; ...79</span>
 <span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span><span class='op'>(</span><span class='va'>mbr4_data_latest</span><span class='op'>)</span></span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble [21,541 × 79] (S3: tbl_df/tbl/data.frame)</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_grob           :</span>
-<span class='r-wrn co'><span class='r-pr'>#&gt;</span> <span class='warning'>Warning: </span>One or more parsing issues, see `problems()` for details</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  num [1:21541] 64.2 67 70.5 76.4 78.9 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_bel            : num [1:21541] 65.2 65.3 65.5 65.5 61.4 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_filt           : num [1:21541] 88.1 88.2 88.2 88.1 88 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filt           : num [1:21541] 169 169 169 170 170 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt           : num [1:21541] 4.48 4.63 5.06 5.02 4.55 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg1            : num [1:21541] 7.6868 11.2276 -0.0244 -0.0244 11.2575 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg2            : num [1:21541] 1.9995 -0.0109 11.8587 11.8433 -0.0136 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_nitri          : num [1:21541] -1.5e-05 -5.0e-06 0.0 -5.0e-06 0.0 0.0 0.0 -2.8e-05 0.0 0.0 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp             : num [1:21541] 0 0 0 0 6367 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_rp             : num [1:21541] 1779 1768 1755 1773 1690 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filtrat2       : num [1:21541] 168 169 169 170 169 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filtrat2       : num [1:21541] 1.439 0.871 0.833 0.459 0.492 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_sg1            : num [1:21541] 239.73 237.14 1.88 1.95 238.07 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_sg2            : num [1:21541] 1.56 1.22 243.65 239.71 1.18 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_nitri        : num [1:21541] 0.427 0.427 0.427 0.427 0.426 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_nitri_temp   : num [1:21541] 19.1 19.1 19.1 19.2 19.2 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_filter       : num [1:21541] 0.566 0.599 0.649 0.651 0.621 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_filter_temp  : num [1:21541] 19.2 19.2 19.2 19.2 19.2 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ redox_deni       : num [1:21541] -188 -188 -189 -186 -181 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ redox_deni_temp  : num [1:21541] 19.9 19.9 19.9 19.9 19.9 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ts_filter        : num [1:21541] 11.6 11.5 11.5 11.5 11.4 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ts_nitri         : num [1:21541] 10.1 10.2 10.3 10.4 10.4 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_ablauf  : num [1:21541] 3 3 2.99 2.99 2.99 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ nitrat_ablauf    : num [1:21541] 9.11 9.12 9.11 9.11 9.11 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_ablauf    : num [1:21541] 13.1 13.1 13.1 13.1 13.1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ chlorid_ablauf   : num [1:21541] 112 111 111 111 111 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_ablauf      : num [1:21541] 19.1 19.1 19.1 19.1 19.1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_nitri   : num [1:21541] 13.2 12.7 12.6 12.5 12.5 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_nitri     : num [1:21541] 140 143 142 142 143 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_nitri       : num [1:21541] 18.9 18.9 19 19 19 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_zulauf  : num [1:21541] 64.9 64.8 64.1 63.1 65.2 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_zulauf    : num [1:21541] 10.7 10.3 10.1 11.1 11.6 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_zulauf      : num [1:21541] 16 16 16 16 15.9 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ leitf_zulauf     : num [1:21541] 1371 1372 1373 1384 1383 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ leitf_zulauf_temp: num [1:21541] 16.1 16.1 16.1 16.1 16.2 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_filter        : num [1:21541] 7.62 7.62 7.62 7.62 7.62 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_filter_temp   : num [1:21541] 19.1 19.1 19.1 19.1 19.1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_nitri         : num [1:21541] 7.81 7.81 7.82 7.82 7.82 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_nitri_temp    : num [1:21541] 19.1 19.2 19.2 19.2 19.2 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_bypass_rezi    : num [1:21541] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filter_rezi    : num [1:21541] 1779 1769 1754 1775 1689 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_komp           : num [1:21541] -0.217 0.316 -0.217 -0.216 -0.216 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_zulauf         : num [1:21541] 159 165 172 217 306 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt1_diff     : num [1:21541] 11.9 11.9 11.9 11.9 11.9 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt2_diff     : num [1:21541] 14 14 14 14 14 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_no3n: num [1:21541] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_no2n: num [1:21541] 0.464 0.469 0.546 0.491 0.51 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_csb : num [1:21541] 17.8 18.5 18.4 18.2 18.3 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_sak : num [1:21541] 91 90.9 91.2 90.6 90.9 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_no3n: num [1:21541] 11.3 11.3 11.2 11.3 11.3 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_no2n: num [1:21541] 1.98 1.98 2.03 2.01 2.01 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_csb : num [1:21541] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_sak : num [1:21541] 51.1 51.2 51.2 51.2 51.1 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gesamt         : num [1:21541] 767806 767800 767795 767789 767784 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gestern        : num [1:21541] 3260 3260 3260 3260 3260 3260 3260 3260 3260 3260 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gesamt_filt2   : num [1:21541] 749547 749541 749535 749530 749524 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gestern_filt2  : num [1:21541] 3269 3269 3269 3269 3269 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q-nitri-gesamt   : num [1:21541] 15307 15307 15307 15307 15307 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg1_gesamt     : num [1:21541] 80547 80547 80547 80547 80547 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg2_gesamt     : num [1:21541] 84657 84657 84656 84656 84656 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp_gesamt      : num [1:21541] 1520700 1520700 1520700 1520700 1520520 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp_gestern     : num [1:21541] 6860 6860 6860 6860 6860 6860 6860 6860 6860 6860 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_uss_gesamt     : num [1:21541] 44560 44560 44560 44560 44560 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rechen         : num [1:21541] 2574229 2574229 2574229 2574198 2574078 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_nitri          : num [1:21541] 13742555 13742555 13742555 13742555 13742555 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rp             : num [1:21541] 21802316 21802196 21802076 21801956 21801836 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_sg1            : num [1:21541] 19685242 19685190 19685131 19685059 19685000 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_sg2            : num [1:21541] 19685096 19685024 19684960 19684908 19684844 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_fp             : num [1:21541] 17143593 17143473 17143353 17143233 17143113 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_fp2            : num [1:21541] 17072555 17072435 17072315 17072195 17072075 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rw1            : num [1:21541] 17521089 17520969 17520849 17520729 17520609 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rw2            : num [1:21541] 2.1e+07 2.1e+07 2.1e+07 2.1e+07 2.1e+07 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_zp1            : num [1:21541] 954289 954289 954289 954289 954183 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_grobstoffp     : num [1:21541] 1653 1653 1653 1653 1653 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ zustand          : chr [1:21541] "05000500050007000500070007000000000000000000020002000700000015000000000001008F00010007D82300" "05000500050007000500070007000000000000000000020002000700000015000000000001008F0001000FD82300" "05000500050005000700070007000000000000000000020002000700000015000000000001008F000100A7D82900" "05000700050005000700070007000000000000000000020002000700000015000000000003008F00010027D82900" ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ meldungen        : chr [1:21541] "000000000000000000000000" "000000000000000000000000" "000000000000000000000000" "000000000000000000000000" ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ id               : num [1:21541] 179703 179702 179701 179700 179699 ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Zeitstempel      : POSIXct[1:21541], format: "2021-11-10 16:02:11" "2021-11-10 16:00:12" ...</span>
-<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ...79            : num [1:21541] NA NA NA NA NA NA NA NA NA NA ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> tibble [21,536 × 79] (S3: tbl_df/tbl/data.frame)</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_grob           : num [1:21536] 62.7 62.7 62.7 62.9 63.4 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_bel            : num [1:21536] 62.1 62.3 62.6 62.7 62.7 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ h_filt           : num [1:21536] 88 88 87.8 88 88 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filt           : num [1:21536] 169 168 168 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt           : num [1:21536] 3.33 3.36 3.2 16.93 15.81 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg1            : num [1:21536] 11.2603 -0.0244 6.7737 11.2354 -0.0244 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg2            : num [1:21536] -0.0109 11.8646 2.4789 -0.0109 11.8169 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_nitri          : num [1:21536] 0 -0.000291 0 0 -0.000347 0 0 -0.000538 0 -0.000055 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp             : num [1:21536] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_rp             : num [1:21536] 1633 1614 1627 1642 1652 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filtrat2       : num [1:21536] 170 170 170 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filtrat2       : num [1:21536] 0.481 0.306 0.342 15.978 15.916 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_sg1            : num [1:21536] 237.06 2.12 239.72 238.07 2.09 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_sg2            : num [1:21536] 1.02 241.1 1.54 1.05 244.64 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_nitri        : num [1:21536] 0.43 0.43 0.43 0.43 0.43 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_nitri_temp   : num [1:21536] 19 19 19 19 18.9 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_filter       : num [1:21536] 0.553 0.547 0.55 0.53 0.573 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ldo_filter_temp  : num [1:21536] 19.1 19.1 19.1 19.1 19.1 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ redox_deni       : num [1:21536] -186 -186 -186 -186 -187 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ redox_deni_temp  : num [1:21536] 19.7 19.7 19.7 19.7 19.7 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ts_filter        : num [1:21536] 11.7 11.8 11.5 11.7 11.8 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ts_nitri         : num [1:21536] 10.2 10.2 10.2 10.1 10.1 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_ablauf  : num [1:21536] 2.96 2.95 2.94 2.96 2.99 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ nitrat_ablauf    : num [1:21536] 11 11 11 11 10.9 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_ablauf    : num [1:21536] 11.9 11.9 11.9 11.8 11.9 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ chlorid_ablauf   : num [1:21536] 113 113 113 113 113 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_ablauf      : num [1:21536] 19 19 19 19 19 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_nitri   : num [1:21536] 12.6 12.7 13.1 12.6 12.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_nitri     : num [1:21536] 139 139 136 138 139 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_nitri       : num [1:21536] 18.8 18.8 18.7 18.8 18.8 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ammonium_zulauf  : num [1:21536] 60.7 60.3 60 59.9 59.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ kalium_zulauf    : num [1:21536] 15.8 16 16.3 16.8 17.3 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ temp_zulauf      : num [1:21536] 17.8 17.8 17.8 17.8 17.8 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ leitf_zulauf     : num [1:21536] 1409 1409 1409 1408 1408 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ leitf_zulauf_temp: num [1:21536] 18.6 18.6 18.6 18.6 18.5 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_filter        : num [1:21536] 7.65 7.65 7.65 7.65 7.65 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_filter_temp   : num [1:21536] 19 19 19 19 19 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_nitri         : num [1:21536] 7.83 7.83 7.82 7.82 7.82 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ph_nitri_temp    : num [1:21536] 19 19 19 19 19 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_bypass_rezi    : num [1:21536] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_filter_rezi    : num [1:21536] 1634 1612 1627 1641 1652 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_komp           : num [1:21536] 0.2767 -0.0802 -0.1447 -0.1447 -0.1447 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_zulauf         : num [1:21536] 156 156 156 156 158 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt1_diff     : num [1:21536] 13.7 13.7 13.7 13.7 13.7 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ p_filt2_diff     : num [1:21536] 15.6 15.6 15.6 15.6 15.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_no3n: num [1:21536] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_no2n: num [1:21536] 0.457 0.512 0.447 0.422 0.455 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_csb : num [1:21536] 18.3 17.7 18.8 18.1 18.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_zulauf_sak : num [1:21536] 91.6 91.5 91.4 91.2 91.5 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_no3n: num [1:21536] 10.4 10.6 10.3 10.6 10.4 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_no2n: num [1:21536] 1.98 1.9 2.03 1.89 1.99 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_csb : num [1:21536] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ trios_ablauf_sak : num [1:21536] 51.7 51.5 51.7 51.6 51.6 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gesamt         : num [1:21536] 772879 772874 772868 772863 772863 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gestern        : num [1:21536] 3260 3260 3260 3260 3260 3260 3260 3260 3260 3260 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gesamt_filt2   : num [1:21536] 754634 754629 754623 754618 754618 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_gestern_filt2  : num [1:21536] 3266 3266 3266 3266 3266 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q-nitri-gesamt   : num [1:21536] 15307 15307 15307 15307 15307 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg1_gesamt     : num [1:21536] 80758 80757 80757 80757 80757 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_sg2_gesamt     : num [1:21536] 84876 84876 84876 84876 84876 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp_gesamt      : num [1:21536] 1530790 1530790 1530790 1530790 1530790 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_zp_gestern     : num [1:21536] 6540 6540 6540 6540 6540 6540 6540 6540 6540 6540 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ q_uss_gesamt     : num [1:21536] 44700 44700 44700 44700 44700 44700 44700 44700 44700 44700 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rechen         : num [1:21536] 2586705 2586705 2586675 2586675 2586675 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_nitri          : num [1:21536] 13742555 13742555 13742555 13742555 13742555 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rp             : num [1:21536] 21936895 21936775 21936656 21936535 21936415 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_sg1            : num [1:21536] 19754463 19754395 19754326 19754273 19754215 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_sg2            : num [1:21536] 19754269 19754214 19754161 19754089 19754024 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_fp             : num [1:21536] 17251232 17251112 17250993 17250887 17250887 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_fp2            : num [1:21536] 17180344 17180224 17180105 17179999 17179999 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rw1            : num [1:21536] 17655728 17655608 17655489 17655368 17655248 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_rw2            : num [1:21536] 21112473 21112353 21112234 21112113 21111993 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_zp1            : num [1:21536] 960043 960043 960043 960043 960043 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ t_grobstoffp     : num [1:21536] 1653 1653 1653 1653 1653 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ zustand          : chr [1:21536] "0500050005000700050007000700000000000000000002000200070000001500000000000100870001008FF82300" "05000500050005000700070007000000000000000000020002000700000015000000000001008700010027F82900" "05000500050007000500070007000000000000000000020002000700000015000000000001008700010087F82300" "0500050005000700050005000700000000000000000002000200050000001500000000000100870001000EB82300" ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ meldungen        : chr [1:21536] "008000000000000000000000" "008000000000000000000000" "008000000000000000000000" "008000000000000000000000" ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ id               : num [1:21536] 180816 180815 180814 180813 180812 ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ Zeitstempel      : POSIXct[1:21536], format: "2021-11-12 05:26:11" "2021-11-12 05:24:12" ...</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span>  $ ...79            : num [1:21536] NA NA NA NA NA NA NA NA NA NA ...</span>
 </pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
