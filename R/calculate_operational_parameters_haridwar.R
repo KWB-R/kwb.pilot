@@ -16,6 +16,8 @@
 #' @param calc_paras a vector with parameter codes used for performing calculations
 #' defined in 'calc_list' (default: c('Redox_Out1', 'Redox_Out2', 'Redox_In',
 #' 'Flux', 'Up', 'Ip', 'Uz', 'Iz'))
+#' @param config configuration object (list) from which the \code{calc_*}
+#'   arguments are filled. Default: \code{get_calc_config("haridwar")}
 #' @return dataframe with calculated operational parameters
 #' @importFrom kwb.utils stringList
 #' @export
@@ -27,10 +29,11 @@
 #'
 calculate_operational_parameters <- function(
   df,
-  calc_list = get_calc_info_haridwar(),
-  calc_list_name = get_calc_info_haridwar("name"),
-  calc_list_unit = get_calc_info_haridwar("unit"),
-  calc_paras = get_calc_info_haridwar("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("haridwar")
 )
 {
   print(sprintf(
@@ -71,12 +74,6 @@ calculate_operational_parameters <- function(
     dplyr::filter_("!is.na(ParameterValue)") %>%
     dplyr::left_join(y = meta_data)
   # dplyr::mutate_(DataType = "'calculated'")
-}
-
-# get_calc_info_haridwar -------------------------------------------------------
-get_calc_info_haridwar <- function(what = "expr")
-{
-  get_calc_info_from_config(config = get_calc_config("haridwar"), what)
 }
 
 #' Plot calculate operational time series

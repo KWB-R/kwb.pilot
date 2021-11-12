@@ -45,12 +45,14 @@ normalised_permeate_flow <- function(
 #' Calculate operational parameters for Berlin-Friedrichshagen
 #' @param df a data frame as retrieved by import_data_berlin_f()
 #' @param calc_list list with calculation operations to be carried out
-#' @param calc_list_name full names of parameters to be used for plotting for each
-#' calculation specified wit 'calc_list'.
+#' @param calc_list_name full names of parameters to be used for plotting for
+#'   each calculation specified wit 'calc_list'.
 #' @param calc_list_unit units of parameters to be used for plotting for each
-#' calculation specified wit 'calc_list'.
-#' @param calc_paras a vector with parameter codes used for performing calculations
-#' defined in 'calc_list'
+#'   calculation specified wit 'calc_list'.
+#' @param calc_paras a vector with parameter codes used for performing
+#'   calculations defined in 'calc_list'
+#' @param config configuration object (list) from which the \code{calc_*}
+#'   arguments are filled. Default: \code{get_calc_config("berlin_f")}
 #' @return dataframe with calculated operational parameters
 #' @export
 #' @examples
@@ -61,10 +63,11 @@ normalised_permeate_flow <- function(
 #'
 calculate_operational_parameters_berlin_f <- function(
   df,
-  calc_list = get_calc_info_berlin_f(),
-  calc_list_name = get_calc_info_berlin_f("name"),
-  calc_list_unit = get_calc_info_berlin_f("unit"),
-  calc_paras = get_calc_info_berlin_f("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("berlin_f")
 )
 {
   res <- calculate_operational_parameters(
@@ -81,10 +84,4 @@ calculate_operational_parameters_berlin_f <- function(
   res$Source <- "online"
   
   res
-}
-
-# get_calc_info_berlin_f -------------------------------------------------------
-get_calc_info_berlin_f <- function(what = "expr")
-{
-  get_calc_info_from_config(config = get_calc_config("berlin_f"), what)
 }

@@ -8,6 +8,8 @@
 #' calculation specified wit 'calc_list'. default: c("percent")
 #' @param calc_paras a vector with parameter codes used for performing calculations
 #' defined in 'calc_list' (default: c("FY-20-01", "FT-10-01")
+#' @param config configuration object (list) from which the \code{calc_*}
+#'   arguments are filled. Default: \code{get_calc_config("berlin_t")}
 #' @return dataframe with calculated operational parameters
 #' @export
 #' @examples
@@ -18,10 +20,11 @@
 #'
 calculate_operational_parameters_berlin_t <- function(
   df,
-  calc_list = get_calc_info_berlin_t(),
-  calc_list_name = get_calc_info_berlin_t("name"),
-  calc_list_unit = get_calc_info_berlin_t("unit"),
-  calc_paras = get_calc_info_berlin_t("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("berlin_t")
 )
 {
   res <- calculate_operational_parameters(
@@ -38,10 +41,4 @@ calculate_operational_parameters_berlin_t <- function(
   res$Source <- "online"
   
   res
-}
-
-# get_calc_info_berlin_t -------------------------------------------------------
-get_calc_info_berlin_t <- function(what = "expr")
-{
-  get_calc_info_from_config(config = get_calc_config("berlin_t"), what)
 }
