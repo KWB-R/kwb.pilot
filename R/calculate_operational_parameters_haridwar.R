@@ -74,44 +74,57 @@ calculate_operational_parameters <- function(
 }
 
 # get_calc_info_haridwar -------------------------------------------------------
-get_calc_info_haridwar <- function(part = "")
+get_calc_info_haridwar <- function(what = "expr")
 {
-  if (part == "name") return(c(
-    "Mean redox potential in tank",
-    "Difference (outflow - inflow) of redox potential",
-    "Power demand of pump",
-    "Power demand of cell",
-    "Specific energy demand of pump",
-    "Specific energy demand of cell"
-  ))
+  get_calc_info_from_config(config = get_calc_config_haridwar(), what)
+}
 
-  if (part == "unit") return(c(
-    "mV",
-    "mV",
-    "W",
-    "W",
-    "Wh/m3",
-    "Wh/m3"
-  ))
-
-  if (part == "paras") return(c(
-    "Redox_Out1",
-    "Redox_Out2",
-    "Redox_In",
-    "Flux",
-    "Up",
-    "Ip",
-    "Uz",
-    "Iz"
-  ))
-  
+# get_calc_config_haridwar -----------------------------------------------------
+get_calc_config_haridwar <- function()
+{
   list(
-    Redox_Out = "(Redox_Out1+Redox_Out2)/2",
-    Redox_Diff = "Redox_Out - Redox_In",
-    Power_pump = "Up*Ip",
-    Power_cell = "Uz*Iz",
-    Pump_WhPerCbm = "Power_pump/(Flux/1000)",
-    Cell_WhPerCbm = "Power_cell/(Flux/1000)"
+    parameters = c(
+      "Redox_Out1",
+      "Redox_Out2",
+      "Redox_In",
+      "Flux",
+      "Up",
+      "Ip",
+      "Uz",
+      "Iz"
+    ),
+    calculated = list(
+      Redox_Out = list(
+        name = "Mean redox potential in tank",
+        unit = "mV",
+        expr = "(Redox_Out1+Redox_Out2)/2"
+      ),
+      Redox_Diff = list(
+        name = "Difference (outflow - inflow) of redox potential",
+        unit = "mV",
+        expr = "Redox_Out - Redox_In"
+      ),
+      Power_pump = list(
+        name = "Power demand of pump",
+        unit = "W",
+        expr = "Up*Ip"
+      ),
+      Power_cell = list(
+        name = "Power demand of cell",
+        unit = "W",
+        expr = "Uz*Iz"
+      ),
+      Pump_WhPerCbm = list(
+        name = "Specific energy demand of pump",
+        unit = "Wh/m3",
+        expr = "Power_pump/(Flux/1000)"
+      ),
+      Cell_WhPerCbm = list(
+        name = "Specific energy demand of cell",
+        unit = "Wh/m3",
+        expr = "Power_cell/(Flux/1000)"
+      )
+    )
   )
 }
 

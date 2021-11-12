@@ -41,20 +41,24 @@ calculate_operational_parameters_berlin_t <- function(
 }
 
 # get_calc_info_berlin_t -------------------------------------------------------
-get_calc_info_berlin_t <- function(part = "")
+get_calc_info_berlin_t <- function(what = "expr")
 {
-  if (part == "name") return(c(
-    "recovery"
-  ))
-  
-  if (part == "unit") return(c(
-    "%"
-  ))
-  
-  if (part == "paras") return(c(
-    "FY-20-01", 
-    "FT-10-01"
-  ))
-  
-  list(recovery = "100*`FY-20-01`/`FT-10-01`")
+  get_calc_info_from_config(config = get_calc_config_berlin_t(), what)
+}
+
+# get_calc_config_berlin_t -----------------------------------------------------
+get_calc_config_berlin_t <- function()
+{
+  list(
+    parameters = c(
+      "FY-20-01", 
+      "FT-10-01"
+    ),
+    calculated = list(
+      recovery = list(
+        name = "recovery",
+        unit = "%",
+        expr = "100*`FY-20-01`/`FT-10-01`")
+    )
+  )
 }

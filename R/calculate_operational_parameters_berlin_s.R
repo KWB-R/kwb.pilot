@@ -40,29 +40,32 @@ calculate_operational_parameters_berlin_s <- function(
 }
 
 # get_calc_info_berlin_s -------------------------------------------------------
-get_calc_info_berlin_s <- function(part = "")
+get_calc_info_berlin_s <- function(what = "expr")
 {
-  if (part == "name") return(c(
-    "delta SAK", 
-    "Ozoneintrag"
-  ))
-  
-  if (part == "unit") return(c(
-    "%", 
-    "mg-O3/L"
-  ))
-  
-  if (part == "paras") return(c(
-    "SCAN_SAK_Ablauf",
-    "SCAN_SAK_Zulauf",
-    "C_O3_Zugas",
-    "C_O3_Abgas",
-    "Q_Gas",
-    "Q_Ozonanlage"
-  ))
-  
+  get_calc_info_from_config(config = get_calc_config_berlin_s(), what)
+}
+
+# get_calc_config_berlin_s -----------------------------------------------------
+get_calc_config_berlin_s <- function()
+{
   list(
-    deltaSAK = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100",
-    Ozoneintrag = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage"
+    parameters = c(
+      "SCAN_SAK_Ablauf",
+      "SCAN_SAK_Zulauf",
+      "C_O3_Zugas",
+      "C_O3_Abgas",
+      "Q_Gas",
+      "Q_Ozonanlage"
+    ),
+    calculated = list(    
+      deltaSAK = list(
+        name = "delta SAK", 
+        unit = "%", 
+        expr = "(1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100"),
+      Ozoneintrag = list(
+        name = "Ozoneintrag",
+        unit = "mg-O3/L",
+        expr = "(C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage")
+    )
   )
 }
