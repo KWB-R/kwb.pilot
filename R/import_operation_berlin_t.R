@@ -13,27 +13,27 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
     dplyr::mutate_(
       ParameterName = gsub(pattern = "\\s*\\(.*", "", "ParameterCode")
     )
-
+  
   gather_cols <- setdiff(names(lab_results), c(
     "ParameterCode", "ParameterUnit", "ParameterName"
   ))
-
+  
   sep_into <- c(
     "ProbenNr", "Date", "Termin", "Komplexkuerzel", "Ort_Typ", "Art",
     "Gegenstand", "Bezeichnung", "SiteName", "InterneKN", "Bemerkung",
     "DateTime"
   )
-
+  
   df <- lab_results %>%
     tidyr::gather_("Combi", "ParameterValueRaw", gather_cols) %>%
     tidyr::separate_("Combi", sep_into, sep = "@", remove = TRUE)
-
+  
   par_value_raw <- kwb.utils::selectColumns(df, "ParameterValueRaw")
   par_value_txt <- comma_to_dot(par_value_raw)
   par_value_num <- as.numeric(gsub("<", "", par_value_txt))
-
+  
   is_below <- grepl("<", par_value_txt)
-
+  
   df <- kwb.utils::setColumns(
     df,
     Date = column_to_date(df, "Date"),
@@ -43,15 +43,15 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
     DetectionLimit_numeric = ifelse(is_below, par_value_num, NA),
     ParameterValue = ifelse(is_below, par_value_num / 2, par_value_num)
   )
-
+  
   site_names <- unique(kwb.utils::selectColumns(df, "SiteName"))
-
+  
   site_meta <- data.frame(
     SiteCode = seq_along(site_names),
     SiteName = site_names,
     stringsAsFactors = FALSE
   )
-
+  
   list(
     matrix = lab_results,
     list = df %>%
@@ -97,25 +97,23 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
       file = meta_file_path, header = TRUE, sep = ",", dec = ".",
       stringsAsFactors = FALSE
     )
-  
-  columns <- c("TimeStamp", meta_data$ParameterCode[meta_data$ZeroOne == 1])
-  
-  raw_list <- lapply(xls_files, FUN = function(xls_file) {
-    print(paste("Importing raw data file:", xls_file))
-    tmp <- readr::read_tsv(file = xls_file, locale = locale,
-                           col_types = col_types)
-    relevant_paras <- names(tmp)[names(tmp) %in% columns]
-    tmp[, relevant_paras]
+    
+    columns <- c("TimeStamp", meta_data$ParameterCode[meta_data$ZeroOne == 1])
+    
+    raw_list <- lapply(xls_files, FUN = function(xls_file) {
+      print(paste("Importing raw data file:", xls_file))
+      tmp <- readr::read_tsv(file = xls_file, locale = locale,
+                             col_types = col_types)
+      relevant_paras <- names(tmp)[names(tmp) %in% columns]
+      tmp[, relevant_paras]
+    })
     
     df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
     
-    
     gather_cols <- setdiff(names(df_tidy), "TimeStamp")
     
-  })
-  
   } else {
-
+    
     raw_list <- lapply(xls_files, FUN = function(xls_file) {
       print(paste("Importing raw data file:", xls_file))
       tmp <- readr::read_tsv(file = xls_file, 
@@ -146,7 +144,7 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
     
     
   }
-    
+  
   meta_data$ParameterLabel <- sprintf_columns("%s (%s)", meta_data, columns = c(
     "ParameterName", "ParameterUnit"))
   
@@ -163,11 +161,11 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
     dplyr::rename(DateTime = "TimeStamp") %>%
     dplyr::left_join(y = meta_data %>% dplyr::select(-tidyselect::matches("ZeroOne"))) %>%
     as.data.frame()
-
+  
   df_tidy$Source <- "online"
-
+  
   df_tidy$SiteName[is.na(df_tidy$SiteName)] <- "General"
-
+  
   df_tidy
 }
 
@@ -190,20 +188,20 @@ import_data_berlin_t <- function(raw_data_dir = package_file("shiny/berlin_t/dat
                                  analytics_path = package_file("shiny/berlin_t/data/analytics.xlsx"),
                                  meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv")) {
   df <- read_pentair_data(raw_data_dir, raw_data_files, meta_file_path)
-
+  
   #### To do: joind with ANALYTICS data as soon as available
   # data_berlin_t_offline <- read_pentair_data(raw_data_dir = raw_data_dir,
   #                                    meta_file_path = meta_file_path)
-
+  
   # data_berlin_t_offline <- import_lab_data_berlin_t(raw_data_dir = raw_data_dir,
   #                                           meta_file_path = meta_file_path)
-
+  
   df$DataType <- "raw"
-
+  
   df$SiteName_ParaName_Unit <- sprintf_columns("%s: %s (%s)", df, columns = c(
     "SiteName", "ParameterName", "ParameterUnit"
   ))
-
+  
   ### Remove duplicates if any exist
   remove_duplicates(df, col_names = c("DateTime", "ParameterCode", "SiteCode"))
 }
