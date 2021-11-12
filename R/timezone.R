@@ -3,7 +3,8 @@
 #' @param x a vector that should be tested whether
 #' @return returns TRUE if of tpye POSIXct
 #' @keywords internal
-is_POSIXct <- function(x) {
+is_POSIXct <- function(x)
+{
   inherits(x, "POSIXct")
 }
 
@@ -17,7 +18,8 @@ is_POSIXct <- function(x) {
 #' \url{https://en.wikipedia.org/wiki/List_of_tz_database_time_zones} for more
 #' details.
 #' @export
-set_timezone <- function(df, tz = "UTC", col_datetime = "DateTime") {
+set_timezone <- function(df, tz = "UTC", col_datetime = "DateTime")
+{
   # Convert tibble into R data.frame
   df <- as.data.frame(df)
 
@@ -29,12 +31,13 @@ set_timezone <- function(df, tz = "UTC", col_datetime = "DateTime") {
 }
 
 # get_posix_column_or_stop -----------------------------------------------------
-get_posix_column_or_stop <- function(df, column) {
+get_posix_column_or_stop <- function(df, column)
+{
   # Select the time column
   times <- kwb.utils::selectColumns(df, column)
 
   # Assumption: first column of dataframe always needs to date/time (i.e. POSIXct)
-  if (!is_POSIXct(times)) {
+  if (! is_POSIXct(times)) {
     clean_stop(
       "Column ", column, " needs to be of type DATE/TIME (POSIXct). ",
       "Please check sheet 'xyz' of imported xls file 'xyz'!"
@@ -56,12 +59,19 @@ get_posix_column_or_stop <- function(df, column) {
 #' details.
 #' @importFrom lubridate with_tz
 #' @export
-change_timezone <- function(df, tz = "UTC", col_datetime = "DateTime", debug = TRUE) {
+change_timezone <- function(
+  df, 
+  tz = "UTC", 
+  col_datetime = "DateTime", 
+  debug = TRUE
+)
+{
   times <- get_posix_column_or_stop(df, col_datetime)
 
   tz_org <- paste(unique(base::attr(times, "tzone")), collapse = " , ")
 
   if (tz_org == tz) {
+    
     kwb.utils::catIf(debug, sprintf(
       "Original time zone(s) %s and new time zone %s are identical", tz_org, tz
     ))
@@ -87,7 +97,8 @@ change_timezone <- function(df, tz = "UTC", col_datetime = "DateTime", debug = T
 #' @importFrom rvest html_nodes html_table
 #' @importFrom xml2 read_html
 #' @export
-get_valid_timezones <- function() {
+get_valid_timezones <- function()
+{
   url_tz <- "https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"
 
   url_tz %>%
