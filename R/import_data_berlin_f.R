@@ -10,9 +10,11 @@
 #' soon as available)
 #' @export
 #' @importFrom fs dir_ls
-import_data_berlin_f <- function(raw_data_files = fs::dir_ls(shiny_file("berlin_f/data/raw/online_data"), recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
-                                 meta_file_path = shiny_file("berlin_f/data/raw/online_data/parameter_unit_metadata.csv")) {
-
+import_data_berlin_f <- function(
+  raw_data_files = fs::dir_ls(shiny_file("berlin_f/data/raw/online_data"), recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
+  meta_file_path = shiny_file("berlin_f/data/raw/online_data/parameter_unit_metadata.csv")
+)
+{
   # kwb.utils::assignPackageObjects("kwb.pilot")
 
   # =======
@@ -30,13 +32,10 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(shiny_file("berlin_
   # data_berlin_f_offline <- import_lab_data_berlin_f(raw_data_dir = raw_data_dir,
   #                                           meta_file_path = meta_file_path)
 
-
-
   meta_data <- readr::read_csv(meta_file_path,
     col_types = "cc",
     locale = readr::locale(encoding = "UTF-8")
   )
-
 
   data_berlin_f <- read_weintek_batch(raw_data_files) %>%
     dplyr::left_join(meta_data) %>%
@@ -57,7 +56,6 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(shiny_file("berlin_
     ### Remove duplicates if any exist
     remove_duplicates(col_names = c("DateTime", "ParameterName", "SiteName"))
 
-
   Encoding(data_berlin_f$ParameterUnit) <- "UTF-8"
 
   #   data_berlin_f <- remove_duplicates(
@@ -65,6 +63,5 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(shiny_file("berlin_
   #     col_names = c("DateTime", "ParameterName", "SiteName")
   #   )
 
-
-  return(data_berlin_f)
+  data_berlin_f
 }
