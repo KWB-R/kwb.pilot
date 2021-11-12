@@ -37,7 +37,7 @@ get_monthly_data_from_calendarweeks <- function(year_month) {
     dplyr::pull("cw") %>%
     unique()
 
-  dir_operation <- package_file("shiny/berlin_s/data/operation")
+  dir_operation <- shiny_file("berlin_s/data/operation")
 
   files <- list.files(dir_operation, pattern = ".csv")
 
@@ -58,8 +58,8 @@ if (FALSE) {
   ##############################################################################
   #### Make one CSV file of Ozone_2017_BisKW_29.csv for each calendar week 17-29
   ##############################################################################
-  old_data <- readLines(kwb.pilot:::package_file(
-    "shiny/berlin_s/data/operation/Ozone_2017_BisKW_29.csv"
+  old_data <- readLines(kwb.pilot:::shiny_file(
+    "berlin_s/data/operation/Ozone_2017_BisKW_29.csv"
   ))
 
   date_strings <- stringr::str_sub(old_data, 1, 8)

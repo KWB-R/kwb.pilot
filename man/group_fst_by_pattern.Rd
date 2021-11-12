@@ -7,7 +7,7 @@
 group_fst_by_pattern(
   time_pattern = NULL,
   fst_pattern = "raw",
-  fst_dir = package_file("shiny/berlin_t/data/fst")
+  fst_dir = shiny_file("berlin_t/data/fst")
 )
 }
 \arguments{
@@ -17,7 +17,7 @@ for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")}
 \item{fst_pattern}{pattern to search for in fst filename (default: "raw")}
 
 \item{fst_dir}{directory with fst files or subdirs to be imported (default:
-kwb.pilot:::package_file("shiny/berlin_t/data/fst"))}
+kwb.pilot:::shiny_file("berlin_t/data/fst"))}
 }
 \value{
 merged data.frame

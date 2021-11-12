@@ -39,11 +39,6 @@ num_column_to_posix_cet <- function(df, column) {
   as.POSIXct(times_num * 24 * 3600, origin = "1899-12-30", tz = "CET")
 }
 
-# package_file -----------------------------------------------------------------
-package_file <- function(...) {
-  system.file(..., package = "kwb.pilot")
-}
-
 #' Path to Shiny File in Package
 #'
 #' @param ... relative path to file in "shiny" folder of R package "kwb.pilot" 

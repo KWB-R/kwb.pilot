@@ -59,9 +59,9 @@ create_wedeco_metafile <- function(raw_data_file) {
 #' @importFrom lubridate parse_date_time2
 #' @importFrom data.table rbindlist
 #' @export
-read_wedeco_data <- function(raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+read_wedeco_data <- function(raw_data_dir = shiny_file("berlin_s/data/operation"),
                              raw_data_files = NULL,
-                             meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")) {
+                             meta_file_path = shiny_file("berlin_s/data/parameter_site_metadata.csv")) {
   meta_data <- read.csv(meta_file_path, stringsAsFactors = FALSE) %>%
     dplyr::select_(
       "ProzessID",
@@ -142,20 +142,20 @@ read_wedeco_data <- function(raw_data_dir = package_file("shiny/berlin_s/data/op
 
 #' Import data for Berlin Schoenerlinde
 #' @param raw_data_dir path of directory containing WEDECO CSV files
-#' (default: kwb.pilot:::package_file("shiny/berlin_s/data/operation"))
+#' (default: kwb.pilot:::shiny_file("berlin_s/data/operation"))
 #' @param raw_data_files vector with full path to operational raw data files that
 #' allows to limit import to specific files (default: NULL). If specified parameter
 #' "raw_data_dir" will not be used
 #' @param meta_file_path path to metadata file (default:
-#' kwb.pilot:::package_file("shiny/berlin_s/data/parameter_site_metadata.csv"))
+#' kwb.pilot:::shiny_file("berlin_s/data/parameter_site_metadata.csv"))
 #' @return list with "df": data.frame with imported operational data (analytics
 #' data to be added as soon as available) and "added_data_points": number of
 #' added data points in case of existing fst file was updated with new operational
 #' data
 #' @export
-import_data_berlin_s <- function(raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+import_data_berlin_s <- function(raw_data_dir = shiny_file("berlin_s/data/operation"),
                                  raw_data_files = NULL,
-                                 meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")) {
+                                 meta_file_path = shiny_file("berlin_s/data/parameter_site_metadata.csv")) {
   df <- read_wedeco_data(raw_data_dir, raw_data_files, meta_file_path)
 
   df$DataType <- "raw"

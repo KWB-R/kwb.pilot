@@ -18,7 +18,7 @@ run_app <- function(siteName = "haridwar", use_live_data = FALSE, mySQL_conf = N
                     launch.browser = TRUE, ...) {
   use_live_data <- toupper(use_live_data)
 
-  shinyDir <- package_file("shiny")
+  shinyDir <- shiny_file()
 
   appDir <- file.path(shinyDir, siteName)
 

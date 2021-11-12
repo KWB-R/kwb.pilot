@@ -6,10 +6,11 @@
 \usage{
 calculate_operational_parameters(
   df,
-  calc_list = get_calc_info_haridwar(),
-  calc_list_name = get_calc_info_haridwar("name"),
-  calc_list_unit = get_calc_info_haridwar("unit"),
-  calc_paras = get_calc_info_haridwar("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("haridwar")
 )
 }
 \arguments{
@@ -34,6 +35,9 @@ calculation specified wit 'calc_list'. default: c('mV', 'mV', 'Wh', 'Wh',
 \item{calc_paras}{a vector with parameter codes used for performing calculations
 defined in 'calc_list' (default: c('Redox_Out1', 'Redox_Out2', 'Redox_In',
 'Flux', 'Up', 'Ip', 'Uz', 'Iz'))}
+
+\item{config}{configuration object (list) from which the \code{calc_*}
+arguments are filled. Default: \code{get_calc_config("haridwar")}}
 }
 \value{
 dataframe with calculated operational parameters

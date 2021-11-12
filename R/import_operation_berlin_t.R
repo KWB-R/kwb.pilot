@@ -1,13 +1,13 @@
 #' BerlinTiefwerder: import lab data
 #' @param xlsx_path  full path to lab data EXCEL file in xlsx format
-#' (default: kwb.pilot:::package_file("shiny/berlin_t/data/analytics.xlsx"))
+#' (default: kwb.pilot:::shiny_file("berlin_t/data/analytics.xlsx"))
 #' @return a list of imported lab data for Berlin-Tiefwerder
 #' @import tidyr
 #' @importFrom dplyr left_join mutate
 #' @importFrom readxl read_xlsx
 #' @importFrom magrittr "%>%"
 #' @export
-import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/data/analytics.xlsx")) {
+import_lab_data_berlin_t <- function(xlsx_path = shiny_file("berlin_t/data/analytics.xlsx")) {
   lab_results <- xlsx_path %>%
     readxl::read_xlsx(sheet = "Tabelle1", skip = 12) %>%
     dplyr::mutate_(
@@ -63,12 +63,12 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' Read PENTAIR operational data
 #'
 #' @param raw_data_dir path of directory containing PENTAIR xls files
-#' (default: kwb.pilot:::package_file("shiny/berlin_t/data/operation"))
+#' (default: kwb.pilot:::shiny_file("berlin_t/data/operation"))
 #' @param raw_data_files vector with full path to operational raw data files that
 #' allows to limit import to specific files (default: NULL). If specified parameter
 #' "raw_data_dir" will not be used
 #' @param meta_file_path path to metadata file (default:
-#' kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))
+#' kwb.pilot:::shiny_file("berlin_t/data/parameter_site_metadata.csv"))
 #' @param locale locale (default: \code{\link[readr]{locale}}(tz = "CET"))
 #' @param col_types col_types (default: \code{\link[readr]{cols}})
 #' @return data.frame with imported PENTAIR operational data
@@ -79,9 +79,9 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' @importFrom kwb.utils catAndRun
 #' @importFrom utils write.csv
 #' @export
-read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
+read_pentair_data <- function(raw_data_dir = shiny_file("berlin_t/data/operation"),
                               raw_data_files = NULL,
-                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+                              meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv"),
                               locale = readr::locale(tz = "CET"),
                               col_types = readr::cols()) {
   
@@ -174,21 +174,21 @@ read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/o
 #' Import data for Berlin Tiefwerder
 #'
 #' @param raw_data_dir path of directory containing PENTAIR xls files
-#' (default: kwb.pilot:::package_file("shiny/berlin_t/data/operation"))
+#' (default: kwb.pilot:::shiny_file("berlin_t/data/operation"))
 #' @param raw_data_files vector with full path to operational raw data files that
 #' allows to limit import to specific files (default: NULL). If specified parameter
 #' "raw_data_dir" will not be used
 #' @param analytics_path  full path to lab data EXCEL file in xlsx format
-#' (default: kwb.pilot:::package_file("shiny/berlin_t/data/analytics.xlsx"))
+#' (default: kwb.pilot:::shiny_file("berlin_t/data/analytics.xlsx"))
 #' @param meta_file_path path to metadata file (default:
-#' kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))
+#' kwb.pilot:::shiny_file("berlin_t/data/parameter_site_metadata.csv"))
 #' @return data.frame with imported operational data (analytics´data to be added as
 #' soon as available)
 #' @export
-import_data_berlin_t <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
+import_data_berlin_t <- function(raw_data_dir = shiny_file("berlin_t/data/operation"),
                                  raw_data_files = NULL,
-                                 analytics_path = package_file("shiny/berlin_t/data/analytics.xlsx"),
-                                 meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv")) {
+                                 analytics_path = shiny_file("berlin_t/data/analytics.xlsx"),
+                                 meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv")) {
   df <- read_pentair_data(raw_data_dir, raw_data_files, meta_file_path)
 
   #### To do: joind with ANALYTICS data as soon as available

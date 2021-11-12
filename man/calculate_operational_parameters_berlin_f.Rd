@@ -6,10 +6,11 @@
 \usage{
 calculate_operational_parameters_berlin_f(
   df,
-  calc_list = get_calc_info_berlin_f(),
-  calc_list_name = get_calc_info_berlin_f("name"),
-  calc_list_unit = get_calc_info_berlin_f("unit"),
-  calc_paras = get_calc_info_berlin_f("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("berlin_f")
 )
 }
 \arguments{
@@ -17,14 +18,17 @@ calculate_operational_parameters_berlin_f(
 
 \item{calc_list}{list with calculation operations to be carried out}
 
-\item{calc_list_name}{full names of parameters to be used for plotting for each
-calculation specified wit 'calc_list'.}
+\item{calc_list_name}{full names of parameters to be used for plotting for
+each calculation specified wit 'calc_list'.}
 
 \item{calc_list_unit}{units of parameters to be used for plotting for each
 calculation specified wit 'calc_list'.}
 
-\item{calc_paras}{a vector with parameter codes used for performing calculations
-defined in 'calc_list'}
+\item{calc_paras}{a vector with parameter codes used for performing
+calculations defined in 'calc_list'}
+
+\item{config}{configuration object (list) from which the \code{calc_*}
+arguments are filled. Default: \code{get_calc_config("berlin_f")}}
 }
 \value{
 dataframe with calculated operational parameters

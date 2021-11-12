@@ -6,10 +6,11 @@
 \usage{
 calculate_operational_parameters_berlin_t(
   df,
-  calc_list = get_calc_info_berlin_t(),
-  calc_list_name = get_calc_info_berlin_t("name"),
-  calc_list_unit = get_calc_info_berlin_t("unit"),
-  calc_paras = get_calc_info_berlin_t("paras")
+  calc_list = get_calc_info_from_config(config, "expr"),
+  calc_list_name = get_calc_info_from_config(config, "name"),
+  calc_list_unit = get_calc_info_from_config(config, "unit"),
+  calc_paras = get_calc_info_from_config(config, "paras"),
+  config = get_calc_config("berlin_t")
 )
 }
 \arguments{
@@ -26,6 +27,9 @@ calculation specified wit 'calc_list'. default: c("percent")}
 
 \item{calc_paras}{a vector with parameter codes used for performing calculations
 defined in 'calc_list' (default: c("FY-20-01", "FT-10-01")}
+
+\item{config}{configuration object (list) from which the \code{calc_*}
+arguments are filled. Default: \code{get_calc_config("berlin_t")}}
 }
 \value{
 dataframe with calculated operational parameters

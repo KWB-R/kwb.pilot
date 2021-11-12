@@ -75,7 +75,7 @@ aggregate_export_fst <- function(
     # Determine the path to the export directory (if not given)
     export_dir_path <- kwb.utils::defaultIfNULL(
       export_dir_path, 
-      sprintf("%s/data/fst/%s", package_file("shiny", prefix), year_month)
+      sprintf("%s/data/fst/%s", shiny_file(prefix), year_month)
     )
     
     # Make sure that the export directory exists    

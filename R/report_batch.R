@@ -46,7 +46,7 @@ create_report_batch <- function(batchDir = file.path(tempdir(), "batch_report"),
   on.exit(owdir)
 
   report_path <- kwb.utils::defaultIfNULL(
-    report_path, package_file("shiny/haridwar/report/report.Rmd")
+    report_path, shiny_file("haridwar/report/report.Rmd")
   )
 
   report_name <- basename(report_path)

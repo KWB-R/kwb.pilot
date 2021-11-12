@@ -74,7 +74,7 @@ aggregate_export_fst_berlin_f <- function(
     year_month <- unique(x$year_month)
     stopifnot(length(year_month == 1L))
     fs::dir_ls(
-      package_file("shiny/berlin_f/data/raw/online_data"),
+      shiny_file("berlin_f/data/raw/online_data"),
       recurse = TRUE, 
       regexp = sprintf(
         "^[^~].*%s[0-3][0-9].*\\.xlsx$",

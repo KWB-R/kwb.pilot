@@ -4,7 +4,7 @@
 #' @param time_pattern optional pattern to filter months to be imported (default: NULL),
 #' for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")
 #' @param fst_dir directory with fst files or subdirs to be imported (default:
-#' kwb.pilot:::package_file("shiny/berlin_t/data/fst"))
+#' kwb.pilot:::shiny_file("berlin_t/data/fst"))
 #' @importFrom stringr str_detect
 #' @importFrom data.table rbindlist
 #' @return merged data.frame
@@ -12,7 +12,7 @@
 
 group_fst_by_pattern <- function(time_pattern = NULL,
                                  fst_pattern = "raw",
-                                 fst_dir = package_file("shiny/berlin_t/data/fst")) {
+                                 fst_dir = shiny_file("berlin_t/data/fst")) {
   files <- list.files(fst_dir, fst_pattern, recursive = TRUE, full.names = TRUE)
 
   if (!is.null(time_pattern)) {
@@ -40,15 +40,15 @@ group_fst_by_pattern <- function(time_pattern = NULL,
 #' for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")
 #' @param compression compression for fst export (default: 100)
 #' @param import_dir directory with fst files or subdirs to be imported (default:
-#' kwb.pilot:::package_file("shiny/berlin_t/data/fst"))
+#' kwb.pilot:::shiny_file("berlin_t/data/fst"))
 #' @param export_dir directory with fst directory for export (default:
-#' kwb.pilot:::package_file("shiny/berlin_t/data"))
+#' kwb.pilot:::shiny_file("berlin_t/data"))
 #' @return imports multiple fst files and exports them to be used for app
 #' @export
 merge_and_export_fst <- function(time_pattern = NULL,
                                  compression = 100,
-                                 import_dir = package_file("shiny/berlin_t/data/fst"),
-                                 export_dir = package_file("shiny/berlin_t/data")) {
+                                 import_dir = shiny_file("berlin_t/data/fst"),
+                                 export_dir = shiny_file("berlin_t/data")) {
   if (!dir.exists(export_dir)) {
     kwb.utils::catAndRun(
       sprintf("Creating export path: %s", export_dir),

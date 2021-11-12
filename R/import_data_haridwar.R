@@ -1,11 +1,11 @@
 #' Imports Haridwar data
 #'
 #' @param analytics_path Define path of analytics EXCEL spreadsheet to be
-#' imported (default: kwb.pilot:::package_file("shiny/haridwar/data/analytics.xlsx"))
+#' imported (default: kwb.pilot:::shiny_file("haridwar/data/analytics.xlsx"))
 #' @param operation_mySQL_conf column name pattern for identifying raw data
-#' (default: kwb.pilot:::package_file("shiny/haridwar/.my.cnf"))
+#' (default: kwb.pilot:::shiny_file("haridwar/.my.cnf"))
 #' @param operation_meta_path path to table with meta data for operational
-#' parameters (default: kwb.pilot:::package_file("shiny/haridwar/data/operation_parameters.csv"))
+#' parameters (default: kwb.pilot:::shiny_file("haridwar/data/operation_parameters.csv"))
 #' @param excludedSheets all sheets, which are not listed here will be imported
 #' as lab data sheets (default: c("Parameters", "Location", "Sites", "#Summary",
 #' "Site_and_Parameter", "Observations", "dP", "ORP", "Flow", "Current_Voltage",
@@ -21,9 +21,9 @@
 #' @importFrom utils read.csv
 #' @export
 
-import_data_haridwar <- function(analytics_path = package_file("shiny/haridwar/data/analytics.xlsx"),
-                                 operation_mySQL_conf = package_file("shiny/haridwar/.my.cnf"),
-                                 operation_meta_path = package_file("shiny/haridwar/data/operation_parameters.csv"),
+import_data_haridwar <- function(analytics_path = shiny_file("haridwar/data/analytics.xlsx"),
+                                 operation_mySQL_conf = shiny_file("haridwar/.my.cnf"),
+                                 operation_meta_path = shiny_file("haridwar/data/operation_parameters.csv"),
                                  excludedSheets = c(
                                    "Parameters",
                                    "Location",
