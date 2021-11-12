@@ -6,9 +6,14 @@
 #' 'endDate' month including a column 'label' (used in shiny app for month
 #' selection)
 #' @importFrom lubridate days_in_month
+#' @importFrom kwb.utils noFactorDataFrame
 #' @export
 
-create_monthly_selection <- function(startDate = "2016-09-01", endDate = Sys.Date()) {
+create_monthly_selection <- function(
+  startDate = "2016-09-01", 
+  endDate = Sys.Date()
+)
+{
   ym <- function(x) format(x, "%Y-%m")
 
   endMonth <- as.Date(sprintf("%s-01", ym(endDate)))
@@ -17,10 +22,9 @@ create_monthly_selection <- function(startDate = "2016-09-01", endDate = Sys.Dat
 
   end <- as.Date(sprintf("%s-%s", ym(start), lubridate::days_in_month(start)))
 
-  data.frame(
+  kwb.utils::noFactorDataFrame(
     start = start,
     end = end,
-    label = format(start, "%B %Y"),
-    stringsAsFactors = FALSE
+    label = format(start, "%B %Y")
   )
 }
