@@ -11,14 +11,14 @@ tsv_paths <- list.files("C:/kwb/projects/ultimate/raw_data_pilots/Pilot_B/data",
 
 
 pilot_b <- kwb.pilot::read_pentair_data(#raw_data_dir = "C:/kwb/projects/ultimate/raw_data_pilots/Pilot_B/",
-  raw_data_files = tsv_paths[1:50],
-  meta_file_path = "") 
+  raw_data_files = tsv_paths[51:100],
+  meta_file_path = "") %>% 
+  dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))
+  )
 
-tmp <- pilot_b[, c("DateTime", "ParameterCode", "ParameterValue", "Source", "SiteCode")] %>% 
-  dplyr::filter(!is.na(ParameterValue))
-
-
-tmp_wide <- tmp %>% 
+tmp_wide <- pilot_b %>% 
+  dplyr::filter(!is.na(ParameterValue),
+                !is.infinite(ParameterValue)) %>%
   tidyr::pivot_wider(names_from = "ParameterCode",
                      values_from = "ParameterValue") %>%
   janitor::clean_names() %>% 
@@ -26,9 +26,30 @@ tmp_wide <- tmp %>%
   as.data.frame() 
 
 
-field_cols <- setdiff(names(tmp_wide), c("date_time", "source", "site_code"))
 
-### R Client 
+field_cols <- setdiff(names(tmp_wide), c("date_time", "site_code"))
+
+tmp_long <- tmp_wide %>%
+  tidyr::pivot_longer(cols = tidyselect::all_of(field_cols), 
+                      names_to = "ParameterCode",
+                      values_to = "ParameterValue") %>% 
+  dplyr::filter(!is.na(ParameterValue),
+                !is.infinite(ParameterValue)) 
+
+
+fieldnames_with_changing_data <- tmp_long %>%  
+  dplyr::group_by(.data$ParameterCode) %>% 
+  dplyr::summarise(min = min(ParameterValue), 
+                   max = max(ParameterValue),
+                   diff = max-min) %>% 
+  dplyr::filter(diff != 0) %>% 
+  dplyr::pull(.data$ParameterCode)
+
+tmp_long <- tmp_long %>% 
+  dplyr::filter(.data$ParameterCode %in% fieldnames_with_changing_data)
+
+
++### R Client 
 
 remotes::install_github("influxdata/influxdb-client-r")
 
@@ -44,79 +65,57 @@ ready <- client$ready()
 
 client$health() 
 
-client$write(tmp_wide[,1:177],
-             bucket = "tmp", 
+sapply(fieldnames_with_changing_data, function(field_col) {
+
+tmp_dat <- tmp_long %>%  
+  dplyr::filter(ParameterCode == field_col) %>% 
+  tidyr::pivot_wider(names_from = "ParameterCode", 
+                     values_from = "ParameterValue") %>% 
+  as.data.frame()
+
+batch_size <- 5000
+ids <- seq(ceiling(nrow(tmp_dat)/batch_size))
+requests <- tibble::tibble(id = ids,
+                           idx_start = 1+(request_id-1)*batch_size,
+                           idx_end = request_id*batch_size
+                           )
+requests$idx_end[nrow(requests)] <- nrow(tmp_dat)
+sapply(ids, function(id) {
+  
+tmp_dat_split <-  tmp_dat[requests$idx_start[id]:requests$idx_end[id], ]
+
+msg_txt <- sprintf("'%s' (%d/%d), write request %d/%d (%s - %s, data points: %d, temporal resolution (avg): %ds) to InfluxDB",
+                   field_col,
+                   which(fieldnames_with_changing_data == field_col), 
+                   length(fieldnames_with_changing_data),
+                   id, 
+                   length(ids),
+                   min(tmp_dat_split$date_time),
+                   max(tmp_dat_split$date_time),
+                   nrow(tmp_dat_split),
+                   round(as.numeric(difftime(max(tmp_dat_split$date_time),
+                                             min(tmp_dat_split$date_time),
+                                             units = "secs"))/nrow(tmp_dat_split),
+                         0)
+                   )
+kwb.utils::catAndRun(messageText = msg_txt,expr = {
+client$write(tmp_dat_split, 
+             bucket = "ultimate", 
              precision = "s",
-             measurementCol = "source",
-             tagCols = "site_code",
-             fieldCols = field_cols[1:174],
+             measurementCol = "site_code",
+             tagCols = NULL, #"site_code",
+             fieldCols = field_col,
              timeCol = "date_time")
-
-
-tmp_wide[20001:30000,1:177] %>% 
-  dplyr::select(
-    tidyselect::(
-      ~!all(is.na(.x))
-    )
-  )
-
-
-tables <- client$query('from(bucket: "tmp") |> range(start: -30000h)')
-tables
-
-
-data <- data.frame(
-  name = replicate(2, "sensors"),
-  sensor_id = c("LM101", "LM102"),
-  temperature = c(71.4, 67.3),
-  humidity = c(47, 59),
-  time = c(Sys.time(),Sys.time())
+})
+}
 )
-
-client$write(data,bucket = "tmp", precision = "ms",
-             measurementCol = "name",
-             tagCols = c("sensor_id"),
-             fieldCols = c("temperature", "humidity"),
-             timeCol = "time")
-
-pilot_b
+})
 
 
-tables <- client$query('from(bucket: "tmp") |> range(start: -6h)')
-tables
+#tables <- client$query('from(bucket: "ultimate") |> range(start: -30000h)')
+#tables
 
-
-data <- readr::read_csv("influxtest.txt", col_names = TRUE) %>% as.data.frame()
-
-
-
-response <- client$write(x = data, 
-                         bucket = "tmp",
-                         precision = "us",
-                         measurementCol = "name",
-                         tagCols = c("region", "sensor_id"),
-                         fieldCols = c("altitude", "temperature"),
-                         timeCol = "time")
-
-
-
-#tmp <- pilot_b[1:10,c("DateTime", "ParameterCode", "ParameterValue", "ParameterName", "Source")] #%>% 
-#  tidyr::pivot_wider(names_from = "ParameterCode", 
-#                     values_from = "ParameterValue") 
-data <- readr::read_csv("influxtest.txt", col_names = TRUE) %>% as.data.frame()
-
-response <- client$write(data, 
-                         bucket = "tmp", 
-                         precision = "us",
-                         measurementCol = "name",
-                         tagCols = c("region", "sensor_id"),
-                         fieldCols = c("altitude", "temperature"),
-                         timeCol = "time")
-
-data <- client$query('from(bucket: "tmp") |> range(start: -1h) ')
-data
-
-### Python Client 
+### Python Client (alternative, but unused for now as R client works)
 
 env_name <- "influxdb"
 kwb.python::conda_py_install(env_name = env_name, 
@@ -126,30 +125,4 @@ kwb.python::conda_py_install(env_name = env_name,
 kwb.python::conda_export(env_name, export_dir = ".")
 
 reticulate::use_condaenv(env_name)
-
-
-client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
-                                             token = paths$influx_token, 
-                                             org = paths$influx_org)
-
-write_api = client$writeApi$)
-query_api = client.query_api()
-
-
-
-write_apiwrite(bucket="tmp", record=data[1,])
-p = write_api Point("my_measurement").tag("location", "Prague").field("temperature", 25.3)
-
-write_api.write(bucket=bucket, record=p)
-
-
-response <- client$write(x = data, 
-                         bucket = "ultimate",
-                         precision = "s",
-                         measurementCol = "name",
-                         tagCols = c("region", "sensor_id"),
-                         fieldCols = c("altitude", "temperature"),
-                         timeCol = "time")
-
-client$health()
 
