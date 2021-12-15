@@ -1,28 +1,31 @@
 library(kwb.pilot)
 paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
                    influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
-                   influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG")
+                   influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
+                   project_root = "C:/kwb/projects/ultimate",
+                   site_code = "Pilot_B",
+                   raw_data_dir = "<project_root>/raw_data_pilots/<site_code>/data"
 )
 
 paths <- kwb.utils::resolveAll(paths_list)
 
-tsv_paths <- list.files("C:/kwb/projects/ultimate/raw_data_pilots/Pilot_B/data", 
+tsv_paths <- list.files(path = paths$raw_data_dir,
                         full.names = TRUE,
                         pattern = "xls$")
 
-tsv_paths[c(54,60,83,85,89)]
-#sapply(tsv_paths[c(51:53, 55:59)], function(file) { 
-#message(file)
-tmp_wide <- kwb.pilot::read_pentair_data(#raw_data_dir = "C:/kwb/projects/ultimate/raw_data_pilots/Pilot_B/",
-  raw_data_files = tsv_paths[c(80:82,84,86:88,90:100)], #file,
+
+tmp_wide <- kwb.pilot::read_pentair_data(
+  raw_data_files = tsv_paths[1:10],
   meta_file_path = "") %>% 
-  dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))) %>% 
+  dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))) %>%
+  dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
+  dplyr::summarise(ParameterValue = mean(.data$ParameterValue)) %>%  
   dplyr::filter(!is.na(ParameterValue),
                 !is.infinite(ParameterValue)) %>%
   tidyr::pivot_wider(names_from = "ParameterCode",
                      values_from = "ParameterValue") %>%
   janitor::clean_names() %>% 
-  dplyr::mutate(site_code = "Pilot_B") %>% 
+  dplyr::mutate(site_code = paths$site_code) %>% 
   as.data.frame() 
 
 
@@ -49,7 +52,7 @@ tmp_long <- tmp_long %>%
   dplyr::filter(.data$ParameterCode %in% fieldnames_with_changing_data)
 
 
-+### R Client 
+### R Client 
   
   #remotes::install_github("influxdata/influxdb-client-r")
   
@@ -66,7 +69,7 @@ tmp_long <- tmp_long %>%
 #client$health() 
 
 system.time(expr = {
-  sapply(fieldnames_with_changing_data, function(field_col) {
+  sapply(fieldnames_with_changing_data[73:146], function(field_col) {
     
     tmp_dat <- tmp_long %>%  
       dplyr::filter(ParameterCode == field_col) %>% 
