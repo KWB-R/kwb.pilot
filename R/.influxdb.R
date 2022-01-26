@@ -15,7 +15,7 @@ tsv_paths <- list.files(path = paths$raw_data_dir,
 
 
 tmp_wide <- kwb.pilot::read_pentair_data(
-  raw_data_files = tsv_paths[11:20],
+  raw_data_files = tsv_paths[1:10],
   meta_file_path = "") %>% 
   dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))) %>%
   dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
