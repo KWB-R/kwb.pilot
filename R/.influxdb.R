@@ -1,9 +1,10 @@
+if(FALSE) {
 library(kwb.pilot)
 paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
                    influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
                    influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
                    project_root = "C:/kwb/projects/ultimate",
-                   site_code = "Pilot_B",
+                   site_code = "Pilot_A",
                    raw_data_dir = "<project_root>/raw_data_pilots/<site_code>/data"
 )
 
@@ -13,9 +14,54 @@ tsv_paths <- list.files(path = paths$raw_data_dir,
                         full.names = TRUE,
                         pattern = "xls$")
 
+write_to_influxdb_loop(tsv_paths = tsv_paths,
+                       paths = paths, 
+                       max_tsv_files = 17, 
+                       batch_size = 10000)
+}
+
+
+write_to_influxdb_loop <- function(tsv_paths,
+                                   paths,
+                                   max_tsv_files = 5,
+                                   batch_size = 5000) {
+splits_full <- floor(length(tsv_paths)/max_tsv_files)
+splits_partial <- ceiling(length(tsv_paths)/max_tsv_files)
+
+idx_start <- 1 - max_tsv_files
+idx_end <- 0 
+
+for(split in seq_len(splits_full)) {
+  idx_start <- idx_start + max_tsv_files
+  idx_end <- idx_end + max_tsv_files
+  cat(sprintf("Split: %d (tsv_paths_idx: %d - %d)\n", 
+              split,
+              idx_start, 
+              idx_end))
+  write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end], 
+                    paths = paths,
+                    batch_size = batch_size)
+} 
+if (splits_partial - splits_full == 1) {
+  idx_start <- idx_start + max_tsv_files
+  idx_end <- length(tsv_paths)
+  cat(sprintf("Split partial: %d (tsv_paths_idx: %d - %d)\n", 
+              splits_partial,
+              idx_start, 
+              idx_end))
+  write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end], 
+                    paths = paths,
+                    batch_size = batch_size)
+}
+}
+
+write_to_influxdb <- function(tsv_paths, 
+                              paths, 
+                              batch_size = 5000) {
 
 tmp_wide <- kwb.pilot::read_pentair_data(
-  raw_data_files = tsv_paths[1:10],
+  raw_data_dir = paths$raw_data_dir,
+  raw_data_files = tsv_paths,
   meta_file_path = "") %>% 
   dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))) %>%
   dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
@@ -77,7 +123,6 @@ system.time(expr = {
                          values_from = "ParameterValue") %>% 
       as.data.frame()
     
-    batch_size <- 5000
     ids <- seq(ceiling(nrow(tmp_dat)/batch_size))
     requests <- tibble::tibble(id = ids,
                                idx_start = 1+(ids-1)*batch_size,
@@ -115,19 +160,19 @@ system.time(expr = {
     )
   })
 })
-
+}
 
 #tables <- client$query('from(bucket: "ultimate") |> range(start: -30000h)')
 #tables
 
-### Python Client (alternative, but unused for now as R client works)
-
-env_name <- "influxdb"
-kwb.python::conda_py_install(env_name = env_name, 
-                             pkgs = list(conda = c("python=3.9"),
-                                         py = "influxdb-client==1.23.0")
-)
-kwb.python::conda_export(env_name, export_dir = ".")
-
-reticulate::use_condaenv(env_name)
+# ### Python Client (alternative, but unused for now as R client works)
+# 
+# env_name <- "influxdb"
+# kwb.python::conda_py_install(env_name = env_name, 
+#                              pkgs = list(conda = c("python=3.9"),
+#                                          py = "influxdb-client==1.23.0")
+# )
+# kwb.python::conda_export(env_name, export_dir = ".")
+# 
+# reticulate::use_condaenv(env_name)
 
