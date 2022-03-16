@@ -1,5 +1,15 @@
 if(FALSE) {
+
 library(kwb.pilot)
+
+################################################################################  
+### 1. Write Pilot Plant Raw Data to InfluxDB Cloud 
+################################################################################  
+  
+################################################################################  
+### 1.1 Pilot A
+################################################################################
+
 paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
                    influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
                    influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
@@ -17,7 +27,30 @@ tsv_paths <- list.files(path = paths$raw_data_dir,
 write_to_influxdb_loop(tsv_paths = tsv_paths,
                        paths = paths, 
                        max_tsv_files = 17, 
-                       batch_size = 10000)
+                       batch_size = 5000)
+
+################################################################################  
+### 1.2 Pilot B
+################################################################################
+
+paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
+                   influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
+                   influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
+                   project_root = "C:/kwb/projects/ultimate",
+                   site_code = "Pilot_B",
+                   raw_data_dir = "<project_root>/raw_data_pilots/<site_code>/data"
+)
+
+paths <- kwb.utils::resolveAll(paths_list)
+
+tsv_paths <- list.files(path = paths$raw_data_dir,
+                        full.names = TRUE,
+                        pattern = "xls$")
+
+write_to_influxdb_loop(tsv_paths = tsv_paths,
+                       paths = paths, 
+                       max_tsv_files = 5, 
+                       batch_size = 5000)
 }
 
 
