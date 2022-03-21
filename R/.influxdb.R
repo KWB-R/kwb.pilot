@@ -62,39 +62,104 @@ write_to_influxdb_loop(tsv_paths = tsv_paths,
 
 
 # write to bucket: 'ultimate_median_1d': median 'daily' values
-write_aggr_to_influxdb_loop(agg_period = "1d", max_days = 10)
+write_aggr_to_influxdb_loop(agg_interval = "1d", max_days = 10)
 # write to bucket: 'ultimate_median_1h': median 'hourly' values
-write_aggr_to_influxdb_loop(agg_period = "1h", max_days = 10)
+write_aggr_to_influxdb_loop(agg_interval = "1h", max_days = 10,
+                            date_start = "2022-03-08")
 # write to bucket: 'ultimate_median_10m': median '10 minutes' values
-write_aggr_to_influxdb_loop(agg_period = "10m", max_days = 5)
+write_aggr_to_influxdb_loop(agg_interval = "10m", max_days = 5)
+# write to bucket: 'ultimate_median_1m': median '1 minutes' values
+write_aggr_to_influxdb_loop(agg_interval = "1m", max_days = 2,
+                            date_end = "2021-12-19")
+write_aggr_to_influxdb_loop(agg_interval = "1m", max_days = 2,
+                            date_start = "2021-12-20")
+
+median_1m_1 <- get_pivot_data(agg_interval = "1m", 
+                           date_stop = "2021-10-31")
+median_1m_2 <- get_pivot_data(agg_interval = "1m", 
+                             date_start = "2021-11-01")
+
+median_1m <- dplyr::bind_rows(median_1m_1,
+                             median_1m_2)
+rm(median_1m_1)
+rm(median_1m_2)
+
+cols_pilot_a <- c("time", stringr::str_subset(names(median_1m), "Pilot_A"))
+
+cols_pilot_b <- c("time", stringr::str_subset(names(median_1m), "Pilot_B"))
+
+
+pilotplants_1m <- list(`median_1m_pilot-a` = median_1m[,..cols_pilot_a],
+                       `median_1m_pilot-b` = median_1m[,..cols_pilot_b])
 
 
 
-flux_qry  <- paste('from(bucket: "ultimate")',
-                   '|> range(start: 2021-07-05T00:00:00Z, stop: 2021-07-05T00:00:00Z)',
-                   '|> aggregateWindow(every: 1d, fn: median)')
+period <- paste(stringr::str_replace(as.character(range(median_1m$time)), " ", "T"),
+                collapse = "_") %>% stringr::str_remove_all(":|-")
+
+openxlsx::write.xlsx(pilotplants_1m, 
+                     file = sprintf("ultimate_pilots_1m_%s.xlsx", period),
+                     overwrite = TRUE
+)
 
 
-client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
-                                             token = paths$influx_token,
-                                             org = paths$influx_org,
-                                             retryOptions = TRUE)
+pilotplants <- list(median_1d = get_pivot_data(agg_interval = "1d"),
+                    median_1h = get_pivot_data(agg_interval = "1h"),
+                    median_10m = get_pivot_data(agg_interval = "10m"))
 
-tables <- client$query(text = flux_qry)
-table_df <- data.table::rbindlist(tables) 
+period <- paste(stringr::str_replace(as.character(range(pilotplants$median_10m)), " ", "T"),
+                collapse = "_") %>% stringr::str_remove_all(":|-")
 
-tidyr::pivot_wider()   
-#dplyr::filter(stringr::str_detect(as.character(.data$`_time`),  pattern="00:00^"))
+
+openxlsx::write.xlsx(pilotplants, 
+                     file = sprintf("ultimate_pilots_1d-1h-10m_%s.xlsx", period),
+                     overwrite = TRUE
+                     )
+
 }
 
 
-write_aggr_to_influxdb_loop <- function(agg_period = "1h", 
+get_pivot_data <- function(agg_interval = "1d",
+                           date_start = "2021-07-05",
+                           date_stop = Sys.Date()) {
+  
+  #stopifnot(agg_interval %in% c("1d", "1h", "10m", "1m"))
+  
+  if(agg_interval %in% c("1d", "1h", "10m", "1m")) {
+    bucket_source <- sprintf("ultimate_median_%s", agg_interval)
+  } else {
+    message("use raw data")
+    bucket_source <- "ultimate"
+  }
+  
+  flux_qry  <- paste(sprintf('from(bucket: "%s")', bucket_source),
+                     '|> range(start:',
+                     sprintf('%sT00:00:00Z,', date_start),
+                     sprintf('stop: %sT00:00:00Z)', date_stop),
+                     '|> drop(columns: ["_start", "_stop"])',
+                     '|> pivot(rowKey: ["_time"], columnKey: ["_measurement", "_field"], valueColumn: "_value")')
+  
+  client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
+                                               token = paths$influx_token,
+                                               org = paths$influx_org,
+                                               retryOptions = TRUE)
+  
+  tables <- client$query(text = flux_qry) 
+  
+  data.table::rbindlist(tables) %>% 
+    dplyr::select(order(colnames(.))) %>% 
+    dplyr::relocate(.data$time, .after = "_time") %>% 
+    dplyr::select(- .data$`_time`)
+}
+
+
+write_aggr_to_influxdb_loop <- function(agg_interval = "1h", 
                                         agg_function = "median",
                                         bucket_source = "ultimate",
                                         bucket_target = sprintf("%s_%s_%s",
                                                                 bucket_source,
                                                                 agg_function,
-                                                                agg_period),
+                                                                agg_interval),
                                         bucket_org = "kwb",
                                         date_start = "2021-07-05",
                                         date_end = Sys.Date(),
@@ -117,12 +182,12 @@ write_aggr_to_influxdb_loop <- function(agg_period = "1h",
     period <- periods_df[idx,]
     
     msg_txt <- sprintf("Aggregate raw data (func: '%s', intervall: %s, period: %s - %s) from raw bucket '%s' and write to '%s'",
-                       agg_function, agg_period, period$start, period$end, bucket_source, bucket_target)
+                       agg_function, agg_interval, period$start, period$end, bucket_source, bucket_target)
     kwb.utils::catAndRun(messageText = msg_txt, 
                          expr = {
                            write_aggr_to_influxdb(start = period$start,
                                                   end = period$end,
-                                                  agg_period = agg_period,
+                                                  agg_interval = agg_interval,
                                                   agg_function = agg_function,
                                                   bucket_source = bucket_source,
                                                   bucket_target = bucket_target,
@@ -133,13 +198,13 @@ write_aggr_to_influxdb_loop <- function(agg_period = "1h",
 
 write_aggr_to_influxdb <- function(start,
                                    end,
-                                   agg_period = "1h",
+                                   agg_interval = "1h",
                                    agg_function = "median",
                                    bucket_source = "ultimate",
                                    bucket_target = sprintf("%s_%s_%s",
                                                            bucket_source,
                                                            agg_function,
-                                                           agg_period),
+                                                           agg_interval),
                                    bucket_org = "kwb"
 ) {
   
@@ -150,7 +215,7 @@ write_aggr_to_influxdb <- function(start,
   
   flux_qry  <- paste0('from(bucket: "ultimate") ',
                       '|> range(start: ', start, ', stop: ', end, ') ',
-                      '|> aggregateWindow(every: ', agg_period, ', fn: ', agg_function, ', createEmpty: false)',
+                      '|> aggregateWindow(every: ', agg_interval, ', fn: ', agg_function, ', createEmpty: false)',
                       '|> to(bucket: "', bucket_target, '", org: "', bucket_org, '")'
   )
   
