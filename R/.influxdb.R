@@ -103,9 +103,33 @@ openxlsx::write.xlsx(pilotplants_1m,
 )
 
 
-pilotplants <- list(median_1d = get_pivot_data(agg_interval = "1d"),
-                    median_1h = get_pivot_data(agg_interval = "1h"),
-                    median_10m = get_pivot_data(agg_interval = "10m"))
+median_1d <- get_pivot_data(agg_interval = "1d")
+median_1h <- get_pivot_data(agg_interval = "1h")
+median_10m <- get_pivot_data(agg_interval = "10m")
+
+
+pilots_to_csv <- function(dataset) {
+  
+  dataset_string <- deparse(substitute(dataset))
+  
+  period <- paste(stringr::str_replace(as.character(range(dataset$time)), " ", "T"),
+                  collapse = "_") %>% stringr::str_remove_all(":|-")
+  
+  readr::write_csv2(dataset, 
+                   file = sprintf("ultimate_pilots_%s_%s.csv",
+                                  stringr::str_replace(dataset_string , "_", "-"),
+                                  period)
+                   )
+}
+
+pilots_to_csv(median_1d)
+pilots_to_csv(median_1h)
+pilots_to_csv(median_10m)
+pilots_to_csv(median_1m)
+
+pilotplants <- list(median_1d = media_1d,
+                    median_1h = median_1h,
+                    median_10m = median_10m)
 
 period <- paste(stringr::str_replace(as.character(range(pilotplants$median_10m$time)), " ", "T"),
                 collapse = "_") %>% stringr::str_remove_all(":|-")
@@ -115,6 +139,11 @@ openxlsx::write.xlsx(pilotplants,
                      file = sprintf("ultimate_pilots_1d-1h-10m_%s.xlsx", period),
                      overwrite = TRUE
                      )
+
+openxlsx::write.xlsx(median_10m, 
+                     file = sprintf("ultimate_pilots_median-10m_%s.xlsx", period),
+                     overwrite = TRUE
+)
 
 }
 
