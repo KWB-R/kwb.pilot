@@ -107,7 +107,7 @@ pilotplants <- list(median_1d = get_pivot_data(agg_interval = "1d"),
                     median_1h = get_pivot_data(agg_interval = "1h"),
                     median_10m = get_pivot_data(agg_interval = "10m"))
 
-period <- paste(stringr::str_replace(as.character(range(pilotplants$median_10m)), " ", "T"),
+period <- paste(stringr::str_replace(as.character(range(pilotplants$median_10m$time)), " ", "T"),
                 collapse = "_") %>% stringr::str_remove_all(":|-")
 
 
