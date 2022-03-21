@@ -166,7 +166,8 @@ get_pivot_data <- function(agg_interval = "1d",
                      sprintf('%sT00:00:00Z,', date_start),
                      sprintf('stop: %sT00:00:00Z)', date_stop),
                      '|> drop(columns: ["_start", "_stop"])',
-                     '|> pivot(rowKey: ["_time"], columnKey: ["_measurement", "_field"], valueColumn: "_value")')
+                     '|> pivot(rowKey: ["_time"], columnKey: ["_measurement", "_field"], valueColumn: "_value")',
+                     '|> sort(columns: ["_time"])')
   
   client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
                                                token = paths$influx_token,
