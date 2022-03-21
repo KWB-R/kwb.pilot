@@ -127,7 +127,7 @@ pilots_to_csv(median_1h)
 pilots_to_csv(median_10m)
 pilots_to_csv(median_1m)
 
-pilotplants <- list(median_1d = media_1d,
+pilotplants <- list(median_1d = median_1d,
                     median_1h = median_1h,
                     median_10m = median_10m)
 
@@ -140,8 +140,12 @@ openxlsx::write.xlsx(pilotplants,
                      overwrite = TRUE
                      )
 
-openxlsx::write.xlsx(median_10m, 
-                     file = sprintf("ultimate_pilots_median-10m_%s.xlsx", period),
+period <- paste(stringr::str_replace(as.character(range(median_1m$time)), " ", "T"),
+                collapse = "_") %>% stringr::str_remove_all(":|-")
+
+
+openxlsx::write.xlsx(median_1m, 
+                     file = sprintf("ultimate_pilots_median-1m_%s.xlsx", period),
                      overwrite = TRUE
 )
 
