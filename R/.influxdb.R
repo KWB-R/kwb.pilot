@@ -26,7 +26,7 @@ tsv_paths <- list.files(path = paths$raw_data_dir,
 
 write_to_influxdb_loop(tsv_paths = tsv_paths,
                        paths = paths, 
-                       max_tsv_files = 17, 
+                       max_tsv_files = 10, 
                        batch_size = 5000)
 
 ################################################################################  
@@ -56,45 +56,57 @@ write_to_influxdb_loop(tsv_paths = tsv_paths,
 
 ################################################################################  
 ### 2. Aggregate "raw-data" (bucket: "ultimate") and save in new buckets
-### 'ultimate_median_1d': median 'daily' values
-### 'ultimate_median_1h': median 'hourly' values
+### 'ultimate_mean_1d': mean 'daily' values
+### 'ultimate_mean_1h': mean 'hourly' values
 ################################################################################  
 
+date_start <- "2021-07-05"
+date_end <- Sys.Date()
 
-# write to bucket: 'ultimate_median_1d': median 'daily' values
-write_aggr_to_influxdb_loop(agg_interval = "1d", max_days = 10)
-# write to bucket: 'ultimate_median_1h': median 'hourly' values
-write_aggr_to_influxdb_loop(agg_interval = "1h", max_days = 10,
-                            date_start = "2022-03-08")
-# write to bucket: 'ultimate_median_10m': median '10 minutes' values
-write_aggr_to_influxdb_loop(agg_interval = "10m", max_days = 5)
-# write to bucket: 'ultimate_median_1m': median '1 minutes' values
-write_aggr_to_influxdb_loop(agg_interval = "1m", max_days = 2,
-                            date_end = "2021-12-19")
-write_aggr_to_influxdb_loop(agg_interval = "1m", max_days = 2,
-                            date_start = "2021-12-20")
+# write to bucket: 'ultimate_mean_1d': mean 'daily' values
+write_aggr_to_influxdb(start = date_start, 
+                       end = date_end,
+                       agg_interval = "1d")
 
-median_1m_1 <- get_pivot_data(agg_interval = "1m", 
+# write to bucket: 'ultimate_mean_1h': mean 'hourly' values
+write_aggr_to_influxdb(start = date_start, 
+                       end = date_end,
+                       agg_interval = "1h")
+
+# write to bucket: 'ultimate_mean_10m': mean '10 minutes' values
+write_aggr_to_influxdb(start = date_start, 
+                       end = date_end,
+                       agg_interval = "10m")
+
+write_aggr_to_influxdb_loop(agg_interval = "10m", max_days = 2,
+                            date_start = date_start)
+
+# write to bucket: 'ultimate_mean_1m': mean '1 minutes' values
+write_aggr_to_influxdb(start = date_start, 
+                       end = date_end,
+                       agg_interval = "1m")
+
+mean_1m_1 <- get_pivot_data(agg_interval = "1m", 
                            date_stop = "2021-10-31")
-median_1m_2 <- get_pivot_data(agg_interval = "1m", 
+mean_1m_2 <- get_pivot_data(agg_interval = "1m", 
                              date_start = "2021-11-01")
 
-median_1m <- dplyr::bind_rows(median_1m_1,
-                             median_1m_2)
-rm(median_1m_1)
-rm(median_1m_2)
+mean_1m <- dplyr::bind_rows(mean_1m_1,
+                             mean_1m_2)
+rm(mean_1m_1)
+rm(mean_1m_2)
 
-cols_pilot_a <- c("time", stringr::str_subset(names(median_1m), "Pilot_A"))
+cols_pilot_a <- c("time", stringr::str_subset(names(mean_1m), "Pilot_A"))
 
-cols_pilot_b <- c("time", stringr::str_subset(names(median_1m), "Pilot_B"))
-
-
-pilotplants_1m <- list(`median_1m_pilot-a` = median_1m[,..cols_pilot_a],
-                       `median_1m_pilot-b` = median_1m[,..cols_pilot_b])
+cols_pilot_b <- c("time", stringr::str_subset(names(mean_1m), "Pilot_B"))
 
 
+pilotplants_1m <- list(`mean_1m_pilot-a` = mean_1m[,..cols_pilot_a],
+                       `mean_1m_pilot-b` = mean_1m[,..cols_pilot_b])
 
-period <- paste(stringr::str_replace(as.character(range(median_1m$time)), " ", "T"),
+
+
+period <- paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
                 collapse = "_") %>% stringr::str_remove_all(":|-")
 
 openxlsx::write.xlsx(pilotplants_1m, 
@@ -103,10 +115,22 @@ openxlsx::write.xlsx(pilotplants_1m,
 )
 
 
-median_1d <- get_pivot_data(agg_interval = "1d")
-median_1h <- get_pivot_data(agg_interval = "1h")
-median_10m <- get_pivot_data(agg_interval = "10m")
-
+mean_1d <- get_pivot_data(agg_interval = "1d")
+mean_1h <- get_pivot_data(agg_interval = "1h")
+mean_10m <- get_pivot_data(agg_interval = "10m")
+mean_1m_1 <- get_pivot_data(agg_interval = "1m",
+                              date_stop = "2021-09-01")
+mean_1m_2 <- get_pivot_data(agg_interval = "1m",
+                              date_start = "2021-10-02",
+                              date_stop = "2021-12-31")
+mean_1m_3 <- get_pivot_data(agg_interval = "1m",
+                              date_start = "2022-01-01")
+mean_1m <- dplyr::bind_rows(mean_1m_1, 
+                       mean_1m_2) %>%
+  dplyr::bind_rows(mean_1m_3)
+rm(mean_1m_1)
+rm(mean_1m_2)
+rm(mean_1m_3)
 
 pilots_to_csv <- function(dataset) {
   
@@ -122,16 +146,16 @@ pilots_to_csv <- function(dataset) {
                    )
 }
 
-pilots_to_csv(median_1d)
-pilots_to_csv(median_1h)
-pilots_to_csv(median_10m)
-pilots_to_csv(median_1m)
+pilots_to_csv(mean_1d)
+pilots_to_csv(mean_1h)
+pilots_to_csv(mean_10m)
+pilots_to_csv(mean_1m)
 
-pilotplants <- list(median_1d = median_1d,
-                    median_1h = median_1h,
-                    median_10m = median_10m)
+pilotplants <- list(mean_1d = mean_1d,
+                    mean_1h = mean_1h,
+                    mean_10m = mean_10m)
 
-period <- paste(stringr::str_replace(as.character(range(pilotplants$median_10m$time)), " ", "T"),
+period <- paste(stringr::str_replace(as.character(range(pilotplants$mean_10m$time)), " ", "T"),
                 collapse = "_") %>% stringr::str_remove_all(":|-")
 
 
@@ -140,14 +164,16 @@ openxlsx::write.xlsx(pilotplants,
                      overwrite = TRUE
                      )
 
-period <- paste(stringr::str_replace(as.character(range(median_1m$time)), " ", "T"),
+period <- paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
                 collapse = "_") %>% stringr::str_remove_all(":|-")
 
 
-openxlsx::write.xlsx(median_1m, 
-                     file = sprintf("ultimate_pilots_median-1m_%s.xlsx", period),
+openxlsx::write.xlsx(mean_1m, 
+                     file = sprintf("ultimate_pilots_mean-1m_%s.xlsx", period),
                      overwrite = TRUE
 )
+
+
 
 }
 
@@ -159,7 +185,7 @@ get_pivot_data <- function(agg_interval = "1d",
   #stopifnot(agg_interval %in% c("1d", "1h", "10m", "1m"))
   
   if(agg_interval %in% c("1d", "1h", "10m", "1m")) {
-    bucket_source <- sprintf("ultimate_median_%s", agg_interval)
+    bucket_source <- sprintf("ultimate_mean_%s", agg_interval)
   } else {
     message("use raw data")
     bucket_source <- "ultimate"
@@ -188,7 +214,7 @@ get_pivot_data <- function(agg_interval = "1d",
 
 
 write_aggr_to_influxdb_loop <- function(agg_interval = "1h", 
-                                        agg_function = "median",
+                                        agg_function = "mean",
                                         bucket_source = "ultimate",
                                         bucket_target = sprintf("%s_%s_%s",
                                                                 bucket_source,
@@ -197,7 +223,11 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
                                         bucket_org = "kwb",
                                         date_start = "2021-07-05",
                                         date_end = Sys.Date(),
+                                        hour_start = 0, 
+                                        hour_end = 12,
                                         max_days = 5) {
+  
+  if(max_days > 0) {
   
   dates_start <- sprintf("%sT00:00:00Z", seq(lubridate::ymd(date_start),
                                            lubridate::ymd(date_end)-max_days, 
@@ -207,11 +237,26 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
                              lubridate::ymd(date_end), 
                              by = sprintf('%d days', max_days)))
            
+
+  } else {
+    dates_start <- seq(lubridate::ymd(date_start), lubridate::ymd(date_end), 1)
+    
+    if(hour_end == 0) {
+      dates_end <- dates_start + 1
+    } else {
+      dates_end <- dates_start  
+    }
+    
+    dates_start <- sprintf("%sT%02d:00:00Z", dates_start, hour_start)
+    
+    dates_end <- sprintf("%sT%02d:00:00Z", dates_end, hour_end)
+  }
+  
+
   periods_df <- data.frame(start =  dates_start,
                            end =  dates_end)
-
   
-  sapply(seq_len(nrow(periods_df)), FUN = function(idx) {
+    sapply(seq_len(nrow(periods_df)), FUN = function(idx) {
     
     period <- periods_df[idx,]
     
@@ -233,7 +278,7 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
 write_aggr_to_influxdb <- function(start,
                                    end,
                                    agg_interval = "1h",
-                                   agg_function = "median",
+                                   agg_function = "mean",
                                    bucket_source = "ultimate",
                                    bucket_target = sprintf("%s_%s_%s",
                                                            bucket_source,
@@ -249,12 +294,13 @@ write_aggr_to_influxdb <- function(start,
   
   flux_qry  <- paste0('from(bucket: "ultimate") ',
                       '|> range(start: ', start, ', stop: ', end, ') ',
+                      # '|> filter(fn: (r) => r["_measurement"] == "Pilot_B") ',
                       '|> aggregateWindow(every: ', agg_interval, ', fn: ', agg_function, ', createEmpty: false)',
                       '|> to(bucket: "', bucket_target, '", org: "', bucket_org, '")'
   )
   
   
-  client$query(text = flux_qry)
+  tables <- client$query(text = flux_qry)
   # tables <- client$query(text = flux_qry)
   #   
   # tables[[1]] %>%
