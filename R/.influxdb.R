@@ -1,219 +1,257 @@
 if(FALSE) {
-
-library(kwb.pilot)
-
-################################################################################  
-### 1. Write Pilot Plant Raw Data to InfluxDB Cloud 
-################################################################################  
+  library(kwb.pilot)
   
-################################################################################  
-### 1.1 Pilot A
-################################################################################
+  ################################################################################
+  ### 1. Write Pilot Plant Raw Data to InfluxDB Cloud
+  ################################################################################
+  
+  ################################################################################
+  ### 1.1 Pilot A
+  ################################################################################
+  
+  paths_list <- list(
+    influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
+    influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
+    influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
+    project_root = "C:/kwb/projects",
+    common_root = "ultimate/raw_data_pilots/<site_code>/data",
+    site_code = "Pilot_A",
+    cloud_raw_data_dir = "projects/<common_root>",
+    raw_data_dir = "<project_root>/<common_root>"
+  )
+  
+  paths <- kwb.utils::resolve(paths_list)
+  
+  download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir, 
+                           dir_local = paths$raw_data_dir)
+  
+  tsv_paths <- list.files(
+    path = paths$raw_data_dir,
+    full.names = TRUE,
+    pattern = "xls$"
+  )
+  
+  write_to_influxdb_loop(
+    tsv_paths = tsv_paths,
+    paths = paths,
+    max_tsv_files = 10,
+    batch_size = 5000
+  )
+  
+  ################################################################################
+  ### 1.2 Pilot B
+  ################################################################################
+  
+  paths_list <- list(
+    influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
+    influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
+    influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
+    project_root = "C:/kwb/projects",
+    common_root = "ultimate/raw_data_pilots/<site_code>/data",
+    site_code = "Pilot_B",
+    cloud_raw_data_dir = "projects/<common_root>",
+    raw_data_dir = "<project_root>/<common_root>"
+  )
+  
+  paths <- kwb.utils::resolve(paths_list)
+  
+  download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir, 
+                           dir_local = paths$raw_data_dir)
+  
 
-paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
-                   influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
-                   influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
-                   project_root = "C:/kwb/projects/ultimate",
-                   site_code = "Pilot_A",
-                   raw_data_dir = "<project_root>/raw_data_pilots/<site_code>/data"
-)
-
-paths <- kwb.utils::resolveAll(paths_list)
-
-tsv_paths <- list.files(path = paths$raw_data_dir,
-                        full.names = TRUE,
-                        pattern = "xls$")
-
-write_to_influxdb_loop(tsv_paths = tsv_paths,
-                       paths = paths, 
-                       max_tsv_files = 10, 
-                       batch_size = 5000)
-
-################################################################################  
-### 1.2 Pilot B
-################################################################################
-
-paths_list <- list(influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
-                   influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
-                   influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
-                   project_root = "C:/kwb/projects/ultimate",
-                   site_code = "Pilot_B",
-                   raw_data_dir = "<project_root>/raw_data_pilots/<site_code>/data"
-)
-
-paths <- kwb.utils::resolveAll(paths_list)
-
-tsv_paths <- list.files(path = paths$raw_data_dir,
-                        full.names = TRUE,
-                        pattern = "xls$")
-
-write_to_influxdb_loop(tsv_paths = tsv_paths,
-                       paths = paths, 
-                       max_tsv_files = 5, 
-                       batch_size = 5000)
-
-
-
-################################################################################  
-### 2. Aggregate "raw-data" (bucket: "ultimate") and save in new buckets
-### 'ultimate_mean_1d': mean 'daily' values
-### 'ultimate_mean_1h': mean 'hourly' values
-################################################################################  
-
-date_start <- "2021-07-05"
-date_end <- Sys.Date()
-
-# write to bucket: 'ultimate_mean_1d': mean 'daily' values
-write_aggr_to_influxdb(start = date_start, 
-                       end = date_end,
-                       agg_interval = "1d")
-
-# write to bucket: 'ultimate_mean_1h': mean 'hourly' values
-write_aggr_to_influxdb(start = date_start, 
-                       end = date_end,
-                       agg_interval = "1h")
-
-# write to bucket: 'ultimate_mean_10m': mean '10 minutes' values
-write_aggr_to_influxdb(start = date_start, 
-                       end = date_end,
-                       agg_interval = "10m")
-
-write_aggr_to_influxdb_loop(agg_interval = "10m", max_days = 2,
-                            date_start = date_start)
-
-# write to bucket: 'ultimate_mean_1m': mean '1 minutes' values
-write_aggr_to_influxdb(start = date_start, 
-                       end = date_end,
-                       agg_interval = "1m")
-
-mean_1m_1 <- get_pivot_data(agg_interval = "1m", 
-                           date_stop = "2021-10-31")
-mean_1m_2 <- get_pivot_data(agg_interval = "1m", 
-                             date_start = "2021-11-01")
-
-mean_1m <- dplyr::bind_rows(mean_1m_1,
-                             mean_1m_2)
-rm(mean_1m_1)
-rm(mean_1m_2)
-
-cols_pilot_a <- c("time", stringr::str_subset(names(mean_1m), "Pilot_A"))
-
-cols_pilot_b <- c("time", stringr::str_subset(names(mean_1m), "Pilot_B"))
-
-
-pilotplants_1m <- list(`mean_1m_pilot-a` = mean_1m[,..cols_pilot_a],
-                       `mean_1m_pilot-b` = mean_1m[,..cols_pilot_b])
-
-
-
-period <- paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
-                collapse = "_") %>% stringr::str_remove_all(":|-")
-
-openxlsx::write.xlsx(pilotplants_1m, 
-                     file = sprintf("ultimate_pilots_1m_%s.xlsx", period),
-                     overwrite = TRUE
-)
-
-
-mean_1d <- get_pivot_data(agg_interval = "1d")
-mean_1h <- get_pivot_data(agg_interval = "1h")
-mean_10m <- get_pivot_data(agg_interval = "10m")
-mean_1m_1 <- get_pivot_data(agg_interval = "1m",
+  paths <- kwb.utils::resolveAll(paths_list)
+  
+  tsv_paths <- list.files(
+    path = paths$raw_data_dir,
+    full.names = TRUE,
+    pattern = "xls$"
+  )
+  
+  write_to_influxdb_loop(
+    tsv_paths = tsv_paths,
+    paths = paths,
+    max_tsv_files = 5,
+    batch_size = 5000
+  )
+  
+  
+  
+  ################################################################################
+  ### 2. Aggregate "raw-data" (bucket: "ultimate") and save in new buckets
+  ### 'ultimate_mean_1d': mean 'daily' values
+  ### 'ultimate_mean_1h': mean 'hourly' values
+  ################################################################################
+  
+  date_start <- "2021-07-05"
+  date_end <- Sys.Date()
+  
+  # write to bucket: 'ultimate_mean_1d': mean 'daily' values
+  write_aggr_to_influxdb(start = date_start,
+                         end = date_end,
+                         agg_interval = "1d")
+  
+  # write to bucket: 'ultimate_mean_1h': mean 'hourly' values
+  write_aggr_to_influxdb(start = date_start,
+                         end = date_end,
+                         agg_interval = "1h")
+  
+  # write to bucket: 'ultimate_mean_10m': mean '10 minutes' values
+  write_aggr_to_influxdb(start = date_start,
+                         end = date_end,
+                         agg_interval = "10m")
+  
+  write_aggr_to_influxdb_loop(agg_interval = "10m",
+                              max_days = 2,
+                              date_start = date_start)
+  
+  # write to bucket: 'ultimate_mean_1m': mean '1 minutes' values
+  write_aggr_to_influxdb(start = date_start,
+                         end = date_end,
+                         agg_interval = "1m")
+  
+  mean_1m_1 <- get_pivot_data(agg_interval = "1m",
+                              date_stop = "2021-10-31")
+  mean_1m_2 <- get_pivot_data(agg_interval = "1m",
+                              date_start = "2021-11-01")
+  
+  mean_1m <- dplyr::bind_rows(mean_1m_1,
+                              mean_1m_2)
+  rm(mean_1m_1)
+  rm(mean_1m_2)
+  
+  cols_pilot_a <-
+    c("time", stringr::str_subset(names(mean_1m), "Pilot_A"))
+  
+  cols_pilot_b <-
+    c("time", stringr::str_subset(names(mean_1m), "Pilot_B"))
+  
+  
+  pilotplants_1m <- list(`mean_1m_pilot-a` = mean_1m[, ..cols_pilot_a],
+                         `mean_1m_pilot-b` = mean_1m[, ..cols_pilot_b])
+  
+  
+  
+  period <-
+    paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
+          collapse = "_") %>% stringr::str_remove_all(":|-")
+  
+  openxlsx::write.xlsx(
+    pilotplants_1m,
+    file = sprintf("ultimate_pilots_1m_%s.xlsx", period),
+    overwrite = TRUE
+  )
+  
+  
+  mean_1d <- get_pivot_data(agg_interval = "1d")
+  mean_1h <- get_pivot_data(agg_interval = "1h")
+  mean_10m <- get_pivot_data(agg_interval = "10m")
+  mean_1m_1 <- get_pivot_data(agg_interval = "1m",
                               date_stop = "2021-09-01")
-mean_1m_2 <- get_pivot_data(agg_interval = "1m",
+  mean_1m_2 <- get_pivot_data(agg_interval = "1m",
                               date_start = "2021-10-02",
                               date_stop = "2021-12-31")
-mean_1m_3 <- get_pivot_data(agg_interval = "1m",
+  mean_1m_3 <- get_pivot_data(agg_interval = "1m",
                               date_start = "2022-01-01")
-mean_1m <- dplyr::bind_rows(mean_1m_1, 
-                       mean_1m_2) %>%
-  dplyr::bind_rows(mean_1m_3)
-rm(mean_1m_1)
-rm(mean_1m_2)
-rm(mean_1m_3)
-
-pilots_to_csv <- function(dataset) {
+  mean_1m <- dplyr::bind_rows(mean_1m_1,
+                              mean_1m_2) %>%
+    dplyr::bind_rows(mean_1m_3)
+  rm(mean_1m_1)
+  rm(mean_1m_2)
+  rm(mean_1m_3)
   
-  dataset_string <- deparse(substitute(dataset))
+  pilots_to_csv <- function(dataset) {
+    dataset_string <- deparse(substitute(dataset))
+    
+    period <-
+      paste(stringr::str_replace(as.character(range(dataset$time)), " ", "T"),
+            collapse = "_") %>% stringr::str_remove_all(":|-")
+    
+    readr::write_csv2(dataset,
+                      file = sprintf(
+                        "ultimate_pilots_%s_%s.csv",
+                        stringr::str_replace(dataset_string , "_", "-"),
+                        period
+                      ))
+  }
   
-  period <- paste(stringr::str_replace(as.character(range(dataset$time)), " ", "T"),
-                  collapse = "_") %>% stringr::str_remove_all(":|-")
+  pilots_to_csv(mean_1d)
+  pilots_to_csv(mean_1h)
+  pilots_to_csv(mean_10m)
+  pilots_to_csv(mean_1m)
   
-  readr::write_csv2(dataset, 
-                   file = sprintf("ultimate_pilots_%s_%s.csv",
-                                  stringr::str_replace(dataset_string , "_", "-"),
-                                  period)
-                   )
-}
-
-pilots_to_csv(mean_1d)
-pilots_to_csv(mean_1h)
-pilots_to_csv(mean_10m)
-pilots_to_csv(mean_1m)
-
-pilotplants <- list(mean_1d = mean_1d,
-                    mean_1h = mean_1h,
-                    mean_10m = mean_10m)
-
-period <- paste(stringr::str_replace(as.character(range(pilotplants$mean_10m$time)), " ", "T"),
-                collapse = "_") %>% stringr::str_remove_all(":|-")
-
-
-openxlsx::write.xlsx(pilotplants, 
-                     file = sprintf("ultimate_pilots_1d-1h-10m_%s.xlsx", period),
-                     overwrite = TRUE
-                     )
-
-period <- paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
-                collapse = "_") %>% stringr::str_remove_all(":|-")
-
-
-openxlsx::write.xlsx(mean_1m, 
-                     file = sprintf("ultimate_pilots_mean-1m_%s.xlsx", period),
-                     overwrite = TRUE
-)
-
-
-
+  pilotplants <- list(mean_1d = mean_1d,
+                      mean_1h = mean_1h,
+                      mean_10m = mean_10m)
+  
+  period <-
+    paste(stringr::str_replace(as.character(range(
+      pilotplants$mean_10m$time
+    )), " ", "T"),
+    collapse = "_") %>% stringr::str_remove_all(":|-")
+  
+  
+  openxlsx::write.xlsx(
+    pilotplants,
+    file = sprintf("ultimate_pilots_1d-1h-10m_%s.xlsx", period),
+    overwrite = TRUE
+  )
+  
+  period <-
+    paste(stringr::str_replace(as.character(range(mean_1m$time)), " ", "T"),
+          collapse = "_") %>% stringr::str_remove_all(":|-")
+  
+  
+  openxlsx::write.xlsx(
+    mean_1m,
+    file = sprintf("ultimate_pilots_mean-1m_%s.xlsx", period),
+    overwrite = TRUE
+  )
+  
+  
+  
 }
 
 
 get_pivot_data <- function(agg_interval = "1d",
                            date_start = "2021-07-05",
                            date_stop = Sys.Date()) {
-  
   #stopifnot(agg_interval %in% c("1d", "1h", "10m", "1m"))
   
-  if(agg_interval %in% c("1d", "1h", "10m", "1m")) {
+  if (agg_interval %in% c("1d", "1h", "10m", "1m")) {
     bucket_source <- sprintf("ultimate_mean_%s", agg_interval)
   } else {
     message("use raw data")
     bucket_source <- "ultimate"
   }
   
-  flux_qry  <- paste(sprintf('from(bucket: "%s")', bucket_source),
-                     '|> range(start:',
-                     sprintf('%sT00:00:00Z,', date_start),
-                     sprintf('stop: %sT00:00:00Z)', date_stop),
-                     '|> drop(columns: ["_start", "_stop"])',
-                     '|> pivot(rowKey: ["_time"], columnKey: ["_measurement", "_field"], valueColumn: "_value")',
-                     '|> sort(columns: ["_time"])')
+  flux_qry  <- paste(
+    sprintf('from(bucket: "%s")', bucket_source),
+    '|> range(start:',
+    sprintf('%sT00:00:00Z,', date_start),
+    sprintf('stop: %sT00:00:00Z)', date_stop),
+    '|> drop(columns: ["_start", "_stop"])',
+    '|> pivot(rowKey: ["_time"], columnKey: ["_measurement", "_field"], valueColumn: "_value")',
+    '|> sort(columns: ["_time"])'
+  )
   
-  client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
-                                               token = paths$influx_token,
-                                               org = paths$influx_org,
-                                               retryOptions = TRUE)
+  client <-
+    influxdbclient::InfluxDBClient$new(
+      url = paths$influx_url,
+      token = paths$influx_token,
+      org = paths$influx_org,
+      retryOptions = TRUE
+    )
   
-  tables <- client$query(text = flux_qry) 
+  tables <- client$query(text = flux_qry)
   
-  data.table::rbindlist(tables) %>% 
-    dplyr::select(order(colnames(.))) %>% 
-    dplyr::relocate(.data$time, .after = "_time") %>% 
-    dplyr::select(- .data$`_time`)
+  data.table::rbindlist(tables) %>%
+    dplyr::select(order(colnames(.))) %>%
+    dplyr::relocate(.data$time, .after = "_time") %>%
+    dplyr::select(-.data$`_time`)
 }
 
 
-write_aggr_to_influxdb_loop <- function(agg_interval = "1h", 
+write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
                                         agg_function = "mean",
                                         bucket_source = "ultimate",
                                         bucket_target = sprintf("%s_%s_%s",
@@ -223,56 +261,76 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
                                         bucket_org = "kwb",
                                         date_start = "2021-07-05",
                                         date_end = Sys.Date(),
-                                        hour_start = 0, 
+                                        hour_start = 0,
                                         hour_end = 12,
                                         max_days = 5) {
-  
-  if(max_days > 0) {
-  
-  dates_start <- sprintf("%sT00:00:00Z", seq(lubridate::ymd(date_start),
-                                           lubridate::ymd(date_end)-max_days, 
-                                           by = sprintf('%d days', max_days)))
-  
-  dates_end <- sprintf("%sT00:00:00Z", seq(lubridate::ymd(date_start)+max_days,
-                             lubridate::ymd(date_end), 
-                             by = sprintf('%d days', max_days)))
-           
-
-  } else {
-    dates_start <- seq(lubridate::ymd(date_start), lubridate::ymd(date_end), 1)
+  if (max_days > 0) {
+    dates_start <-
+      sprintf("%sT00:00:00Z",
+              seq(
+                lubridate::ymd(date_start),
+                lubridate::ymd(date_end) - max_days,
+                by = sprintf('%d days', max_days)
+              ))
     
-    if(hour_end == 0) {
+    dates_end <-
+      sprintf("%sT00:00:00Z",
+              seq(
+                lubridate::ymd(date_start) + max_days,
+                lubridate::ymd(date_end),
+                by = sprintf('%d days', max_days)
+              ))
+    
+    
+  } else {
+    dates_start <-
+      seq(lubridate::ymd(date_start), lubridate::ymd(date_end), 1)
+    
+    if (hour_end == 0) {
       dates_end <- dates_start + 1
     } else {
-      dates_end <- dates_start  
+      dates_end <- dates_start
     }
     
-    dates_start <- sprintf("%sT%02d:00:00Z", dates_start, hour_start)
+    dates_start <-
+      sprintf("%sT%02d:00:00Z", dates_start, hour_start)
     
     dates_end <- sprintf("%sT%02d:00:00Z", dates_end, hour_end)
   }
   
-
+  
   periods_df <- data.frame(start =  dates_start,
                            end =  dates_end)
   
-    sapply(seq_len(nrow(periods_df)), FUN = function(idx) {
-    
-    period <- periods_df[idx,]
-    
-    msg_txt <- sprintf("Aggregate raw data (func: '%s', intervall: %s, period: %s - %s) from raw bucket '%s' and write to '%s'",
-                       agg_function, agg_interval, period$start, period$end, bucket_source, bucket_target)
-    kwb.utils::catAndRun(messageText = msg_txt, 
-                         expr = {
-                           write_aggr_to_influxdb(start = period$start,
-                                                  end = period$end,
-                                                  agg_interval = agg_interval,
-                                                  agg_function = agg_function,
-                                                  bucket_source = bucket_source,
-                                                  bucket_target = bucket_target,
-                                                  bucket_org = bucket_org)
-                         })
-  })
+  sapply(
+    seq_len(nrow(periods_df)),
+    FUN = function(idx) {
+      period <- periods_df[idx, ]
+      
+      msg_txt <-
+        sprintf(
+          "Aggregate raw data (func: '%s', intervall: %s, period: %s - %s) from raw bucket '%s' and write to '%s'",
+          agg_function,
+          agg_interval,
+          period$start,
+          period$end,
+          bucket_source,
+          bucket_target
+        )
+      kwb.utils::catAndRun(messageText = msg_txt,
+                           expr = {
+                             write_aggr_to_influxdb(
+                               start = period$start,
+                               end = period$end,
+                               agg_interval = agg_interval,
+                               agg_function = agg_function,
+                               bucket_source = bucket_source,
+                               bucket_target = bucket_target,
+                               bucket_org = bucket_org
+                             )
+                           })
+    }
+  )
 }
 
 write_aggr_to_influxdb <- function(start,
@@ -284,25 +342,38 @@ write_aggr_to_influxdb <- function(start,
                                                            bucket_source,
                                                            agg_function,
                                                            agg_interval),
-                                   bucket_org = "kwb"
-) {
+                                   bucket_org = "kwb") {
+  client <- influxdbclient::InfluxDBClient$new(
+    url = paths$influx_url,
+    token = paths$influx_token,
+    org = paths$influx_org,
+    retryOptions = TRUE
+  )
   
-  client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
-                                               token = paths$influx_token,
-                                               org = paths$influx_org,
-                                               retryOptions = TRUE)
-  
-  flux_qry  <- paste0('from(bucket: "ultimate") ',
-                      '|> range(start: ', start, ', stop: ', end, ') ',
-                      # '|> filter(fn: (r) => r["_measurement"] == "Pilot_B") ',
-                      '|> aggregateWindow(every: ', agg_interval, ', fn: ', agg_function, ', createEmpty: false)',
-                      '|> to(bucket: "', bucket_target, '", org: "', bucket_org, '")'
+  flux_qry  <- paste0(
+    'from(bucket: "ultimate") ',
+    '|> range(start: ',
+    start,
+    ', stop: ',
+    end,
+    ') ',
+    # '|> filter(fn: (r) => r["_measurement"] == "Pilot_B") ',
+    '|> aggregateWindow(every: ',
+    agg_interval,
+    ', fn: ',
+    agg_function,
+    ', createEmpty: false)',
+    '|> to(bucket: "',
+    bucket_target,
+    '", org: "',
+    bucket_org,
+    '")'
   )
   
   
   tables <- client$query(text = flux_qry)
   # tables <- client$query(text = flux_qry)
-  #   
+  #
   # tables[[1]] %>%
   #   dplyr::relocate(.data$time, .after = "_time")
   
@@ -313,154 +384,228 @@ write_to_influxdb_loop <- function(tsv_paths,
                                    paths,
                                    max_tsv_files = 5,
                                    batch_size = 5000) {
-splits_full <- floor(length(tsv_paths)/max_tsv_files)
-splits_partial <- ceiling(length(tsv_paths)/max_tsv_files)
-
-idx_start <- 1 - max_tsv_files
-idx_end <- 0 
-
-for(split in seq_len(splits_full)) {
-  idx_start <- idx_start + max_tsv_files
-  idx_end <- idx_end + max_tsv_files
-  cat(sprintf("Split: %d (tsv_paths_idx: %d - %d)\n", 
-              split,
-              idx_start, 
-              idx_end))
-  write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end], 
-                    paths = paths,
-                    batch_size = batch_size)
-} 
-if (splits_partial - splits_full == 1) {
-  idx_start <- idx_start + max_tsv_files
-  idx_end <- length(tsv_paths)
-  cat(sprintf("Split partial: %d (tsv_paths_idx: %d - %d)\n", 
-              splits_partial,
-              idx_start, 
-              idx_end))
-  write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end], 
-                    paths = paths,
-                    batch_size = batch_size)
+  splits_full <- floor(length(tsv_paths) / max_tsv_files)
+  splits_partial <- ceiling(length(tsv_paths) / max_tsv_files)
+  
+  idx_start <- 1 - max_tsv_files
+  idx_end <- 0
+  
+  for (split in seq_len(splits_full)) {
+    idx_start <- idx_start + max_tsv_files
+    idx_end <- idx_end + max_tsv_files
+    cat(sprintf(
+      "Split: %d (tsv_paths_idx: %d - %d)\n",
+      split,
+      idx_start,
+      idx_end
+    ))
+    write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end],
+                      paths = paths,
+                      batch_size = batch_size)
+  }
+  if (splits_partial - splits_full == 1) {
+    idx_start <- idx_start + max_tsv_files
+    idx_end <- length(tsv_paths)
+    cat(
+      sprintf(
+        "Split partial: %d (tsv_paths_idx: %d - %d)\n",
+        splits_partial,
+        idx_start,
+        idx_end
+      )
+    )
+    write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end],
+                      paths = paths,
+                      batch_size = batch_size)
+  }
 }
-}
 
-write_to_influxdb <- function(tsv_paths, 
-                              paths, 
+write_to_influxdb <- function(tsv_paths,
+                              paths,
                               batch_size = 5000) {
-
-tmp_wide <- kwb.pilot::read_pentair_data(
-  raw_data_dir = paths$raw_data_dir,
-  raw_data_files = tsv_paths,
-  meta_file_path = "") %>% 
-  dplyr::select(tidyselect::all_of(c("DateTime", "ParameterCode", "ParameterValue"))) %>%
-  dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
-  dplyr::summarise(ParameterValue = mean(.data$ParameterValue)) %>%  
-  dplyr::filter(!is.na(ParameterValue),
-                !is.infinite(ParameterValue)) %>%
-  tidyr::pivot_wider(names_from = "ParameterCode",
-                     values_from = "ParameterValue") %>%
-  janitor::clean_names() %>% 
-  dplyr::mutate(site_code = paths$site_code) %>% 
-  as.data.frame() 
-
-
-
-field_cols <- setdiff(names(tmp_wide), c("date_time", "site_code"))
-
-tmp_long <- tmp_wide %>%
-  tidyr::pivot_longer(cols = tidyselect::all_of(field_cols), 
-                      names_to = "ParameterCode",
-                      values_to = "ParameterValue") %>% 
-  dplyr::filter(!is.na(ParameterValue),
-                !is.infinite(ParameterValue)) 
-
-
-fieldnames_with_changing_data <- tmp_long %>%  
-  dplyr::group_by(.data$ParameterCode) %>% 
-  dplyr::summarise(min = min(ParameterValue), 
-                   max = max(ParameterValue),
-                   diff = max-min) %>% 
-  dplyr::filter(diff != 0) %>% 
-  dplyr::pull(.data$ParameterCode)
-
-tmp_long <- tmp_long %>% 
-  dplyr::filter(.data$ParameterCode %in% fieldnames_with_changing_data)
-
-
-### R Client 
+  tmp_wide <- kwb.pilot::read_pentair_data(
+    raw_data_dir = paths$raw_data_dir,
+    raw_data_files = tsv_paths,
+    meta_file_path = ""
+  ) %>%
+    dplyr::select(tidyselect::all_of(c(
+      "DateTime", "ParameterCode", "ParameterValue"
+    ))) %>%
+    dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
+    dplyr::summarise(ParameterValue = mean(.data$ParameterValue)) %>%
+    dplyr::filter(!is.na(ParameterValue),!is.infinite(ParameterValue)) %>%
+    tidyr::pivot_wider(names_from = "ParameterCode",
+                       values_from = "ParameterValue") %>%
+    janitor::clean_names() %>%
+    dplyr::mutate(site_code = paths$site_code) %>%
+    as.data.frame()
+  
+  
+  
+  field_cols <- setdiff(names(tmp_wide), c("date_time", "site_code"))
+  
+  tmp_long <- tmp_wide %>%
+    tidyr::pivot_longer(
+      cols = tidyselect::all_of(field_cols),
+      names_to = "ParameterCode",
+      values_to = "ParameterValue"
+    ) %>%
+    dplyr::filter(!is.na(ParameterValue),!is.infinite(ParameterValue))
+  
+  
+  fieldnames_with_changing_data <- tmp_long %>%
+    dplyr::group_by(.data$ParameterCode) %>%
+    dplyr::summarise(
+      min = min(ParameterValue),
+      max = max(ParameterValue),
+      diff = max - min
+    ) %>%
+    dplyr::filter(diff != 0) %>%
+    dplyr::pull(.data$ParameterCode)
+  
+  tmp_long <- tmp_long %>%
+    dplyr::filter(.data$ParameterCode %in% fieldnames_with_changing_data)
+  
+  
+  ### R Client
   
   #remotes::install_github("influxdata/influxdb-client-r")
   
-  client <- influxdbclient::InfluxDBClient$new(url = paths$influx_url,
-                                               token = paths$influx_token,
-                                               org = paths$influx_org,
-                                               retryOptions = TRUE)
+  client <-
+    influxdbclient::InfluxDBClient$new(
+      url = paths$influx_url,
+      token = paths$influx_token,
+      org = paths$influx_org,
+      retryOptions = TRUE
+    )
   
   # Ready status
   #ready <- client$ready()
   
-# Health info
-
-#client$health() 
-
-system.time(expr = {
-  sapply(fieldnames_with_changing_data, function(field_col) {
-    
-    tmp_dat <- tmp_long %>%  
-      dplyr::filter(ParameterCode == field_col) %>% 
-      tidyr::pivot_wider(names_from = "ParameterCode", 
-                         values_from = "ParameterValue") %>% 
-      as.data.frame()
-    
-    ids <- seq(ceiling(nrow(tmp_dat)/batch_size))
-    requests <- tibble::tibble(id = ids,
-                               idx_start = 1+(ids-1)*batch_size,
-                               idx_end = ids*batch_size
-    )
-    requests$idx_end[nrow(requests)] <- nrow(tmp_dat)
-    sapply(ids, function(id) {
+  # Health info
+  
+  #client$health()
+  
+  system.time(expr = {
+    sapply(fieldnames_with_changing_data, function(field_col) {
+      tmp_dat <- tmp_long %>%
+        dplyr::filter(ParameterCode == field_col) %>%
+        tidyr::pivot_wider(names_from = "ParameterCode",
+                           values_from = "ParameterValue") %>%
+        as.data.frame()
       
-      tmp_dat_split <-  tmp_dat[requests$idx_start[id]:requests$idx_end[id], ]
-      
-      msg_txt <- sprintf("'%s' (%d/%d), write request %d/%d (%s - %s, data points: %d, temporal resolution (avg): %ds) to InfluxDB",
-                         field_col,
-                         which(fieldnames_with_changing_data == field_col), 
-                         length(fieldnames_with_changing_data),
-                         id, 
-                         length(ids),
-                         min(tmp_dat_split$date_time),
-                         max(tmp_dat_split$date_time),
-                         nrow(tmp_dat_split),
-                         round(as.numeric(difftime(max(tmp_dat_split$date_time),
-                                                   min(tmp_dat_split$date_time),
-                                                   units = "secs"))/nrow(tmp_dat_split),
-                               0)
+      ids <- seq(ceiling(nrow(tmp_dat) / batch_size))
+      requests <- tibble::tibble(
+        id = ids,
+        idx_start = 1 + (ids - 1) * batch_size,
+        idx_end = ids * batch_size
       )
-      kwb.utils::catAndRun(messageText = msg_txt,expr = {
-        client$write(tmp_dat_split, 
-                     bucket = "ultimate", 
-                     precision = "s",
-                     measurementCol = "site_code",
-                     tagCols = NULL, #"site_code",
-                     fieldCols = field_col,
-                     timeCol = "date_time")
+      requests$idx_end[nrow(requests)] <- nrow(tmp_dat)
+      sapply(ids, function(id) {
+        tmp_dat_split <-
+          tmp_dat[requests$idx_start[id]:requests$idx_end[id],]
+        
+        msg_txt <-
+          sprintf(
+            "'%s' (%d/%d), write request %d/%d (%s - %s, data points: %d, temporal resolution (avg): %ds) to InfluxDB",
+            field_col,
+            which(fieldnames_with_changing_data == field_col),
+            length(fieldnames_with_changing_data),
+            id,
+            length(ids),
+            min(tmp_dat_split$date_time),
+            max(tmp_dat_split$date_time),
+            nrow(tmp_dat_split),
+            round(as.numeric(
+              difftime(
+                max(tmp_dat_split$date_time),
+                min(tmp_dat_split$date_time),
+                units = "secs"
+              )
+            ) / nrow(tmp_dat_split),
+            0)
+          )
+        kwb.utils::catAndRun(messageText = msg_txt, expr = {
+          client$write(
+            tmp_dat_split,
+            bucket = "ultimate",
+            precision = "s",
+            measurementCol = "site_code",
+            tagCols = NULL,
+            #"site_code",
+            fieldCols = field_col,
+            timeCol = "date_time"
+          )
+        })
       })
-    }
-    )
+    })
   })
-})
 }
 
 
 #tables
 
 # ### Python Client (alternative, but unused for now as R client works)
-# 
+#
 # env_name <- "influxdb"
-# kwb.python::conda_py_install(env_name = env_name, 
+# kwb.python::conda_py_install(env_name = env_name,
 #                              pkgs = list(conda = c("python=3.9"),
 #                                          py = "influxdb-client==1.23.0")
 # )
 # kwb.python::conda_export(env_name, export_dir = ".")
-# 
+#
 # reticulate::use_condaenv(env_name)
 
+#' Download Nextcloud Files from a Directory
+#'
+#' @param dir_cloud directory on Nextcloud
+#' @param dir_local directory on local computer. If not existing it will be created
+#' @param file_pattern file pattern to be used as download filter
+#' (default: "Project\\.xls$")
+#' @return downloads all files from cloud into local folder fullfilling file_pattern
+#' @export
+#' @importFrom fs dir_create
+#' @importFrom kwb.nextcloud list_files download_files
+#' @importFrom stringr str_detect
+#' @importFrom dplyr filter
+#' @examples
+#' \dontrun{
+#' #1 Open RStudio and run usethis::edit_r_environ()
+#' #2 In the opened window add the required environment variables
+#' ### NEXTCLOUD_URL = "https://<replace-with-nextcloud-cloud-url>"
+#' ### NEXTCLOUD_USER = "<your-nextcloud-username>" # your username
+#' ### NEXTCLOUD_PASSWORD = "your-nextcloud-app-password" ### see details below
+#' #3 For creating <your-nextcloud-app-password>:
+#' #3.1 go to: https://replace-with-nextcloud-url/index.php/settings/user/security
+#' #3.2 scroll down to create new app password
+#' #3.3 select a name e.g. r-script and copy the token and replace your-nextcloud-app-password
+#' #4 Finally you need to restart Rstudio and proceed with the code below:
+#' paths_list <- list(site_code = "Pilot_A",
+#' common_path = "ultimate/raw_data_pilots/<site_code>/data",
+#' dir_cloud = "projects/<common_path>",
+#' dir_local = "C:/kwb/projects/<common_path>")
+#'
+#' paths <- kwb.utils::resolve(paths_list)
+
+#' download_nextcloud_files(dir_cloud = paths$dir_cloud,
+#' dir_local = paths$dir_local,
+#' file_pattern = "Project\\.xls$"
+#' )
+#' }
+download_nextcloud_files <- function(dir_cloud,
+                                     dir_local,
+                                     file_pattern = "Project\\.xls$")
+{
+  if (!dir.exists(dir_local)) {
+    fs::dir_create(dir_local, recurse = TRUE)
+  }
+  
+  cloud_files <- kwb.nextcloud::list_files(dir_cloud,
+                                           full_info = TRUE) %>%
+    dplyr::filter(stringr::str_detect(.data$file,
+                                      pattern = file_pattern))
+  
+  
+  kwb.nextcloud::download_files(href = cloud_files$href,
+                                target_dir = dir_local)
+}
