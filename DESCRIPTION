@@ -11,7 +11,7 @@ Authors@R: c(
     person("MBR 4.0", role = "fnd"),
     person("SULEMAN", role = "fnd"),
     person("ULTIMATE", role = "fnd"),
-    person("Kompetenzzentrum Wasser Berlin gGmbH", role = "cph")
+    person("Kompetenzzentrum Wasser Berlin gGmbH (KWB)", role = "cph")
   )
 Description: Collects, aggregates and visualises operational and
     analytical data from water suppliers (including a standardised
