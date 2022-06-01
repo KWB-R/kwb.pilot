@@ -4,159 +4,137 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="kwb.pilot">
 <title>4 Modify • kwb.pilot</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="4 Modify">
+<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="4 Modify">
 <meta property="og:description" content="kwb.pilot">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
-    <div class="container template-article">
-      <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">kwb.pilot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
-      </span>
-    </div>
+<body>
+    <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
+    
 
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-<li>
-  <a href="../articles/A0_intro.html">0 Intro</a>
+    <nav class="navbar fixed-top navbar-default navbar-expand-lg bg-primary"><div class="container">
+    
+    <a class="navbar-brand me-2" href="../index.html">kwb.pilot</a>
+
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">0.2.1</small>
+
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div id="navbar" class="collapse navbar-collapse ms-3">
+      <ul class="navbar-nav me-auto">
+<li class="nav-item">
+  <a class="nav-link" href="../articles/A0_intro.html">0 Intro</a>
 </li>
-<li>
-  <a href="../articles/A1_installation.html">1 Installation</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/A1_installation.html">1 Installation</a>
 </li>
-<li>
-  <a href="../articles/A2_app_start.html">2 App start</a>
+<li class="nav-item">
+  <a class="nav-link" href="../articles/A2_app_start.html">2 App start</a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    3 GUI
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/A3_0_gui_overview.html">3.0 Overview</a>
-    </li>
-    <li>
-      <a href="../articles/A3_1_gui_explore.html">3.1 Explore panel</a>
-    </li>
-    <li>
-      <a href="../articles/A3_2_gui_report.html">3.2 Report panel</a>
-    </li>
-    <li>
-      <a href="../articles/A3_3_gui_background.html">3.3 Background panel</a>
-    </li>
-    <li>
-      <a href="../articles/A3_4_gui_site.html">3.4 Site panel</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../articles/A4_modify.html">4 Modify</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    5 KWB Pilots
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-<li>
-      <a href="../articles/mbr40.html">5.1 MBR4.0</a>
-    </li>
-    <li>
-      <a href="../articles/suleman.html">5.2 Suleman</a>
-    </li>
-  </ul>
-</li>
-<li>
-  <a href="../news/index.html">News</a>
-</li>
-<li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
-<li>
-  <a href="https://github.com/kwb-r/kwb.pilot/">
-    <span class="fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
-      </ul>
-</div>
-<!--/.nav-collapse -->
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--gui">3 GUI</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--gui">
+    <a class="dropdown-item" href="../articles/A3_0_gui_overview.html">3.0 Overview</a>
+    <a class="dropdown-item" href="../articles/A3_1_gui_explore.html">3.1 Explore panel</a>
+    <a class="dropdown-item" href="../articles/A3_2_gui_report.html">3.2 Report panel</a>
+    <a class="dropdown-item" href="../articles/A3_3_gui_background.html">3.3 Background panel</a>
+    <a class="dropdown-item" href="../articles/A3_4_gui_site.html">3.4 Site panel</a>
   </div>
-<!--/.container -->
+</li>
+<li class="active nav-item">
+  <a class="nav-link" href="../articles/A4_modify.html">4 Modify</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown--kwb-pilots">5 KWB Pilots</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown--kwb-pilots">
+    <a class="dropdown-item" href="../articles/mbr40.html">5.1 MBR4.0</a>
+    <a class="dropdown-item" href="../articles/suleman.html">5.2 Suleman</a>
+    <a class="dropdown-item" href="../articles/ultimate.html">5.3 Ultimate</a>
+  </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">News</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+      </ul>
+<form class="form-inline my-2 my-lg-0" role="search">
+        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
+</form>
+
+      <ul class="navbar-nav">
+<li class="nav-item">
+  <a class="external-link nav-link" href="https://github.com/kwb-r/kwb.pilot/" aria-label="github">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
-<!--/.navbar -->
 
-      
+    
+  </div>
+</nav><div class="container template-article">
 
-      </header><script src="A4_modify_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <div class="col-md-9 contents">
-    <div class="page-header toc-ignore">
-      <h1 data-toc-skip>4 Modify</h1>
+
+
+<script src="A4_modify_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+  <main id="main"><div class="page-header">
+      <img src="" class="logo" alt=""><h1>4 Modify</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/kwb-r/kwb.pilot/blob/master/vignettes/A4_modify.Rmd"><code>vignettes/A4_modify.Rmd</code></a></small>
-      <div class="hidden name"><code>A4_modify.Rmd</code></div>
-
+      <small class="dont-index">Source: <a href="https://github.com/kwb-r/kwb.pilot/blob/HEAD/vignettes/A4_modify.Rmd" class="external-link"><code>vignettes/A4_modify.Rmd</code></a></small>
+      <div class="d-none name"><code>A4_modify.Rmd</code></div>
     </div>
 
     
     
 <p>In the following sub-chapters three basic use cases – requiring no programming skills - and one advanced use case – requiring advanced R programming skills – are presented, in order to show how the R reporting tool can be modified.</p>
-<div id="basic-update-operationalanalytical-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-update-operationalanalytical-data" class="anchor"></a>4.1 Basic: update operational/analytical data</h2>
+<div class="section level2">
+<h2 id="basic-update-operationalanalytical-data">4.1 Basic: update operational/analytical data<a class="anchor" aria-label="anchor" href="#basic-update-operationalanalytical-data"></a>
+</h2>
 <p>In order to use the latest operational data (from the MySQL DB of the Haridwar site) in the R reporting tool you need to run the following code in R(Studio):</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span>use_live_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>If also the analytical data was updated you need to save the analytics file with the filename “analytics.xlsx” at the location returned by running the following code in R(Studio):</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/analytics.xlsx"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/analytics.xlsx"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
 <p>In this example (which is based on the R 3.3.2 release) it will be located in your personal documents folder under: “C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/analytics.xlsx”</p>
 <p>In order to use the latest analytics data in the R reporting tool you also need to run the following code in R(Studio):</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span>use_live_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="basic-update-thresholds" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-update-thresholds" class="anchor"></a>4.2 Basic: update thresholds</h2>
+<div class="section level2">
+<h2 id="basic-update-thresholds">4.2 Basic: update thresholds<a class="anchor" aria-label="anchor" href="#basic-update-thresholds"></a>
+</h2>
 <p>The thresholds are defined in a CSV file, which is located at the location returned by running the following code in R(Studio):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/thesholds.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/thesholds.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
 <p>In this example (which is based on the R 3.3.2 release) it will be located in your personal documents folder under: “C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/thresholds.csv”</p>
 <p>For updating e.g. the threshold for the parameter “Battery voltage” for example to “24”, the value in column ParameterThreshold (see Table 1) needs to be updated and saved. A threshold value for a parameter not defined in the table below can be added by typing its ParameterCode, Parameter-Name, ParameterUnit into a new line of “thresholds.csv”. For example all valid parameters values for the operational Haridwar data are defined here:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/operation_parameters.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/operation_parameters.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
 <p>In addition data entries for the columns ParameterThresholdComparison (i.e. &gt;=, =, &gt;=) and Pa-rameterThreshold are required, whilst ParameterThresholdSource can be freely defined by the user or even left blank. Finally the app needs to be restarted as described in Chapter 3.1.2 (in case no new operation/analytical data should be used) or in Chapter 3.1.1 (in case also new operational/analytical data should be used).</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/get_thresholds.html">get_thresholds</a></span><span class="op">(</span><span class="op">)</span>, row.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="basic-update-map-in-site-panel-tab" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-update-map-in-site-panel-tab" class="anchor"></a>4.3 Basic: update map in site panel tab</h2>
+<div class="section level2">
+<h2 id="basic-update-map-in-site-panel-tab">4.3 Basic: update map in site panel tab<a class="anchor" aria-label="anchor" href="#basic-update-map-in-site-panel-tab"></a>
+</h2>
 <p>The two maps shown in the <a href="A3_4_gui_site.html">site panel tab</a> can be adapted. During the app start the configuration file “site_info.csv” is imported and used for specifying the:</p>
 <ul>
 <li><p>Coordinates: longitude and latitude</p></li>
@@ -164,13 +142,13 @@
 </ul>
 <p>In case the user wants to change either coordinates, popup menu or both, the configuration file needs to be modified. Its location will be returned by running the following code in R(Studio):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/site_info.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"shiny/haridwar/data/site_info.csv"</span>, package <span class="op">=</span> <span class="st">"kwb.pilot"</span><span class="op">)</span></code></pre></div>
 <p>In this example (which is based on the R 3.3.2 release) it will be located in your personal documents folder under: “C:/Users/YOUR_USERNAME/Documents/R/win-library/3.3/kwb.pilot/shiny/haridwar/data/site_info.csv”</p>
 </div>
-<div id="advanced-adapting-to-a-different-site" class="section level2">
-<h2 class="hasAnchor">
-<a href="#advanced-adapting-to-a-different-site" class="anchor"></a>4.4 Advanced: adapting to a different site</h2>
-<p>In general, adapting the R reporting tool to other sites is possible, as the R code is released using an open source <a href="https://opensource.org/licenses/MIT">MIT licence</a> on <a href="https://github.com/KWB-R/kwb.pilot">Github</a> and <a href="http://doi.org/10.5281/zenodo.825030">Zenodo</a>.<br>
+<div class="section level2">
+<h2 id="advanced-adapting-to-a-different-site">4.4 Advanced: adapting to a different site<a class="anchor" aria-label="anchor" href="#advanced-adapting-to-a-different-site"></a>
+</h2>
+<p>In general, adapting the R reporting tool to other sites is possible, as the R code is released using an open source <a href="https://opensource.org/licenses/MIT" class="external-link">MIT licence</a> on <a href="https://github.com/KWB-R/kwb.pilot" class="external-link">Github</a> and <a href="http://doi.org/10.5281/zenodo.825030" class="external-link">Zenodo</a>.<br>
 However, advanced R programming techniques are required in order to adapt the importing, aggregation and calculations for another site. Thus it is planned within the AQUANES project to adapt the R reporting tool to the following five additional AQUANES sites:</p>
 <ul>
 <li><p>Berlin-Tiefwerder (site 1)</p></li>
@@ -180,31 +158,28 @@ However, advanced R programming techniques are required in order to adapt the im
 <li><p>Packington (site 13)</p></li>
 </ul>
 </div>
-  </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-
-        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
-    </nav>
-</div>
-
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
 
-      <footer><div class="copyright">
-  <p>Developed by <a href="https://mrustl.de">Michael Rustler</a>, <a href="https://www.kompetenz-wasser.de/en/project/aquanes/"><img src="https://www.kompetenz-wasser.de/wp-content/uploads/2017/09/11-558x122.jpg" height="24"></a>, <a href="https://www.kompetenz-wasser.de/en/project/mbr40/"><img src="https://www.kompetenz-wasser.de/wp-content/uploads/2019/10/mbr4-0_primary_logo_1024-294x244.jpg" height="24"></a>, <a href="https://www.kompetenz-wasser.de/en/project/suleman/">SULEMAN</a>.</p>
+    <footer><div class="pkgdown-footer-left">
+  <p></p>
+<p>Developed by <a href="https://mrustl.de" class="external-link">Michael Rustler</a>, <a href="https://www.kompetenz-wasser.de/en/forschung/projekte/aquanes" class="external-link"><img src="http://www.aquanes-h2020.eu/App_Themes/assets/img/logo.png" alt="Project AquaNES" height="24"></a>, <a href="https://www.kompetenz-wasser.de/en/forschung/projekte/mbr40" class="external-link"><img src="https://www.kompetenz-wasser.de/media/pages/forschung/projekte/mbr40/cad804f04d-1639132759/mbr4-0_primary_logo_1024.jpg" alt="Project MBR4.0" height="24"></a>, <a href="https://www.kompetenz-wasser.de/en/forschung/projekte/suleman" class="external-link"><img src="https://www.hamburgwasser.de/fileadmin/_processed_/6/4/csm_Pojektlogo_330ce63bea.jpg" alt="Project SULEMAN" height="24"></a>, <a href="https://www.kompetenz-wasser.de/en/forschung/projekte/ultimate" class="external-link"><img src="https://www.kompetenz-wasser.de/media/pages/forschung/projekte/ultimate/3de259ff3b-1639132761/ultimate_logo.jpg" alt="Project ULTIMATE" height="24"></a>.</p>
 </div>
 
-<div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+<div class="pkgdown-footer-right">
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
-      </footer>
+    </footer>
 </div>
 
   
 
+  
 
   </body>
 </html>
