@@ -5,19 +5,19 @@ authors:
   AquaNES:
     href: https://www.kompetenz-wasser.de/en/forschung/projekte/aquanes
     html: <img src='https://old.kompetenz-wasser.de/wp-content/uploads/2017/09/11-558x122.jpg' alt='Project AquaNES'
-      height = '24' />
+      width='72' />
   MBR 4.0:
     href: https://www.kompetenz-wasser.de/en/forschung/projekte/mbr40
     html: <img src='https://www.kompetenz-wasser.de/media/pages/forschung/projekte/mbr40/cad804f04d-1639132759/mbr4-0_primary_logo_1024.jpg' alt='Project MBR4.0'
-      height = '24' />
+      width='72' />
   SULEMAN:
     href: https://www.kompetenz-wasser.de/en/forschung/projekte/suleman
     html: <img src='https://www.hamburgwasser.de/fileadmin/_processed_/6/4/csm_Pojektlogo_330ce63bea.jpg' alt='Project SULEMAN'
-      height = '24' />
+      width='72' />
   ULTIMATE:
     href: https://www.kompetenz-wasser.de/en/forschung/projekte/ultimate
     html: <img src='https://www.kompetenz-wasser.de/media/pages/forschung/projekte/ultimate/3de259ff3b-1639132761/ultimate_logo.jpg' alt='Project ULTIMATE'
-      height = '24' />
+      width='72' />
   Kompetenzzentrum Wasser Berlin gGmbH (KWB):
     href: https://www.kompetenz-wasser.de
     html: <img src='https://publications.kompetenz-wasser.de/img/KWB-Logo.svg' alt='KWB'
