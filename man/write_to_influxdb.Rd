@@ -7,10 +7,10 @@
 write_to_influxdb(tsv_paths, paths, batch_size = 5000)
 }
 \arguments{
-\item{tsv_paths}{vector with tsv_paths with files to be imported by 
+\item{tsv_paths}{vector with tsv_paths with files to be imported by
 a modification of \code{\link{read_pentair_data}}}
 
-\item{paths}{paths list with elements \code{raw_data_dir}, \code{site_code}, 
+\item{paths}{paths list with elements \code{raw_data_dir}, \code{site_code},
 \code{influx_url}, \code{influx_token} and \code{influx_org}}
 
 \item{batch_size}{number of data points that are written in one query (default:

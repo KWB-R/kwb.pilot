@@ -12,6 +12,8 @@
 get_pivot_data <- function(agg_interval = "1d",
                            date_start = "2021-07-05",
                            date_stop = Sys.Date()) {
+  config <- get_env_influxdb_ultimate()
+  
   #stopifnot(agg_interval %in% c("1d", "1h", "10m", "1m"))
   
   if (agg_interval %in% c("1d", "1h", "10m", "1m")) {
@@ -31,13 +33,12 @@ get_pivot_data <- function(agg_interval = "1d",
     '|> sort(columns: ["_time"])'
   )
   
-  client <-
-    influxdbclient::InfluxDBClient$new(
-      url = paths$influx_url,
-      token = paths$influx_token,
-      org = paths$influx_org,
-      retryOptions = TRUE
-    )
+  client <- influxdbclient::InfluxDBClient$new(
+    url = config[[1]],
+    token = config[[2]],
+    org = config[[3]],
+    retryOptions = TRUE
+  )
   
   tables <- client$query(text = flux_qry)
   
@@ -157,8 +158,6 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
 #' @param bucket_source bucket source (default: "ultimate")
 #' @param bucket_target bucket target (default: <bucket_source_<agg_function>_<agg_interval>))
 #' @param bucket_org bucket organisation (default: "kwb")
-#' @param max_days maximum time period in days that should be sent within one
-#' query to influxdb (default: 5)
 #' @return writes aggregated time series to InfluxDB target bucket in loop
 #' @export
 write_aggr_to_influxdb <- function(start,
@@ -171,10 +170,12 @@ write_aggr_to_influxdb <- function(start,
                                                            agg_function,
                                                            agg_interval),
                                    bucket_org = "kwb") {
+  config <- get_env_influxdb_ultimate()
+  
   client <- influxdbclient::InfluxDBClient$new(
-    url = paths$influx_url,
-    token = paths$influx_token,
-    org = paths$influx_org,
+    url = config[[1]],
+    token = config[[2]],
+    org = config[[3]],
     retryOptions = TRUE
   )
   
@@ -208,9 +209,9 @@ write_aggr_to_influxdb <- function(start,
 #'
 #' @description wrapper function for \code{\link{write_to_influxdb}}
 #'
-#' @param tsv_paths vector with tsv_paths with files to be imported by 
+#' @param tsv_paths vector with tsv_paths with files to be imported by
 #' \code{\link{write_to_influxdb}} which relies on \code{\link{read_pentair_data}}
-#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code}, 
+#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code},
 #' \code{influx_url}, \code{influx_token} and \code{influx_org}
 #' @param max_tsv_files maximum number of tsv files to read at once (should be
 #' limited due to high RAM demand), default: 5
@@ -264,9 +265,9 @@ write_to_influxdb_loop <- function(tsv_paths,
 #' InfluxDB: write to InfluxDB
 #'
 
-#' @param tsv_paths vector with tsv_paths with files to be imported by 
+#' @param tsv_paths vector with tsv_paths with files to be imported by
 #' a modification of \code{\link{read_pentair_data}}
-#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code}, 
+#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code},
 #' \code{influx_url}, \code{influx_token} and \code{influx_org}
 #' @param batch_size number of data points that are written in one query (default:
 #' 5000)
@@ -279,6 +280,8 @@ write_to_influxdb_loop <- function(tsv_paths,
 write_to_influxdb <- function(tsv_paths,
                               paths,
                               batch_size = 5000) {
+  config <- get_env_influxdb_ultimate()
+  
   tmp_wide <- read_pentair_data(
     raw_data_dir = paths$raw_data_dir,
     raw_data_files = tsv_paths,
@@ -289,7 +292,7 @@ write_to_influxdb <- function(tsv_paths,
     ))) %>%
     dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
     dplyr::summarise(ParameterValue = mean(.data$ParameterValue)) %>%
-    dplyr::filter(!is.na(ParameterValue), !is.infinite(ParameterValue)) %>%
+    dplyr::filter(!is.na(.data$ParameterValue),!is.infinite(.data$ParameterValue)) %>%
     tidyr::pivot_wider(names_from = "ParameterCode",
                        values_from = "ParameterValue") %>%
     janitor::clean_names() %>%
@@ -307,14 +310,15 @@ write_to_influxdb <- function(tsv_paths,
       names_to = "ParameterCode",
       values_to = "ParameterValue"
     ) %>%
-    dplyr::filter(!is.na(ParameterValue), !is.infinite(ParameterValue))
+    dplyr::filter(!is.na(.data$ParameterValue),
+                  !is.infinite(.data$ParameterValue))
   
   
   fieldnames_with_changing_data <- tmp_long %>%
     dplyr::group_by(.data$ParameterCode) %>%
     dplyr::summarise(
-      min = min(ParameterValue),
-      max = max(ParameterValue),
+      min = min(.data$ParameterValue),
+      max = max(.data$ParameterValue),
       diff = max - min
     ) %>%
     dplyr::filter(diff != 0) %>%
@@ -330,9 +334,9 @@ write_to_influxdb <- function(tsv_paths,
   
   client <-
     influxdbclient::InfluxDBClient$new(
-      url = paths$influx_url,
-      token = paths$influx_token,
-      org = paths$influx_org,
+      url = config[[1]],
+      token = config[[2]],
+      org = config[[3]],
       retryOptions = TRUE
     )
   
@@ -477,4 +481,19 @@ check_env_influxdb_ultimate <- function() {
     "ULTIMATE_INFLUXDB_%s",
     c("URL", "TOKEN", "ORG")
   )), nchar) > 0)
+}
+
+#' Helper Function: get influxdb config for Ultimate if defined
+#' defined
+#'
+#' @return list with influxdb config
+#' @export
+#'
+get_env_influxdb_ultimate <- function() {
+  stopifnot(check_env_influxdb_ultimate())
+  
+  as.list(Sys.getenv(sprintf(
+    "ULTIMATE_INFLUXDB_%s",
+    c("URL", "TOKEN", "ORG")
+  )))
 }
