@@ -42,6 +42,7 @@ Imports:
     ggplot2 (>= 3.3.2),
     ggforce (>= 0.3.2),
     htmlwidgets (>= 1.5.3),
+    influxdbclient (>= 0.1.0),
     janitor (>= 2.0.1),
     kwb.nextcloud (>= 0.2.0),
     kwb.utils (>= 0.7.0),
@@ -72,6 +73,7 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
+    github::influxdata/influxdb-client-r,
     github::kwb-r/kwb.nextcloud,
     github::kwb-r/kwb.utils
 Encoding: UTF-8
