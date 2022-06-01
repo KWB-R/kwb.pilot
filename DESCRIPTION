@@ -64,7 +64,6 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
-    github::influxdata/influxdb-client-r,
     github::kwb-r/kwb.nextcloud,
     github::kwb-r/kwb.utils
 Config/testthat/edition: 3
