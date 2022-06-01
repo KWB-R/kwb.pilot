@@ -1,27 +1,18 @@
 Type: Package
 Package: kwb.pilot
-Title: Importing, Aggregating and Visualising Data From KWB
-    Pilot Plants
+Title: Importing, Aggregating and Visualising Data From KWB Pilot Plants
 Version: 0.2.1
-Authors@R: 
-    c(person(given = "Michael",
-             family = "Rustler",
-             role = c("aut", "cre"),
-             email = "michael.rustler@kompetenz-wasser.de",
-             comment = c(ORCID = "0000-0003-0647-7726")),
-      person(given = "Hauke",
-             family = "Sonnenberg",
-             role = "ctb",
-             email = "hauke.sonnenberg@kompetenz-wasser.de",
-             comment = c(ORCID = "0000-0001-9134-2871")),
-      person(given = "Kompetenzzentrum Wasser Berlin gGmbH",
-             role = "cph"),
-      person(given = "AquaNES",
-             role = "fnd"),
-      person(given = "MBR 4.0",
-             role = "fnd"),
-      person(given = "SULEMAN",
-             role = "fnd"))
+Authors@R: c(
+    person("Michael", "Rustler", , "michael.rustler@kompetenz-wasser.de", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0003-0647-7726")),
+    person("Hauke", "Sonnenberg", , "hauke.sonnenberg@kompetenz-wasser.de", role = "ctb",
+           comment = c(ORCID = "0000-0001-9134-2871")),
+    person("AquaNES", role = "fnd"),
+    person("MBR 4.0", role = "fnd"),
+    person("SULEMAN", role = "fnd"),
+    person("ULTIMATE", role = "fnd"),
+    person("Kompetenzzentrum Wasser Berlin gGmbH", role = "cph")
+  )
 Description: Collects, aggregates and visualises operational and
     analytical data from water suppliers (including a standardised
     reporting document).
@@ -31,17 +22,18 @@ BugReports: https://github.com/kwb-r/kwb.pilot/issues
 Depends: 
     R (>= 3.6)
 Imports:
-    dbplyr (>= 2.0.0),
-    dplyr (>= 1.0.2),
     data.table (>= 1.13.4),
+    dbplyr (>= 2.0.0),
     digest (>= 0.6.27),
+    dplyr (>= 1.0.2),
     dygraphs (>= 1.1.1.6),
     fasttime (>= 1.0.2),
     fs (>= 1.5.0),
     fst (>= 0.9.4),
-    ggplot2 (>= 3.3.2),
     ggforce (>= 0.3.2),
+    ggplot2 (>= 3.3.2),
     htmlwidgets (>= 1.5.3),
+    influxdbclient (>= 0.1.0),
     janitor (>= 2.0.1),
     kwb.nextcloud (>= 0.2.0),
     kwb.utils (>= 0.7.0),
@@ -50,18 +42,18 @@ Imports:
     magrittr (>= 2.0.1),
     plotly (>= 4.9.2.1),
     plyr (>= 1.8.6),
-    readxl (>= 1.3.1),
     readr (>= 1.4.0),
+    readxl (>= 1.3.1),
     rmarkdown (>= 2.6),
     rvest (>= 0.3.6),
     shiny (>= 1.5.0),
     shinythemes (>= 1.1.2),
     stringr (>= 1.4.0),
-    tidyr (>= 1.1.2),
     tibble (>= 3.0.4),
+    tidyr (>= 1.1.2),
     tidyselect (>= 1.1.1),
-    xml2 (>= 1.3.2),
     withr (>= 2.3.0),
+    xml2 (>= 1.3.2),
     xts (>= 0.12.1)
 Suggests:
     covr (>= 3.5.1),
@@ -72,9 +64,10 @@ Suggests:
 VignetteBuilder: 
     knitr
 Remotes: 
+    github::influxdata/influxdb-client-r,
     github::kwb-r/kwb.nextcloud,
     github::kwb-r/kwb.utils
+Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.1.2
-Config/testthat/edition: 3
