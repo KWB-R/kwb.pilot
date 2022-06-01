@@ -7,10 +7,10 @@
 write_aggr_to_influxdb(
   start,
   end,
-  agg_period = "1h",
-  agg_function = "median",
+  agg_interval = "1h",
+  agg_function = "mean",
   bucket_source = "ultimate",
-  bucket_target = sprintf("\%s_\%s_\%s", bucket_source, agg_function, agg_period),
+  bucket_target = sprintf("\%s_\%s_\%s", bucket_source, agg_function, agg_interval),
   bucket_org = "kwb"
 )
 }
@@ -19,6 +19,8 @@ write_aggr_to_influxdb(
 
 \item{end}{date end}
 
+\item{agg_interval}{aggregation interval (default: "1h")}
+
 \item{agg_function}{aggregation function (default: "mean")}
 
 \item{bucket_source}{bucket source (default: "ultimate")}
@@ -26,8 +28,6 @@ write_aggr_to_influxdb(
 \item{bucket_target}{bucket target (default: <bucket_source_<agg_function>_<agg_interval>))}
 
 \item{bucket_org}{bucket organisation (default: "kwb")}
-
-\item{agg_interval}{aggregation interval (default: "1h")}
 
 \item{max_days}{maximum time period in days that should be sent within one
 query to influxdb (default: 5)}

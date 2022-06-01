@@ -5,15 +5,21 @@
 \title{InfluxDB: write aggregated time series to Ultimate target bucket in loop}
 \usage{
 write_aggr_to_influxdb_loop(
-  agg_period = "1h",
-  agg_function = "median",
+  agg_interval = "1h",
+  agg_function = "mean",
   bucket_source = "ultimate",
-  bucket_target = sprintf("\%s_\%s_\%s", bucket_source, agg_function, agg_period),
+  bucket_target = sprintf("\%s_\%s_\%s", bucket_source, agg_function, agg_interval),
   bucket_org = "kwb",
+  date_start = "2021-07-05",
+  date_end = Sys.Date(),
+  hour_start = 0,
+  hour_end = 12,
   max_days = 5
 )
 }
 \arguments{
+\item{agg_interval}{aggregation interval (default: "1h")}
+
 \item{agg_function}{aggregation function (default: "mean")}
 
 \item{bucket_source}{bucket source (default: "ultimate")}
@@ -22,11 +28,6 @@ write_aggr_to_influxdb_loop(
 
 \item{bucket_org}{bucket organisation (default: "kwb")}
 
-\item{max_days}{maximum time period in days that should be sent within one
-query to influxdb (default: 5)}
-
-\item{agg_interval}{aggregation interval (default: "1h")}
-
 \item{date_start}{date start (default: "2021-07-05")}
 
 \item{date_end}{date end (default: Sys.Date())}
@@ -34,10 +35,13 @@ query to influxdb (default: 5)}
 \item{hour_start}{(default: 0)}
 
 \item{hour_end}{(default: 12)}
+
+\item{max_days}{maximum time period in days that should be sent within one
+query to influxdb (default: 5)}
 }
 \value{
 writes aggregated time series to InfluxDB target bucket in loop
 }
 \description{
-wrapper for \code{\link{write_aggr_to_influxdb }}
+wrapper for \code{\link{write_aggr_to_influxdb}}
 }

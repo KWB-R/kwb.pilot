@@ -49,7 +49,7 @@ get_pivot_data <- function(agg_interval = "1d",
 
 
 #' InfluxDB: write aggregated time series to Ultimate target bucket in loop
-#' @description wrapper for \code{\link{write_aggr_to_influxdb }}
+#' @description wrapper for \code{\link{write_aggr_to_influxdb}}
 #'
 #' @param agg_interval aggregation interval (default: "1h")
 #' @param agg_function aggregation function (default: "mean")
