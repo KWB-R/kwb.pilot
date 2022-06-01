@@ -157,8 +157,6 @@ write_aggr_to_influxdb_loop <- function(agg_interval = "1h",
 #' @param bucket_source bucket source (default: "ultimate")
 #' @param bucket_target bucket target (default: <bucket_source_<agg_function>_<agg_interval>))
 #' @param bucket_org bucket organisation (default: "kwb")
-#' @param max_days maximum time period in days that should be sent within one
-#' query to influxdb (default: 5)
 #' @return writes aggregated time series to InfluxDB target bucket in loop
 #' @export
 write_aggr_to_influxdb <- function(start,

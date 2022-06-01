@@ -28,9 +28,6 @@ write_aggr_to_influxdb(
 \item{bucket_target}{bucket target (default: <bucket_source_<agg_function>_<agg_interval>))}
 
 \item{bucket_org}{bucket organisation (default: "kwb")}
-
-\item{max_days}{maximum time period in days that should be sent within one
-query to influxdb (default: 5)}
 }
 \value{
 writes aggregated time series to InfluxDB target bucket in loop
