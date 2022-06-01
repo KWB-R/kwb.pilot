@@ -36,7 +36,6 @@ development:
 
 navbar:
   title: ~
-  type: default
   left:
   - text: 0 Intro
     href: articles/A0_intro.html
