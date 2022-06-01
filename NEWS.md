@@ -1,4 +1,9 @@
-# [kwb.pilot 0.2.1]
+# [kwb.pilot 0.3.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.3.0) <small>2021-06-01</small>
+
+* ULTIMATE: add functions for data import and upload to InfluxDB cloud, for 
+details checkout the [Ultimate](../articles/ultimate.html) article.
+
+# [kwb.pilot 0.2.1](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.2.1) <small>2021-11-10</small>
 
 * MBR4.0: bugfix as data format changed from `de` to `en` for download from webportal
 of Martin Systems

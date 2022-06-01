@@ -1,0 +1,136 @@
+---
+title: "Ultimate"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Ultimate}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Define Login Credentials
+
+For writting to InfluxDBCloud you need to run `usethis::edit_r_environ()` and 
+define at least the following environment variables:
+
+```{r echo = TRUE, eval = FALSE}
+###############################################################################
+### For InfluxDB-Cloud
+###############################################################################
+ULTIMATE_INFLUXDB_URL = "<ultimate_influxdbcloud_url>"
+# InfluxDB API-Token with Write for bucket "ultimate"
+ULTIMATE_INFLUXDB_TOKEN = "<ultimate_influxdbcloud_apitoken>"
+ULTIMATE_INFLUXDB_ORG = "<ultimate_influxdbcloud_organisation>"
+
+################################################################################  
+## Optional (for downloading raw data from Nextcloud)
+################################################################################
+NEXTCLOUD_URL = "https://<replace-with-nextcloud-cloud-url>"
+NEXTCLOUD_USER = "<your-nextcloud-username>" # your username
+NEXTCLOUD_PASSWORD = "your-nextcloud-app-password" ### see details below
+
+#3 For creating <your-nextcloud-app-password>:
+#3.1 go to: https://replace-with-nextcloud-url/index.php/settings/user/security
+#3.2 scroll down to create new app password
+#3.3 select a name e.g. r-script and copy the token and replace your-nextcloud-app-password
+```
+
+Finally you need to restart Rstudio and proceed with the code below:
+
+## Install R package
+
+```{r install, echo = TRUE, eval = FALSE}
+# Enable repository from kwb-r
+options(repos = c(
+  kwbr = 'https://kwb-r.r-universe.dev',
+  CRAN = 'https://cloud.r-project.org'))
+
+# Download and install kwb.pilot in R
+install.packages('kwb.pilot')
+```
+
+
+## Define Paths and Upload Data to InfluxDBCloud
+
+```{r define_paths_and_upload_data_to_influxdb, eval = FALSE}
+library(kwb.pilot)
+
+################################################################################
+### 1. Write Pilot Plant Raw Data to InfluxDB Cloud
+################################################################################
+
+################################################################################
+### 1.1 Pilot A
+################################################################################
+
+paths_list <- list(
+  project_root = "C:/kwb/projects",
+  common_root = "ultimate/raw_data_pilots/<site_code>/data",
+  site_code = "Pilot_A",
+  cloud_raw_data_dir = "projects/<common_root>",
+  raw_data_dir = "<project_root>/<common_root>"
+)
+
+paths <- kwb.utils::resolve(paths_list)
+
+## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
+## if the data is provided in the `paths$raw_data_dir`
+kwb.pilot::download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir,
+                                    dir_local = paths$raw_data_dir)
+
+
+tsv_paths <- list.files(
+  path = paths$raw_data_dir,
+  full.names = TRUE,
+  pattern = "xls$"
+)
+
+kwb.pilot::write_to_influxdb_loop(
+  tsv_paths = tsv_paths,
+  paths = paths,
+  max_tsv_files = 10,
+  batch_size = 5000
+)
+
+################################################################################
+### 1.2 Pilot B
+################################################################################
+
+paths_list <- list(
+  influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
+  influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
+  influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
+  project_root = "C:/kwb/projects",
+  common_root = "ultimate/raw_data_pilots/<site_code>/data",
+  site_code = "Pilot_B",
+  cloud_raw_data_dir = "projects/<common_root>",
+  raw_data_dir = "<project_root>/<common_root>"
+)
+
+paths <- kwb.utils::resolve(paths_list)
+
+## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
+## if the data is provided in the `paths$raw_data_dir`
+kwb.pilot::download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir,
+                                    dir_local = paths$raw_data_dir)
+
+
+tsv_paths <- list.files(
+  path = paths$raw_data_dir,
+  full.names = TRUE,
+  pattern = "xls$"
+)
+
+kwb.pilot::write_to_influxdb_loop(
+  tsv_paths = tsv_paths,
+  paths = paths,
+  max_tsv_files = 5,
+  batch_size = 5000
+)
+```
