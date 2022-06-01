@@ -211,8 +211,7 @@ write_aggr_to_influxdb <- function(start,
 #'
 #' @param tsv_paths vector with tsv_paths with files to be imported by
 #' \code{\link{write_to_influxdb}} which relies on \code{\link{read_pentair_data}}
-#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code},
-#' \code{influx_url}, \code{influx_token} and \code{influx_org}
+#' @param paths paths list with elements \code{raw_data_dir} and \code{site_code}
 #' @param max_tsv_files maximum number of tsv files to read at once (should be
 #' limited due to high RAM demand), default: 5
 #' @param batch_size number of data points that are written in one query (default:
@@ -267,8 +266,7 @@ write_to_influxdb_loop <- function(tsv_paths,
 
 #' @param tsv_paths vector with tsv_paths with files to be imported by
 #' a modification of \code{\link{read_pentair_data}}
-#' @param paths paths list with elements \code{raw_data_dir}, \code{site_code},
-#' \code{influx_url}, \code{influx_token} and \code{influx_org}
+#' @param paths paths list with elements \code{raw_data_dir} and \code{site_code}
 #' @param batch_size number of data points that are written in one query (default:
 #' 5000)
 #' @return writes imported data to InfluxDB

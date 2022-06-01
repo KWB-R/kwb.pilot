@@ -156,6 +156,7 @@ reference:
       - check_env_nextcloud
       - check_env_influxdb_ultimate
       - download_nextcloud_files
+      - get_env_influxdb_ultimate
       - get_pivot_data
       - write_aggr_to_influxdb_loop
       - write_aggr_to_influxdb

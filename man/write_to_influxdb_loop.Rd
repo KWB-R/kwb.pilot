@@ -10,8 +10,7 @@ write_to_influxdb_loop(tsv_paths, paths, max_tsv_files = 5, batch_size = 5000)
 \item{tsv_paths}{vector with tsv_paths with files to be imported by
 \code{\link{write_to_influxdb}} which relies on \code{\link{read_pentair_data}}}
 
-\item{paths}{paths list with elements \code{raw_data_dir}, \code{site_code},
-\code{influx_url}, \code{influx_token} and \code{influx_org}}
+\item{paths}{paths list with elements \code{raw_data_dir} and \code{site_code}}
 
 \item{max_tsv_files}{maximum number of tsv files to read at once (should be
 limited due to high RAM demand), default: 5}
