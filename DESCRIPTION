@@ -14,14 +14,16 @@ Authors@R:
              role = "ctb",
              email = "hauke.sonnenberg@kompetenz-wasser.de",
              comment = c(ORCID = "0000-0001-9134-2871")),
-      person(given = "Kompetenzzentrum Wasser Berlin gGmbH",
-             role = "cph"),
       person(given = "AquaNES",
              role = "fnd"),
       person(given = "MBR 4.0",
              role = "fnd"),
       person(given = "SULEMAN",
-             role = "fnd"))
+             role = "fnd"),
+      person(given = "ULTIMATE",
+             role = "fnd"),
+      person(given = "Kompetenzzentrum Wasser Berlin gGmbH",
+             role = "cph"))
 Description: Collects, aggregates and visualises operational and
     analytical data from water suppliers (including a standardised
     reporting document).
