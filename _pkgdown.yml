@@ -77,6 +77,7 @@ reference:
       General functions which can be used for all pilot plant (with default 
       parameterisation "AquaNES: Haridwar" site)
     contents: 
+      - calenderweek_from_dates
       - calculate_operational_parameters
       - change_timezone
       - check_thresholds
@@ -84,6 +85,9 @@ reference:
       - create_report_batch 
       - dygraph_add_limits
       - export_data
+      - get_monthly_data_from_calendarweeks
+      - get_monthly_periods
+      - get_rawfilespaths_for_month
       - get_valid_timezones
       - get_thresholds
       - group_datetime
@@ -93,6 +97,7 @@ reference:
       - starts_with("report_")
       - run_app
       - set_timezone
+      - shiny_file
 
 
   - title: "AquaNES: Berlin-Tiefwerder (site 1)"
@@ -100,12 +105,23 @@ reference:
       Functions for importing data of Berlin-Tiefwerder site
     contents: 
       - import_data_berlin_t
+      - import_lab_data_berlin_t
       - read_pentair_data
       - calculate_operational_parameters_berlin_t
       - remove_duplicates
       - aggregate_export_fst_berlin_t
       - merge_and_export_fst
       - load_fst_data
+
+  - title: "AquaNES: Haridwar (site 5)"
+    desc: >
+      Functions for importing data of Haridwar site
+    contents: 
+      - import_data_haridwar
+      - import_operation
+      - import_sheets
+      - plot_analytics
+      - plot_calculated_operational_timeseries
 
   - title: "AquaNES: Berlin-Schoenerlinde (site 12)"
     desc: >
@@ -135,6 +151,7 @@ reference:
     desc: >
       Functions for importing data from MBR 4.0 pilot plants
     contents:
+      - aggregate_export_fst_mbr4
       - read_mbr4
       - read_mbr4_archived
       - read_mbr4_latest
@@ -145,8 +162,12 @@ reference:
     desc: >
       Functions for importing Weintek data of Berlin Friedrichsagen
     contents:
+      - calculate_operational_parameters_berlin_f
+      - normalised_permeate_flow
+      - import_data_berlin_f
       - read_weintek
       - read_weintek_batch
+      - aggregate_export_fst_berlin_f
       
   - title: "ULTIMATE"
     desc: >
@@ -162,4 +183,3 @@ reference:
       - write_aggr_to_influxdb
       - write_to_influxdb
       - write_to_influxdb_loop
-
