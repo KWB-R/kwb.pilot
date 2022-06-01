@@ -348,7 +348,7 @@ write_to_influxdb <- function(tsv_paths,
   system.time(expr = {
     sapply(fieldnames_with_changing_data, function(field_col) {
       tmp_dat <- tmp_long %>%
-        dplyr::filter(ParameterCode == field_col) %>%
+        dplyr::filter(.data$ParameterCode == field_col) %>%
         tidyr::pivot_wider(names_from = .data$ParameterCode,
                            values_from = .data$ParameterValue) %>%
         as.data.frame()
