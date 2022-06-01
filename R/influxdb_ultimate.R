@@ -293,8 +293,8 @@ write_to_influxdb <- function(tsv_paths,
     dplyr::group_by(.data$DateTime, .data$ParameterCode) %>%
     dplyr::summarise(ParameterValue = mean(.data$ParameterValue)) %>%
     dplyr::filter(!is.na(.data$ParameterValue),!is.infinite(.data$ParameterValue)) %>%
-    tidyr::pivot_wider(names_from = "ParameterCode",
-                       values_from = "ParameterValue") %>%
+    tidyr::pivot_wider(names_from = .data$ParameterCode,
+                       values_from = .data$ParameterValue) %>%
     janitor::clean_names() %>%
     dplyr::mutate(site_code = paths$site_code) %>%
     as.data.frame()
@@ -351,8 +351,8 @@ write_to_influxdb <- function(tsv_paths,
     sapply(fieldnames_with_changing_data, function(field_col) {
       tmp_dat <- tmp_long %>%
         dplyr::filter(ParameterCode == field_col) %>%
-        tidyr::pivot_wider(names_from = "ParameterCode",
-                           values_from = "ParameterValue") %>%
+        tidyr::pivot_wider(names_from = .data$ParameterCode,
+                           values_from = .data$ParameterValue) %>%
         as.data.frame()
       
       ids <- seq(ceiling(nrow(tmp_dat) / batch_size))
