@@ -70,9 +70,6 @@ library(kwb.pilot)
 ################################################################################
 
 paths_list <- list(
-  influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
-  influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
-  influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
   project_root = "C:/kwb/projects",
   common_root = "ultimate/raw_data_pilots/<site_code>/data",
   site_code = "Pilot_A",
@@ -84,17 +81,9 @@ paths <- kwb.utils::resolve(paths_list)
 
 ## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
 ## if the data is provided in the `paths$raw_data_dir`
-if(check_env_nextcloud()) {
 kwb.pilot::download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir,
                                     dir_local = paths$raw_data_dir)
-} else {
- message(sprintf(paste0("Not all environment variables are defined. Please ", 
-                        "define or provide raw data to be imported for %s in %s",
-                        paths$site_code,
-                        paths$raw_data_dir)
-                 )
-         )
-}
+
 
 tsv_paths <- list.files(
   path = paths$raw_data_dir,

@@ -445,6 +445,14 @@ download_nextcloud_files <- function(dir_cloud,
                                      dir_local,
                                      file_pattern = "Project\\.xls$")
 {
+  if(!check_env_nextcloud()) {
+    env_vars <- paste0(sprintf("NEXTCLOUD_%s", c("URL", "USER", "PASSWORD")),
+                       collapse = ", ")
+    message(sprintf(paste0("Not all NEXTCLOUD environment variables are defined. ",
+                           "Please define all of them '%s' with usethis::edit_r_environ()"),
+                           env_vars))
+  } else {
+  
   if (!dir.exists(dir_local)) {
     fs::dir_create(dir_local, recurse = TRUE)
   }
@@ -457,6 +465,7 @@ download_nextcloud_files <- function(dir_cloud,
   
   kwb.nextcloud::download_files(href = cloud_files$href,
                                 target_dir = dir_local)
+}
 }
 
 #' Helper Function: check if all environment variables for Nextcloud are defined
