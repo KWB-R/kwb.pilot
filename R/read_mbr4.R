@@ -128,8 +128,11 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #' @export
 #'
 #' @examples
-#' mbr4_data_latest <- read_mbr4_latest()
+#' url_mbr40 <- Sys.getenv("MBR40_URL")
+#' if(url_mbr40 != "") {
+#' mbr4_data_latest <- read_mbr4_latest(url = url_mbr40)
 #' str(mbr4_data_latest)
+#' }
 read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
                       target_dir = tempdir(),
                       locale = readr::locale(tz = "CET",
