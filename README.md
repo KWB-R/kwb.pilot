@@ -6,6 +6,10 @@ Importing, Aggregating and Visualising Data From KWB Pilot Plants
 [![pkgdown](https://github.com/KWB-R/kwb.pilot/workflows/pkgdown/badge.svg)](https://github.com/KWB-R/kwb.pilot/actions?query=workflow%3Apkgdown)
 [![codecov](https://codecov.io/github/KWB-R/kwb.pilot/branch/master/graphs/badge.svg)](https://codecov.io/github/KWB-R/kwb.pilot)
 [![lifecycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable) 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/kwb.pilot)]()
+[![R-Universe_Status_Badge](https://kwb-r.r-universe.dev/badges/kwb.pilot)](https://kwb-r.r-universe.dev/)
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.4564544.svg)](https://doi.org/10.5281/zenodo.4564544)
+
 
 ## Installation & usage
 
