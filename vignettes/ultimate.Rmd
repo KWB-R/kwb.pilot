@@ -1,8 +1,8 @@
 ---
-title: "Ultimate"
+title: "Pilot: Ultimate"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Ultimate}
+  %\VignetteIndexEntry{Pilot: Ultimate}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 ## Define Login Credentials
 
-For writting to InfluxDBCloud you need to run `usethis::edit_r_environ()` and 
+For writing to InfluxDBCloud you need to run `usethis::edit_r_environ()` and 
 define at least the following environment variables:
 
 ```{r echo = TRUE, eval = FALSE}
