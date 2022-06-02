@@ -134,14 +134,16 @@ decimal_mark = ",", grouping_mark = "."))</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mbr4_data_archived</span> <span class="op">&lt;-</span> <span class="fu">read_mbr4_archived</span><span class="op">(</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="check_env_nextcloud.html">check_env_nextcloud</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span class="r-in"><span class="va">mbr4_data_archived</span> <span class="op">&lt;-</span> <span class="fu">read_mbr4_archived</span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_archived</span><span class="op">)</span></span>
+<span class="r-in"><span class="op">}</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Listing </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Listing projects/MBR4.0/Exchange/Rohdaten/Online_export</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Splitting paths ... ok. (0.00s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Removing the first 10 path segments ... ok. (0.00s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Putting path segments together ... ok. (0.00s) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (17.33s) </span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_archived</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (10.62s) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> tibble [221,273 × 78] (S3: tbl_df/tbl/data.frame)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ h_grob           : num [1:221273] 62.5 72.3 78 80.1 74.6 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ h_bel            : num [1:221273] 60.8 60.3 60.7 64.6 65.3 ...</span>

@@ -216,7 +216,7 @@
 <span class="co">#&gt; Splitting paths ... ok. (0.00s) </span>
 <span class="co">#&gt; Removing the first 10 path segments ... ok. (0.00s) </span>
 <span class="co">#&gt; Putting path segments together ... ok. (0.00s) </span>
-<span class="co">#&gt; Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (6.75s) </span>
+<span class="co">#&gt; Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (10.32s) </span>
 <span class="co">#&gt; Checking for duplicates (in columns: 'h_grob', 'h_bel', 'h_filt', 'q_filt', 'p_filt', 'q_sg1', 'q_sg2', 'q_nitri', 'q_zp', 'q_rp', 'q_filtrat2', 'p_filtrat2', 'p_sg1', 'p_sg2', 'ldo_nitri', 'ldo_nitri_temp', 'ldo_filter', 'ldo_filter_temp', 'redox_deni', 'redox_deni_temp', 'ts_filter', 'ts_nitri', 'ammonium_ablauf', 'nitrat_ablauf', 'kalium_ablauf', 'chlorid_ablauf', 'temp_ablauf', 'ammonium_nitri', 'kalium_nitri', 'temp_nitri', 'ammonium_zulauf', 'kalium_zulauf', 'temp_zulauf', 'leitf_zulauf', 'leitf_zulauf_temp', 'ph_filter', 'ph_filter_temp', 'ph_nitri', 'ph_nitri_temp', 'q_bypass_rezi', 'q_filter_rezi', 'p_komp', 'p_zulauf', 'p_filt1_diff', 'p_filt2_diff', 'trios_zulauf_no3n', 'trios_zulauf_no2n', 'trios_zulauf_csb', 'trios_zulauf_sak', 'trios_ablauf_no3n', 'trios_ablauf_no2n', 'trios_ablauf_csb', 'trios_ablauf_sak', 'q_gesamt', 'q_gestern', 'q_gesamt_filt2', 'q_gestern_filt2', 'q-nitri-gesamt', 'q_sg1_gesamt', 'q_sg2_gesamt', 'q_zp_gesamt', 'q_zp_gestern', 'q_uss_gesamt', 't_rechen', 't_nitri', 't_rp', 't_sg1', 't_sg2', 't_fp', 't_fp2', 't_rw1', 't_rw2', 't_zp1', 't_grobstoffp', 'zustand', 'meldungen', 'id', 'Zeitstempel', '...79') in 221273 rows...</span>
 <span class="co">#&gt; Warning in remove_duplicates(.): Removing 2836 duplicates:</span>
 <span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,836 × 79</span></span>
@@ -346,11 +346,11 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mbr4_data_tidy_10min</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_raw</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   
   <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> 
-<span class="co">#&gt; Performing temporal aggregation for 600 seconds time periods! ... ok. (6.39s)</span>
+<span class="co">#&gt; Performing temporal aggregation for 600 seconds time periods! ... ok. (5.90s)</span>
 
 <span class="va">mbr4_data_tidy_hour</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_10min</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
   <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">3600</span><span class="op">)</span>
-<span class="co">#&gt; Performing temporal aggregation for 3600 seconds time periods! ... ok. (1.09s)</span></code></pre></div>
+<span class="co">#&gt; Performing temporal aggregation for 3600 seconds time periods! ... ok. (1.03s)</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="export">Export<a class="anchor" aria-label="anchor" href="#export"></a>
