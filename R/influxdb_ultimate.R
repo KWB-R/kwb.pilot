@@ -409,7 +409,8 @@ write_to_influxdb <- function(tsv_paths,
 #' @param dir_local directory on local computer. If not existing it will be created
 #' @param file_pattern file pattern to be used as download filter
 #' (default: "Project\\.xls$")
-#' @return downloads all files from cloud into local folder fullfilling file_pattern
+#' @return downloads all files from cloud into local folder fullfilling file_pattern 
+#' and returns the \code{file}, i.e. filename 
 #' @export
 #' @importFrom fs dir_create
 #' @importFrom kwb.nextcloud list_files download_files
@@ -463,6 +464,7 @@ download_nextcloud_files <- function(dir_cloud,
   
   kwb.nextcloud::download_files(href = cloud_files$href,
                                 target_dir = dir_local)
+  cloud_files$file
 }
 }
 
