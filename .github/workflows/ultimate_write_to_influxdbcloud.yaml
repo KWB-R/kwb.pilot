@@ -43,6 +43,9 @@ jobs:
       - name: Install dependencies
         run: |
           Rscript -e "remotes::install_deps(dependencies = TRUE)"
+          
+      - name: Install package
+        run: R CMD INSTALL .
         shell: cmd
 
       - name: Cache R packages
