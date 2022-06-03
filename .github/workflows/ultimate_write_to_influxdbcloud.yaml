@@ -1,0 +1,61 @@
+name: Import Pilot Data From Nextcloud and Upload to InfluxDB Cloud
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
+  push:
+    branches:
+      - master
+      - dev
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run this job every day at 05:00 a.m UTC ('0 5 * * *')
+    - cron:  '0 5 * * 1-5'
+
+jobs:
+  render:
+    runs-on: macOS-latest
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
+      NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
+      NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
+      ULTIMATE_INFLUXDB_URL: ${{ secrets.ULTIMATE_INFLUXDB_URL }}
+      ULTIMATE_INFLUXDB_TOKEN: ${{ secrets.ULTIMATE_INFLUXDB_TOKEN }}
+      ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@master
+
+      - uses: r-lib/actions/setup-pandoc@master
+      
+      - name: Install system dependencies
+        if: runner.os == 'MacOS'
+        run: brew install harfbuzz fribidi
+        
+      - name: Query dependencies
+        run: |
+          install.packages('remotes')
+          saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
+          writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
+        shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
+
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+
+      - name: Download Raw Data from Nextcloud, Write to InfluxDBcloud, Move files on Nextcloud  
+        run: |
+          txt <- gsub("eval = eval_chunks", "eval = TRUE", x =readLines("vignettes/ultimate.Rmd"))
+          writeLines(txt, "vignettes/ultimate.Rmd")
+          knitr::purl("vignettes/ultimate.Rmd", "vignettes/ultimate.R", quiet = TRUE)
+          source("vignettes/ultimate.R")
+        shell: Rscript {0} 
