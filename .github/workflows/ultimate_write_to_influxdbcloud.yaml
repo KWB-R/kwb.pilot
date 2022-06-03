@@ -19,15 +19,11 @@ jobs:
       NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
+      TZ: "Europe/Berlin"
       ULTIMATE_INFLUXDB_URL: ${{ secrets.ULTIMATE_INFLUXDB_URL }}
       ULTIMATE_INFLUXDB_TOKEN: ${{ secrets.ULTIMATE_INFLUXDB_TOKEN }}
       ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
     steps:
-      - uses: szenius/set-timezone@v1.0
-        with:
-          timezoneLinux: "Europe/Berlin"
-          timezoneMacos: "Europe/Berlin"
-          timezoneWindows: "Europe/Berlin"
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@master
