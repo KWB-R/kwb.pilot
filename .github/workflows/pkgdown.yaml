@@ -21,7 +21,7 @@ jobs:
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
       ULTIMATE_INFLUXDB_URL: ${{ secrets.ULTIMATE_INFLUXDB_URL }}
-      ULTIMATE_INFLUXDB_TOKENL: ${{ secrets.ULTIMATE_INFLUXDB_TOKENL }}
+      ULTIMATE_INFLUXDB_TOKEN: ${{ secrets.ULTIMATE_INFLUXDB_TOKEN }}
       ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
     steps:
       - uses: actions/checkout@v2
