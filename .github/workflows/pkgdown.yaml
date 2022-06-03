@@ -4,6 +4,10 @@ on:
       - main
       - master
       - dev
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run this job every weekday (Mo-Fr) at 05:00 a.m UTC ('0 5 * * 1-5')
+    - cron:  '0 5 * * 1-5'
 
 name: pkgdown
 
@@ -16,6 +20,9 @@ jobs:
       NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
+      ULTIMATE_INFLUXDB_URL: ${{ secrets.ULTIMATE_INFLUXDB_URL }}
+      ULTIMATE_INFLUXDB_TOKENL: ${{ secrets.ULTIMATE_INFLUXDB_TOKENL }}
+      ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
     steps:
       - uses: actions/checkout@v2
 
