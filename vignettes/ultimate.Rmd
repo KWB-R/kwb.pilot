@@ -101,7 +101,7 @@ paths <- kwb.utils::resolve(paths_list,
 
 ### Write to InfluxDBCloud
 
-```{r a_download, eval = eval_chunks}
+```{r a_download_import_move, eval = eval_chunks}
 
 ################################################################################
 ### 1. Write Pilot Plant Raw Data to InfluxDB Cloud
@@ -117,9 +117,8 @@ files_pilot_a <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$a_cloud_r
                                     dir_local = paths$a_local_raw)
 
 
-```
+if(length(files_pilot_a) > 0) {
 
-```{r a_import_upload, eval = eval_chunks}
 tsv_paths <- list.files(
   path = paths$a_local_raw,
   full.names = TRUE,
@@ -133,9 +132,8 @@ kwb.pilot::write_to_influxdb_loop(
   max_tsv_files = 10,
   batch_size = 5000
 )
-```
 
-```{r a_move, eval = eval_chunks}
+
 ### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
 ### directory (in case that a file is already existing there: overwrite it)!
 paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
@@ -143,10 +141,15 @@ paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
                             )
 
 kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
+} else {
+  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
+                  paths$a_site_code,
+                  paths$a_cloud_raw))
+}
 ```
 
 
-```{r b_download, eval = eval_chunks}
+```{r b_download_import_move, eval = eval_chunks}
 
 ################################################################################
 ### 1.2 Pilot B
@@ -157,7 +160,7 @@ kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
 files_pilot_b <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$b_cloud_raw,
                                     dir_local = paths$b_local_raw)
 
-
+if(length(files_pilot_b) > 0) {
 tsv_paths <- list.files(
   path = paths$b_local_raw,
   full.names = TRUE,
@@ -171,18 +174,18 @@ kwb.pilot::write_to_influxdb_loop(
   max_tsv_files = 5,
   batch_size = 5000
 )
-```
 
-```{r b_import_upload, eval = eval_chunks}
-### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
+### Move all files for Pilot B`s cloud "raw" data directory to the "imported" 
 ### directory (in case that a file is already existing there: overwrite it)!
 paths_pilot_b <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_b),
                             imported = file.path(paths$a_cloud_imported, files_pilot_b)
                             )
-```
 
-```{r b_move, eval = eval_chunks}
 kwb.pilot::move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
-
+} else {
+  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
+                  paths$b_site_code,
+                  paths$b_cloud_raw))
+}
 ```
 
