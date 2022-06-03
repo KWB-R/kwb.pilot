@@ -8,8 +8,8 @@ on:
       - dev
   schedule:
     # * is a special character in YAML so you have to quote this string
-    # Run this job every day at 05:00 a.m UTC ('0 5 * * *')
-    - cron:  '0 5 * * 1-5'
+    # Run this job every day at 00:00 am UTC ('0 0 * * *')
+    - cron:  '0 0 * * 1-5'
 
 jobs:
   render:
