@@ -67,7 +67,7 @@ install.packages('kwb.pilot')
 library(kwb.pilot)
 
 paths_list <- list(
-  root_ci = ".",
+  root_ci = tempdir(),
   root_windows = "C:/kwb",
   root = "",
   common_root = "projects/ultimate/raw_data_pilots",
@@ -100,7 +100,7 @@ paths <- kwb.utils::resolve(paths_list,
 
 ### Write to InfluxDBCloud
 
-```{r download_aggregate_upload, eval = eval_chunks}
+```{r a_download, eval = eval_chunks}
 
 ################################################################################
 ### 1. Write Pilot Plant Raw Data to InfluxDB Cloud
@@ -116,6 +116,9 @@ files_pilot_a <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$a_cloud_r
                                     dir_local = paths$a_local_raw)
 
 
+```
+
+```{r a_import_upload, eval = eval_chunks}
 tsv_paths <- list.files(
   path = paths$a_local_raw,
   full.names = TRUE,
@@ -129,8 +132,9 @@ kwb.pilot::write_to_influxdb_loop(
   max_tsv_files = 10,
   batch_size = 5000
 )
+```
 
-
+```{r a_move, eval = eval_chunks}
 ### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
 ### directory (in case that a file is already existing there: overwrite it)!
 paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
@@ -138,6 +142,10 @@ paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
                             )
 
 move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
+```
+
+
+```{r b_download, eval = eval_chunks}
 
 ################################################################################
 ### 1.2 Pilot B
@@ -162,13 +170,17 @@ kwb.pilot::write_to_influxdb_loop(
   max_tsv_files = 5,
   batch_size = 5000
 )
+```
 
+```{r b_import_upload, eval = eval_chunks}
 ### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
 ### directory (in case that a file is already existing there: overwrite it)!
 paths_pilot_b <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_b),
                             imported = file.path(paths$a_cloud_imported, files_pilot_b)
                             )
+```
 
+```{r b_move, eval = eval_chunks}
 move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
 
 ```
