@@ -24,10 +24,10 @@ jobs:
       ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
     steps:
       - uses: szenius/set-timezone@v1.0
-          with:
-            timezoneLinux: "Europe/Berlin"
-            timezoneMacos: "Europe/Berlin"
-            timezoneWindows: "Europe/Berlin"
+        with:
+          timezoneLinux: "Europe/Berlin"
+          timezoneMacos: "Europe/Berlin"
+          timezoneWindows: "Europe/Berlin"
       - uses: actions/checkout@v2
 
       - uses: r-lib/actions/setup-r@master
