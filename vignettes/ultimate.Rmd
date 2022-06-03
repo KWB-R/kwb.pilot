@@ -123,7 +123,7 @@ tsv_paths <- list.files(
   path = paths$a_local_raw,
   full.names = TRUE,
   pattern = "xls$"
-)
+)[1]
 
 kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
@@ -161,7 +161,7 @@ tsv_paths <- list.files(
   path = paths$b_local_raw,
   full.names = TRUE,
   pattern = "xls$"
-)
+)[1]
 
 kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
