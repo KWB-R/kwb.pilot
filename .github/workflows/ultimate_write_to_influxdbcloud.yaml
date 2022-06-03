@@ -13,7 +13,7 @@ on:
 
 jobs:
   render:
-    runs-on: macOS-latest
+    runs-on: windows-latest
     env: 
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
@@ -43,6 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           Rscript -e "remotes::install_deps(dependencies = TRUE)"
+        shell: cmd
 
       - name: Cache R packages
         uses: actions/cache@v2

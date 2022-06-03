@@ -4,10 +4,6 @@ on:
       - main
       - master
       - dev
-  schedule:
-    # * is a special character in YAML so you have to quote this string
-    # Run this job every weekday (Mo-Fr) at 05:00 a.m UTC ('0 5 * * 1-5')
-    - cron:  '0 5 * * 1-5'
 
 name: pkgdown
 
