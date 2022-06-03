@@ -19,7 +19,6 @@ jobs:
       NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
-      TZ: "Europe/Berlin"
       ULTIMATE_INFLUXDB_URL: ${{ secrets.ULTIMATE_INFLUXDB_URL }}
       ULTIMATE_INFLUXDB_TOKEN: ${{ secrets.ULTIMATE_INFLUXDB_TOKEN }}
       ULTIMATE_INFLUXDB_ORG: ${{ secrets.ULTIMATE_INFLUXDB_ORG }}
@@ -59,6 +58,7 @@ jobs:
 
       - name: Download Raw Data from Nextcloud, Write to InfluxDBcloud, Move files on Nextcloud  
         run: |
+          Sys.setenv(TZ = "Europe/Berlin")
           txt <- gsub("eval = eval_chunks", "eval = TRUE", x =readLines("vignettes/ultimate.Rmd"))
           writeLines(txt, "vignettes/ultimate.Rmd")
           knitr::purl("vignettes/ultimate.Rmd", "vignettes/ultimate.R", quiet = TRUE)
