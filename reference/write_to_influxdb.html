@@ -81,7 +81,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_to_influxdb</span><span class="op">(</span><span class="va">tsv_paths</span>, <span class="va">paths</span>, batch_size <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_to_influxdb</span><span class="op">(</span><span class="va">tsv_paths</span>, <span class="va">paths</span>, changed_only <span class="op">=</span> <span class="cn">TRUE</span>, batch_size <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -91,6 +91,10 @@
 a modification of <code><a href="read_pentair_data.html">read_pentair_data</a></code></p></dd>
 <dt>paths</dt>
 <dd><p>paths list with elements <code>raw_data_dir</code> and <code>site_code</code></p></dd>
+<dt>changed_only</dt>
+<dd><p>TRUE if only columns with changing data points 
+within time series of  provided tsv_path should be written to InfluxDB, otherwise 
+FALSE (default: TRUE)</p></dd>
 <dt>batch_size</dt>
 <dd><p>number of data points that are written in one query (default:
 5000)</p></dd>

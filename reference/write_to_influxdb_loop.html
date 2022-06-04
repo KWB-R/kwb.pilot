@@ -81,7 +81,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_to_influxdb_loop</span><span class="op">(</span><span class="va">tsv_paths</span>, <span class="va">paths</span>, max_tsv_files <span class="op">=</span> <span class="fl">5</span>, batch_size <span class="op">=</span> <span class="fl">5000</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">write_to_influxdb_loop</span><span class="op">(</span>
+  <span class="va">tsv_paths</span>,
+  <span class="va">paths</span>,
+  changed_only <span class="op">=</span> <span class="cn">TRUE</span>,
+  max_tsv_files <span class="op">=</span> <span class="fl">5</span>,
+  batch_size <span class="op">=</span> <span class="fl">5000</span>
+<span class="op">)</span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -91,6 +97,11 @@
 <code><a href="write_to_influxdb.html">write_to_influxdb</a></code> which relies on <code><a href="read_pentair_data.html">read_pentair_data</a></code></p></dd>
 <dt>paths</dt>
 <dd><p>paths list with elements <code>raw_data_dir</code> and <code>site_code</code></p></dd>
+<dt>changed_only</dt>
+<dd><p>TRUE if only columns with changing data points 
+within time series of provided tsv_paths (limited by parameter <code>max_tsv_files</code>,
+i.e. changes between different tsv splits are not detected!) should be written 
+to InfluxDB, otherwise FALSE (default: TRUE)</p></dd>
 <dt>max_tsv_files</dt>
 <dd><p>maximum number of tsv files to read at once (should be
 limited due to high RAM demand), default: 5</p></dd>
