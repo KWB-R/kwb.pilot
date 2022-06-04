@@ -81,10 +81,10 @@ paths_list <- list(
   a_cloud_imported = "<a_cloud>/<data_imp>",
   a_local = "<root>/<a_cloud>",
   a_local_raw = "<a_local>/<data_raw>", 
-  a_local_imported = "<a_local>/<data_imp >",
+  a_local_imported = "<a_local>/<data_imp>",
   b_cloud = "<common_root>/<b_site_code>",
   b_cloud_raw = "<b_cloud>/<data_raw>", 
-  b_cloud_imported = "<b_cloud>/<data_imp >",
+  b_cloud_imported = "<b_cloud>/<data_imp>",
   b_local = "<root>/<b_cloud>",
   b_local_raw = "<b_local>/<data_raw>", 
   b_local_imported = "<b_local>/<data_imp>"
