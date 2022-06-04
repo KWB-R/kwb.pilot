@@ -177,8 +177,8 @@ kwb.pilot::write_to_influxdb_loop(
 
 ### Move all files for Pilot B`s cloud "raw" data directory to the "imported" 
 ### directory (in case that a file is already existing there: overwrite it)!
-paths_pilot_b <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_b),
-                            imported = file.path(paths$a_cloud_imported, files_pilot_b)
+paths_pilot_b <- data.frame(raw = file.path(paths$b_cloud_raw, files_pilot_b),
+                            imported = file.path(paths$b_cloud_imported, files_pilot_b)
                             )
 
 kwb.pilot::move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
