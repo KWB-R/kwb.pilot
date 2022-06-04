@@ -1,4 +1,4 @@
-# [kwb.pilot 0.3.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.3.0) <small>2021-06-03</small>
+# [kwb.pilot 0.3.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.3.0) <small>2021-06-04</small>
 
 * **ULTIMATE**: add functions for data import and upload to InfluxDB cloud, for 
 details checkout the [Ultimate](../articles/ultimate.html) article. In addition
