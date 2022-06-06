@@ -1,18 +1,15 @@
+name: Import Pilot Data From Nextcloud and Upload to InfluxDB Cloud
 on:
-  push:
-    branches:
-      - main
-      - master
-      - dev
-
-name: pkgdown
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    # Run this job every day at 00:00 am UTC ('0 0 * * *')
+    - cron:  '0 0 * * *'
 
 jobs:
-  pkgdown:
-    runs-on: macOS-latest
-    env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      MBR40_URL: ${{ secrets.MBR40_URL }}
+  render:
+    runs-on: windows-latest
+    env: 
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NEXTCLOUD_URL: ${{ secrets.NEXTCLOUD_URL }}
       NEXTCLOUD_USER: ${{ secrets.NEXTCLOUD_USER }}
       NEXTCLOUD_PASSWORD: ${{ secrets.NEXTCLOUD_PASSWORD }}
@@ -25,13 +22,25 @@ jobs:
       - uses: r-lib/actions/setup-r@master
 
       - uses: r-lib/actions/setup-pandoc@master
-
+      
+      - name: Install system dependencies
+        if: runner.os == 'MacOS'
+        run: brew install harfbuzz fribidi
+        
       - name: Query dependencies
         run: |
           install.packages('remotes')
           saveRDS(remotes::dev_package_deps(dependencies = TRUE), ".github/depends.Rds", version = 2)
           writeLines(sprintf("R-%i.%i", getRversion()$major, getRversion()$minor), ".github/R-version")
         shell: Rscript {0}
+
+      - name: Install dependencies
+        run: |
+          Rscript -e "remotes::install_deps(dependencies = TRUE)"
+          
+      - name: Install package
+        run: R CMD INSTALL .
+        shell: cmd
 
       - name: Cache R packages
         uses: actions/cache@v2
@@ -40,17 +49,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
 
-      - name: Install dependencies
-        run: |
-          remotes::install_deps(dependencies = TRUE)
-          install.packages("pkgdown", type = "binary")
-        shell: Rscript {0}
 
-      - name: Install package
-        run: R CMD INSTALL .
-
-      - name: Deploy package
+      - name: Download Raw Data from Nextcloud, Write to InfluxDBcloud, Move files on Nextcloud  
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
+          Sys.setenv(TZ = "Europe/Berlin")
+          txt <- gsub("eval = eval_chunks", "eval = TRUE", x =readLines("vignettes/ultimate.Rmd"))
+          writeLines(txt, "vignettes/ultimate.Rmd")
+          knitr::purl("vignettes/ultimate.Rmd", "vignettes/ultimate.R", quiet = TRUE)
+          source("vignettes/ultimate.R")
+        shell: Rscript {0} 

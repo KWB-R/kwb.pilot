@@ -178,6 +178,7 @@ reference:
       - download_nextcloud_files
       - get_env_influxdb_ultimate
       - get_pivot_data
+      - move_nextcloud_files
       - write_aggr_to_influxdb_loop
       - write_aggr_to_influxdb
       - write_to_influxdb

@@ -35,7 +35,7 @@ Imports:
     htmlwidgets (>= 1.5.3),
     influxdbclient (>= 0.1.0),
     janitor (>= 2.0.1),
-    kwb.nextcloud (>= 0.2.0),
+    kwb.nextcloud (>= 0.3.0),
     kwb.utils (>= 0.7.0),
     leaflet (>= 2.0.3),
     lubridate (>= 1.7.9.2),

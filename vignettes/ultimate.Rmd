@@ -12,6 +12,12 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+credentials_defined <- kwb.pilot::check_env_influxdb_ultimate() && kwb.pilot::check_env_nextcloud()
+is_github <- identical(Sys.getenv("CI"), "true")
+                       
+#eval_chunks <- credentials_defined && is_github
+eval_chunks = FALSE
+
 ```
 
 ## Define Login Credentials
@@ -56,10 +62,46 @@ install.packages('kwb.pilot')
 ```
 
 
-## Define Paths and Upload Data to InfluxDBCloud
+## Define Paths 
 
-```{r define_paths_and_upload_data_to_influxdb, eval = FALSE}
+```{r define_paths, eval = TRUE}
 library(kwb.pilot)
+
+paths_list <- list(
+  root_ci = tempdir(),
+  root_windows = "C:/kwb",
+  root = "",
+  common_root = "projects/ultimate/raw_data_pilots",
+  data_raw = "data", 
+  data_imp = "data_imported",
+  a_site_code = "Pilot_A",
+  b_site_code = "Pilot_B",
+  a_cloud = "<common_root>/<a_site_code>",
+  a_cloud_raw = "<a_cloud>/<data_raw>", 
+  a_cloud_imported = "<a_cloud>/<data_imp>",
+  a_local = "<root>/<a_cloud>",
+  a_local_raw = "<a_local>/<data_raw>", 
+  a_local_imported = "<a_local>/<data_imp>",
+  b_cloud = "<common_root>/<b_site_code>",
+  b_cloud_raw = "<b_cloud>/<data_raw>", 
+  b_cloud_imported = "<b_cloud>/<data_imp>",
+  b_local = "<root>/<b_cloud>",
+  b_local_raw = "<b_local>/<data_raw>", 
+  b_local_imported = "<b_local>/<data_imp>"
+)
+
+paths <- kwb.utils::resolve(paths_list, 
+                            root = ifelse(identical(Sys.getenv("CI"), 
+                                                            "true"),
+                                                  paths_list$root_ci, 
+                                                  paths_list$root_windows)
+                            )
+
+```
+
+### Write to InfluxDBCloud
+
+```{r a_download_import_move, eval = eval_chunks}
 
 ################################################################################
 ### 1. Write Pilot Plant Raw Data to InfluxDB Cloud
@@ -69,68 +111,81 @@ library(kwb.pilot)
 ### 1.1 Pilot A
 ################################################################################
 
-paths_list <- list(
-  project_root = "C:/kwb/projects",
-  common_root = "ultimate/raw_data_pilots/<site_code>/data",
-  site_code = "Pilot_A",
-  cloud_raw_data_dir = "projects/<common_root>",
-  raw_data_dir = "<project_root>/<common_root>"
-)
-
-paths <- kwb.utils::resolve(paths_list)
-
 ## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
 ## if the data is provided in the `paths$raw_data_dir`
-kwb.pilot::download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir,
-                                    dir_local = paths$raw_data_dir)
+files_pilot_a <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$a_cloud_raw,
+                                    dir_local = paths$a_local_raw)
 
+
+if(length(files_pilot_a) > 0) {
 
 tsv_paths <- list.files(
-  path = paths$raw_data_dir,
+  path = paths$a_local_raw,
   full.names = TRUE,
   pattern = "xls$"
 )
 
 kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
-  paths = paths,
+  paths = list(site_code = paths$a_site_code,
+               raw_data_dir = paths$a_local_raw),
   max_tsv_files = 10,
   batch_size = 5000
 )
+
+
+### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
+### directory (in case that a file is already existing there: overwrite it)!
+paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
+                            imported = file.path(paths$a_cloud_imported, files_pilot_a)
+                            )
+
+kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
+} else {
+  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
+                  paths$a_site_code,
+                  paths$a_cloud_raw))
+}
+```
+
+
+```{r b_download_import_move, eval = eval_chunks}
 
 ################################################################################
 ### 1.2 Pilot B
 ################################################################################
 
-paths_list <- list(
-  influx_url = Sys.getenv("ULTIMATE_INFLUXDB_URL"),
-  influx_token = Sys.getenv("ULTIMATE_INFLUXDB_TOKEN"),
-  influx_org = Sys.getenv("ULTIMATE_INFLUXDB_ORG"),
-  project_root = "C:/kwb/projects",
-  common_root = "ultimate/raw_data_pilots/<site_code>/data",
-  site_code = "Pilot_B",
-  cloud_raw_data_dir = "projects/<common_root>",
-  raw_data_dir = "<project_root>/<common_root>"
-)
-
-paths <- kwb.utils::resolve(paths_list)
-
 ## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
 ## if the data is provided in the `paths$raw_data_dir`
-kwb.pilot::download_nextcloud_files(dir_cloud = paths$cloud_raw_data_dir,
-                                    dir_local = paths$raw_data_dir)
+files_pilot_b <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$b_cloud_raw,
+                                    dir_local = paths$b_local_raw)
 
-
+if(length(files_pilot_b) > 0) {
 tsv_paths <- list.files(
-  path = paths$raw_data_dir,
+  path = paths$b_local_raw,
   full.names = TRUE,
   pattern = "xls$"
 )
 
 kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
-  paths = paths,
+  paths = list(site_code = paths$b_site_code,
+               raw_data_dir = paths$b_local_raw),
   max_tsv_files = 5,
   batch_size = 5000
 )
+
+### Move all files for Pilot B`s cloud "raw" data directory to the "imported" 
+### directory (in case that a file is already existing there: overwrite it)!
+paths_pilot_b <- data.frame(raw = file.path(paths$b_cloud_raw, files_pilot_b),
+                            imported = file.path(paths$b_cloud_imported, files_pilot_b)
+                            )
+
+kwb.pilot::move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
+} else {
+  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
+                  paths$b_site_code,
+                  paths$b_cloud_raw))
+}
 ```
+

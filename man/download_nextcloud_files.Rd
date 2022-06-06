@@ -19,7 +19,8 @@ download_nextcloud_files(
 (default: "Project\\.xls$")}
 }
 \value{
-downloads all files from cloud into local folder fullfilling file_pattern
+downloads all files from cloud into local folder fullfilling file_pattern 
+and returns the \code{file}, i.e. filename
 }
 \description{
 Helper Function: Download Nextcloud Files from a Directory

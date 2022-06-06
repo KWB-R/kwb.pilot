@@ -212,6 +212,10 @@ write_aggr_to_influxdb <- function(start,
 #' @param tsv_paths vector with tsv_paths with files to be imported by
 #' \code{\link{write_to_influxdb}} which relies on \code{\link{read_pentair_data}}
 #' @param paths paths list with elements \code{raw_data_dir} and \code{site_code}
+#' @param changed_only TRUE if only columns with changing data points 
+#' within time series of provided tsv_paths (limited by parameter \code{max_tsv_files},
+#' i.e. changes between different tsv splits are not detected!) should be written 
+#' to InfluxDB, otherwise FALSE (default: TRUE)
 #' @param max_tsv_files maximum number of tsv files to read at once (should be
 #' limited due to high RAM demand), default: 5
 #' @param batch_size number of data points that are written in one query (default:
@@ -222,6 +226,7 @@ write_aggr_to_influxdb <- function(start,
 
 write_to_influxdb_loop <- function(tsv_paths,
                                    paths,
+                                   changed_only = TRUE,
                                    max_tsv_files = 5,
                                    batch_size = 5000) {
   splits_full <- floor(length(tsv_paths) / max_tsv_files)
@@ -241,6 +246,7 @@ write_to_influxdb_loop <- function(tsv_paths,
     ))
     write_to_influxdb(tsv_paths = tsv_paths[idx_start:idx_end],
                       paths = paths,
+                      changed_only = changed_only,
                       batch_size = batch_size)
   }
   if (splits_partial - splits_full == 1) {
@@ -267,6 +273,9 @@ write_to_influxdb_loop <- function(tsv_paths,
 #' @param tsv_paths vector with tsv_paths with files to be imported by
 #' a modification of \code{\link{read_pentair_data}}
 #' @param paths paths list with elements \code{raw_data_dir} and \code{site_code}
+#' @param changed_only TRUE if only columns with changing data points 
+#' within time series of  provided tsv_path should be written to InfluxDB, otherwise 
+#' FALSE (default: TRUE)
 #' @param batch_size number of data points that are written in one query (default:
 #' 5000)
 #' @return writes imported data to InfluxDB
@@ -277,6 +286,7 @@ write_to_influxdb_loop <- function(tsv_paths,
 #' @importFrom tidyr pivot_wider
 write_to_influxdb <- function(tsv_paths,
                               paths,
+                              changed_only = TRUE,
                               batch_size = 5000) {
   config <- get_env_influxdb_ultimate()
   
@@ -312,19 +322,24 @@ write_to_influxdb <- function(tsv_paths,
                   !is.infinite(.data$ParameterValue))
   
   
-  fieldnames_with_changing_data <- tmp_long %>%
+  fieldnames <- tmp_long %>%
     dplyr::group_by(.data$ParameterCode) %>%
     dplyr::summarise(
       min = min(.data$ParameterValue),
       max = max(.data$ParameterValue),
       diff = max - min
-    ) %>%
+    )
+  
+  if(changed_only) {
+  fieldnames <- fieldnames %>%
     dplyr::filter(diff != 0) %>%
     dplyr::pull(.data$ParameterCode)
-  
+   
   tmp_long <- tmp_long %>%
-    dplyr::filter(.data$ParameterCode %in% fieldnames_with_changing_data)
-  
+    dplyr::filter(.data$ParameterCode %in% fieldnames)
+  } else {
+    fieldnames <- fieldnames %>% dplyr::pull(.data$ParameterCode)
+  }
   
   ### R Client
   
@@ -346,7 +361,7 @@ write_to_influxdb <- function(tsv_paths,
   #client$health()
   
   system.time(expr = {
-    sapply(fieldnames_with_changing_data, function(field_col) {
+    sapply(fieldnames, function(field_col) {
       tmp_dat <- tmp_long %>%
         dplyr::filter(.data$ParameterCode == field_col) %>%
         tidyr::pivot_wider(names_from = .data$ParameterCode,
@@ -368,8 +383,8 @@ write_to_influxdb <- function(tsv_paths,
           sprintf(
             "'%s' (%d/%d), write request %d/%d (%s - %s, data points: %d, temporal resolution (avg): %ds) to InfluxDB",
             field_col,
-            which(fieldnames_with_changing_data == field_col),
-            length(fieldnames_with_changing_data),
+            which(fieldnames == field_col),
+            length(fieldnames),
             id,
             length(ids),
             min(tmp_dat_split$date_time),
@@ -409,7 +424,8 @@ write_to_influxdb <- function(tsv_paths,
 #' @param dir_local directory on local computer. If not existing it will be created
 #' @param file_pattern file pattern to be used as download filter
 #' (default: "Project\\.xls$")
-#' @return downloads all files from cloud into local folder fullfilling file_pattern
+#' @return downloads all files from cloud into local folder fullfilling file_pattern 
+#' and returns the \code{file}, i.e. filename 
 #' @export
 #' @importFrom fs dir_create
 #' @importFrom kwb.nextcloud list_files download_files
@@ -463,6 +479,7 @@ download_nextcloud_files <- function(dir_cloud,
   
   kwb.nextcloud::download_files(href = cloud_files$href,
                                 target_dir = dir_local)
+  cloud_files$file
 }
 }
 
