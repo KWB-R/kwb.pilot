@@ -129,6 +129,7 @@ kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
   paths = list(site_code = paths$a_site_code,
                raw_data_dir = paths$a_local_raw),
+  changed_only = FALSE,
   max_tsv_files = 10,
   batch_size = 5000
 )
@@ -171,6 +172,7 @@ kwb.pilot::write_to_influxdb_loop(
   tsv_paths = tsv_paths,
   paths = list(site_code = paths$b_site_code,
                raw_data_dir = paths$b_local_raw),
+  changed_only = FALSE,
   max_tsv_files = 5,
   batch_size = 5000
 )
