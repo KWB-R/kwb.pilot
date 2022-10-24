@@ -8,8 +8,8 @@
 <meta name="description" content="kwb.pilot">
 <title>Pilot: MBR 4.0 • kwb.pilot</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Pilot: MBR 4.0">
 <meta property="og:description" content="kwb.pilot">
@@ -92,8 +92,9 @@
 
 
 
-<script src="mbr40_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Pilot: MBR 4.0</h1>
             
       
@@ -107,14 +108,14 @@
 <h2 id="install-r-package">Install R package<a class="anchor" aria-label="anchor" href="#install-r-package"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># Install latest stable version from KWB-R R-Universe</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-    kwbr <span class="op">=</span> <span class="st">'https://kwb-r.r-universe.dev'</span>,
-    CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span>
-
-
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'kwb.pilot'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Install latest stable version from KWB-R R-Universe</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    kwbr <span class="op">=</span> <span class="st">'https://kwb-r.r-universe.dev'</span>,</span>
+<span>    CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'kwb.pilot'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="setup-environment-variables">Setup Environment Variables<a class="anchor" aria-label="anchor" href="#setup-environment-variables"></a>
@@ -126,10 +127,10 @@
 <li><p>In the opened window add the required environment variables</p></li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">MBR40_URL</span> <span class="op">=</span> <span class="st">"url-to-download-pilot-plant-data"</span>
-<span class="va">NEXTCLOUD_URL</span> <span class="op">=</span> <span class="st">"https://&lt;replace-with-dwc-cloud-url&gt;"</span>
-<span class="va">NEXTCLOUD_USER</span> <span class="op">=</span> <span class="st">"&lt;your-dwc-cloud-username&gt;"</span> <span class="co"># your username</span>
-<span class="va">NEXTCLOUD_PASSWORD</span> <span class="op">=</span> <span class="st">"your-nextcloud-app-password"</span> <span class="co">### see details below</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">MBR40_URL</span> <span class="op">=</span> <span class="st">"url-to-download-pilot-plant-data"</span></span>
+<span><span class="va">NEXTCLOUD_URL</span> <span class="op">=</span> <span class="st">"https://&lt;replace-with-dwc-cloud-url&gt;"</span></span>
+<span><span class="va">NEXTCLOUD_USER</span> <span class="op">=</span> <span class="st">"&lt;your-dwc-cloud-username&gt;"</span> <span class="co"># your username</span></span>
+<span><span class="va">NEXTCLOUD_PASSWORD</span> <span class="op">=</span> <span class="st">"your-nextcloud-app-password"</span> <span class="co">### see details below</span></span></code></pre></div>
 <p>To access the <code>archived</code> data you need to be a registered Nextcloud user with access to the folder <code>projects/MBR4.0</code></p>
 <p>For creating <code>&lt;your-nextcloud-app-password&gt;</code>:</p>
 <ul>
@@ -151,14 +152,14 @@
 </h3>
 <p>To use the <code>latest data</code> (downloads data from web) or if you run the app for the first time you need to run:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span><span class="st">"mbr4.0"</span>, use_live_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span><span class="st">"mbr4.0"</span>, use_live_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="local-data">Local Data<a class="anchor" aria-label="anchor" href="#local-data"></a>
 </h3>
 <p>Once you have done the step above for one time, you can also just interactively load you datasets, which you downloaded during the command above by running:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span><span class="st">"mbr4.0"</span>, use_live_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/run_app.html">run_app</a></span><span class="op">(</span><span class="st">"mbr4.0"</span>, use_live_data <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -170,187 +171,189 @@
 </h3>
 <p>In <code>paths_list</code> you need to replace the dummy value <code>kwb-server</code> for the key <code>servername</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co">#KWB server</span>
-<span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  servername <span class="op">=</span> <span class="st">"kwb-server"</span>,
-  root <span class="op">=</span> <span class="st">"//&lt;servername&gt;/projekte$/WWT_Department/Projects/MBR 4.0/Exchange/"</span>,
-  rawdata <span class="op">=</span> <span class="st">"&lt;root&gt;/20_rawdata"</span>,
-  processing <span class="op">=</span> <span class="st">"&lt;root&gt;/21_processing"</span>,
-  online <span class="op">=</span>  <span class="st">"&lt;rawdata&gt;/online_data"</span>,
-  export_dir <span class="op">=</span> <span class="st">"&lt;processing&gt;/online-data"</span>
-  <span class="op">)</span>
-
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">online</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span>
-<span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co">#KWB server</span></span>
+<span><span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  servername <span class="op">=</span> <span class="st">"kwb-server"</span>,</span>
+<span>  root <span class="op">=</span> <span class="st">"//&lt;servername&gt;/projekte$/WWT_Department/Projects/MBR 4.0/Exchange/"</span>,</span>
+<span>  rawdata <span class="op">=</span> <span class="st">"&lt;root&gt;/20_rawdata"</span>,</span>
+<span>  processing <span class="op">=</span> <span class="st">"&lt;root&gt;/21_processing"</span>,</span>
+<span>  online <span class="op">=</span>  <span class="st">"&lt;rawdata&gt;/online_data"</span>,</span>
+<span>  export_dir <span class="op">=</span> <span class="st">"&lt;processing&gt;/online-data"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/files2.html" class="external-link">dir.exists</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">online</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="option-2-at-home">Option 2: At Home<a class="anchor" aria-label="anchor" href="#option-2-at-home"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  root <span class="op">=</span> <span class="st">"C:/kwb/projects/mbr4.0"</span>,
-  rawdata <span class="op">=</span> <span class="st">"&lt;root&gt;/20_rawdata"</span>,
-  processing <span class="op">=</span> <span class="st">"&lt;root&gt;/21_processing"</span>,
-  online <span class="op">=</span>  <span class="st">"&lt;rawdata&gt;/online_data"</span>,
-  export_dir <span class="op">=</span> <span class="st">"&lt;processing&gt;/online-data"</span>
-<span class="op">)</span>
-
-<span class="co"># Only execute "At Home" if not at "KWB" (i.e. KWB server path does not exist) </span>
-<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">online</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  root <span class="op">=</span> <span class="st">"C:/kwb/projects/mbr4.0"</span>,</span>
+<span>  rawdata <span class="op">=</span> <span class="st">"&lt;root&gt;/20_rawdata"</span>,</span>
+<span>  processing <span class="op">=</span> <span class="st">"&lt;root&gt;/21_processing"</span>,</span>
+<span>  online <span class="op">=</span>  <span class="st">"&lt;rawdata&gt;/online_data"</span>,</span>
+<span>  export_dir <span class="op">=</span> <span class="st">"&lt;processing&gt;/online-data"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Only execute "At Home" if not at "KWB" (i.e. KWB server path does not exist) </span></span>
+<span><span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="https://fs.r-lib.org/reference/create.html" class="external-link">dir_create</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">online</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
 <h2 id="import">Import<a class="anchor" aria-label="anchor" href="#import"></a>
 </h2>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kwb-r/kwb.pilot" class="external-link">kwb.pilot</a></span><span class="op">)</span>
-
-<span class="va">mbr4_data_raw</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/read_mbr4.html">read_mbr4</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; New names:</span>
-<span class="co">#&gt; Listing</span>
-<span class="co">#&gt; Listing projects/MBR4.0/Exchange/Rohdaten/Online_export</span>
-<span class="co">#&gt; <span style="color: #00BBBB;">•</span> `` -&gt; `...79`</span>
-<span class="co">#&gt; Splitting paths ... ok. (0.00s) </span>
-<span class="co">#&gt; Removing the first 10 path segments ... ok. (0.00s) </span>
-<span class="co">#&gt; Putting path segments together ... ok. (0.00s) </span>
-<span class="co">#&gt; Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (7.14s) </span>
-<span class="co">#&gt; Checking for duplicates (in columns: 'h_grob', 'h_bel', 'h_filt', 'q_filt', 'p_filt', 'q_sg1', 'q_sg2', 'q_nitri', 'q_zp', 'q_rp', 'q_filtrat2', 'p_filtrat2', 'p_sg1', 'p_sg2', 'ldo_nitri', 'ldo_nitri_temp', 'ldo_filter', 'ldo_filter_temp', 'redox_deni', 'redox_deni_temp', 'ts_filter', 'ts_nitri', 'ammonium_ablauf', 'nitrat_ablauf', 'kalium_ablauf', 'chlorid_ablauf', 'temp_ablauf', 'ammonium_nitri', 'kalium_nitri', 'temp_nitri', 'ammonium_zulauf', 'kalium_zulauf', 'temp_zulauf', 'leitf_zulauf', 'leitf_zulauf_temp', 'ph_filter', 'ph_filter_temp', 'ph_nitri', 'ph_nitri_temp', 'q_bypass_rezi', 'q_filter_rezi', 'p_komp', 'p_zulauf', 'p_filt1_diff', 'p_filt2_diff', 'trios_zulauf_no3n', 'trios_zulauf_no2n', 'trios_zulauf_csb', 'trios_zulauf_sak', 'trios_ablauf_no3n', 'trios_ablauf_no2n', 'trios_ablauf_csb', 'trios_ablauf_sak', 'q_gesamt', 'q_gestern', 'q_gesamt_filt2', 'q_gestern_filt2', 'q-nitri-gesamt', 'q_sg1_gesamt', 'q_sg2_gesamt', 'q_zp_gesamt', 'q_zp_gestern', 'q_uss_gesamt', 't_rechen', 't_nitri', 't_rp', 't_sg1', 't_sg2', 't_fp', 't_fp2', 't_rw1', 't_rw2', 't_zp1', 't_grobstoffp', 'zustand', 'meldungen', 'id', 'Zeitstempel', '...79') in 221273 rows...</span>
-<span class="co">#&gt; Warning in remove_duplicates(.): Removing 2836 duplicates:</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,836 × 79</span></span>
-<span class="co">#&gt;    h_grob h_bel h_filt q_filt p_filt q_sg1 q_sg2 q_nitri  q_zp  q_rp q_filtrat2</span>
-<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   73.5  61.1   86.6   147.  -<span style="color: #BB0000;">33.5</span>  10.7  11.5    0       0  <span style="text-decoration: underline;">3</span>070.       115.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   64.7  61.0   86.6   147.  -<span style="color: #BB0000;">33.5</span>  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>019.       129.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   63.8  60.6   86.7   146.  -<span style="color: #BB0000;">33.7</span>  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>048.       128.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   63.7  60.6   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.7  11.5    2.67    0  <span style="text-decoration: underline;">3</span>064.       115.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   63.6  60.4   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.7  11.6    2.65    0  <span style="text-decoration: underline;">3</span>007.       117.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   78.6  61.4   86.7     0    11.7  10.7  11.6    0    <span style="text-decoration: underline;">6</span>340. <span style="text-decoration: underline;">3</span>080.         0 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   74.6  65.4   86.8     0    12.8  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>046.         0 </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   67.0  65.3   86.6   148.  -<span style="color: #BB0000;">34.1</span>  10.7  11.5    0       0  <span style="text-decoration: underline;">3</span>048.       114.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   65.3  65.2   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.8  11.5    2.66    0  <span style="text-decoration: underline;">3</span>091.       115.</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   65.3  64.8   86.6   148.  -<span style="color: #BB0000;">34.2</span>  10.7  11.5    2.65    0  <span style="text-decoration: underline;">2</span>736.       119.</span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 2,826 more rows, and 68 more variables: p_filtrat2 &lt;dbl&gt;, p_sg1 &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   p_sg2 &lt;dbl&gt;, ldo_nitri &lt;dbl&gt;, ldo_nitri_temp &lt;dbl&gt;, ldo_filter &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   ldo_filter_temp &lt;dbl&gt;, redox_deni &lt;dbl&gt;, redox_deni_temp &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   ts_filter &lt;dbl&gt;, ts_nitri &lt;dbl&gt;, ammonium_ablauf &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   nitrat_ablauf &lt;dbl&gt;, kalium_ablauf &lt;dbl&gt;, chlorid_ablauf &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   temp_ablauf &lt;dbl&gt;, ammonium_nitri &lt;dbl&gt;, kalium_nitri &lt;dbl&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   temp_nitri &lt;dbl&gt;, ammonium_zulauf &lt;dbl&gt;, kalium_zulauf &lt;dbl&gt;, …</span></span>
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_raw</span><span class="op">)</span>
-<span class="co">#&gt; tibble [218,437 × 79] (S3: tbl_df/tbl/data.frame)</span>
-<span class="co">#&gt;  $ h_grob           : num [1:218437] 62.5 72.3 78 80.1 74.6 ...</span>
-<span class="co">#&gt;  $ h_bel            : num [1:218437] 60.8 60.3 60.7 64.6 65.3 ...</span>
-<span class="co">#&gt;  $ h_filt           : num [1:218437] 87.8 87.8 87.8 87.8 87.8 ...</span>
-<span class="co">#&gt;  $ q_filt           : num [1:218437] 204 204 204 204 204 ...</span>
-<span class="co">#&gt;  $ p_filt           : num [1:218437] 8.03 8.5 8.04 7.44 8.32 ...</span>
-<span class="co">#&gt;  $ q_sg1            : num [1:218437] 5.13 5.14 5.15 5.15 5.13 ...</span>
-<span class="co">#&gt;  $ q_sg2            : num [1:218437] 5.35 5.32 5.33 5.32 5.32 ...</span>
-<span class="co">#&gt;  $ q_nitri          : num [1:218437] 3.69202 0.000543 0.000543 3.68433 3.7033 ...</span>
-<span class="co">#&gt;  $ q_zp             : num [1:218437] 0 6838 6901 6801 0 ...</span>
-<span class="co">#&gt;  $ q_rp             : num [1:218437] 3008 2998 2997 3029 3033 ...</span>
-<span class="co">#&gt;  $ q_filtrat2       : num [1:218437] 204 204 204 205 203 ...</span>
-<span class="co">#&gt;  $ p_filtrat2       : num [1:218437] 8.36 8.88 8.89 8.83 8.77 ...</span>
-<span class="co">#&gt;  $ p_sg1            : num [1:218437] 237 237 237 237 237 ...</span>
-<span class="co">#&gt;  $ p_sg2            : num [1:218437] 241 240 240 241 240 ...</span>
-<span class="co">#&gt;  $ ldo_nitri        : num [1:218437] 2.267 0.99 0.736 1.113 1.916 ...</span>
-<span class="co">#&gt;  $ ldo_nitri_temp   : num [1:218437] 17.9 17.9 17.9 17.9 17.9 ...</span>
-<span class="co">#&gt;  $ ldo_filter       : num [1:218437] 0.372 0.372 0.372 0.372 0.372 ...</span>
-<span class="co">#&gt;  $ ldo_filter_temp  : num [1:218437] 18.1 18.1 18.1 18.1 18.1 ...</span>
-<span class="co">#&gt;  $ redox_deni       : num [1:218437] -32.1 -30.7 -30.5 -38.1 -48.6 ...</span>
-<span class="co">#&gt;  $ redox_deni_temp  : num [1:218437] 18.7 18.7 18.7 18.7 18.6 ...</span>
-<span class="co">#&gt;  $ ts_filter        : num [1:218437] 5.09 4.91 4.87 4.98 4.95 ...</span>
-<span class="co">#&gt;  $ ts_nitri         : num [1:218437] 3.41 3.38 3.43 3.71 3.56 ...</span>
-<span class="co">#&gt;  $ ammonium_ablauf  : num [1:218437] 4.59 4.59 4.59 4.59 4.6 ...</span>
-<span class="co">#&gt;  $ nitrat_ablauf    : num [1:218437] 19.8 19.9 19.8 19.9 19.9 ...</span>
-<span class="co">#&gt;  $ kalium_ablauf    : num [1:218437] 26.4 26.4 26.4 26.4 26.5 ...</span>
-<span class="co">#&gt;  $ chlorid_ablauf   : num [1:218437] 116 117 117 117 117 ...</span>
-<span class="co">#&gt;  $ temp_ablauf      : num [1:218437] 18.1 18.1 18.1 18.1 18.1 ...</span>
-<span class="co">#&gt;  $ ammonium_nitri   : num [1:218437] 8.27 7.95 7.98 8.06 8.75 ...</span>
-<span class="co">#&gt;  $ kalium_nitri     : num [1:218437] 30.2 30.4 30.4 30.2 30 ...</span>
-<span class="co">#&gt;  $ temp_nitri       : num [1:218437] 17.8 17.8 17.8 17.8 17.8 ...</span>
-<span class="co">#&gt;  $ ammonium_zulauf  : num [1:218437] 56 55.5 55.8 55.4 54.6 ...</span>
-<span class="co">#&gt;  $ kalium_zulauf    : num [1:218437] 19 20.9 24.1 27.3 24.3 ...</span>
-<span class="co">#&gt;  $ temp_zulauf      : num [1:218437] 12.6 12.6 12.6 12.6 12.6 ...</span>
-<span class="co">#&gt;  $ leitf_zulauf     : num [1:218437] 1384 1386 1389 1394 1390 ...</span>
-<span class="co">#&gt;  $ leitf_zulauf_temp: num [1:218437] 12.4 12.4 12.4 12.3 12.2 ...</span>
-<span class="co">#&gt;  $ ph_filter        : num [1:218437] 7.17 7.18 7.18 7.18 7.18 ...</span>
-<span class="co">#&gt;  $ ph_filter_temp   : num [1:218437] 17.9 17.9 17.9 17.9 17.8 ...</span>
-<span class="co">#&gt;  $ ph_nitri         : num [1:218437] 7.24 7.22 7.23 7.26 7.26 ...</span>
-<span class="co">#&gt;  $ ph_nitri_temp    : num [1:218437] 17.9 17.9 17.9 17.9 17.9 ...</span>
-<span class="co">#&gt;  $ q_bypass_rezi    : num [1:218437] 570 569 570 574 580 ...</span>
-<span class="co">#&gt;  $ q_filter_rezi    : num [1:218437] 2437 2430 2427 2456 2454 ...</span>
-<span class="co">#&gt;  $ p_komp           : num [1:218437] -0.362 0.217 0.217 0.215 0.184 ...</span>
-<span class="co">#&gt;  $ p_zulauf         : num [1:218437] 154 422 413 425 152 ...</span>
-<span class="co">#&gt;  $ p_filt1_diff     : num [1:218437] 6.5 6.5 6.5 6.5 6.5 ...</span>
-<span class="co">#&gt;  $ p_filt2_diff     : num [1:218437] 5.84 5.84 5.84 5.84 5.84 ...</span>
-<span class="co">#&gt;  $ trios_zulauf_no3n: num [1:218437] 0.706 0.718 0.718 0.732 0.794 ...</span>
-<span class="co">#&gt;  $ trios_zulauf_no2n: num [1:218437] 0.354 0.331 0.331 0.315 0.25 ...</span>
-<span class="co">#&gt;  $ trios_zulauf_csb : num [1:218437] 17.5 17.9 17.9 18.1 18.6 ...</span>
-<span class="co">#&gt;  $ trios_zulauf_sak : num [1:218437] 39.3 39.2 39.2 39.2 39.2 ...</span>
-<span class="co">#&gt;  $ trios_ablauf_no3n: num [1:218437] 9.51 9.5 9.47 9.48 9.49 ...</span>
-<span class="co">#&gt;  $ trios_ablauf_no2n: num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ trios_ablauf_csb : num [1:218437] 13.1 13.2 13.5 13.3 13.2 ...</span>
-<span class="co">#&gt;  $ trios_ablauf_sak : num [1:218437] 38.9 38.9 38.9 38.9 39 ...</span>
-<span class="co">#&gt;  $ q_gesamt         : num [1:218437] 547 556 559 566 572 573 576 583 589 596 ...</span>
-<span class="co">#&gt;  $ q_gestern        : num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ q_gesamt_filt2   : num [1:218437] 549 558 561 567 574 575 578 585 591 598 ...</span>
-<span class="co">#&gt;  $ q_gestern_filt2  : num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ q-nitri-gesamt   : num [1:218437] 20 20 20 21 21 21 21 21 22 22 ...</span>
-<span class="co">#&gt;  $ q_sg1_gesamt     : num [1:218437] 87 88 89 90 90 91 92 93 94 95 ...</span>
-<span class="co">#&gt;  $ q_sg2_gesamt     : num [1:218437] 90 91 91 92 93 94 95 96 97 97 ...</span>
-<span class="co">#&gt;  $ q_zp_gesamt      : num [1:218437] 980 1000 1080 1310 1330 1330 1330 1330 1330 1330 ...</span>
-<span class="co">#&gt;  $ q_zp_gestern     : num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ q_uss_gesamt     : num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ t_rechen         : num [1:218437] 56741 56741 56766 56885 56934 ...</span>
-<span class="co">#&gt;  $ t_nitri          : num [1:218437] 115903 115927 115927 116021 116141 ...</span>
-<span class="co">#&gt;  $ t_rp             : num [1:218437] 540706 540863 540907 541026 541146 ...</span>
-<span class="co">#&gt;  $ t_sg1            : num [1:218437] 540068 540225 540269 540388 540508 ...</span>
-<span class="co">#&gt;  $ t_sg2            : num [1:218437] 540072 540229 540273 540392 540512 ...</span>
-<span class="co">#&gt;  $ t_fp             : num [1:218437] 408656 408813 408857 408976 409096 ...</span>
-<span class="co">#&gt;  $ t_fp2            : num [1:218437] 408656 408813 408857 408976 409096 ...</span>
-<span class="co">#&gt;  $ t_rw1            : num [1:218437] 475638 475771 475815 475840 475840 ...</span>
-<span class="co">#&gt;  $ t_rw2            : num [1:218437] 588366 588523 588567 588686 588806 ...</span>
-<span class="co">#&gt;  $ t_zp1            : num [1:218437] 100918 100930 100974 101093 101101 ...</span>
-<span class="co">#&gt;  $ t_grobstoffp     : num [1:218437] 0 0 0 0 0 0 0 0 0 0 ...</span>
-<span class="co">#&gt;  $ zustand          : chr [1:218437] "05000500070007000700070007000000000000000000050007000700000010000000000001008700010087D82B00" "07000500050007000700070007000000000000000000070007000700000010000000000001000700010007D86B00" "07000700050007000700070007000000000000000000070007000700000010000000000007000700010007D86B00" "07000700070007000700070007000000000000000000050007000700000010000000000007000700010087D86B00" ...</span>
-<span class="co">#&gt;  $ meldungen        : chr [1:218437] "0" "0" "0" "0" ...</span>
-<span class="co">#&gt;  $ id               : num [1:218437] 1 2 3 4 5 6 7 8 9 10 ...</span>
-<span class="co">#&gt;  $ Zeitstempel      : POSIXct[1:218437], format: "2021-03-04 11:26:00" "2021-03-04 11:29:00" ...</span>
-<span class="co">#&gt;  $ ...79            : num [1:218437] NA NA NA NA NA NA NA NA NA NA ...</span>
-
-<span class="va">mbr4_data_tidy_raw</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/tidy_mbr4_data.html">tidy_mbr4_data</a></span><span class="op">(</span>mbr4_data <span class="op">=</span> <span class="va">mbr4_data_raw</span><span class="op">)</span> 
-<span class="co">#&gt; Checking for duplicates (in columns: 'h_grob', 'h_bel', 'h_filt', 'q_filt', 'p_filt', 'q_sg1', 'q_sg2', 'q_nitri', 'q_zp', 'q_rp', 'q_filtrat2', 'p_filtrat2', 'p_sg1', 'p_sg2', 'ldo_nitri', 'ldo_nitri_temp', 'ldo_filter', 'ldo_filter_temp', 'redox_deni', 'redox_deni_temp', 'ts_filter', 'ts_nitri', 'ammonium_ablauf', 'nitrat_ablauf', 'kalium_ablauf', 'chlorid_ablauf', 'temp_ablauf', 'ammonium_nitri', 'kalium_nitri', 'temp_nitri', 'ammonium_zulauf', 'kalium_zulauf', 'temp_zulauf', 'leitf_zulauf', 'leitf_zulauf_temp', 'ph_filter', 'ph_filter_temp', 'ph_nitri', 'ph_nitri_temp', 'q_bypass_rezi', 'q_filter_rezi', 'p_komp', 'p_zulauf', 'p_filt1_diff', 'p_filt2_diff', 'trios_zulauf_no3n', 'trios_zulauf_no2n', 'trios_zulauf_csb', 'trios_zulauf_sak', 'trios_ablauf_no3n', 'trios_ablauf_no2n', 'trios_ablauf_csb', 'trios_ablauf_sak', 'q_gesamt', 'q_gestern', 'q_gesamt_filt2', 'q_gestern_filt2', 'q-nitri-gesamt', 'q_sg1_gesamt', 'q_sg2_gesamt', 'q_zp_gesamt', 'q_zp_gestern', 'q_uss_gesamt', 't_rechen', 't_nitri', 't_rp', 't_sg1', 't_sg2', 't_fp', 't_fp2', 't_rw1', 't_rw2', 't_zp1', 't_grobstoffp', 'Zeitstempel', '...79') in 218437 rows...</span>
-
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_tidy_raw</span><span class="op">)</span>
-<span class="co">#&gt; tibble [16,114,318 × 13] (S3: tbl_df/tbl/data.frame)</span>
-<span class="co">#&gt;  $ DateTime              : POSIXct[1:16114318], format: "2021-03-04 11:26:00" "2021-03-04 11:26:00" ...</span>
-<span class="co">#&gt;  $ ParameterCode_SiteCode: chr [1:16114318] "h_grob" "h_bel" "h_filt" "q_filt" ...</span>
-<span class="co">#&gt;  $ ParameterValue        : num [1:16114318] 62.47 60.8 87.82 204.08 8.03 ...</span>
-<span class="co">#&gt;  $ ParameterCode         : chr [1:16114318] "h" "h" "h" "q" ...</span>
-<span class="co">#&gt;  $ SiteCode              : chr [1:16114318] "grob" "bel" "filt" "filt" ...</span>
-<span class="co">#&gt;  $ ParameterName_SiteName: chr [1:16114318] "Füllstand Grobstofftank" "Füllstand Belebung" "Füllstand Filtration" "Durchfluss Filtrat 1" ...</span>
-<span class="co">#&gt;  $ ParameterName         : chr [1:16114318] "Füllstand" "Füllstand" "Füllstand" "Durchfluss" ...</span>
-<span class="co">#&gt;  $ SiteName              : chr [1:16114318] "Grobstofftank" "Belebung" "Filtration" "Filtrat 1" ...</span>
-<span class="co">#&gt;  $ ParameterUnit         : chr [1:16114318] "%" "%" "%" "l/h" ...</span>
-<span class="co">#&gt;  $ Comment               : chr [1:16114318] NA NA NA NA ...</span>
-<span class="co">#&gt;  $ Source                : chr [1:16114318] "online" "online" "online" "online" ...</span>
-<span class="co">#&gt;  $ DataType              : chr [1:16114318] "raw" "raw" "raw" "raw" ...</span>
-<span class="co">#&gt;  $ SiteName_ParaName_Unit: chr [1:16114318] "Grobstofftank: Füllstand (%)" "Belebung: Füllstand (%)" "Filtration: Füllstand (%)" "Filtrat 1: Durchfluss (l/h)" ...</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kwb-r/kwb.pilot" class="external-link">kwb.pilot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mbr4_data_raw</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/read_mbr4.html">read_mbr4</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; New names:</span></span>
+<span><span class="co">#&gt; Listing</span></span>
+<span><span class="co">#&gt; Listing projects/MBR4.0/Exchange/Rohdaten/Online_export</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> `` -&gt; `...79`</span></span>
+<span><span class="co">#&gt; Splitting paths ... ok. (0.00s) </span></span>
+<span><span class="co">#&gt; Removing the first 10 path segments ... ok. (0.00s) </span></span>
+<span><span class="co">#&gt; Putting path segments together ... ok. (0.00s) </span></span>
+<span><span class="co">#&gt; Downloading /remote.php/dav/files/mrustl/projects/MBR4.0/Exchange/Rohdaten/Online_export/MBR_export_2022-01-03.tsv ... ok. (9.47s) </span></span>
+<span><span class="co">#&gt; Checking for duplicates (in columns: 'h_grob', 'h_bel', 'h_filt', 'q_filt', 'p_filt', 'q_sg1', 'q_sg2', 'q_nitri', 'q_zp', 'q_rp', 'q_filtrat2', 'p_filtrat2', 'p_sg1', 'p_sg2', 'ldo_nitri', 'ldo_nitri_temp', 'ldo_filter', 'ldo_filter_temp', 'redox_deni', 'redox_deni_temp', 'ts_filter', 'ts_nitri', 'ammonium_ablauf', 'nitrat_ablauf', 'kalium_ablauf', 'chlorid_ablauf', 'temp_ablauf', 'ammonium_nitri', 'kalium_nitri', 'temp_nitri', 'ammonium_zulauf', 'kalium_zulauf', 'temp_zulauf', 'leitf_zulauf', 'leitf_zulauf_temp', 'ph_filter', 'ph_filter_temp', 'ph_nitri', 'ph_nitri_temp', 'q_bypass_rezi', 'q_filter_rezi', 'p_komp', 'p_zulauf', 'p_filt1_diff', 'p_filt2_diff', 'trios_zulauf_no3n', 'trios_zulauf_no2n', 'trios_zulauf_csb', 'trios_zulauf_sak', 'trios_ablauf_no3n', 'trios_ablauf_no2n', 'leistung', 'energie', 'q_gesamt', 'q_gestern', 'q_gesamt_filt2', 'q_gestern_filt2', 'q-nitri-gesamt', 'q_sg1_gesamt', 'q_sg2_gesamt', 'q_zp_gesamt', 'q_zp_gestern', 'q_uss_gesamt', 't_rechen', 't_nitri', 't_rp', 't_sg1', 't_sg2', 't_fp', 't_fp2', 't_rw1', 't_rw2', 't_zp1', 't_grobstoffp', 'zustand', 'meldungen', 'id', 'Zeitstempel', '...79', 'trios_ablauf_csb', 'trios_ablauf_sak') in 242789 rows...</span></span>
+<span><span class="co">#&gt; Warning in remove_duplicates(.): Removing 2836 duplicates:</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2,836 × 81</span></span></span>
+<span><span class="co">#&gt;    h_grob h_bel h_filt q_filt p_filt q_sg1 q_sg2 q_nitri  q_zp  q_rp q_filtrat2</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   73.5  61.1   86.6   147.  -<span style="color: #BB0000;">33.5</span>  10.7  11.5    0       0  <span style="text-decoration: underline;">3</span>070.       115.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   64.7  61.0   86.6   147.  -<span style="color: #BB0000;">33.5</span>  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>019.       129.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   63.8  60.6   86.7   146.  -<span style="color: #BB0000;">33.7</span>  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>048.       128.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   63.7  60.6   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.7  11.5    2.67    0  <span style="text-decoration: underline;">3</span>064.       115.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   63.6  60.4   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.7  11.6    2.65    0  <span style="text-decoration: underline;">3</span>007.       117.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   78.6  61.4   86.7     0    11.7  10.7  11.6    0    <span style="text-decoration: underline;">6</span>340. <span style="text-decoration: underline;">3</span>080.         0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   74.6  65.4   86.8     0    12.8  10.7  11.6    0       0  <span style="text-decoration: underline;">3</span>046.         0 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   67.0  65.3   86.6   148.  -<span style="color: #BB0000;">34.1</span>  10.7  11.5    0       0  <span style="text-decoration: underline;">3</span>048.       114.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   65.3  65.2   86.6   146.  -<span style="color: #BB0000;">34.1</span>  10.8  11.5    2.66    0  <span style="text-decoration: underline;">3</span>091.       115.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   65.3  64.8   86.6   148.  -<span style="color: #BB0000;">34.2</span>  10.7  11.5    2.65    0  <span style="text-decoration: underline;">2</span>736.       119.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 2,826 more rows, and 70 more variables: p_filtrat2 &lt;dbl&gt;, p_sg1 &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   p_sg2 &lt;dbl&gt;, ldo_nitri &lt;dbl&gt;, ldo_nitri_temp &lt;dbl&gt;, ldo_filter &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ldo_filter_temp &lt;dbl&gt;, redox_deni &lt;dbl&gt;, redox_deni_temp &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ts_filter &lt;dbl&gt;, ts_nitri &lt;dbl&gt;, ammonium_ablauf &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   nitrat_ablauf &lt;dbl&gt;, kalium_ablauf &lt;dbl&gt;, chlorid_ablauf &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   temp_ablauf &lt;dbl&gt;, ammonium_nitri &lt;dbl&gt;, kalium_nitri &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   temp_nitri &lt;dbl&gt;, ammonium_zulauf &lt;dbl&gt;, kalium_zulauf &lt;dbl&gt;, …</span></span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_raw</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [239,953 × 81] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ h_grob           : num [1:239953] 73.6 73.6 73.6 73.6 73.6 ...</span></span>
+<span><span class="co">#&gt;  $ h_bel            : num [1:239953] 63.4 63.7 63.6 63.6 63.8 ...</span></span>
+<span><span class="co">#&gt;  $ h_filt           : num [1:239953] 87.4 87.5 87.4 87.4 87.4 ...</span></span>
+<span><span class="co">#&gt;  $ q_filt           : num [1:239953] 194 0 0 194 193 ...</span></span>
+<span><span class="co">#&gt;  $ p_filt           : num [1:239953] -44.4 16.7 14.7 -46.2 -45.7 ...</span></span>
+<span><span class="co">#&gt;  $ q_sg1            : num [1:239953] 12.2 12.2 12.1 12.1 12.1 ...</span></span>
+<span><span class="co">#&gt;  $ q_sg2            : num [1:239953] 12.2 12.2 12.2 12.2 12.2 ...</span></span>
+<span><span class="co">#&gt;  $ q_nitri          : num [1:239953] 2.35749 2.34938 2.37305 0.00109 0.00109 ...</span></span>
+<span><span class="co">#&gt;  $ q_zp             : num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ q_rp             : num [1:239953] 3015 3018 3016 2993 3013 ...</span></span>
+<span><span class="co">#&gt;  $ q_filtrat2       : num [1:239953] 181.94 0.76 0 184.59 185.88 ...</span></span>
+<span><span class="co">#&gt;  $ p_filtrat2       : num [1:239953] -157.45 12.61 -2.12 -172.9 -171.83 ...</span></span>
+<span><span class="co">#&gt;  $ p_sg1            : num [1:239953] 168 168 168 168 168 ...</span></span>
+<span><span class="co">#&gt;  $ p_sg2            : num [1:239953] 261 261 261 261 261 ...</span></span>
+<span><span class="co">#&gt;  $ ldo_nitri        : num [1:239953] 2.535 1.34 0.699 0.869 1.917 ...</span></span>
+<span><span class="co">#&gt;  $ ldo_nitri_temp   : num [1:239953] 18 18 18 18 18 ...</span></span>
+<span><span class="co">#&gt;  $ ldo_filter       : num [1:239953] 0.498 0.498 0.498 0.498 0.498 ...</span></span>
+<span><span class="co">#&gt;  $ ldo_filter_temp  : num [1:239953] 18.1 18.1 18.1 18.1 18.2 ...</span></span>
+<span><span class="co">#&gt;  $ redox_deni       : num [1:239953] 97.5 96.7 95.9 95.1 94.1 ...</span></span>
+<span><span class="co">#&gt;  $ redox_deni_temp  : num [1:239953] 18.7 18.7 18.7 18.7 18.7 ...</span></span>
+<span><span class="co">#&gt;  $ ts_filter        : num [1:239953] 9.94 10.65 10.27 11.34 11.48 ...</span></span>
+<span><span class="co">#&gt;  $ ts_nitri         : num [1:239953] 7.85 7.86 7.93 7.98 7.93 ...</span></span>
+<span><span class="co">#&gt;  $ ammonium_ablauf  : num [1:239953] 59.7 59.4 59 59.2 59.3 ...</span></span>
+<span><span class="co">#&gt;  $ nitrat_ablauf    : num [1:239953] 3.75 3.76 3.75 3.75 3.75 ...</span></span>
+<span><span class="co">#&gt;  $ kalium_ablauf    : num [1:239953] 132 131 131 131 131 ...</span></span>
+<span><span class="co">#&gt;  $ chlorid_ablauf   : num [1:239953] 1.32 1.32 1.32 1.32 1.32 ...</span></span>
+<span><span class="co">#&gt;  $ temp_ablauf      : num [1:239953] 18.4 18.4 18.4 18.4 18.4 ...</span></span>
+<span><span class="co">#&gt;  $ ammonium_nitri   : num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ kalium_nitri     : num [1:239953] 1275 1274 1275 1275 1275 ...</span></span>
+<span><span class="co">#&gt;  $ temp_nitri       : num [1:239953] 18 18 18 18 18 ...</span></span>
+<span><span class="co">#&gt;  $ ammonium_zulauf  : num [1:239953] 60.3 60.2 60.1 60.1 60 ...</span></span>
+<span><span class="co">#&gt;  $ kalium_zulauf    : num [1:239953] 22.5 22.5 22.5 22.5 22.4 ...</span></span>
+<span><span class="co">#&gt;  $ temp_zulauf      : num [1:239953] 15.4 15.4 15.4 15.4 15.4 ...</span></span>
+<span><span class="co">#&gt;  $ leitf_zulauf     : num [1:239953] 705 705 706 705 706 ...</span></span>
+<span><span class="co">#&gt;  $ leitf_zulauf_temp: num [1:239953] 15 15 15 15 15 ...</span></span>
+<span><span class="co">#&gt;  $ ph_filter        : num [1:239953] 7.41 7.41 7.41 7.42 7.42 ...</span></span>
+<span><span class="co">#&gt;  $ ph_filter_temp   : num [1:239953] 18.1 18.1 18.1 18.1 18.1 ...</span></span>
+<span><span class="co">#&gt;  $ ph_nitri         : num [1:239953] 7.78 7.78 7.78 7.78 7.78 ...</span></span>
+<span><span class="co">#&gt;  $ ph_nitri_temp    : num [1:239953] 18 18 18 18.1 18 ...</span></span>
+<span><span class="co">#&gt;  $ q_bypass_rezi    : num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ q_filter_rezi    : num [1:239953] 3015 3018 3017 2993 3013 ...</span></span>
+<span><span class="co">#&gt;  $ p_komp           : num [1:239953] 0.293 -0.105 0.289 0.346 -0.209 ...</span></span>
+<span><span class="co">#&gt;  $ p_zulauf         : num [1:239953] 151 151 151 151 151 ...</span></span>
+<span><span class="co">#&gt;  $ p_filt1_diff     : num [1:239953] 62.8 62.8 62.8 63.2 63.2 ...</span></span>
+<span><span class="co">#&gt;  $ p_filt2_diff     : num [1:239953] 188 188 188 187 187 ...</span></span>
+<span><span class="co">#&gt;  $ trios_zulauf_no3n: num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ trios_zulauf_no2n: num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ trios_zulauf_csb : num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ trios_zulauf_sak : num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ trios_ablauf_no3n: num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ trios_ablauf_no2n: num [1:239953] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ leistung         : num [1:239953] 1761 1538 1544 2264 2322 ...</span></span>
+<span><span class="co">#&gt;  $ energie          : num [1:239953] 4843 4843 4843 4843 4843 ...</span></span>
+<span><span class="co">#&gt;  $ q_gesamt         : num [1:239953] 305999 305995 305995 305990 305983 ...</span></span>
+<span><span class="co">#&gt;  $ q_gestern        : num [1:239953] 3746 3746 3746 3746 3746 ...</span></span>
+<span><span class="co">#&gt;  $ q_gesamt_filt2   : num [1:239953] 3e+05 3e+05 3e+05 3e+05 3e+05 ...</span></span>
+<span><span class="co">#&gt;  $ q_gestern_filt2  : num [1:239953] 3652 3652 3652 3652 3652 ...</span></span>
+<span><span class="co">#&gt;  $ q-nitri-gesamt   : num [1:239953] 2 2 2 2 2 2 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;  $ q_sg1_gesamt     : num [1:239953] 14472 14471 14471 14471 14470 ...</span></span>
+<span><span class="co">#&gt;  $ q_sg2_gesamt     : num [1:239953] 14323 14323 14322 14322 14322 ...</span></span>
+<span><span class="co">#&gt;  $ q_zp_gesamt      : num [1:239953] 625940 625940 625940 625940 625940 ...</span></span>
+<span><span class="co">#&gt;  $ q_zp_gestern     : num [1:239953] 7410 7410 7410 7410 7410 7410 7410 7410 7410 7410 ...</span></span>
+<span><span class="co">#&gt;  $ q_uss_gesamt     : num [1:239953] 17840 17840 17840 17840 17840 ...</span></span>
+<span><span class="co">#&gt;  $ t_rechen         : num [1:239953] 4275900 4275900 4275900 4275870 4275870 ...</span></span>
+<span><span class="co">#&gt;  $ t_nitri          : num [1:239953] 23667185 23667065 23666945 23666859 23666859 ...</span></span>
+<span><span class="co">#&gt;  $ t_rp             : num [1:239953] 40050885 40050765 40050645 40050525 40050406 ...</span></span>
+<span><span class="co">#&gt;  $ t_sg1            : num [1:239953] 31371136 31371016 31370896 31370776 31370657 ...</span></span>
+<span><span class="co">#&gt;  $ t_sg2            : num [1:239953] 31371441 31371321 31371201 31371081 31370962 ...</span></span>
+<span><span class="co">#&gt;  $ t_fp             : num [1:239953] 31622496 31622410 31622410 31622315 31622196 ...</span></span>
+<span><span class="co">#&gt;  $ t_fp2            : num [1:239953] 31568171 31568085 31568085 31567990 31567871 ...</span></span>
+<span><span class="co">#&gt;  $ t_rw1            : num [1:239953] 30806555 30806555 30806555 30806520 30806401 ...</span></span>
+<span><span class="co">#&gt;  $ t_rw2            : num [1:239953] 40088169 40088049 40087929 40087809 40087690 ...</span></span>
+<span><span class="co">#&gt;  $ t_zp1            : num [1:239953] 1856720 1856720 1856720 1856720 1856720 ...</span></span>
+<span><span class="co">#&gt;  $ t_grobstoffp     : num [1:239953] 6699 6699 6699 6699 6699 ...</span></span>
+<span><span class="co">#&gt;  $ zustand          : chr [1:239953] "050005000700070007000700070005000000000000000500070007000000100000000000010087000100AF783B00" "050005000700070007000500070005000000000000000500070005000000100000000000010087000100AEB83B00" "050005000700070007000500070005000000000000000500070005000000100000000000010087000100AEB83B00" "050005000500070007000700070005000000000000000700070007000000100000000000010087000100AF783B00" ...</span></span>
+<span><span class="co">#&gt;  $ meldungen        : chr [1:239953] "0000000000000000000000400000" "0000000000000000000000400000" "0000000000000000000000400000" "0000000000000000000000400000" ...</span></span>
+<span><span class="co">#&gt;  $ id               : num [1:239953] 73536 73535 73534 73533 73532 ...</span></span>
+<span><span class="co">#&gt;  $ Zeitstempel      : POSIXct[1:239953], format: "2022-10-24 22:10:11" "2022-10-24 22:08:12" ...</span></span>
+<span><span class="co">#&gt;  $ ...79            : num [1:239953] NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ trios_ablauf_csb : num [1:239953] NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ trios_ablauf_sak : num [1:239953] NA NA NA NA NA NA NA NA NA NA ...</span></span>
+<span></span>
+<span><span class="va">mbr4_data_tidy_raw</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/tidy_mbr4_data.html">tidy_mbr4_data</a></span><span class="op">(</span>mbr4_data <span class="op">=</span> <span class="va">mbr4_data_raw</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Checking for duplicates (in columns: 'h_grob', 'h_bel', 'h_filt', 'q_filt', 'p_filt', 'q_sg1', 'q_sg2', 'q_nitri', 'q_zp', 'q_rp', 'q_filtrat2', 'p_filtrat2', 'p_sg1', 'p_sg2', 'ldo_nitri', 'ldo_nitri_temp', 'ldo_filter', 'ldo_filter_temp', 'redox_deni', 'redox_deni_temp', 'ts_filter', 'ts_nitri', 'ammonium_ablauf', 'nitrat_ablauf', 'kalium_ablauf', 'chlorid_ablauf', 'temp_ablauf', 'ammonium_nitri', 'kalium_nitri', 'temp_nitri', 'ammonium_zulauf', 'kalium_zulauf', 'temp_zulauf', 'leitf_zulauf', 'leitf_zulauf_temp', 'ph_filter', 'ph_filter_temp', 'ph_nitri', 'ph_nitri_temp', 'q_bypass_rezi', 'q_filter_rezi', 'p_komp', 'p_zulauf', 'p_filt1_diff', 'p_filt2_diff', 'trios_zulauf_no3n', 'trios_zulauf_no2n', 'trios_zulauf_csb', 'trios_zulauf_sak', 'trios_ablauf_no3n', 'trios_ablauf_no2n', 'leistung', 'energie', 'q_gesamt', 'q_gestern', 'q_gesamt_filt2', 'q_gestern_filt2', 'q-nitri-gesamt', 'q_sg1_gesamt', 'q_sg2_gesamt', 'q_zp_gesamt', 'q_zp_gestern', 'q_uss_gesamt', 't_rechen', 't_nitri', 't_rp', 't_sg1', 't_sg2', 't_fp', 't_fp2', 't_rw1', 't_rw2', 't_zp1', 't_grobstoffp', 'Zeitstempel', '...79', 'trios_ablauf_csb', 'trios_ablauf_sak') in 239953 rows...</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">mbr4_data_tidy_raw</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [17,706,502 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ DateTime              : POSIXct[1:17706502], format: "2022-10-24 22:10:11" "2022-10-24 22:10:11" ...</span></span>
+<span><span class="co">#&gt;  $ ParameterCode_SiteCode: chr [1:17706502] "h_grob" "h_bel" "h_filt" "q_filt" ...</span></span>
+<span><span class="co">#&gt;  $ ParameterValue        : num [1:17706502] 73.6 63.4 87.4 193.8 -44.4 ...</span></span>
+<span><span class="co">#&gt;  $ ParameterCode         : chr [1:17706502] "h" "h" "h" "q" ...</span></span>
+<span><span class="co">#&gt;  $ SiteCode              : chr [1:17706502] "grob" "bel" "filt" "filt" ...</span></span>
+<span><span class="co">#&gt;  $ ParameterName_SiteName: chr [1:17706502] "Füllstand Grobstofftank" "Füllstand Belebung" "Füllstand Filtration" "Durchfluss Filtrat 1" ...</span></span>
+<span><span class="co">#&gt;  $ ParameterName         : chr [1:17706502] "Füllstand" "Füllstand" "Füllstand" "Durchfluss" ...</span></span>
+<span><span class="co">#&gt;  $ SiteName              : chr [1:17706502] "Grobstofftank" "Belebung" "Filtration" "Filtrat 1" ...</span></span>
+<span><span class="co">#&gt;  $ ParameterUnit         : chr [1:17706502] "%" "%" "%" "l/h" ...</span></span>
+<span><span class="co">#&gt;  $ Comment               : chr [1:17706502] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ Source                : chr [1:17706502] "online" "online" "online" "online" ...</span></span>
+<span><span class="co">#&gt;  $ DataType              : chr [1:17706502] "raw" "raw" "raw" "raw" ...</span></span>
+<span><span class="co">#&gt;  $ SiteName_ParaName_Unit: chr [1:17706502] "Grobstofftank: Füllstand (%)" "Belebung: Füllstand (%)" "Filtration: Füllstand (%)" "Filtrat 1: Durchfluss (l/h)" ...</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="aggregate">Aggregate<a class="anchor" aria-label="anchor" href="#aggregate"></a>
 </h2>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mbr4_data_tidy_10min</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_raw</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   
-  <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> 
-<span class="co">#&gt; Performing temporal aggregation for 600 seconds time periods! ... ok. (6.48s)</span>
-
-<span class="va">mbr4_data_tidy_hour</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_10min</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>
-  <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">3600</span><span class="op">)</span>
-<span class="co">#&gt; Performing temporal aggregation for 3600 seconds time periods! ... ok. (1.15s)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mbr4_data_tidy_10min</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_raw</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span>   </span>
+<span>  <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">600</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Performing temporal aggregation for 600 seconds time periods! ... ok. (6.27s)</span></span>
+<span></span>
+<span><span class="va">mbr4_data_tidy_hour</span> <span class="op">&lt;-</span> <span class="va">mbr4_data_tidy_10min</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/group_datetime.html">group_datetime</a></span><span class="op">(</span>by <span class="op">=</span> <span class="fl">3600</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Performing temporal aggregation for 3600 seconds time periods! ... ok. (1.14s)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="export">Export<a class="anchor" aria-label="anchor" href="#export"></a>
@@ -360,18 +363,18 @@
 </h3>
 <p>Raw and aggregated data will be exported as <code>csv</code> in <code>wide</code> format (by running <code><a href="../reference/long_to_wide.html">kwb.pilot::long_to_wide()</a></code>) as shown below:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_raw</span>,
-                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_list_10min</span>,
-                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_list_hour</span>,
-                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_raw</span>,</span>
+<span>                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_list_10min</span>,</span>
+<span>                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/export_data.html">export_data</a></span><span class="op">(</span>df_long <span class="op">=</span> <span class="va">mbr4_data_tidy_list_hour</span>,</span>
+<span>                       export_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></span></code></pre></div>
 <p>Finally you can check the datasets in the export folder by running:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/hsOpenWindowsExplorer.html" class="external-link">hsOpenWindowsExplorer</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/hsOpenWindowsExplorer.html" class="external-link">hsOpenWindowsExplorer</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">export_dir</span><span class="op">)</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -387,7 +390,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>

@@ -8,8 +8,8 @@
 <meta name="description" content="kwb.pilot">
 <title>Pilot: Ultimate • kwb.pilot</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Pilot: Ultimate">
 <meta property="og:description" content="kwb.pilot">
@@ -92,8 +92,9 @@
 
 
 
-<script src="ultimate_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
-  <main id="main"><div class="page-header">
+
+<div class="row">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Pilot: Ultimate</h1>
             
       
@@ -108,162 +109,162 @@
 </h2>
 <p>For writing to InfluxDBCloud you need to run <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code> and define at least the following environment variables:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co">###############################################################################</span>
-<span class="co">### For InfluxDB-Cloud</span>
-<span class="co">###############################################################################</span>
-<span class="va">ULTIMATE_INFLUXDB_URL</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_url&gt;"</span>
-<span class="co"># InfluxDB API-Token with Write for bucket "ultimate"</span>
-<span class="va">ULTIMATE_INFLUXDB_TOKEN</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_apitoken&gt;"</span>
-<span class="va">ULTIMATE_INFLUXDB_ORG</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_organisation&gt;"</span>
-
-<span class="co">################################################################################  </span>
-<span class="co">## Optional (for downloading raw data from Nextcloud)</span>
-<span class="co">################################################################################</span>
-<span class="va">NEXTCLOUD_URL</span> <span class="op">=</span> <span class="st">"https://&lt;replace-with-nextcloud-cloud-url&gt;"</span>
-<span class="va">NEXTCLOUD_USER</span> <span class="op">=</span> <span class="st">"&lt;your-nextcloud-username&gt;"</span> <span class="co"># your username</span>
-<span class="va">NEXTCLOUD_PASSWORD</span> <span class="op">=</span> <span class="st">"your-nextcloud-app-password"</span> <span class="co">### see details below</span>
-
-<span class="co">#3 For creating &lt;your-nextcloud-app-password&gt;:</span>
-<span class="co">#3.1 go to: https://replace-with-nextcloud-url/index.php/settings/user/security</span>
-<span class="co">#3.2 scroll down to create new app password</span>
-<span class="co">#3.3 select a name e.g. r-script and copy the token and replace your-nextcloud-app-password</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">###############################################################################</span></span>
+<span><span class="co">### For InfluxDB-Cloud</span></span>
+<span><span class="co">###############################################################################</span></span>
+<span><span class="va">ULTIMATE_INFLUXDB_URL</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_url&gt;"</span></span>
+<span><span class="co"># InfluxDB API-Token with Write for bucket "ultimate"</span></span>
+<span><span class="va">ULTIMATE_INFLUXDB_TOKEN</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_apitoken&gt;"</span></span>
+<span><span class="va">ULTIMATE_INFLUXDB_ORG</span> <span class="op">=</span> <span class="st">"&lt;ultimate_influxdbcloud_organisation&gt;"</span></span>
+<span></span>
+<span><span class="co">################################################################################  </span></span>
+<span><span class="co">## Optional (for downloading raw data from Nextcloud)</span></span>
+<span><span class="co">################################################################################</span></span>
+<span><span class="va">NEXTCLOUD_URL</span> <span class="op">=</span> <span class="st">"https://&lt;replace-with-nextcloud-cloud-url&gt;"</span></span>
+<span><span class="va">NEXTCLOUD_USER</span> <span class="op">=</span> <span class="st">"&lt;your-nextcloud-username&gt;"</span> <span class="co"># your username</span></span>
+<span><span class="va">NEXTCLOUD_PASSWORD</span> <span class="op">=</span> <span class="st">"your-nextcloud-app-password"</span> <span class="co">### see details below</span></span>
+<span></span>
+<span><span class="co">#3 For creating &lt;your-nextcloud-app-password&gt;:</span></span>
+<span><span class="co">#3.1 go to: https://replace-with-nextcloud-url/index.php/settings/user/security</span></span>
+<span><span class="co">#3.2 scroll down to create new app password</span></span>
+<span><span class="co">#3.3 select a name e.g. r-script and copy the token and replace your-nextcloud-app-password</span></span></code></pre></div>
 <p>Finally you need to restart Rstudio and proceed with the code below:</p>
 </div>
 <div class="section level2">
 <h2 id="install-r-package">Install R package<a class="anchor" aria-label="anchor" href="#install-r-package"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Enable repository from kwb-r</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-  kwbr <span class="op">=</span> <span class="st">'https://kwb-r.r-universe.dev'</span>,
-  CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span>
-
-<span class="co"># Download and install kwb.pilot in R</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'kwb.pilot'</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Enable repository from kwb-r</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  kwbr <span class="op">=</span> <span class="st">'https://kwb-r.r-universe.dev'</span>,</span>
+<span>  CRAN <span class="op">=</span> <span class="st">'https://cloud.r-project.org'</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Download and install kwb.pilot in R</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'kwb.pilot'</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="define-paths">Define Paths<a class="anchor" aria-label="anchor" href="#define-paths"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kwb-r/kwb.pilot" class="external-link">kwb.pilot</a></span><span class="op">)</span>
-
-<span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>
-  root_ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,
-  root_windows <span class="op">=</span> <span class="st">"C:/kwb"</span>,
-  root <span class="op">=</span> <span class="st">""</span>,
-  common_root <span class="op">=</span> <span class="st">"projects/ultimate/raw_data_pilots"</span>,
-  data_raw <span class="op">=</span> <span class="st">"data"</span>, 
-  data_imp <span class="op">=</span> <span class="st">"data_imported"</span>,
-  a_site_code <span class="op">=</span> <span class="st">"Pilot_A"</span>,
-  b_site_code <span class="op">=</span> <span class="st">"Pilot_B"</span>,
-  a_cloud <span class="op">=</span> <span class="st">"&lt;common_root&gt;/&lt;a_site_code&gt;"</span>,
-  a_cloud_raw <span class="op">=</span> <span class="st">"&lt;a_cloud&gt;/&lt;data_raw&gt;"</span>, 
-  a_cloud_imported <span class="op">=</span> <span class="st">"&lt;a_cloud&gt;/&lt;data_imp&gt;"</span>,
-  a_local <span class="op">=</span> <span class="st">"&lt;root&gt;/&lt;a_cloud&gt;"</span>,
-  a_local_raw <span class="op">=</span> <span class="st">"&lt;a_local&gt;/&lt;data_raw&gt;"</span>, 
-  a_local_imported <span class="op">=</span> <span class="st">"&lt;a_local&gt;/&lt;data_imp&gt;"</span>,
-  b_cloud <span class="op">=</span> <span class="st">"&lt;common_root&gt;/&lt;b_site_code&gt;"</span>,
-  b_cloud_raw <span class="op">=</span> <span class="st">"&lt;b_cloud&gt;/&lt;data_raw&gt;"</span>, 
-  b_cloud_imported <span class="op">=</span> <span class="st">"&lt;b_cloud&gt;/&lt;data_imp&gt;"</span>,
-  b_local <span class="op">=</span> <span class="st">"&lt;root&gt;/&lt;b_cloud&gt;"</span>,
-  b_local_raw <span class="op">=</span> <span class="st">"&lt;b_local&gt;/&lt;data_raw&gt;"</span>, 
-  b_local_imported <span class="op">=</span> <span class="st">"&lt;b_local&gt;/&lt;data_imp&gt;"</span>
-<span class="op">)</span>
-
-<span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span>, 
-                            root <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CI"</span><span class="op">)</span>, 
-                                                            <span class="st">"true"</span><span class="op">)</span>,
-                                                  <span class="va">paths_list</span><span class="op">$</span><span class="va">root_ci</span>, 
-                                                  <span class="va">paths_list</span><span class="op">$</span><span class="va">root_windows</span><span class="op">)</span>
-                            <span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kwb-r/kwb.pilot" class="external-link">kwb.pilot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">paths_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  root_ci <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempdir</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  root_windows <span class="op">=</span> <span class="st">"C:/kwb"</span>,</span>
+<span>  root <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  common_root <span class="op">=</span> <span class="st">"projects/ultimate/raw_data_pilots"</span>,</span>
+<span>  data_raw <span class="op">=</span> <span class="st">"data"</span>, </span>
+<span>  data_imp <span class="op">=</span> <span class="st">"data_imported"</span>,</span>
+<span>  a_site_code <span class="op">=</span> <span class="st">"Pilot_A"</span>,</span>
+<span>  b_site_code <span class="op">=</span> <span class="st">"Pilot_B"</span>,</span>
+<span>  a_cloud <span class="op">=</span> <span class="st">"&lt;common_root&gt;/&lt;a_site_code&gt;"</span>,</span>
+<span>  a_cloud_raw <span class="op">=</span> <span class="st">"&lt;a_cloud&gt;/&lt;data_raw&gt;"</span>, </span>
+<span>  a_cloud_imported <span class="op">=</span> <span class="st">"&lt;a_cloud&gt;/&lt;data_imp&gt;"</span>,</span>
+<span>  a_local <span class="op">=</span> <span class="st">"&lt;root&gt;/&lt;a_cloud&gt;"</span>,</span>
+<span>  a_local_raw <span class="op">=</span> <span class="st">"&lt;a_local&gt;/&lt;data_raw&gt;"</span>, </span>
+<span>  a_local_imported <span class="op">=</span> <span class="st">"&lt;a_local&gt;/&lt;data_imp&gt;"</span>,</span>
+<span>  b_cloud <span class="op">=</span> <span class="st">"&lt;common_root&gt;/&lt;b_site_code&gt;"</span>,</span>
+<span>  b_cloud_raw <span class="op">=</span> <span class="st">"&lt;b_cloud&gt;/&lt;data_raw&gt;"</span>, </span>
+<span>  b_cloud_imported <span class="op">=</span> <span class="st">"&lt;b_cloud&gt;/&lt;data_imp&gt;"</span>,</span>
+<span>  b_local <span class="op">=</span> <span class="st">"&lt;root&gt;/&lt;b_cloud&gt;"</span>,</span>
+<span>  b_local_raw <span class="op">=</span> <span class="st">"&lt;b_local&gt;/&lt;data_raw&gt;"</span>, </span>
+<span>  b_local_imported <span class="op">=</span> <span class="st">"&lt;b_local&gt;/&lt;data_imp&gt;"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">paths</span> <span class="op">&lt;-</span> <span class="fu">kwb.utils</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kwb.utils/man/resolve.html" class="external-link">resolve</a></span><span class="op">(</span><span class="va">paths_list</span>, </span>
+<span>                            root <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.getenv.html" class="external-link">Sys.getenv</a></span><span class="op">(</span><span class="st">"CI"</span><span class="op">)</span>, </span>
+<span>                                                            <span class="st">"true"</span><span class="op">)</span>,</span>
+<span>                                                  <span class="va">paths_list</span><span class="op">$</span><span class="va">root_ci</span>, </span>
+<span>                                                  <span class="va">paths_list</span><span class="op">$</span><span class="va">root_windows</span><span class="op">)</span></span>
+<span>                            <span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="write-to-influxdbcloud">Write to InfluxDBCloud<a class="anchor" aria-label="anchor" href="#write-to-influxdbcloud"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co">################################################################################</span>
-<span class="co">### 1. Write Pilot Plant Raw Data to InfluxDB Cloud</span>
-<span class="co">################################################################################</span>
-
-<span class="co">################################################################################</span>
-<span class="co">### 1.1 Pilot A</span>
-<span class="co">################################################################################</span>
-
-<span class="co">## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped</span>
-<span class="co">## if the data is provided in the `paths$raw_data_dir`</span>
-<span class="va">files_pilot_a</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/download_nextcloud_files.html">download_nextcloud_files</a></span><span class="op">(</span>dir_cloud <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span>,
-                                    dir_local <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span><span class="op">)</span>
-
-
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">files_pilot_a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
-
-<span class="va">tsv_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>
-  path <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span>,
-  full.names <span class="op">=</span> <span class="cn">TRUE</span>,
-  pattern <span class="op">=</span> <span class="st">"xls$"</span>
-<span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/write_to_influxdb_loop.html">write_to_influxdb_loop</a></span><span class="op">(</span>
-  tsv_paths <span class="op">=</span> <span class="va">tsv_paths</span>,
-  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site_code <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_site_code</span>,
-               raw_data_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span><span class="op">)</span>,
-  changed_only <span class="op">=</span> <span class="cn">FALSE</span>,
-  max_tsv_files <span class="op">=</span> <span class="fl">10</span>,
-  batch_size <span class="op">=</span> <span class="fl">5000</span>
-<span class="op">)</span>
-
-
-<span class="co">### Move all files for Pilot A`s cloud "raw" data directory to the "imported" </span>
-<span class="co">### directory (in case that a file is already existing there: overwrite it)!</span>
-<span class="va">paths_pilot_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span>, <span class="va">files_pilot_a</span><span class="op">)</span>,
-                            imported <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_imported</span>, <span class="va">files_pilot_a</span><span class="op">)</span>
-                            <span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/move_nextcloud_files.html">move_nextcloud_files</a></span><span class="op">(</span><span class="va">paths_pilot_a</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Nothing to do for '%s'! No new files in '%s'"</span>,
-                  <span class="va">paths</span><span class="op">$</span><span class="va">a_site_code</span>,
-                  <span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co">################################################################################</span></span>
+<span><span class="co">### 1. Write Pilot Plant Raw Data to InfluxDB Cloud</span></span>
+<span><span class="co">################################################################################</span></span>
+<span></span>
+<span><span class="co">################################################################################</span></span>
+<span><span class="co">### 1.1 Pilot A</span></span>
+<span><span class="co">################################################################################</span></span>
+<span></span>
+<span><span class="co">## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped</span></span>
+<span><span class="co">## if the data is provided in the `paths$raw_data_dir`</span></span>
+<span><span class="va">files_pilot_a</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/download_nextcloud_files.html">download_nextcloud_files</a></span><span class="op">(</span>dir_cloud <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span>,</span>
+<span>                                    dir_local <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">files_pilot_a</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span><span class="va">tsv_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span>,</span>
+<span>  full.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  pattern <span class="op">=</span> <span class="st">"xls$"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/write_to_influxdb_loop.html">write_to_influxdb_loop</a></span><span class="op">(</span></span>
+<span>  tsv_paths <span class="op">=</span> <span class="va">tsv_paths</span>,</span>
+<span>  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site_code <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_site_code</span>,</span>
+<span>               raw_data_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">a_local_raw</span><span class="op">)</span>,</span>
+<span>  changed_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  max_tsv_files <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span></span>
+<span><span class="co">### Move all files for Pilot A`s cloud "raw" data directory to the "imported" </span></span>
+<span><span class="co">### directory (in case that a file is already existing there: overwrite it)!</span></span>
+<span><span class="va">paths_pilot_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span>, <span class="va">files_pilot_a</span><span class="op">)</span>,</span>
+<span>                            imported <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_imported</span>, <span class="va">files_pilot_a</span><span class="op">)</span></span>
+<span>                            <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/move_nextcloud_files.html">move_nextcloud_files</a></span><span class="op">(</span><span class="va">paths_pilot_a</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Nothing to do for '%s'! No new files in '%s'"</span>,</span>
+<span>                  <span class="va">paths</span><span class="op">$</span><span class="va">a_site_code</span>,</span>
+<span>                  <span class="va">paths</span><span class="op">$</span><span class="va">a_cloud_raw</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co">################################################################################</span>
-<span class="co">### 1.2 Pilot B</span>
-<span class="co">################################################################################</span>
-
-<span class="co">## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped</span>
-<span class="co">## if the data is provided in the `paths$raw_data_dir`</span>
-<span class="va">files_pilot_b</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/download_nextcloud_files.html">download_nextcloud_files</a></span><span class="op">(</span>dir_cloud <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span>,
-                                    dir_local <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span><span class="op">)</span>
-
-<span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">files_pilot_b</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span>
-<span class="va">tsv_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span>
-  path <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span>,
-  full.names <span class="op">=</span> <span class="cn">TRUE</span>,
-  pattern <span class="op">=</span> <span class="st">"xls$"</span>
-<span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/write_to_influxdb_loop.html">write_to_influxdb_loop</a></span><span class="op">(</span>
-  tsv_paths <span class="op">=</span> <span class="va">tsv_paths</span>,
-  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site_code <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_site_code</span>,
-               raw_data_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span><span class="op">)</span>,
-  changed_only <span class="op">=</span> <span class="cn">FALSE</span>,
-  max_tsv_files <span class="op">=</span> <span class="fl">5</span>,
-  batch_size <span class="op">=</span> <span class="fl">5000</span>
-<span class="op">)</span>
-
-<span class="co">### Move all files for Pilot B`s cloud "raw" data directory to the "imported" </span>
-<span class="co">### directory (in case that a file is already existing there: overwrite it)!</span>
-<span class="va">paths_pilot_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span>, <span class="va">files_pilot_b</span><span class="op">)</span>,
-                            imported <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_imported</span>, <span class="va">files_pilot_b</span><span class="op">)</span>
-                            <span class="op">)</span>
-
-<span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/move_nextcloud_files.html">move_nextcloud_files</a></span><span class="op">(</span><span class="va">paths_pilot_b</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
-<span class="op">}</span> <span class="kw">else</span> <span class="op">{</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Nothing to do for '%s'! No new files in '%s'"</span>,
-                  <span class="va">paths</span><span class="op">$</span><span class="va">b_site_code</span>,
-                  <span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="co">################################################################################</span></span>
+<span><span class="co">### 1.2 Pilot B</span></span>
+<span><span class="co">################################################################################</span></span>
+<span></span>
+<span><span class="co">## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped</span></span>
+<span><span class="co">## if the data is provided in the `paths$raw_data_dir`</span></span>
+<span><span class="va">files_pilot_b</span> <span class="op">&lt;-</span> <span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/download_nextcloud_files.html">download_nextcloud_files</a></span><span class="op">(</span>dir_cloud <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span>,</span>
+<span>                                    dir_local <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">files_pilot_b</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="va">tsv_paths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span></span>
+<span>  path <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span>,</span>
+<span>  full.names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  pattern <span class="op">=</span> <span class="st">"xls$"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/write_to_influxdb_loop.html">write_to_influxdb_loop</a></span><span class="op">(</span></span>
+<span>  tsv_paths <span class="op">=</span> <span class="va">tsv_paths</span>,</span>
+<span>  paths <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site_code <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_site_code</span>,</span>
+<span>               raw_data_dir <span class="op">=</span> <span class="va">paths</span><span class="op">$</span><span class="va">b_local_raw</span><span class="op">)</span>,</span>
+<span>  changed_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  max_tsv_files <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  batch_size <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">### Move all files for Pilot B`s cloud "raw" data directory to the "imported" </span></span>
+<span><span class="co">### directory (in case that a file is already existing there: overwrite it)!</span></span>
+<span><span class="va">paths_pilot_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>raw <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span>, <span class="va">files_pilot_b</span><span class="op">)</span>,</span>
+<span>                            imported <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_imported</span>, <span class="va">files_pilot_b</span><span class="op">)</span></span>
+<span>                            <span class="op">)</span></span>
+<span></span>
+<span><span class="fu">kwb.pilot</span><span class="fu">::</span><span class="fu"><a href="../reference/move_nextcloud_files.html">move_nextcloud_files</a></span><span class="op">(</span><span class="va">paths_pilot_b</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">message</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"Nothing to do for '%s'! No new files in '%s'"</span>,</span>
+<span>                  <span class="va">paths</span><span class="op">$</span><span class="va">b_site_code</span>,</span>
+<span>                  <span class="va">paths</span><span class="op">$</span><span class="va">b_cloud_raw</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -279,7 +280,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
     </footer>
