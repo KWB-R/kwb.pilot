@@ -1,5 +1,10 @@
 name: Import Pilot Data From Nextcloud and Upload to InfluxDB Cloud
 on:
+  push:
+    branches:
+      - main
+      - master
+      - dev
   schedule:
     # * is a special character in YAML so you have to quote this string
     # Run this job every day at 00:00 am UTC ('0 0 * * *')
