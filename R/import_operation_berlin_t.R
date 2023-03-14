@@ -79,11 +79,14 @@ import_lab_data_berlin_t <- function(xlsx_path = package_file("shiny/berlin_t/da
 #' @importFrom kwb.utils catAndRun
 #' @importFrom utils write.csv
 #' @export
-read_pentair_data <- function(raw_data_dir = package_file("shiny/berlin_t/data/operation"),
-                              raw_data_files = NULL,
-                              meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
-                              locale = readr::locale(tz = "CET"),
-                              col_types = readr::cols()) {
+read_pentair_data <- function(
+    raw_data_dir = package_file("shiny/berlin_t/data/operation"),
+    raw_data_files = NULL,
+    meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+    locale = readr::locale(tz = "CET"),
+    col_types = readr::cols()
+) 
+{
   
   xls_files <- if (is.null(raw_data_files)) {
     list_full_xls_files(raw_data_dir)
