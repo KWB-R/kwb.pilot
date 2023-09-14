@@ -2,9 +2,11 @@
 title: "Pilot: Ultimate"
 output: rmarkdown::html_vignette
 vignette: >
+  %\VignetteEncoding{UTF-8}
   %\VignetteIndexEntry{Pilot: Ultimate}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r, include = FALSE}
@@ -14,7 +16,7 @@ knitr::opts_chunk$set(
 )
 credentials_defined <- kwb.pilot::check_env_influxdb_ultimate() && kwb.pilot::check_env_nextcloud()
 is_github <- identical(Sys.getenv("CI"), "true")
-                       
+
 #eval_chunks <- credentials_defined && is_github
 eval_chunks = FALSE
 
@@ -90,13 +92,14 @@ paths_list <- list(
   b_local_imported = "<b_local>/<data_imp>"
 )
 
-paths <- kwb.utils::resolve(paths_list, 
-                            root = ifelse(identical(Sys.getenv("CI"), 
-                                                            "true"),
-                                                  paths_list$root_ci, 
-                                                  paths_list$root_windows)
-                            )
-
+paths <- kwb.utils::resolve(
+  paths_list, 
+  root = ifelse(
+    identical(Sys.getenv("CI"), "true"),
+    paths_list$root_ci, 
+    paths_list$root_windows
+  )
+)
 ```
 
 ### Write to InfluxDBCloud
@@ -113,39 +116,47 @@ paths <- kwb.utils::resolve(paths_list,
 
 ## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
 ## if the data is provided in the `paths$raw_data_dir`
-files_pilot_a <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$a_cloud_raw,
-                                    dir_local = paths$a_local_raw)
-
-
-if(length(files_pilot_a) > 0) {
-
-tsv_paths <- list.files(
-  path = paths$a_local_raw,
-  full.names = TRUE,
-  pattern = "xls$"
+files_pilot_a <- kwb.pilot::download_nextcloud_files(
+  dir_cloud = paths$a_cloud_raw,
+  dir_local = paths$a_local_raw
 )
 
-kwb.pilot::write_to_influxdb_loop(
-  tsv_paths = tsv_paths,
-  paths = list(site_code = paths$a_site_code,
-               raw_data_dir = paths$a_local_raw),
-  changed_only = FALSE,
-  max_tsv_files = 10,
-  batch_size = 5000
-)
-
-
-### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
-### directory (in case that a file is already existing there: overwrite it)!
-paths_pilot_a <- data.frame(raw = file.path(paths$a_cloud_raw, files_pilot_a),
-                            imported = file.path(paths$a_cloud_imported, files_pilot_a)
-                            )
-
-kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
+if (length(files_pilot_a) > 0L) {
+  
+  tsv_paths <- list.files(
+    path = paths$a_local_raw,
+    full.names = TRUE,
+    pattern = "xls$"
+  )
+  
+  kwb.pilot::write_to_influxdb_loop(
+    tsv_paths = tsv_paths,
+    paths = list(
+      site_code = paths$a_site_code,
+      raw_data_dir = paths$a_local_raw
+    ),
+    changed_only = FALSE,
+    max_tsv_files = 10,
+    batch_size = 5000
+  )
+  
+  ### Move all files for Pilot A`s cloud "raw" data directory to the "imported" 
+  ### directory (in case that a file is already existing there: overwrite it)!
+  paths_pilot_a <- data.frame(
+    raw = file.path(paths$a_cloud_raw, files_pilot_a),
+    imported = file.path(paths$a_cloud_imported, files_pilot_a
+    )
+  )
+  
+  kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
+  
 } else {
-  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
-                  paths$a_site_code,
-                  paths$a_cloud_raw))
+  
+  message(sprintf(
+    "Nothing to do for '%s'! No new files in '%s'",
+    paths$a_site_code,
+    paths$a_cloud_raw
+  ))
 }
 ```
 
@@ -158,36 +169,45 @@ kwb.pilot::move_nextcloud_files(paths_pilot_a, overwrite = TRUE)
 
 ## Step: kwb.pilot::download_nextcloud_files() is optional and can be skipped
 ## if the data is provided in the `paths$raw_data_dir`
-files_pilot_b <- kwb.pilot::download_nextcloud_files(dir_cloud = paths$b_cloud_raw,
-                                    dir_local = paths$b_local_raw)
-
-if(length(files_pilot_b) > 0) {
-tsv_paths <- list.files(
-  path = paths$b_local_raw,
-  full.names = TRUE,
-  pattern = "xls$"
+files_pilot_b <- kwb.pilot::download_nextcloud_files(
+  dir_cloud = paths$b_cloud_raw,
+  dir_local = paths$b_local_raw
 )
 
-kwb.pilot::write_to_influxdb_loop(
-  tsv_paths = tsv_paths,
-  paths = list(site_code = paths$b_site_code,
-               raw_data_dir = paths$b_local_raw),
-  changed_only = FALSE,
-  max_tsv_files = 5,
-  batch_size = 5000
-)
-
-### Move all files for Pilot B`s cloud "raw" data directory to the "imported" 
-### directory (in case that a file is already existing there: overwrite it)!
-paths_pilot_b <- data.frame(raw = file.path(paths$b_cloud_raw, files_pilot_b),
-                            imported = file.path(paths$b_cloud_imported, files_pilot_b)
-                            )
-
-kwb.pilot::move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
+if (length(files_pilot_b) > 0L) {
+  
+  tsv_paths <- list.files(
+    path = paths$b_local_raw,
+    full.names = TRUE,
+    pattern = "xls$"
+  )
+  
+  kwb.pilot::write_to_influxdb_loop(
+    tsv_paths = tsv_paths,
+    paths = list(
+      site_code = paths$b_site_code,
+      raw_data_dir = paths$b_local_raw
+    ),
+    changed_only = FALSE,
+    max_tsv_files = 5,
+    batch_size = 5000
+  )
+  
+  ### Move all files for Pilot B`s cloud "raw" data directory to the "imported" 
+  ### directory (in case that a file is already existing there: overwrite it)!
+  paths_pilot_b <- data.frame(
+    raw = file.path(paths$b_cloud_raw, files_pilot_b),
+    imported = file.path(paths$b_cloud_imported, files_pilot_b)
+  )
+  
+  kwb.pilot::move_nextcloud_files(paths_pilot_b, overwrite = TRUE)
+  
 } else {
-  message(sprintf("Nothing to do for '%s'! No new files in '%s'",
-                  paths$b_site_code,
-                  paths$b_cloud_raw))
+  
+  message(sprintf(
+    "Nothing to do for '%s'! No new files in '%s'",
+    paths$b_site_code,
+    paths$b_cloud_raw
+  ))
 }
 ```
-
