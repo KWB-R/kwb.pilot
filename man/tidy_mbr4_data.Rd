@@ -6,7 +6,7 @@
 \usage{
 tidy_mbr4_data(
   mbr4_data,
-  path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")
+  path_metadata = shiny_file("mbr4.0/data/metadata.csv")
 )
 }
 \arguments{

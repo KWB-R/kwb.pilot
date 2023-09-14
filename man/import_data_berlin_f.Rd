@@ -14,7 +14,7 @@ import_data_berlin_f(
 \arguments{
 \item{raw_data_files}{vector with full path to operational raw data files that
 allows to limit import to specific files (default:
-fs::dir_ls(shiny_file("berlin_f/data/raw/online_data""), recurse = TRUE,
+fs::dir_ls(kwb.pilot:::shiny_file("berlin_f/data/raw/online_data""), recurse = TRUE,
 regexp = "^[^~].*\\.xlsx$")).}
 
 \item{meta_file_path}{path to metadata file (default:

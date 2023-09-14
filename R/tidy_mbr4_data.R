@@ -17,7 +17,7 @@
 #' }
 tidy_mbr4_data <- function(
   mbr4_data,
-  path_metadata = kwb.pilot:::shiny_file("mbr4.0/data/metadata.csv")
+  path_metadata = shiny_file("mbr4.0/data/metadata.csv")
 )
 {
   remove_cols <- c("zustand", "meldungen", "id")

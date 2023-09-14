@@ -62,7 +62,9 @@ if (FALSE)
   ##############################################################################
   #### Make one CSV file of Ozone_2017_BisKW_29.csv for each calendar week 17-29
   ##############################################################################
-  old_data <- readLines(kwb.pilot:::shiny_file(
+  shiny_file <- getFromNamespace("shiny_file", ns = "kwb.pilot")
+
+  old_data <- readLines(shiny_file(
     "berlin_s/data/operation/Ozone_2017_BisKW_29.csv"
   ))
 
