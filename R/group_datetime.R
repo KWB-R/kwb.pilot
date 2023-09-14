@@ -58,7 +58,7 @@ group_datetime <- function(
     
     times <- fasttime::fastPOSIXct(
       format(timestamps, format = grp_list[[by]]),
-      tz = base::check_tzones(timestamps),
+      tz = base::.check_tzones(timestamps),
       required.components = 3L
     )
     
