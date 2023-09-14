@@ -8,9 +8,8 @@ import_data_haridwar(
   analytics_path = shiny_file("haridwar/data/analytics.xlsx"),
   operation_mySQL_conf = shiny_file("haridwar/.my.cnf"),
   operation_meta_path = shiny_file("haridwar/data/operation_parameters.csv"),
-  excludedSheets = c("Parameters", "Location", "Sites", "#Summary",
-    "Site_and_Parameter", "Observations", "dP", "ORP", "Flow", "Current_Voltage",
-    "As_total_Arsenator"),
+  excludedSheets = c("Parameters", "Location", "Sites", "#Summary", "Site_and_Parameter",
+    "Observations", "dP", "ORP", "Flow", "Current_Voltage", "As_total_Arsenator"),
   skip = 69,
   debug = TRUE
 )

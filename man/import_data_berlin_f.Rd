@@ -7,8 +7,8 @@
 import_data_berlin_f(
   raw_data_files = fs::dir_ls(shiny_file("berlin_f/data/raw/online_data"), recurse =
     TRUE, regexp = "^[^~].*\\\\.xlsx$"),
- 
-    meta_file_path = shiny_file("berlin_f/data/raw/online_data/parameter_unit_metadata.csv")
+  meta_file_path =
+    shiny_file("berlin_f/data/raw/online_data/parameter_unit_metadata.csv")
 )
 }
 \arguments{
