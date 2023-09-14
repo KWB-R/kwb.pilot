@@ -58,7 +58,7 @@ group_datetime <- function(
     
     times <- fasttime::fastPOSIXct(
       format(timestamps, format = grp_list[[by]]),
-      tz = base::.check_tzones(timestamps),
+      tz = check_tzones(timestamps),
       required.components = 3L
     )
     
@@ -96,3 +96,13 @@ group_datetime <- function(
       as.data.frame()
   })
 }
+
+# check_tzones -----------------------------------------------------------------
+check_tzones <- getFromNamespace(
+  x = grep(
+    pattern = "check_tzones", 
+    x = ls(getNamespace("base"), all.names = TRUE), 
+    value = TRUE
+  ),
+  ns = "base"
+)
