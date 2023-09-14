@@ -1,4 +1,15 @@
-# [kwb.pilot 0.2.1]
+# [kwb.pilot 0.3.0](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.3.0) <small>2021-06-04</small>
+
+* **ULTIMATE**: add functions for data import and upload to InfluxDB cloud, for 
+details checkout the [Ultimate](../articles/ultimate.html) article. In addition
+the workflow is now automatically performed form Monday-Friday at 5am UTC (i.e. 
+if rawdata files exist on Nextcloud these will be imported and finally moved to 
+the `data_imported` directory on Nextcloud)
+
+* Added function `move_nextcloud_files()` to move files from `raw data` to `imported`
+directory on Nextcloud auto
+
+# [kwb.pilot 0.2.1](https://github.com/KWB-R/kwb.pilot/releases/tag/v0.2.1) <small>2021-11-10</small>
 
 * MBR4.0: bugfix as data format changed from `de` to `en` for download from webportal
 of Martin Systems

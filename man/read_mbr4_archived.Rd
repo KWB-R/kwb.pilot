@@ -54,6 +54,8 @@ tibble with imported archived MBR4.0 xlsx data from Nextcloud
 Read MBR4.0 archived data from Nextcloud
 }
 \examples{
+if(check_env_nextcloud()) {
 mbr4_data_archived <- read_mbr4_archived()
 str(mbr4_data_archived)
+}
 }

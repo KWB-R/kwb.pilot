@@ -128,8 +128,11 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #' @export
 #'
 #' @examples
-#' mbr4_data_latest <- read_mbr4_latest()
+#' url_mbr40 <- Sys.getenv("MBR40_URL")
+#' if(url_mbr40 != "") {
+#' mbr4_data_latest <- read_mbr4_latest(url = url_mbr40)
 #' str(mbr4_data_latest)
+#' }
 read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
                       target_dir = tempdir(),
                       locale = readr::locale(tz = "CET",
@@ -183,8 +186,10 @@ read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
 #' @export
 #'
 #' @examples
+#' if(check_env_nextcloud()) {
 #' mbr4_data_archived <- read_mbr4_archived()
 #' str(mbr4_data_archived)
+#' }
 read_mbr4_archived <- function(
   file = "MBR_export_",
   dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
@@ -203,6 +208,9 @@ read_mbr4_archived <- function(
   pw = Sys.getenv("NEXTCLOUD_USER"),
   dbg = FALSE,
   ...) {
+  
+  stopifnot(all(c(url, user, pw) != "")) 
+  
   
   archived_file <- kwb.nextcloud::list_files(
     path = dir,
