@@ -15,7 +15,11 @@
 
 read_mbr4_tsv <- function(
   path,
-  locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
+  locale = readr::locale(
+    tz = "CET", 
+    decimal_mark = ",", 
+    grouping_mark = "."
+  ),
   col_types = readr::cols(
     .default = readr::col_double(),
     zustand = readr::col_character(),
