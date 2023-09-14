@@ -44,6 +44,9 @@ tibble with imported MBR4.0 tsv data (~ last four weeks)
 Read MBR4.0 data from Martin Systems Webportal (As "tsv")
 }
 \examples{
-mbr4_data_latest <- read_mbr4_latest()
+url_mbr40 <- Sys.getenv("MBR40_URL")
+if(url_mbr40 != "") {
+mbr4_data_latest <- read_mbr4_latest(url = url_mbr40)
 str(mbr4_data_latest)
+}
 }

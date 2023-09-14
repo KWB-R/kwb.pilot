@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+url_defined <- Sys.getenv("MBR40_URL") != ""
 ```
 
 ## Install R package
@@ -135,7 +136,7 @@ paths <- kwb.utils::resolve(paths_list)
 
 ## Import 
 
-```{r import, eval = TRUE}
+```{r import, eval = url_defined}
 library(kwb.pilot)
 
 mbr4_data_raw <- kwb.pilot::read_mbr4()
@@ -149,7 +150,7 @@ str(mbr4_data_tidy_raw)
 
 ## Aggregate
 
-```{r aggregate, eval = TRUE}
+```{r aggregate, eval = url_defined}
 mbr4_data_tidy_10min <- mbr4_data_tidy_raw %>%   
   kwb.pilot::group_datetime(by = 600) 
 
