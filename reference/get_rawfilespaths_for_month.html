@@ -83,7 +83,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_rawfilespaths_for_month</span><span class="op">(</span></span>
 <span>  monthly_period <span class="op">=</span> <span class="fu"><a href="get_monthly_periods.html">get_monthly_periods</a></span><span class="op">(</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>,</span>
-<span>  raw_data_dir <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/berlin_t/data/operation"</span><span class="op">)</span>,</span>
+<span>  raw_data_dir <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"berlin_t/data/operation"</span><span class="op">)</span>,</span>
 <span>  max_offset_days <span class="op">=</span> <span class="fl">7</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,7 +97,7 @@ first row of get_monthly_periods(), i.e. year month is (default: '2017-06')</p><
 
 <dt>raw_data_dir</dt>
 <dd><p>directory with operational raw data files for Berlin Tiefwerder
-(default: <code>kwb.pilot:::package_file("shiny/berlin_t/data/operation")</code>)</p></dd>
+(default: <code>kwb.pilot:::shiny_file("berlin_t/data/operation")</code>)</p></dd>
 
 
 <dt>max_offset_days</dt>

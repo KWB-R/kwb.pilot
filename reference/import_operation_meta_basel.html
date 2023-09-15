@@ -88,11 +88,11 @@ both sites at once, i.e. "rhein" and "wiese")</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">import_operation_meta_basel</span><span class="op">(</span></span>
-<span>  raw_dir_rhein <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/basel/data/operation/rhein"</span><span class="op">)</span>,</span>
-<span>  raw_dir_wiese <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/basel/data/operation/wiese"</span><span class="op">)</span>,</span>
-<span>  meta_online_path <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/basel/data/metadata/meta_online.csv"</span><span class="op">)</span>,</span>
-<span>  meta_site_path <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/basel/data/metadata/meta_site.csv"</span><span class="op">)</span>,</span>
-<span>  meta_parameter_path <span class="op">=</span> <span class="fu">package_file</span><span class="op">(</span><span class="st">"shiny/basel/data/metadata/meta_parameter.csv"</span><span class="op">)</span></span>
+<span>  raw_dir_rhein <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"basel/data/operation/rhein"</span><span class="op">)</span>,</span>
+<span>  raw_dir_wiese <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"basel/data/operation/wiese"</span><span class="op">)</span>,</span>
+<span>  meta_online_path <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"basel/data/metadata/meta_online.csv"</span><span class="op">)</span>,</span>
+<span>  meta_site_path <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"basel/data/metadata/meta_site.csv"</span><span class="op">)</span>,</span>
+<span>  meta_parameter_path <span class="op">=</span> <span class="fu"><a href="shiny_file.html">shiny_file</a></span><span class="op">(</span><span class="st">"basel/data/metadata/meta_parameter.csv"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -101,28 +101,28 @@ both sites at once, i.e. "rhein" and "wiese")</p>
     <dl><dt>raw_dir_rhein</dt>
 <dd><p>Define directory for site "rhein" with raw data in
 EXCEL spreadsheet format (.xlsx) to be imported (default:
-sema.pilot:::package_file("shiny/basel/data/operation/rhein"))</p></dd>
+sema.pilot:::shiny_file("basel/data/operation/rhein"))</p></dd>
 
 
 <dt>raw_dir_wiese</dt>
 <dd><p>Define directory for site "rhein" with raw data in
 EXCEL spreadsheet format (.xlsx) to be imported (default:
-sema.pilot:::package_file("shiny/basel/data/operation/wiese"))</p></dd>
+sema.pilot:::shiny_file("basel/data/operation/wiese"))</p></dd>
 
 
 <dt>meta_online_path</dt>
 <dd><p>path to file containing metadata for online data
-(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_online.csv"))</p></dd>
+(default: sema.pilot:::shiny_file("basel/data/metadata/meta_online.csv"))</p></dd>
 
 
 <dt>meta_site_path</dt>
 <dd><p>Define path of "meta_site.csv" to be imported
-(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))</p></dd>
+(default: sema.pilot:::shiny_file("basel/data/metadata/meta_site.csv"))</p></dd>
 
 
 <dt>meta_parameter_path</dt>
 <dd><p>Define path of "meta_parameter.csv" to be imported
-(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))</p></dd>
+(default: sema.pilot:::shiny_file("basel/data/metadata/meta_parameter.csv"))</p></dd>
 
 </dl></div>
     <div class="section level2">
