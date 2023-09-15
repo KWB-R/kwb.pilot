@@ -43,7 +43,7 @@ get_pivot_data <- function(agg_interval = "1d",
   tables <- client$query(text = flux_qry)
   
   data.table::rbindlist(tables) %>%
-    dplyr::select(order(colnames(.))) %>%
+    dplyr::select(order(colnames(.data))) %>%
     dplyr::relocate(.data$time, .after = "_time") %>%
     dplyr::select(-.data$`_time`)
 }
