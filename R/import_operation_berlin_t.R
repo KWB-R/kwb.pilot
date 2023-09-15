@@ -8,7 +8,7 @@
 #' @importFrom magrittr "%>%"
 #' @export
 import_lab_data_berlin_t <- function(
-  xlsx_path = shiny_file("berlin_t/data/analytics.xlsx")
+    xlsx_path = shiny_file("berlin_t/data/analytics.xlsx")
 )
 {
   lab_results <- xlsx_path %>%
@@ -83,11 +83,11 @@ import_lab_data_berlin_t <- function(
 #' @importFrom utils write.csv
 #' @export
 read_pentair_data <- function(
-  raw_data_dir = shiny_file("berlin_t/data/operation"),
-  raw_data_files = NULL,
-  meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv"),
-  locale = readr::locale(tz = "CET"),
-  col_types = readr::cols()
+    raw_data_dir = shiny_file("berlin_t/data/operation"),
+    raw_data_files = NULL,
+    meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv"),
+    locale = readr::locale(tz = "CET"),
+    col_types = readr::cols()
 )
 {
   xls_files <- if (is.null(raw_data_files)) {
@@ -96,50 +96,37 @@ read_pentair_data <- function(
     raw_data_files
   }
   
-  if (file.exists(meta_file_path)) {
-    
-    meta_data <- read.csv(
+  meta_data <- if (file.exists(meta_file_path)) {
+    read.csv(
       file = meta_file_path, 
       header = TRUE, 
       sep = ",", 
       dec = ".",
       stringsAsFactors = FALSE
     )
-    
-    columns <- c("TimeStamp", meta_data$ParameterCode[meta_data$ZeroOne == 1])
-    
-    raw_list <- lapply(xls_files, FUN = function(xls_file) {
-      
-      print(paste("Importing raw data file:", xls_file))
-      
-      tmp <- readr::read_tsv(
-        file = xls_file, locale = locale, col_types = col_types
-      )
-      
-      relevant_paras <- names(tmp)[names(tmp) %in% columns]
-      tmp[, relevant_paras]
-      
-      df_tidy <- data.table::rbindlist(raw_list, use.names = TRUE, fill = TRUE)
-      
-      gather_cols <- setdiff(names(df_tidy), "TimeStamp")
-    })
-    
-  } else {
-    
-    raw_list <- lapply(xls_files, FUN = function(xls_file) {
-      
-      print(paste("Importing raw data file:", xls_file))
-      
-      tmp <- readr::read_tsv(
+  } # else NULL
+  
+  raw_list <- lapply(xls_files, FUN = function(xls_file) {
+    kwb.utils::catAndRun(paste("Importing raw data file:", xls_file), expr = {
+      data <- readr::read_tsv(
         file = xls_file, 
         locale = locale, 
         col_types = col_types
       )
+      if (is.null(meta_data)) {
+        data
+      } else {
+        is_active <- meta_data$ZeroOne == 1
+        parameter_columns <- meta_data$ParameterCode[is_active]
+        data[, intersect(names(data), c("TimeStamp", parameter_columns))]
+      }
     })
-    
-    df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
-    
-    gather_cols <- setdiff(names(df_tidy), "TimeStamp")
+  })
+  
+  df_tidy <- data.table::rbindlist(raw_list, use.names = TRUE, fill = TRUE)
+  gather_cols <- setdiff(names(df_tidy), "TimeStamp")
+
+  if (is.null(meta_data)) {
     
     meta_data <- tibble::tibble(
       ParameterCode = gather_cols, 
@@ -152,14 +139,12 @@ read_pentair_data <- function(
     
     meta_path <- file.path(raw_data_dir, "parameter_site_metadata_dummy.csv")
     
-    msg_text <- sprintf(
-      "No metadata file provided. Generating and exporting dummy metadata file to '%s'.",
-      meta_path
+    kwb.utils::catAndRun(
+      paste("No metadata file provided.", sprintf(
+        "Generating and exporting dummy metadata file to '%s'.", meta_path
+      )),
+      expr = write.csv(meta_data, file = meta_path, row.names = FALSE)
     )
-    
-    kwb.utils::catAndRun(messageText = msg_text, expr = { 
-      write.csv(meta_data, file = meta_path, row.names = FALSE)
-    })
   }
   
   meta_data$ParameterLabel <- sprintf_columns(
@@ -168,11 +153,7 @@ read_pentair_data <- function(
     columns = c("ParameterName", "ParameterUnit")
   )
   
-  df_tidy <- data.table::rbindlist(l = raw_list, use.names = TRUE, fill = TRUE)
-  
-  gather_cols <- setdiff(names(df_tidy), "TimeStamp")
-  
-  df_tidy <-  df_tidy %>%
+  df_tidy <- df_tidy %>%
     tidyr::pivot_longer(
       cols = tidyselect::all_of(gather_cols),
       names_to = "ParameterCode", 
@@ -182,7 +163,8 @@ read_pentair_data <- function(
       DateTime = "TimeStamp"
     ) %>%
     dplyr::left_join(
-      y = meta_data %>% dplyr::select(-tidyselect::matches("ZeroOne"))
+      y = meta_data %>% 
+        dplyr::select(-tidyselect::matches("ZeroOne"))
     ) %>%
     as.data.frame()
   
@@ -208,10 +190,10 @@ read_pentair_data <- function(
 #' soon as available)
 #' @export
 import_data_berlin_t <- function(
-  raw_data_dir = shiny_file("berlin_t/data/operation"),
-  raw_data_files = NULL,
-  analytics_path = shiny_file("berlin_t/data/analytics.xlsx"),
-  meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv")
+    raw_data_dir = shiny_file("berlin_t/data/operation"),
+    raw_data_files = NULL,
+    analytics_path = shiny_file("berlin_t/data/analytics.xlsx"),
+    meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv")
 )
 {
   df <- read_pentair_data(raw_data_dir, raw_data_files, meta_file_path)

@@ -101,8 +101,8 @@ group_datetime <- function(
 check_tzones <- getFromNamespace(
   x = grep(
     pattern = "check_tzones", 
-    x = ls(getNamespace("base"), all.names = TRUE), 
+    x = ls(getNamespace("base"), all.names = TRUE),
     value = TRUE
-  ),
+  ), 
   ns = "base"
 )
