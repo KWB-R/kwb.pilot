@@ -331,12 +331,12 @@ write_to_influxdb <- function(tsv_paths,
     )
   
   if(changed_only) {
-  fieldnames <- fieldnames %>%
-    dplyr::filter(diff != 0) %>%
-    dplyr::pull(.data$ParameterCode)
-   
-  tmp_long <- tmp_long %>%
-    dplyr::filter(.data$ParameterCode %in% fieldnames)
+    fieldnames <- fieldnames %>%
+      dplyr::filter(diff != 0) %>%
+      dplyr::pull(.data$ParameterCode)
+    
+    tmp_long <- tmp_long %>%
+      dplyr::filter(.data$ParameterCode %in% fieldnames)
   } else {
     fieldnames <- fieldnames %>% dplyr::pull(.data$ParameterCode)
   }
@@ -455,32 +455,42 @@ write_to_influxdb <- function(tsv_paths,
 #' file_pattern = "Project\\.xls$"
 #' )
 #' }
-download_nextcloud_files <- function(dir_cloud,
-                                     dir_local,
-                                     file_pattern = "Project\\.xls$")
+download_nextcloud_files <- function(
+    dir_cloud, 
+    dir_local,
+    file_pattern = "Project\\.xls$"
+)
 {
-  if(!check_env_nextcloud()) {
-    env_vars <- paste0(sprintf("NEXTCLOUD_%s", c("URL", "USER", "PASSWORD")),
-                       collapse = ", ")
-    message(sprintf(paste0("Not all NEXTCLOUD environment variables are defined. ",
-                           "Please define all of them '%s' with usethis::edit_r_environ()"),
-                           env_vars))
+  if (!check_env_nextcloud()) {
+    
+    env_vars <- paste0(
+      "NEXTCLOUD_", 
+      c("URL", "USER", "PASSWORD"), 
+      collapse = ", "
+    )
+    
+    message(sprintf(env_vars, fmt = paste(
+      "Not all NEXTCLOUD environment variables are defined.",
+      "Please define all of them (%s) with usethis::edit_r_environ()"
+    )))
+    
   } else {
-  
-  if (!dir.exists(dir_local)) {
-    fs::dir_create(dir_local, recurse = TRUE)
+    
+    cloud_files <- dir_cloud %>%
+      kwb.nextcloud::list_files(full_info = TRUE) %>%
+      dplyr::filter(stringr::str_detect(.data$file, pattern = file_pattern))
+
+    local_files <- kwb.nextcloud::download_files(
+      href = cloud_files$href, 
+      target_dir = kwb.utils::createDirectory(dir_local)
+    )
+    
+    # Return paths to local files with Nextcloud paths in attribute "paths"
+    structure(
+      local_files,
+      paths = file.path(dir_cloud, cloud_files$file)
+    )
   }
-  
-  cloud_files <- kwb.nextcloud::list_files(dir_cloud,
-                                           full_info = TRUE) %>%
-    dplyr::filter(stringr::str_detect(.data$file,
-                                      pattern = file_pattern))
-  
-  
-  kwb.nextcloud::download_files(href = cloud_files$href,
-                                target_dir = dir_local)
-  cloud_files$file
-}
 }
 
 #' Helper Function: check if all environment variables for Nextcloud are defined
