@@ -186,9 +186,11 @@ read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' if(check_env_nextcloud()) {
-#' mbr4_data_archived <- read_mbr4_archived()
-#' str(mbr4_data_archived)
+#'   mbr4_data_archived <- read_mbr4_archived()
+#'   str(mbr4_data_archived)
+#' }
 #' }
 read_mbr4_archived <- function(
   file = "MBR_export_",
