@@ -14,8 +14,7 @@ calculate_operational_parameters(
     "Power demand of cell", "Specific energy demand of pump",
     "Specific energy demand of cell"),
   calc_list_unit = c("mV", "mV", "W", "W", "Wh/m3", "Wh/m3"),
-  calc_paras = c("Redox_Out1", "Redox_Out2", "Redox_In", "Flux", "Up", "Ip", "Uz",
-    "Iz")
+  calc_paras = c("Redox_Out1", "Redox_Out2", "Redox_In", "Flux", "Up", "Ip", "Uz", "Iz")
 )
 }
 \arguments{
