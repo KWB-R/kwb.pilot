@@ -14,12 +14,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-credentials_defined <- kwb.pilot::check_env_influxdb_ultimate() && kwb.pilot::check_env_nextcloud()
+
+credentials_defined <- kwb.pilot::check_env_influxdb_ultimate() &&
+  kwb.pilot::check_env_nextcloud()
+
 is_github <- identical(Sys.getenv("CI"), "true")
 
 #eval_chunks <- credentials_defined && is_github
 eval_chunks = FALSE
-
 ```
 
 ## Define Login Credentials
@@ -57,7 +59,8 @@ Finally you need to restart Rstudio and proceed with the code below:
 # Enable repository from kwb-r
 options(repos = c(
   kwbr = 'https://kwb-r.r-universe.dev',
-  CRAN = 'https://cloud.r-project.org'))
+  CRAN = 'https://cloud.r-project.org'
+))
 
 # Download and install kwb.pilot in R
 install.packages('kwb.pilot')
