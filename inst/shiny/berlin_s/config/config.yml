@@ -1,0 +1,16 @@
+parameters:
+- SCAN_SAK_Ablauf
+- SCAN_SAK_Zulauf
+- C_O3_Zugas
+- C_O3_Abgas
+- Q_Gas
+- Q_Ozonanlage
+calculated:
+  deltaSAK:
+    name: delta SAK
+    unit: '%'
+    expr: (1-SCAN_SAK_Ablauf/SCAN_SAK_Zulauf)*100
+  Ozoneintrag:
+    name: Ozoneintrag
+    unit: mg-O3/L
+    expr: (C_O3_Zugas - C_O3_Abgas)*Q_Gas/Q_Ozonanlage

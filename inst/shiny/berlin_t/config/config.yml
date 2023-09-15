@@ -1,0 +1,8 @@
+parameters:
+- FY-20-01
+- FT-10-01
+calculated:
+  recovery:
+    name: recovery
+    unit: '%'
+    expr: 100*`FY-20-01`/`FT-10-01`

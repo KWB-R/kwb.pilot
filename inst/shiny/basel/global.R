@@ -38,7 +38,7 @@ saveRDS(siteData_day_list, file = "data/siteData_day_list.Rds")
 
 print("### Step 5: Importing threshold information ##########################")
 
-threshold_file <- kwb.pilot:::package_file("shiny/basel/data/thresholds.csv")
+threshold_file <- kwb.pilot:::shiny_file("basel/data/thresholds.csv")
 
 thresholds <- kwb.pilot::get_thresholds(threshold_file)
 

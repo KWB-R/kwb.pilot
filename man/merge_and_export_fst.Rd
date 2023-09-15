@@ -7,8 +7,8 @@
 merge_and_export_fst(
   time_pattern = NULL,
   compression = 100,
-  import_dir = package_file("shiny/berlin_t/data/fst"),
-  export_dir = package_file("shiny/berlin_t/data")
+  import_dir = shiny_file("berlin_t/data/fst"),
+  export_dir = shiny_file("berlin_t/data")
 )
 }
 \arguments{
@@ -18,10 +18,10 @@ for using it do e.g. "2017-06|2017-07" or c("2017-06", "2017-07")}
 \item{compression}{compression for fst export (default: 100)}
 
 \item{import_dir}{directory with fst files or subdirs to be imported (default:
-kwb.pilot:::package_file("shiny/berlin_t/data/fst"))}
+kwb.pilot:::shiny_file("berlin_t/data/fst"))}
 
 \item{export_dir}{directory with fst directory for export (default:
-kwb.pilot:::package_file("shiny/berlin_t/data"))}
+kwb.pilot:::shiny_file("berlin_t/data"))}
 }
 \value{
 imports multiple fst files and exports them to be used for app

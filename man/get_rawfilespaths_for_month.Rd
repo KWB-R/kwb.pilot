@@ -6,7 +6,7 @@
 \usage{
 get_rawfilespaths_for_month(
   monthly_period = get_monthly_periods()[1, ],
-  raw_data_dir = package_file("shiny/berlin_t/data/operation"),
+  raw_data_dir = shiny_file("berlin_t/data/operation"),
   max_offset_days = 7
 )
 }
@@ -15,7 +15,7 @@ get_rawfilespaths_for_month(
 first row of get_monthly_periods(), i.e. year month is (default: '2017-06')}
 
 \item{raw_data_dir}{directory with operational raw data files for Berlin Tiefwerder
-(default: \code{kwb.pilot:::package_file("shiny/berlin_t/data/operation")})}
+(default: \code{kwb.pilot:::shiny_file("berlin_t/data/operation")})}
 
 \item{max_offset_days}{number of days in previous/next month to look for beginning/
 ending of month (default: 7)}

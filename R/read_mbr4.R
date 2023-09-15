@@ -13,28 +13,32 @@
 #' @return Reads MBR4.0 tsv data
 #' @importFrom readr read_tsv locale cols col_double col_character col_datetime
 
-read_mbr4_tsv <- function(path,
-                          locale = readr::locale(tz = "CET",
-                                                 decimal_mark = ",",
-                                                 grouping_mark = "."),
-                          col_types = readr::cols(
-                            .default = readr::col_double(),
-                            zustand = readr::col_character(),
-                            meldungen = readr::col_character(),
-                            Zeitstempel = readr::col_datetime(format = "%d.%m.%Y %H:%M")
-                          ),
-                          dbg = FALSE,
-                          ...) {
-
+read_mbr4_tsv <- function(
+  path,
+  locale = readr::locale(
+    tz = "CET", 
+    decimal_mark = ",", 
+    grouping_mark = "."
+  ),
+  col_types = readr::cols(
+    .default = readr::col_double(),
+    zustand = readr::col_character(),
+    meldungen = readr::col_character(),
+    Zeitstempel = readr::col_datetime(format = "%d.%m.%Y %H:%M")
+  ),
+  dbg = FALSE,
+  ...
+)
+{
   import_raw <- function() {
-  readr::read_tsv(
-    file = path,
-    locale = locale,
-    col_types = col_types,
-    trim_ws = TRUE,
-    ...
-  ) %>%
-    dplyr::select(!tidyselect::matches("X[0-9]+"))
+    readr::read_tsv(
+      file = path,
+      locale = locale,
+      col_types = col_types,
+      trim_ws = TRUE,
+      ...
+    ) %>%
+      dplyr::select(!tidyselect::matches("X[0-9]+"))
   }
   
   if (dbg) {
@@ -44,7 +48,6 @@ read_mbr4_tsv <- function(path,
     suppressWarnings(import_raw())
   }
 }
-
 
 #' Read MBR4.0 data combining latest and archived data 
 #' @description  Download latest data as 'tsv' from Martin Systems Webportal and 
@@ -71,38 +74,38 @@ read_mbr4_tsv <- function(path,
 #' mbr4_data <- read_mbr4()
 #' str(mbr4_data)
 #' }
-read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
-                      archived_file = "MBR_export_",
-                      archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
-                      archived_url = Sys.getenv("NEXTCLOUD_URL"),
-                      archived_user = Sys.getenv("NEXTCLOUD_USER"),
-                      archived_pw = Sys.getenv("NEXTCLOUD_USER"),
-                      target_dir = tempdir(),
-                      dbg = FALSE,
-                      ...) {
+read_mbr4 <- function(
+  latest_url = Sys.getenv("MBR40_URL"),
+  archived_file = "MBR_export_",
+  archived_dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
+  archived_url = Sys.getenv("NEXTCLOUD_URL"),
+  archived_user = Sys.getenv("NEXTCLOUD_USER"),
+  archived_pw = Sys.getenv("NEXTCLOUD_USER"),
+  target_dir = tempdir(),
+  dbg = FALSE,
+  ...
+)
+{
+  mbr4_data_latest <- read_mbr4_latest(
+    url = latest_url, 
+    target_dir = target_dir,
+    dbg = dbg,
+    ...
+  )
   
+  mbr4_data_archived <- read_mbr4_archived(
+    file = archived_file,
+    dir = archived_dir,
+    target_dir = target_dir,
+    url = archived_url,
+    user = archived_user,
+    pw = archived_pw,
+    dbg = dbg,
+    ...
+  )
   
-
-  mbr4_data_latest <- read_mbr4_latest(url = latest_url,
-                                       target_dir = target_dir,
-                                       dbg = dbg,
-                                       ...)
-  
-  
-  mbr4_data_archived <- read_mbr4_archived(file = archived_file,
-                                           dir = archived_dir,
-                                           target_dir = target_dir,
-                                           url = archived_url,
-                                           user = archived_user,
-                                           pw = archived_pw,
-                                           dbg = dbg,
-                                           ...)
-  
-  dplyr::bind_rows(mbr4_data_latest,
-                   mbr4_data_archived) %>%
+  dplyr::bind_rows(mbr4_data_latest, mbr4_data_archived) %>%
     remove_duplicates()
-  
-
 }
 
 #' Read MBR4.0 data from Martin Systems Webportal (As "tsv")
@@ -129,37 +132,35 @@ read_mbr4 <- function(latest_url = Sys.getenv("MBR40_URL"),
 #'
 #' @examples
 #' url_mbr40 <- Sys.getenv("MBR40_URL")
-#' if(url_mbr40 != "") {
-#' mbr4_data_latest <- read_mbr4_latest(url = url_mbr40)
-#' str(mbr4_data_latest)
+#' if (url_mbr40 != "") {
+#'   mbr4_data_latest <- read_mbr4_latest(url = url_mbr40)
+#'   str(mbr4_data_latest)
 #' }
-read_mbr4_latest <- function(url = Sys.getenv("MBR40_URL"),
-                      target_dir = tempdir(),
-                      locale = readr::locale(tz = "CET",
-                                             decimal_mark = ".",
-                                             grouping_mark = ","),
-                      col_types = readr::cols(
-                        .default = readr::col_double(),
-                        zustand = readr::col_character(),
-                        meldungen = readr::col_character(),
-                        Zeitstempel = readr::col_datetime(format = "%Y-%m-%d %H:%M:%S")
-                      ),
-                      dbg = FALSE,
-                      ...) {
-  
+read_mbr4_latest <- function(
+  url = Sys.getenv("MBR40_URL"),
+  target_dir = tempdir(),
+  locale = readr::locale(tz = "CET", decimal_mark = ".", grouping_mark = ","),
+  col_types = readr::cols(
+    .default = readr::col_double(),
+    zustand = readr::col_character(),
+    meldungen = readr::col_character(),
+    Zeitstempel = readr::col_datetime(format = "%Y-%m-%d %H:%M:%S")
+  ),
+  dbg = FALSE,
+  ...
+)
+{
   target_path <- file.path(target_dir, "mbr4.tsv")
   
-  utils::download.file(
-    url = url,
-    destfile = target_path, quiet = !dbg
-  )
+  utils::download.file(url = url, destfile = target_path, quiet = ! dbg)
   
-  read_mbr4_tsv(path = target_path,
-                locale = locale,
-                col_types = col_types,
-                dbg = dbg, 
-                ...)
-
+  read_mbr4_tsv(
+    path = target_path,
+    locale = locale,
+    col_types = col_types,
+    dbg = dbg, 
+    ...
+  )
 }
 
 #' Read MBR4.0 archived data from Nextcloud 
@@ -196,9 +197,7 @@ read_mbr4_archived <- function(
   file = "MBR_export_",
   dir = "projects/MBR4.0/Exchange/Rohdaten/Online_export",
   target_dir = tempdir(),
-  locale = readr::locale(tz = "CET",
-                         decimal_mark = ",",
-                         grouping_mark = "."),
+  locale = readr::locale(tz = "CET", decimal_mark = ",", grouping_mark = "."),
   col_types = readr::cols(
     .default = readr::col_double(),
     zustand = readr::col_character(),
@@ -209,37 +208,43 @@ read_mbr4_archived <- function(
   user = Sys.getenv("NEXTCLOUD_USER"),
   pw = Sys.getenv("NEXTCLOUD_USER"),
   dbg = FALSE,
-  ...) {
-  
-  stopifnot(all(c(url, user, pw) != "")) 
-  
+  ...
+)
+{
+  stopifnot(all(c(url, user, pw) != ""))
   
   archived_file <- kwb.nextcloud::list_files(
     path = dir,
     full_info = TRUE) %>%
-    dplyr::filter(stringr::str_detect(.data$file,
-                                      pattern = sprintf("^%s",  
-                                                        file))) %>%
-    dplyr::filter(stringr::str_detect(.data$file,
-                                      pattern = "\\.tsv$")) %>% 
+    dplyr::filter(stringr::str_detect(.data$file, pattern = sprintf("^%s",  file))) %>%
+    dplyr::filter(stringr::str_detect(.data$file, pattern = "\\.tsv$")) %>% 
     dplyr::arrange(dplyr::desc(.data$lastmodified))
   
-  if (nrow(archived_file) > 1) {
-    message(sprintf(paste("Multiple '.tsv' files (%s) found on Nextcloud.", 
-    "Using newest one '%s' (last modified: %s"),
-                paste(archived_file$file, collapse = ", "), 
-                archived_file$file[1], 
-                archived_file$lastmodified))
-    archived_file <- archived_file[1,]
+  if (nrow(archived_file) > 1L) {
+    
+    message(sprintf(
+      paste(
+        "Multiple '.tsv' files (%s) found on Nextcloud.", 
+        "Using newest one '%s' (last modified: %s"
+      ),
+      paste(archived_file$file, collapse = ", "), 
+      archived_file$file[1], 
+      archived_file$lastmodified
+    ))
+    
+    archived_file <- archived_file[1L, ]
   }
   
-  archived_path <- kwb.nextcloud::download_files(hrefs = archived_file$href, 
-                                             target_dir = target_dir)
+  archived_path <- kwb.nextcloud::download_files(
+    hrefs = archived_file$href, 
+    target_dir = target_dir
+  )
   
-  read_mbr4_tsv(path = archived_path, 
-                locale = locale,
-                col_types = col_types,
-                dbg = dbg,
-                ...)
+  read_mbr4_tsv(
+    path = archived_path, 
+    locale = locale,
+    col_types = col_types,
+    dbg = dbg,
+    ...
+  )
 }
-

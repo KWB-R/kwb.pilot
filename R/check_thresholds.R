@@ -16,16 +16,17 @@ check_thresholds <- function(df, # haridwar_day_list,
     thresholds$ParameterThresholdComparison
   )
 
-  thresholds$number_total <- 0
-  thresholds$number_of_satisfying <- 0
-  thresholds$numberOfExceedance <- 0
+  thresholds$number_total <- 0L
+  thresholds$number_of_satisfying <- 0L
+  thresholds$numberOfExceedance <- 0L
 
   thresholds$exceedanceLabel <- "No data within reporting period!"
 
   for (i in seq_len(nrow(thresholds))) {
+    
     cond1 <- df$ParameterCode == thresholds$ParameterCode[i]
     cond1 <- cond1 & df$SiteCode == thresholds$SiteCode[i]
-    cond1 <- cond1 & !is.na(df$ParameterValue)
+    cond1 <- cond1 & ! is.na(df$ParameterValue)
 
     cond2 <- eval(parse(text = sprintf(
       "df$ParameterValue %s %s",
@@ -35,15 +36,15 @@ check_thresholds <- function(df, # haridwar_day_list,
 
     condition <- cond1 & cond2
 
-    n_total <- nrow(df[cond1, ])
-
-    n_satisfy <- nrow(df[condition, ])
+    n_total <- sum(cond1)
+    n_satisfy <- sum(condition)
     n_exceed <- n_total - n_satisfy
 
     thresholds$number_total[i] <- n_total
     thresholds$number_of_satisfying[i] <- n_satisfy
 
-    if (n_total > 0) {
+    if (n_total > 0L) {
+      
       thresholds$numberOfExceedance[i] <- n_exceed
       thresholds$exceedanceLabel[i] <- sprintf(
         "%d (%2.1f %%)", n_exceed, kwb.utils::percentage(n_exceed, n_total)

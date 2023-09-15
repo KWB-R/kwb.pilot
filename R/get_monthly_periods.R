@@ -15,11 +15,15 @@ last_day <- function(date) {
 #' @param year_month_end end year month (default: current month)
 #' @param tz (default: 'CET')
 #' @return dataframe with monthly periods
+#' @importFrom kwb.utils noFactorDataFrame
 #' @importFrom lubridate days
 #' @export
-get_monthly_periods <- function(year_month_start = "2017-06",
-                                year_month_end = format(Sys.Date(), "%Y-%m"),
-                                tz = "CET") {
+get_monthly_periods <- function(
+  year_month_start = "2017-06",
+  year_month_end = format(Sys.Date(), "%Y-%m"),
+  tz = "CET"
+)
+{
   first_day <- function(x) as.Date(paste0(x, "-01"), tz = tz)
 
   month_start <- seq(
@@ -28,11 +32,10 @@ get_monthly_periods <- function(year_month_start = "2017-06",
     by = "month"
   )
 
-  data.frame(
+  kwb.utils::noFactorDataFrame(
     year_month = format(month_start, format = "%Y-%m"),
     start = month_start,
-    end = last_day(month_start),
-    stringsAsFactors = FALSE
+    end = last_day(month_start)
   )
 }
 
@@ -41,21 +44,25 @@ get_monthly_periods <- function(year_month_start = "2017-06",
 #' @param monthly_period one row of data.frame as retrieved by function
 #' first row of get_monthly_periods(), i.e. year month is (default: '2017-06')
 #' @param  raw_data_dir directory with operational raw data files for Berlin Tiefwerder
-#' (default: \code{kwb.pilot:::package_file("shiny/berlin_t/data/operation")})
+#' (default: \code{kwb.pilot:::shiny_file("berlin_t/data/operation")})
 #' @param max_offset_days number of days in previous/next month to look for beginning/
 #' ending of month (default: 7)
 #' @return dataframe with monthly periods
 #' @importFrom lubridate days
 #' @importFrom kwb.utils stringList
 #' @export
-get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1, ],
-                                        raw_data_dir = package_file("shiny/berlin_t/data/operation"),
-                                        max_offset_days = 7) {
-  rawfiles <- stringr::str_sub(list.files(raw_data_dir), start = 1, end = 10)
+get_rawfilespaths_for_month <- function(
+  monthly_period = get_monthly_periods()[1, ],
+  raw_data_dir = shiny_file("berlin_t/data/operation"),
+  max_offset_days = 7
+)
+{
+  rawfiles <- stringr::str_sub(list.files(raw_data_dir), start = 1L, end = 10L)
 
   offset_days <- lubridate::days(seq_len(max_offset_days))
 
   get_offset <- function(type) {
+    
     type <- match.arg(type, c("min", "max"))
 
     offset <- as.character(if (type == "min") {
@@ -65,7 +72,7 @@ get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1
     })
 
     if (any(available <- offset %in% rawfiles)) {
-      return(ifelse(type == "min", rev, identity)(offset[available]))[1]
+      return(ifelse(type == "min", rev, identity)(offset[available]))[1L]
     }
 
     warning(
@@ -76,7 +83,7 @@ get_rawfilespaths_for_month <- function(monthly_period = get_monthly_periods()[1
       kwb.utils::stringList(offset)
     )
 
-    return(NA)
+    NA
   }
 
   dates_to_grab <- c(

@@ -32,7 +32,7 @@ params:
 
 ```{r, echo=FALSE, results='hide', message=FALSE, warning=FALSE}
 
-thresholds_file <- kwb.pilot:::package_file("shiny/berlin_s/data/thresholds.csv")
+thresholds_file <- kwb.pilot:::shiny_file("berlin_s/data/thresholds.csv")
 
 thresholds <- kwb.pilot::get_thresholds(thresholds_file)
 

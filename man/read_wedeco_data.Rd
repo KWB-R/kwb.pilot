@@ -5,9 +5,9 @@
 \title{Import WEDECO raw data}
 \usage{
 read_wedeco_data(
-  raw_data_dir = package_file("shiny/berlin_s/data/operation"),
+  raw_data_dir = shiny_file("berlin_s/data/operation"),
   raw_data_files = NULL,
-  meta_file_path = package_file("shiny/berlin_s/data/parameter_site_metadata.csv")
+  meta_file_path = shiny_file("berlin_s/data/parameter_site_metadata.csv")
 )
 }
 \arguments{

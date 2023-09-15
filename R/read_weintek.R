@@ -8,7 +8,8 @@
 #' @return data frame with Weintek raw data
 #' @export
 #'
-read_weintek <- function(path, tz = "CET", dbg = TRUE) {
+read_weintek <- function(path, tz = "CET", dbg = TRUE)
+{
   if (dbg) {
     message("Importing file: ", path)
   }
@@ -29,7 +30,6 @@ read_weintek <- function(path, tz = "CET", dbg = TRUE) {
   set_timezone(df, tz = tz, col_datetime = "DateTime")
 }
 
-
 #' Read Weintek data from multiple files
 #'
 #' @param files path to Weintek files
@@ -40,7 +40,8 @@ read_weintek <- function(path, tz = "CET", dbg = TRUE) {
 #' @return data frame with Weintek raw data
 #' @export
 #'
-read_weintek_batch <- function(files, tz = "CET", dbg = TRUE) {
+read_weintek_batch <- function(files, tz = "CET", dbg = TRUE)
+{
   paraname_site <- basename(dirname(files))
 
   data_list <- stats::setNames(

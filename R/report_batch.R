@@ -3,7 +3,8 @@
 #' @param rmd_name name of Rmarkdown document to render (default: "report.Rmd")
 #' @param output_dir outputDirectory (default: getwd())
 #' @keywords internal
-write_report <- function(rmd_name = "report.Rmd", output_dir = getwd()) {
+write_report <- function(rmd_name = "report.Rmd", output_dir = getwd())
+{
   code <- 'if (!require("rmarkdown") || packageVersion("rmarkdown") < "1.3") {
     install.packages("rmarkdown", repos = "https://cloud.r-project.org")
   }
@@ -28,17 +29,20 @@ write_report <- function(rmd_name = "report.Rmd", output_dir = getwd()) {
 #' @param open_in_explorer open batchDir in Windows explorer (default: TRUE).
 #' Only working on a Windows system!
 #' @export
-create_report_batch <- function(batchDir = file.path(tempdir(), "batch_report"),
-                                batchName = "create_report.bat",
-                                report_path = NULL,
-                                report_config_path = NULL,
-                                open_in_explorer = TRUE) {
+create_report_batch <- function(
+  batchDir = file.path(tempdir(), "batch_report"),
+  batchName = "create_report.bat",
+  report_path = NULL,
+  report_config_path = NULL,
+  open_in_explorer = TRUE
+)
+{
   # Helper function
   force_copy <- function(from, to) file.copy(from, to, overwrite = TRUE)
 
   batchDir <- gsub(pattern = "\\\\", replacement = .Platform$file.sep, batchDir)
 
-  if (!dir.exists(batchDir)) {
+  if (! dir.exists(batchDir)) {
     dir.create(batchDir, showWarnings = FALSE)
   }
 
@@ -46,7 +50,7 @@ create_report_batch <- function(batchDir = file.path(tempdir(), "batch_report"),
   on.exit(owdir)
 
   report_path <- kwb.utils::defaultIfNULL(
-    report_path, package_file("shiny/haridwar/report/report.Rmd")
+    report_path, shiny_file("haridwar/report/report.Rmd")
   )
 
   report_name <- basename(report_path)
@@ -60,15 +64,13 @@ create_report_batch <- function(batchDir = file.path(tempdir(), "batch_report"),
 
   write_report(rmd_name = report_name, output_dir = batchDir)
 
-  if (!is.null(report_config_path)) {
-    if (file.exists(report_config_path)) {
-      force_copy(
-        from = report_config_path,
-        to = file.path(batchDir, "input", "report_config.txt")
-      )
-    }
+  if (! is.null(report_config_path) && file.exists(report_config_path)) {
+    force_copy(
+      from = report_config_path,
+      to = file.path(batchDir, "input", "report_config.txt")
+    )
   }
-
+  
   batch_r_script <- paste0(
     kwb.utils::removeExtension(basename(batchName)), ".R"
   )
@@ -94,7 +96,7 @@ create_report_batch <- function(batchDir = file.path(tempdir(), "batch_report"),
 
   cat("Batch file & data structure created at:", normalizePath(batch_path))
 
-  if (open_in_explorer & .Platform$OS.type == "windows") {
+  if (open_in_explorer && .Platform$OS.type == "windows") {
     shell(paste("explorer", normalizePath(batchDir)))
   }
 
