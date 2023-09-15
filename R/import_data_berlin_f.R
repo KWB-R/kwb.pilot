@@ -2,25 +2,26 @@
 
 #' @param raw_data_files vector with full path to operational raw data files that
 #' allows to limit import to specific files (default:
-#' fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data""), recurse = TRUE,
+#' fs::dir_ls(kwb.pilot:::shiny_file("berlin_f/data/raw/online_data""), recurse = TRUE,
 #' regexp = "^[^~].*\\.xlsx$")).
 #' @param meta_file_path path to metadata file (default:
-#' kwb.pilot:::package_file(file.path("shiny/berlin_f/data/raw/online_data",
-#' "parameter_site_metadata.csv"))
+#' kwb.pilot:::shiny_file("berlin_f/data/raw/online_data/parameter_site_metadata.csv"))
 #' @return data.frame with imported operational data (analytics´data to be added as
 #' soon as available)
 #' @export
 #' @importFrom fs dir_ls
-import_data_berlin_f <- function(raw_data_files = fs::dir_ls(package_file("shiny/berlin_f/data/raw/online_data"), recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
-                                 meta_file_path = package_file("shiny/berlin_f/data/raw/online_data/parameter_unit_metadata.csv")) {
-
+import_data_berlin_f <- function(
+  raw_data_files = fs::dir_ls(shiny_file("berlin_f/data/raw/online_data"), recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
+  meta_file_path = shiny_file("berlin_f/data/raw/online_data/parameter_unit_metadata.csv")
+)
+{
   # kwb.utils::assignPackageObjects("kwb.pilot")
 
   # =======
-  #   raw_data_dir = package_file("shiny/berlin_f/data/operation"),
+  #   raw_data_dir = shiny_file("berlin_f/data/operation"),
   #   raw_data_files = fs::dir_ls(raw_data_dir, recurse = TRUE, regexp = "^[^~].*\\.xlsx$"),
-  #   analytics_path = package_file("shiny/berlin_f/data/analytics.xlsx"),
-  #   meta_file_path = package_file("shiny/berlin_f/data/parameter_site_metadata.csv")
+  #   analytics_path = shiny_file("berlin_f/data/analytics.xlsx"),
+  #   meta_file_path = shiny_file("berlin_f/data/parameter_site_metadata.csv")
   # )
   # {
 
@@ -31,13 +32,10 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(package_file("shiny
   # data_berlin_f_offline <- import_lab_data_berlin_f(raw_data_dir = raw_data_dir,
   #                                           meta_file_path = meta_file_path)
 
-
-
   meta_data <- readr::read_csv(meta_file_path,
     col_types = "cc",
     locale = readr::locale(encoding = "UTF-8")
   )
-
 
   data_berlin_f <- read_weintek_batch(raw_data_files) %>%
     dplyr::left_join(meta_data) %>%
@@ -58,7 +56,6 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(package_file("shiny
     ### Remove duplicates if any exist
     remove_duplicates(col_names = c("DateTime", "ParameterName", "SiteName"))
 
-
   Encoding(data_berlin_f$ParameterUnit) <- "UTF-8"
 
   #   data_berlin_f <- remove_duplicates(
@@ -66,6 +63,5 @@ import_data_berlin_f <- function(raw_data_files = fs::dir_ls(package_file("shiny
   #     col_names = c("DateTime", "ParameterName", "SiteName")
   #   )
 
-
-  return(data_berlin_f)
+  data_berlin_f
 }

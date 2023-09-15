@@ -4,13 +4,16 @@
 #' @importFrom tidyr spread
 #' @export
 #'
-long_to_wide <- function(df) {
+long_to_wide <- function(df)
+{
   df %>%
-    dplyr::mutate(ParameterName_SiteName = sprintf(
-      "%s_%s",
-      .data$ParameterName,
-      .data$SiteName
-    )) %>%
+    dplyr::mutate(
+      ParameterName_SiteName = sprintf(
+        "%s_%s", 
+        .data$ParameterName,
+        .data$SiteName
+      )
+    ) %>%
     dplyr::select(
       .data$DateTime,
       .data$ParameterName_SiteName,
@@ -22,9 +25,6 @@ long_to_wide <- function(df) {
     )
 }
 
-
-
-
 #' CSV data export in "wide" format
 #'
 #' @param df_long data frame in long format (as retrieved by \code{kwb.pilot::group_datetime})
@@ -35,26 +35,21 @@ long_to_wide <- function(df) {
 #' @export
 #' @importFrom fs dir_create
 #' @importFrom kwb.utils catAndRun
-export_data <- function(df_long,
-                        export_dir,
-                        dbg = TRUE) {
+export_data <- function(df_long, export_dir, dbg = TRUE)
+{
   fs::dir_create(sprintf("%s/data", export_dir))
-
-  df_name <- deparse(substitute(df_long))
-
-  df_file <- sprintf(
-    "%s/data/%s.csv",
-    export_dir,
-    df_name
-  )
-
-
-  kwb.utils::catAndRun(sprintf("Export data to %s", df_file),
+  
+  name <- deparse(substitute(df_long))
+  
+  file <- sprintf("%s/data/%s.csv", export_dir, name)
+  
+  kwb.utils::catAndRun(
+    sprintf("Export data to %s", file),
+    dbg = dbg,
     expr = {
       df_wide <- long_to_wide(df_long)
-      readr::write_csv2(df_wide, path = df_file)
-    },
-    dbg = dbg
+      readr::write_csv2(df_wide, path = file)
+    }
   )
 }
 
@@ -69,24 +64,17 @@ export_data <- function(df_long,
 #' @importFrom htmlwidgets saveWidget
 #' @importFrom plotly ggplotly
 #'
-plot_data <- function(df_long,
-                      export_dir,
-                      dbg = TRUE) {
+plot_data <- function(df_long, export_dir, dbg = TRUE)
+{
   fs::dir_create(sprintf("%s/plots", export_dir))
-
-
-  df_name <- deparse(substitute(df_long))
-
-
-  plot_file <- sprintf(
-    "%s/plots/%s.html",
-    export_dir,
-    df_name
-  )
-
-
-
-  kwb.utils::catAndRun(sprintf("Export plot: %s", plot_file),
+  
+  name <- deparse(substitute(df_long))
+  
+  file <- sprintf("%s/plots/%s.html", export_dir, name)
+  
+  kwb.utils::catAndRun(
+    sprintf("Export plot: %s", file),
+    dbg = dbg,
     expr = {
       g1 <- df_long %>%
         ggplot2::ggplot(mapping = ggplot2::aes_string(
@@ -97,18 +85,15 @@ plot_data <- function(df_long,
         ggplot2::facet_wrap(~ParameterName, scales = "free_y", ncol = 1) +
         ggplot2::geom_point() +
         ggplot2::theme_bw()
-
-
-      withr::with_dir(sprintf("%s/plots", export_dir),
-        code = {
-          plotly::ggplotly(g1) %>%
-            htmlwidgets::saveWidget(basename(plot_file),
-              selfcontained = FALSE,
-              title = df_name
-            )
-        }
-      )
-    },
-    dbg = dbg
+      
+      withr::with_dir(sprintf("%s/plots", export_dir), code = {
+        plotly::ggplotly(g1) %>%
+          htmlwidgets::saveWidget(
+            basename(file), 
+            selfcontained = FALSE, 
+            title = name
+          )
+      })
+    }
   )
 }

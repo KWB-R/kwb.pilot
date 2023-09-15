@@ -76,6 +76,7 @@ reference:
       General functions which can be used for all pilot plant (with default 
       parameterisation "AquaNES: Haridwar" site)
     contents: 
+      - aggregate_export_fst
       - calenderweek_from_dates
       - calculate_operational_parameters
       - change_timezone
@@ -97,7 +98,6 @@ reference:
       - run_app
       - set_timezone
       - shiny_file
-
 
   - title: "AquaNES: Berlin-Tiefwerder (site 1)"
     desc: >

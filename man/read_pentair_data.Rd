@@ -5,23 +5,23 @@
 \title{Read PENTAIR operational data}
 \usage{
 read_pentair_data(
-  raw_data_dir = package_file("shiny/berlin_t/data/operation"),
+  raw_data_dir = shiny_file("berlin_t/data/operation"),
   raw_data_files = NULL,
-  meta_file_path = package_file("shiny/berlin_t/data/parameter_site_metadata.csv"),
+  meta_file_path = shiny_file("berlin_t/data/parameter_site_metadata.csv"),
   locale = readr::locale(tz = "CET"),
   col_types = readr::cols()
 )
 }
 \arguments{
 \item{raw_data_dir}{path of directory containing PENTAIR xls files
-(default: kwb.pilot:::package_file("shiny/berlin_t/data/operation"))}
+(default: kwb.pilot:::shiny_file("berlin_t/data/operation"))}
 
 \item{raw_data_files}{vector with full path to operational raw data files that
 allows to limit import to specific files (default: NULL). If specified parameter
 "raw_data_dir" will not be used}
 
 \item{meta_file_path}{path to metadata file (default:
-kwb.pilot:::package_file("shiny/berlin_t/data/parameter_site_metadata.csv"))}
+kwb.pilot:::shiny_file("berlin_t/data/parameter_site_metadata.csv"))}
 
 \item{locale}{locale (default: \code{\link[readr]{locale}}(tz = "CET"))}
 

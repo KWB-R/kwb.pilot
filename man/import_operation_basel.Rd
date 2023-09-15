@@ -5,13 +5,11 @@
 \title{Imports operational data for Basel (without metadata and only for one site
 at once, e.g. "rhein" or "wiese")}
 \usage{
-import_operation_basel(
-  xlsx_dir = package_file("shiny/basel/data/operation/wiese")
-)
+import_operation_basel(xlsx_dir = shiny_file("basel/data/operation/wiese"))
 }
 \arguments{
 \item{xlsx_dir}{Define directory with raw data in EXCEL spreadsheet (.xlsx) to
-be imported (default: sema.pilot:::package_file("shiny/basel/data/operation/wiese"))}
+be imported (default: sema.pilot:::shiny_file("basel/data/operation/wiese"))}
 }
 \value{
 returns data frame with imported raw operational data

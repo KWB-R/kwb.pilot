@@ -8,30 +8,33 @@
 #' @return data.frame with formatting of DateTime column POSIXct
 #' @importFrom fst read.fst
 #' @export
-read_fst <- function(path, tz = "CET", col_datetime = "DateTime", ...) {
+read_fst <- function(path, tz = "CET", col_datetime = "DateTime", ...)
+{
   df <- fst::read.fst(path, ...)
   df[, col_datetime] <- as.POSIXct(df[, col_datetime], origin = "1970-01-01", tz = "CET")
   df
 }
 
-
 #' Load fst data for shiny app
 #'
 #' @param fst_dir directory of fst files to be loaded
 #' @export
-load_fst_data <- function(fst_dir) {
+load_fst_data <- function(fst_dir)
+{
   print("### Step 4: Loading data ##########################")
-
+  
   step_no <- 0L
-
+  
   step_assign <- function(title, varname, filename) {
     step_no <<- step_no + 1L
     print(sprintf("### %d): %s", step_no, title))
-    assign(x = varname, 
-           value = read_fst(file.path(fst_dir, filename)), 
-           envir = .GlobalEnv)
+    assign(
+      x = varname, 
+      value = read_fst(file.path(fst_dir, filename)), 
+      envir = .GlobalEnv
+    )
   }
-
+  
   step_assign("Raw data", "siteData_raw_list", "siteData_raw_list.fst")
   step_assign("10 minutes data", "siteData_10min_list", "siteData_10min_list.fst")
   step_assign("hourly data", "siteData_hour_list", "siteData_hour_list.fst")

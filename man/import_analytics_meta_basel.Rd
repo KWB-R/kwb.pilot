@@ -6,20 +6,20 @@
 "rhein" and "wiese")}
 \usage{
 import_analytics_meta_basel(
-  analytics_dir = package_file("shiny/basel/data/analytics"),
-  meta_site_path = package_file("shiny/basel/data/metadata/meta_site.csv"),
-  meta_parameter_path = package_file("shiny/basel/data/metadata/meta_parameter.csv")
+  analytics_dir = shiny_file("basel/data/analytics"),
+  meta_site_path = shiny_file("basel/data/metadata/meta_site.csv"),
+  meta_parameter_path = shiny_file("basel/data/metadata/meta_parameter.csv")
 )
 }
 \arguments{
 \item{analytics_dir}{Define directory with raw analytical data in CSV (.csv) format to
-be imported (default: sema.pilot:::package_file("shiny/basel/data/analytics"))}
+be imported (default: sema.pilot:::shiny_file("basel/data/analytics"))}
 
 \item{meta_site_path}{Define path of "meta_site.csv" to be imported
-(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_site.csv"))}
+(default: sema.pilot:::shiny_file("basel/data/metadata/meta_site.csv"))}
 
 \item{meta_parameter_path}{Define path of "meta_parameter.csv" to be imported
-(default: sema.pilot:::package_file("shiny/basel/data/metadata/meta_parameter.csv"))}
+(default: sema.pilot:::shiny_file("basel/data/metadata/meta_parameter.csv"))}
 }
 \value{
 data.frame with analytics data for Basel sites including metadata

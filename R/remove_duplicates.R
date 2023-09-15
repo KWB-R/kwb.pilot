@@ -5,10 +5,11 @@
 #' @return data.frame without duplicates
 #' @importFrom kwb.utils stringList
 #' @export
-remove_duplicates <- function(df, col_names = names(df)) {
+remove_duplicates <- function(df, col_names = names(df))
+{
   available <- col_names %in% names(df)
 
-  if (!all(available)) {
+  if (! all(available)) {
     clean_stop(
       "The following 'col_names' specified by the user are not defined ",
       "in the 'df':\n", kwb.utils::stringList(col_names[!available])
@@ -28,7 +29,7 @@ remove_duplicates <- function(df, col_names = names(df)) {
       print_to_text(df[is_duplicated, ])
     )
 
-    df <- df[!is_duplicated, ]
+    df <- df[! is_duplicated, ]
   }
 
   df

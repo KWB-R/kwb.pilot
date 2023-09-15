@@ -12,7 +12,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-url_defined <- Sys.getenv("MBR40_URL") != ""
+
+url_defined <- FALSE # Sys.getenv("MBR40_URL") != ""
 ```
 
 ## Install R package

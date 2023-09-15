@@ -1,0 +1,34 @@
+parameters:
+- Redox_Out1
+- Redox_Out2
+- Redox_In
+- Flux
+- Up
+- Ip
+- Uz
+- Iz
+calculated:
+  Redox_Out:
+    name: Mean redox potential in tank
+    unit: mV
+    expr: (Redox_Out1+Redox_Out2)/2
+  Redox_Diff:
+    name: Difference (outflow - inflow) of redox potential
+    unit: mV
+    expr: Redox_Out - Redox_In
+  Power_pump:
+    name: Power demand of pump
+    unit: W
+    expr: Up*Ip
+  Power_cell:
+    name: Power demand of cell
+    unit: W
+    expr: Uz*Iz
+  Pump_WhPerCbm:
+    name: Specific energy demand of pump
+    unit: Wh/m3
+    expr: Power_pump/(Flux/1000)
+  Cell_WhPerCbm:
+    name: Specific energy demand of cell
+    unit: Wh/m3
+    expr: Power_cell/(Flux/1000)

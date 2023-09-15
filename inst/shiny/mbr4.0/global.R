@@ -35,7 +35,7 @@ kwb.pilot::load_fst_data(fst_dir = kwb.pilot::shiny_file("mbr4.0/data/fst"))
 print("### Step 5: Importing threshold information ##########################")
 
 print("### NOT IMPLEMENTED YET")
-#threshold_file <- kwb.pilot:::package_file("shiny/mbr4.0/data/thresholds.csv")
+#threshold_file <- kwb.pilot:::shiny_file("mbr4.0/data/thresholds.csv")
 
 #thresholds <- kwb.pilot::get_thresholds(threshold_file)
 

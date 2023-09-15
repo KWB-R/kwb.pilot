@@ -12,8 +12,16 @@
 #' @importFrom dplyr src_mysql
 #' @importFrom dbplyr src_dbi
 #' @keywords internal
-src_mysql_from_cnf <- function(dbname, group = NULL, dir = file.path(getwd(), ".my.cnf"), host = NULL,
-                               user = NULL, password = NULL, ...) {
+src_mysql_from_cnf <- function(
+  dbname, 
+  group = NULL, 
+  dir = file.path(getwd(), ".my.cnf"), 
+  host = NULL,
+  user = NULL, 
+  password = NULL, 
+  ...
+)
+{
   dir <- normalizePath(dir)
 
   kwb.utils::safePath(dir)
@@ -36,7 +44,8 @@ src_mysql_from_cnf <- function(dbname, group = NULL, dir = file.path(getwd(), ".
 #' @return returns data frame operational data from MySQL db
 #' @importFrom dplyr filter tbl tbl_df rename_ filter_ select_ mutate_
 #' @export
-import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
+import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf"))
+{
   sumewa <- src_mysql_from_cnf("sumewa", "autarcon", dir = mysql_conf)
 
   tbl_live <- dplyr::tbl(sumewa, "live") %>%
@@ -83,7 +92,7 @@ import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
 
   duplicated_datetimes <- names(which(table(tbl_tmp$time) != 1))
 
-  tbl_tmp[!tbl_tmp$time %in% duplicated_datetimes, ] %>%
+  tbl_tmp[! tbl_tmp$time %in% duplicated_datetimes, ] %>%
     left_join(data.frame(
       AnlagenID = c(4013, 4014),
       LocationName = rep("Haridwar", 2)
@@ -93,7 +102,8 @@ import_operation <- function(mysql_conf = file.path(getwd(), ".my.cnf")) {
 }
 
 # MAIN -------------------------------------------------------------------------
-if (FALSE) {
+if (FALSE)
+{
   operation <- import_operation()
 
   ### Calculate additional parameters:

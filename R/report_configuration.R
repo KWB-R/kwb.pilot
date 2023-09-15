@@ -10,9 +10,12 @@
 #' @return default list for report configuration template
 #' @export
 
-report_config_template <- function(df = NULL,
-                                   temporal_aggregation = "raw",
-                                   output_timezone = "UTC") {
+report_config_template <- function(
+  df = NULL, 
+  temporal_aggregation = "raw",
+  output_timezone = "UTC"
+)
+{
   if (is.null(df)) {
     sitenames <- c(
       "General",
@@ -21,22 +24,24 @@ report_config_template <- function(df = NULL,
       "After Filter",
       "After AO Cell"
     )
-
+    
     parameters_online <- "Redox potential"
     parameters_offline <- "Temperature"
-
+    
     start_day <- sprintf("%s-01", format(Sys.Date(), format = "%Y-%m"))
     end_day <- as.character(Sys.Date())
     daterange <- c(start_day, end_day)
+    
   } else {
+    
     unique_pars <- function(src) unique(df$ParameterName[df$Source == src])
-
+    
     sitenames <- unique(df$SiteName)
     parameters_online <- unique_pars("online")
     parameters_offline <- unique_pars("offline")
     daterange <- as.character(as.Date(range(df$DateTime)))
   }
-
+  
   list(
     report_sitenames = sitenames,
     report_aggregation = temporal_aggregation,
@@ -70,23 +75,24 @@ report_config_template <- function(df = NULL,
 #'   output_file = "report_config.txt"
 #' )
 #' }
-report_config_to_txt <- function(config_list, output_file = "report_config.txt") {
+report_config_to_txt <- function(config_list, output_file = "report_config.txt")
+{
   ### Write config list to text file
   ### see http://stackoverflow.com/questions/8261590/write-list-to-a-text-file-preserving-names-r
-
+  
   if (file.exists(output_file)) {
     file.remove(output_file)
   }
-
+  
   output_dir <- dirname(output_file)
-
-  if (!dir.exists(output_dir)) {
+  
+  if (! dir.exists(output_dir)) {
     dir.create(path = output_dir, showWarnings = FALSE)
   }
-
+  
   # z <- deparse(substitute(config_list))
   # cat(z, "\n", file=output_file)
-
+  
   for (key in names(config_list)) {
     cat(file = output_file, append = TRUE, sprintf(
       "%s=%s\n", key, kwb.utils::stringList(config_list[[key]], collapse = " ")
@@ -111,29 +117,30 @@ report_config_to_txt <- function(config_list, output_file = "report_config.txt")
 #' ### Check whether both are identical
 #' identical(x = config, y = config_imported)
 #' }
-report_txt_to_config <- function(config_txt = "report_config.txt") {
+report_txt_to_config <- function(config_txt = "report_config.txt")
+{
   x <- scan(config_txt, what = "", sep = "\n")
-
+  
   # Separate elements by one or more whitepace
   y <- strsplit(x, "=")
-
+  
   # Extract the first vector element and set it as the list element name
   names(y) <- sapply(y, `[[`, 1)
-
+  
   # names(y) <- sapply(y, function(x) x[[1]]) # same as above
   # Remove the first vector element from each list element
   y <- lapply(y, `[`, -1)
-
+  
   ### Remove "'" from character strings
-  y <- lapply(y, FUN = function(x) {
+  y <- lapply(y, function(x) {
     gsub(pattern = "'", replacement = "", unlist(strsplit(x, split = "'\\s")))
   })
-
+  
   num_aggregation <- as.numeric(y$report_aggregation)
-
-  if (!is.na(num_aggregation)) {
+  
+  if (! is.na(num_aggregation)) {
     y$report_aggregation <- num_aggregation
   }
-
+  
   y
 }
